@@ -6,6 +6,7 @@ import Link from 'next/link';
 export default function Admisiones() {
   const [showInscriptionForm, setShowInscriptionForm] = useState(false);
   const [menuAbierto, setMenuAbierto] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const [formData, setFormData] = useState({
     studentName: '',
@@ -49,6 +50,9 @@ export default function Admisiones() {
     setShowInscriptionForm(false);
   };
 
+const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
