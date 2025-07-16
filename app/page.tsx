@@ -10,14 +10,14 @@ export default function Home() {
 
   const bannerImages = [
     {
-      url: "https://i.ibb.co/k6BtVfLj/Grado2024.jpg",
-      title: "Prom 2024",
-      description: "Celebrando el éxito de nuestros estudiantes"
-    },
-    {
       url: "https://readdy.ai/api/search-image?query=Colombian%20students%20in%20modern%20English%20classroom%20with%20international%20flags%2C%20interactive%20whiteboards%2C%20intensive%20English%20learning%20program%2C%20bilingual%20education%2C%20speaking%20practice%20activities%2C%20modern%20language%20laboratory&width=1920&height=600&seq=banner2&orientation=landscape",
       title: "Programa Intensivo de Inglés",
       description: "Educación bilingüe de excelencia"
+    },
+    {
+      url: "https://i.ibb.co/k6BtVfLj/Grado2024.jpg",
+      title: "Prom 2024",
+      description: "Celebrando el éxito de nuestros estudiantes"
     },
     {
       url: "https://readdy.ai/api/search-image?query=Students%20building%20robots%20in%20modern%20STEM%20classroom%2C%20robotics%20programming%2C%20educational%20technology%2C%20hands-on%20learning%20with%20robotic%20kits%2C%20innovation%20and%20engineering%2C%20Colombian%20school%20environment%20with%20advanced%20equipment&width=1920&height=600&seq=banner3&orientation=landscape",
