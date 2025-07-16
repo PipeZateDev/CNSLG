@@ -62,59 +62,133 @@ export default function Admisiones() {
                 className="h-12 w-auto"
               />
             </div>
-
+            
+            {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center space-x-8">
-              <Link href="/" className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap">Inicio</Link>
-              <Link href="/nosotros" className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap">Nosotros</Link>
-              <Link href="/admisiones" className="px-4 py-2 bg-blue-900 text-white rounded-full transition-colors whitespace-nowrap">Admisiones</Link>
-              <Link href="/contacto" className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap">Contacto</Link>
-
+              <Link 
+                href="/"
+                className="px-4 py-2 bg-blue-900 text-white rounded-full transition-colors whitespace-nowrap cursor-pointer"
+              >
+                Inicio
+              </Link>
+              <Link 
+                href="/nosotros"
+                className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer"
+              >
+                Nosotros
+              </Link>
+              <Link 
+                href="/admisiones"
+                className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer"
+              >
+                Admisiones
+              </Link>
+              <Link 
+                href="/contacto"
+                className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer"
+              >
+                Contacto
+              </Link>
               <div className="flex space-x-2 ml-8">
-                <a href="https://www.cibercolegios.com/" target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-yellow-400 text-black rounded-full hover:bg-yellow-500 transition-colors">Cibercolegios</a>
-                <a href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=12695&searchedCategoryId=&searchedAgreementName=PEDAGOGICOS%20ASOCIADOS%20SAS" target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors">PSE</a>
+                <a 
+                  href="https://lms30.uno-internacional.com/login/access" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="px-4 py-2 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition-colors whitespace-nowrap cursor-pointer"
+                >
+                  UNOi Santillana
+                </a>
+                <a 
+                  href="https://www.cibercolegios.com/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="px-4 py-2 bg-yellow-400 text-black rounded-full hover:bg-yellow-500 transition-colors whitespace-nowrap cursor-pointer"
+                >
+                  Cibercolegios
+                </a>
+                <a 
+                  href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=12695&searchedCategoryId=&searchedAgreementName=PEDAGOGICOS%20ASOCIADOS%20SAS" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors whitespace-nowrap cursor-pointer"
+                >
+                  PSE
+                </a>
               </div>
             </div>
 
-            <div className="lg:hidden">
-              <button onClick={() => setMenuAbierto(!menuAbierto)} className="focus:outline-none text-blue-900">
-                <i className="ri-menu-line text-2xl"></i>
-              </button>
-            </div>
+            {/* Mobile Menu Button */}
+            <button 
+              onClick={toggleMenu}
+              className="lg:hidden w-10 h-10 flex items-center justify-center text-blue-900 cursor-pointer"
+            >
+              <i className={`ri-${isMenuOpen ? 'close' : 'menu'}-line text-2xl`}></i>
+            </button>
           </div>
 
-          {menuAbierto && (
-            <div className="mt-4 space-y-4 lg:hidden">
-              <Link href="/" onClick={() => setMenuAbierto(false)} className="block px-4 py-2 text-blue-900 hover:bg-blue-50 rounded">Inicio</Link>
-              <Link href="/nosotros" onClick={() => setMenuAbierto(false)} className="block px-4 py-2 text-blue-900 hover:bg-blue-50 rounded">Nosotros</Link>
-              <Link href="/admisiones" onClick={() => setMenuAbierto(false)} className="block px-4 py-2 bg-blue-900 text-white rounded">Admisiones</Link>
-              <Link href="/contacto" onClick={() => setMenuAbierto(false)} className="block px-4 py-2 text-blue-900 hover:bg-blue-50 rounded">Contacto</Link>
-              <a href="https://www.cibercolegios.com/" target="_blank" rel="noopener noreferrer" className="block px-4 py-2 bg-yellow-400 text-black rounded hover:bg-yellow-500">Cibercolegios</a>
-              <a href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=12695&searchedCategoryId=&searchedAgreementName=PEDAGOGICOS%20ASOCIADOS%20SAS" target="_blank" rel="noopener noreferrer" className="block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">PSE</a>
+          {/* Mobile Navigation Menu */}
+          {isMenuOpen && (
+            <div className="lg:hidden mt-4 py-4 border-t border-gray-200">
+              <div className="flex flex-col space-y-3">
+                <Link 
+                  href="/"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="px-4 py-2 bg-blue-900 text-white rounded-full transition-colors text-center cursor-pointer"
+                >
+                  Inicio
+                </Link>
+                <Link 
+                  href="/nosotros"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer"
+                >
+                  Nosotros
+                </Link>
+                <Link 
+                  href="/admisiones"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer"
+                >
+                  Admisiones
+                </Link>
+                <Link 
+                  href="/contacto"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer"
+                >
+                  Contacto
+                </Link>
+                <div className="flex flex-col space-y-2 pt-2">
+                  <a 
+                    href="https://lms30.uno-internacional.com/login/access" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="px-4 py-2 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition-colors text-center cursor-pointer"
+                  >
+                    UNOi Santillana
+                  </a>
+                  <a 
+                    href="https://www.cibercolegios.com/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="px-4 py-2 bg-yellow-400 text-black rounded-full hover:bg-yellow-500 transition-colors text-center cursor-pointer"
+                  >
+                    Cibercolegios
+                  </a>
+                  <a 
+                    href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=12695&searchedCategoryId=&searchedAgreementName=PEDAGOGICOS%20ASOCIADOS%20SAS" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors text-center cursor-pointer"
+                  >
+                    PSE
+                  </a>
+                </div>
+              </div>
             </div>
           )}
         </div>
       </nav>
-
-      {/* Floating Social Media Buttons */}
-<div className="fixed right-6 bottom-6 z-40 space-y-3">
-  {[
-    { href: "https://wa.me/573183365700", color: "bg-green-500 hover:bg-green-600", icon: "ri-whatsapp-line" },
-    { href: "https://www.instagram.com/colegionuevosanluisgonzaga/?hl=es", color: "bg-pink-500 hover:bg-pink-600", icon: "ri-instagram-line" },
-    { href: "https://www.facebook.com/colegionuevosanluisgonzaga", color: "bg-blue-600 hover:bg-blue-700", icon: "ri-facebook-line" },
-    { href: "https://www.tiktok.com/@nuevosanluisgonzaga", color: "bg-black hover:bg-gray-800", icon: "ri-tiktok-line" },
-    { href: "https://www.youtube.com/@colegionuevosanluisgonzaga5795", color: "bg-red-600 hover:bg-red-700", icon: "ri-youtube-line" },
-  ].map((item, idx) => (
-    <a
-      key={idx}
-      href={item.href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={`w-12 h-12 ${item.color} text-white rounded-full flex items-center justify-center transition-all cursor-pointer shadow-lg opacity-80 hover:opacity-100`}
-    >
-      <i className={`${item.icon} text-xl`}></i>
-    </a>
-  ))}
-</div>
 
       {/* Hero Section */}
       <section className="pt-24 pb-12 bg-gradient-to-r from-green-600 to-green-500 text-white">
