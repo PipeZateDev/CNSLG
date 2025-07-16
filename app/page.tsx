@@ -10,8 +10,8 @@ export default function Home() {
 
   const bannerImages = [
     {
-      url: "https://readdy.ai/api/search-image?query=Modern%20Colombian%20school%20students%20in%20blue%20and%20white%20uniforms%20celebrating%20graduation%2C%20happy%20faces%2C%20outdoor%20ceremony%2C%20educational%20achievement%2C%20festive%20atmosphere%2C%20school%20courtyard%2C%20colorful%20Colombian%20flags%20and%20decorations%20in%20background&width=1920&height=600&seq=banner1&orientation=landscape",
-      title: "Graduación 2024",
+      url: "https://i.ibb.co/k6BtVfLj/Grado2024.jpg",
+      title: "Prom 2024",
       description: "Celebrando el éxito de nuestros estudiantes"
     },
     {
@@ -25,12 +25,12 @@ export default function Home() {
       description: "Innovación y tecnología educativa"
     },
     {
-      url: "https://readdy.ai/api/search-image?query=Caring%20teacher%20helping%20young%20students%20with%20warm%20smiles%2C%20loving%20educational%20environment%2C%20nurturing%20classroom%20atmosphere%2C%20emotional%20support%2C%20personalized%20attention%2C%20Colombian%20school%20setting%20with%20happy%20children&width=1920&height=600&seq=banner4&orientation=landscape",
+      url: "https://i.ibb.co/mF8XZpZd/Religi-n.jpg",
       title: "Educación con Amor",
       description: "Formación integral con valores"
     },
     {
-      url: "https://readdy.ai/api/search-image?query=Modern%20innovative%20school%20facilities%20with%20contemporary%20architecture%2C%20bright%20classrooms%2C%20advanced%20laboratories%2C%20library%20spaces%2C%20Colombian%20educational%20institution%20with%20state-of-the-art%20infrastructure%20and%20learning%20environments&width=1920&height=600&seq=banner5&orientation=landscape",
+      url: "https://i.ibb.co/xScwcM2X/Jard-n.jpg",
       title: "Instalaciones Innovadoras",
       description: "Espacios diseñados para el aprendizaje"
     },
