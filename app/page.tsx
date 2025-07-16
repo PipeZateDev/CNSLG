@@ -223,7 +223,7 @@ export default function Home() {
       href={item.href}
       target="_blank"
       rel="noopener noreferrer"
-      className={`w-12 h-12 ${item.color} text-white rounded-full flex items-center justify-center transition-all cursor-pointer shadow-lg opacity-60 hover:opacity-100`}
+      className={`w-12 h-12 ${item.color} text-white rounded-full flex items-center justify-center transition-all cursor-pointer shadow-lg opacity-70 hover:opacity-100`}
     >
       <i className={`${item.icon} text-xl`}></i>
     </a>
