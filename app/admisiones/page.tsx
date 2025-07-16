@@ -618,7 +618,7 @@ export default function Admisiones() {
           
           <div className="border-t border-gray-800 mt-8 pt-8 text-center">
             <p className="text-gray-400 text-sm">
-              2024 Colegio Nuevo San Luis Gonzaga. Todos los derechos reservados.
+              2025 Colegio Nuevo San Luis Gonzaga. Todos los derechos reservados.
             </p>
           </div>
         </div>

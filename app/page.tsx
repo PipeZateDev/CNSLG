@@ -405,8 +405,8 @@ export default function Home() {
                 className="w-full h-48 object-cover object-top"
               />
               <div className="p-6">
-                <span className="text-sm text-blue-600 font-semibold">15 Nov 2024</span>
-                <h3 className="text-lg font-bold text-blue-900 mb-2 mt-1">Casa Abierta 2025</h3>
+                <span className="text-sm text-blue-600 font-semibold">20 Jun 2025</span>
+                <h3 className="text-lg font-bold text-blue-900 mb-2 mt-1">Open House 2025</h3>
                 <p className="text-gray-600 text-sm">Conoce nuestras instalaciones y proceso de admisión para el próximo año escolar.</p>
               </div>
             </div>
@@ -417,7 +417,7 @@ export default function Home() {
                 className="w-full h-48 object-cover object-top"
               />
               <div className="p-6">
-                <span className="text-sm text-blue-600 font-semibold">10 Nov 2024</span>
+                <span className="text-sm text-blue-600 font-semibold">10 Oct 2024</span>
                 <h3 className="text-lg font-bold text-blue-900 mb-2 mt-1">Feria de Ciencias 2024</h3>
                 <p className="text-gray-600 text-sm">Nuestros estudiantes brillaron con proyectos innovadores en ciencia y tecnología.</p>
               </div>
@@ -429,9 +429,9 @@ export default function Home() {
                 className="w-full h-48 object-cover object-top"
               />
               <div className="p-6">
-                <span className="text-sm text-blue-600 font-semibold">05 Nov 2024</span>
-                <h3 className="text-lg font-bold text-blue-900 mb-2 mt-1">Campeones Intercolegiales</h3>
-                <p className="text-gray-600 text-sm">Nuestro equipo de fútbol se coronó campeón del torneo intercolegial 2024.</p>
+                <span className="text-sm text-blue-600 font-semibold">05 Nov 2023</span>
+                <h3 className="text-lg font-bold text-blue-900 mb-2 mt-1">Campeones Robótica</h3>
+                <p className="text-gray-600 text-sm">Nuestro equipo de robótica obtivo el 1er puesto en el campeonato mundial 2023.</p>
               </div>
             </div>
           </div>
@@ -502,7 +502,7 @@ export default function Home() {
           </div>
           <div className="border-t border-gray-800 mt-8 pt-8 text-center">
             <p className="text-gray-400 text-sm">
-              2024 Colegio Nuevo San Luis Gonzaga. Todos los derechos reservados.
+              2025 Colegio Nuevo San Luis Gonzaga. Todos los derechos reservados.
             </p>
           </div>
         </div>
