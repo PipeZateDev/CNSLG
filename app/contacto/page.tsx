@@ -466,6 +466,14 @@ export default function Contacto() {
               <h4 className="font-semibold mb-4">Plataformas</h4>
               <div className="space-y-2">
                 <a 
+                  href="https://lms30.uno-internacional.com/login/access" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="block text-sm text-gray-400 hover:text-white transition-colors cursor-pointer"
+                >
+                  UNOi Santillana
+                </a>
+                <a 
                   href="https://www.cibercolegios.com/" 
                   target="_blank" 
                   rel="noopener noreferrer"

@@ -208,7 +208,7 @@ const toggleMenu = () => {
           </a>
         ))}
       </div>
-      
+
 
       {/* Hero Section */}
       <section className="pt-24 pb-12 bg-gradient-to-r from-green-600 to-green-500 text-white">
@@ -296,7 +296,7 @@ const toggleMenu = () => {
                 <i className="ri-football-line text-purple-600"></i>
               </div>
               <h4 className="font-semibold text-blue-900 mb-2">Deportes</h4>
-              <p className="text-sm text-gray-600">Fútbol, baloncesto, voleibol, natación y atletismo</p>
+              <p className="text-sm text-gray-600">Fútbol, voleibol, baloncesto y atletismo</p>
             </div>
             <div className="bg-gray-50 rounded-lg p-6 text-center">
               <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-3">
@@ -422,28 +422,28 @@ const toggleMenu = () => {
                   <i className="ri-calendar-line text-blue-600 mr-3"></i>
                   <div>
                     <p className="font-semibold">Inscripciones Abiertas</p>
-                    <p className="text-sm text-gray-600">Octubre - Diciembre 2024</p>
+                    <p className="text-sm text-gray-600">Julio - Diciembre 2025</p>
                   </div>
                 </div>
                 <div className="flex items-center">
                   <i className="ri-calendar-line text-blue-600 mr-3"></i>
                   <div>
                     <p className="font-semibold">Entrevistas</p>
-                    <p className="text-sm text-gray-600">Enero - Febrero 2025</p>
+                    <p className="text-sm text-gray-600">Julio - Febrero 2026</p>
                   </div>
                 </div>
                 <div className="flex items-center">
                   <i className="ri-calendar-line text-blue-600 mr-3"></i>
                   <div>
                     <p className="font-semibold">Matrículas</p>
-                    <p className="text-sm text-gray-600">Marzo - Abril 2025</p>
+                    <p className="text-sm text-gray-600">Agosto - Abril 2026</p>
                   </div>
                 </div>
                 <div className="flex items-center">
                   <i className="ri-calendar-line text-blue-600 mr-3"></i>
                   <div>
                     <p className="font-semibold">Inicio de Clases</p>
-                    <p className="text-sm text-gray-600">Mayo 2025</p>
+                    <p className="text-sm text-gray-600">Febrero 2026</p>
                   </div>
                 </div>
               </div>
@@ -455,7 +455,7 @@ const toggleMenu = () => {
       {/* CTA Inscripción */}
       <section className="py-20 bg-blue-900 text-white">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold mb-6">¿Listo para unirte a nuestra familia?</h2>
+          <h2 className="text-3xl font-bold mb-6">¿Listo para unirte a nuestra familia Gonzaguista?</h2>
           <p className="text-xl text-blue-200 mb-8">
             Completa tu solicitud de inscripción y da el primer paso hacia una educación de excelencia
           </p>
@@ -487,7 +487,7 @@ const toggleMenu = () => {
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Nombre del Estudiante *
+                      Nombre del Estudiante*
                     </label>
                     <input 
                       type="text" 
@@ -500,7 +500,7 @@ const toggleMenu = () => {
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Fecha de Nacimiento *
+                      Fecha de Nacimiento*
                     </label>
                     <input 
                       type="date" 
@@ -515,7 +515,7 @@ const toggleMenu = () => {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Grado a Cursar *
+                    Grado a Cursar*
                   </label>
                   <div className="relative">
                     <select 
@@ -526,7 +526,7 @@ const toggleMenu = () => {
                       required
                     >
                       <option value="">Seleccionar grado</option>
-                      <option value="jardin">Jardín</option>
+                      <option value="jardin">Jardín/Kinder</option>
                       <option value="transicion">Transición</option>
                       <option value="1">1° Primaria</option>
                       <option value="2">2° Primaria</option>
@@ -549,7 +549,7 @@ const toggleMenu = () => {
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Nombre del Padre/Madre *
+                      Nombre del Padre/Madre*
                     </label>
                     <input 
                       type="text" 
@@ -562,7 +562,7 @@ const toggleMenu = () => {
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Teléfono *
+                      Teléfono*
                     </label>
                     <input 
                       type="tel" 
@@ -577,7 +577,7 @@ const toggleMenu = () => {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Correo Electrónico *
+                    Correo Electrónico*
                   </label>
                   <input 
                     type="email" 
@@ -691,6 +691,14 @@ const toggleMenu = () => {
               <h4 className="font-semibold mb-4">Plataformas</h4>
               <div className="space-y-2">
                 <a 
+                  href="https://lms30.uno-internacional.com/login/access" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="block text-sm text-gray-400 hover:text-white transition-colors cursor-pointer"
+                >
+                  UNOi Santillana
+                </a>
+                <a 
                   href="https://www.cibercolegios.com/" 
                   target="_blank" 
                   rel="noopener noreferrer"
@@ -712,7 +720,7 @@ const toggleMenu = () => {
           
           <div className="border-t border-gray-800 mt-8 pt-8 text-center">
             <p className="text-gray-400 text-sm">
-              2025 Colegio Nuevo San Luis Gonzaga. Todos los derechos reservados.
+            © 2025 Colegio Nuevo San Luis Gonzaga. Todos los derechos reservados.
             </p>
           </div>
         </div>

@@ -47,7 +47,7 @@ export default function Home() {
       setCurrentImageIndex((prevIndex) => 
         prevIndex === bannerImages.length - 1 ? 0 : prevIndex + 1
       );
-    }, 5000);
+    }, 7000);
 
     return () => clearInterval(interval);
   }, [bannerImages.length]);
@@ -502,7 +502,7 @@ export default function Home() {
           </div>
           <div className="border-t border-gray-800 mt-8 pt-8 text-center">
             <p className="text-gray-400 text-sm">
-              2025 Colegio Nuevo San Luis Gonzaga. Todos los derechos reservados.
+            © 2025 Colegio Nuevo San Luis Gonzaga. Todos los derechos reservados.
             </p>
           </div>
         </div>
