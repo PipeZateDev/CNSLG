@@ -1,14 +1,22 @@
 'use client';
 
 import Link from 'next/link';
+import { useState } from 'react';
 
 export default function Contacto() {
+  const [menuAbierto, setMenuAbierto] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuAbierto(!menuAbierto);
+  };
+
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
       <nav className="fixed top-0 w-full bg-white shadow-lg z-50">
         <div className="px-6 py-4">
           <div className="flex items-center justify-between">
+            {/* Logo */}
             <div className="flex items-center">
               <img 
                 src="https://static.readdy.ai/image/b422d9997318ba9404c133396eb0082a/f0b6df53262c2786638b3d4d8768e052.png" 
@@ -16,99 +24,61 @@ export default function Contacto() {
                 className="h-12 w-auto"
               />
             </div>
-            
-            <div className="flex items-center space-x-8">
-              <Link 
-                href="/"
-                className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer"
-              >
-                Inicio
-              </Link>
-              <Link 
-                href="/nosotros"
-                className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer"
-              >
-                Nosotros
-              </Link>
-              <Link 
-                href="/admisiones"
-                className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer"
-              >
-                Admisiones
-              </Link>
-              <Link 
-                href="/contacto"
-                className="px-4 py-2 bg-blue-900 text-white rounded-full transition-colors whitespace-nowrap cursor-pointer"
-              >
-                Contacto
-              </Link>
-              
+
+            {/* Menú Desktop */}
+            <div className="hidden lg:flex items-center space-x-8">
+              <Link href="/" className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap">Inicio</Link>
+              <Link href="/nosotros" className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap">Nosotros</Link>
+              <Link href="/admisiones" className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap">Admisiones</Link>
+              <Link href="/contacto" className="px-4 py-2 bg-blue-900 text-white rounded-full transition-colors whitespace-nowrap">Contacto</Link>
               <div className="flex space-x-2 ml-8">
-                <a 
-                  href="https://www.cibercolegios.com/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="px-4 py-2 bg-yellow-400 text-black rounded-full hover:bg-yellow-500 transition-colors whitespace-nowrap cursor-pointer"
-                >
-                  Cibercolegios
-                </a>
-                <a 
-                  href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=12695&searchedCategoryId=&searchedAgreementName=PEDAGOGICOS%20ASOCIADOS%20SAS" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors whitespace-nowrap cursor-pointer"
-                >
-                  PSE
-                </a>
+                <a href="https://www.cibercolegios.com/" target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-yellow-400 text-black rounded-full hover:bg-yellow-500 transition-colors">Cibercolegios</a>
+                <a href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=12695&searchedCategoryId=&searchedAgreementName=PEDAGOGICOS%20ASOCIADOS%20SAS" target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors">PSE</a>
               </div>
             </div>
+
+            {/* Botón móvil */}
+            <div className="lg:hidden">
+              <button onClick={toggleMenu} className="focus:outline-none text-blue-900">
+                <i className="ri-menu-line text-2xl"></i>
+              </button>
+            </div>
           </div>
+
+          {/* Menú Móvil */}
+          {menuAbierto && (
+            <div className="mt-4 space-y-4 lg:hidden">
+              <Link href="/" className="block px-4 py-2 text-blue-900 hover:bg-blue-50 rounded">Inicio</Link>
+              <Link href="/nosotros" className="block px-4 py-2 text-blue-900 hover:bg-blue-50 rounded">Nosotros</Link>
+              <Link href="/admisiones" className="block px-4 py-2 text-blue-900 hover:bg-blue-50 rounded">Admisiones</Link>
+              <Link href="/contacto" className="block px-4 py-2 bg-blue-900 text-white rounded">Contacto</Link>
+              <a href="https://www.cibercolegios.com/" target="_blank" rel="noopener noreferrer" className="block px-4 py-2 bg-yellow-400 text-black rounded hover:bg-yellow-500">Cibercolegios</a>
+              <a href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=12695&searchedCategoryId=&searchedAgreementName=PEDAGOGICOS%20ASOCIADOS%20SAS" target="_blank" rel="noopener noreferrer" className="block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">PSE</a>
+            </div>
+          )}
         </div>
       </nav>
 
       {/* Floating Social Media Buttons */}
-      <div className="fixed right-6 top-1/2 transform -translate-y-1/2 z-40 space-y-3">
-        <a 
-          href="https://wa.me/573183365700" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="w-12 h-12 bg-green-500 hover:bg-green-600 text-white rounded-full flex items-center justify-center transition-colors cursor-pointer shadow-lg"
-        >
-          <i className="ri-whatsapp-line text-xl"></i>
-        </a>
-        <a 
-          href="https://instagram.com" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="w-12 h-12 bg-pink-500 hover:bg-pink-600 text-white rounded-full flex items-center justify-center transition-colors cursor-pointer shadow-lg"
-        >
-          <i className="ri-instagram-line text-xl"></i>
-        </a>
-        <a 
-          href="https://facebook.com" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="w-12 h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-full flex items-center justify-center transition-colors cursor-pointer shadow-lg"
-        >
-          <i className="ri-facebook-line text-xl"></i>
-        </a>
-        <a 
-          href="https://tiktok.com" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="w-12 h-12 bg-black hover:bg-gray-800 text-white rounded-full flex items-center justify-center transition-colors cursor-pointer shadow-lg"
-        >
-          <i className="ri-tiktok-line text-xl"></i>
-        </a>
-        <a 
-          href="https://youtube.com" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="w-12 h-12 bg-red-600 hover:bg-red-700 text-white rounded-full flex items-center justify-center transition-colors cursor-pointer shadow-lg"
-        >
-          <i className="ri-youtube-line text-xl"></i>
-        </a>
-      </div>
+<div className="fixed right-6 bottom-6 z-40 space-y-3">
+  {[
+    { href: "https://wa.me/573183365700", color: "bg-green-500 hover:bg-green-600", icon: "ri-whatsapp-line" },
+    { href: "https://www.instagram.com/colegionuevosanluisgonzaga/?hl=es", color: "bg-pink-500 hover:bg-pink-600", icon: "ri-instagram-line" },
+    { href: "https://www.facebook.com/colegionuevosanluisgonzaga", color: "bg-blue-600 hover:bg-blue-700", icon: "ri-facebook-line" },
+    { href: "https://www.tiktok.com/@nuevosanluisgonzaga", color: "bg-black hover:bg-gray-800", icon: "ri-tiktok-line" },
+    { href: "https://www.youtube.com/@colegionuevosanluisgonzaga5795", color: "bg-red-600 hover:bg-red-700", icon: "ri-youtube-line" },
+  ].map((item, idx) => (
+    <a
+      key={idx}
+      href={item.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`w-12 h-12 ${item.color} text-white rounded-full flex items-center justify-center transition-all cursor-pointer shadow-lg opacity-80 hover:opacity-100`}
+    >
+      <i className={`${item.icon} text-xl`}></i>
+    </a>
+  ))}
+</div>
 
       {/* Hero Section */}
       <section className="pt-24 pb-12 bg-gradient-to-r from-blue-900 to-blue-700 text-white">
