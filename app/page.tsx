@@ -35,7 +35,7 @@ export default function Home() {
       description: "Espacios diseñados para el aprendizaje"
     },
     {
-      url: "https://readdy.ai/api/search-image?query=Students%20participating%20in%20various%20sports%20and%20arts%20activities%2C%20soccer%2C%20basketball%2C%20music%2C%20dance%2C%20theater%2C%20diverse%20talents%20showcase%2C%20Colombian%20school%20cultural%20and%20athletic%20programs%2C%20creative%20expression&width=1920&height=600&seq=banner6&orientation=landscape",
+      url: "https://i.ibb.co/fzF4Z8Lw/Intercolegiados.jpg",
       title: "Variedad de Deportes y Artes",
       description: "Desarrollo integral de talentos"
     }
