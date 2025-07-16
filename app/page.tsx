@@ -210,48 +210,25 @@ export default function Home() {
       </nav>
 
       {/* Floating Social Media Buttons */}
-      <div className="fixed right-6 top-1/2 transform -translate-y-1/2 z-40 space-y-3">
-        <a 
-          href="https://wa.me/573183365700" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="w-12 h-12 bg-green-500 hover:bg-green-600 text-white rounded-full flex items-center justify-center transition-colors cursor-pointer shadow-lg"
-        >
-          <i className="ri-whatsapp-line text-xl"></i>
-        </a>
-        <a 
-          href="https://instagram.com" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="w-12 h-12 bg-pink-500 hover:bg-pink-600 text-white rounded-full flex items-center justify-center transition-colors cursor-pointer shadow-lg"
-        >
-          <i className="ri-instagram-line text-xl"></i>
-        </a>
-        <a 
-          href="https://facebook.com" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="w-12 h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-full flex items-center justify-center transition-colors cursor-pointer shadow-lg"
-        >
-          <i className="ri-facebook-line text-xl"></i>
-        </a>
-        <a 
-          href="https://tiktok.com" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="w-12 h-12 bg-black hover:bg-gray-800 text-white rounded-full flex items-center justify-center transition-colors cursor-pointer shadow-lg"
-        >
-          <i className="ri-tiktok-line text-xl"></i>
-        </a>
-        <a 
-          href="https://youtube.com" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="w-12 h-12 bg-red-600 hover:bg-red-700 text-white rounded-full flex items-center justify-center transition-colors cursor-pointer shadow-lg"
-        >
-          <i className="ri-youtube-line text-xl"></i>
-        </a>
-      </div>
+<div className="fixed right-6 bottom-6 z-40 space-y-3">
+  {[
+    { href: "https://wa.me/573183365700", color: "bg-green-500 hover:bg-green-600", icon: "ri-whatsapp-line" },
+    { href: "https://instagram.com", color: "bg-pink-500 hover:bg-pink-600", icon: "ri-instagram-line" },
+    { href: "https://facebook.com", color: "bg-blue-600 hover:bg-blue-700", icon: "ri-facebook-line" },
+    { href: "https://tiktok.com", color: "bg-black hover:bg-gray-800", icon: "ri-tiktok-line" },
+    { href: "https://youtube.com", color: "bg-red-600 hover:bg-red-700", icon: "ri-youtube-line" },
+  ].map((item, idx) => (
+    <a
+      key={idx}
+      href={item.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`w-12 h-12 ${item.color} text-white rounded-full flex items-center justify-center transition-all cursor-pointer shadow-lg opacity-60 hover:opacity-100`}
+    >
+      <i className={`${item.icon} text-xl`}></i>
+    </a>
+  ))}
+</div>
 
       {/* Banner Section */}
       <section className="pt-20 relative">
@@ -423,7 +400,7 @@ export default function Home() {
             <div className="bg-white rounded-lg shadow-lg overflow-hidden">
               <img 
                 src="https://readdy.ai/api/search-image?query=School%20open%20house%20event%2C%20parents%20and%20students%20touring%20facilities%2C%20Colombian%20school%20environment%2C%20welcoming%20atmosphere%2C%20educational%20tour%2C%20modern%20classrooms%2C%20informative%20presentations&width=400&height=250&seq=news1&orientation=landscape"
-                alt="Casa Abierta"
+                alt="Open House"
                 className="w-full h-48 object-cover object-top"
               />
               <div className="p-6">
@@ -447,7 +424,7 @@ export default function Home() {
             <div className="bg-white rounded-lg shadow-lg overflow-hidden">
               <img 
                 src="https://readdy.ai/api/search-image?query=School%20sports%20championship%20celebration%2C%20students%20with%20trophies%20and%20medals%2C%20athletic%20achievement%2C%20team%20spirit%2C%20Colombian%20school%20sports%2C%20victory%20celebration%2C%20proud%20athletes&width=400&height=250&seq=news3&orientation=landscape"
-                alt="Campeonato Deportivo"
+                alt="Olimpiadas Deportivas"
                 className="w-full h-48 object-cover object-top"
               />
               <div className="p-6">
