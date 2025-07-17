@@ -20,127 +20,35 @@ export default function Nosotros() {
                 className="h-12 w-auto"
               />
             </div>
-            
-            {/* Desktop Navigation */}
+
             <div className="hidden lg:flex items-center space-x-8">
-              <Link 
-                href="/"
-                className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer"
-              >
-                Inicio
-              </Link>
-              <Link 
-                href="/nosotros"
-                className="px-4 py-2 bg-blue-900 text-white rounded-full transition-colors whitespace-nowrap cursor-pointer"
-              >
-                Nosotros
-              </Link>
-              <Link 
-                href="/admisiones"
-                className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer"
-              >
-                Admisiones
-              </Link>
-              <Link 
-                href="/contacto"
-                className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer"
-              >
-                Contacto
-              </Link>
+              <Link href="/" className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer">Inicio</Link>
+              <Link href="/nosotros" className="px-4 py-2 bg-blue-900 text-white rounded-full transition-colors whitespace-nowrap cursor-pointer">Nosotros</Link>
+              <Link href="/admisiones" className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer">Admisiones</Link>
+              <Link href="/contacto" className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer">Contacto</Link>
               <div className="flex space-x-2 ml-8">
-                <a 
-                  href="https://lms30.uno-internacional.com/login/access" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="px-4 py-2 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition-colors whitespace-nowrap cursor-pointer"
-                >
-                  UNOi Santillana
-                </a>
-                <a 
-                  href="https://www.cibercolegios.com/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="px-4 py-2 bg-yellow-400 text-black rounded-full hover:bg-yellow-500 transition-colors whitespace-nowrap cursor-pointer"
-                >
-                  Cibercolegios
-                </a>
-                <a 
-                  href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=12695&searchedCategoryId=&searchedAgreementName=PEDAGOGICOS%20ASOCIADOS%20SAS" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors whitespace-nowrap cursor-pointer"
-                >
-                  PSE
-                </a>
+                <a href="https://lms30.uno-internacional.com/login/access" target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition-colors whitespace-nowrap cursor-pointer">UNOi Santillana</a>
+                <a href="https://www.cibercolegios.com/" target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-yellow-400 text-black rounded-full hover:bg-yellow-500 transition-colors whitespace-nowrap cursor-pointer">Cibercolegios</a>
+                <a href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=12695&searchedCategoryId=&searchedAgreementName=PEDAGOGICOS%20ASOCIADOS%20SAS" target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors whitespace-nowrap cursor-pointer">PSE</a>
               </div>
             </div>
 
-            {/* Mobile Menu Button */}
-            <button 
-              onClick={toggleMenu}
-              className="lg:hidden w-10 h-10 flex items-center justify-center text-blue-900 cursor-pointer"
-            >
+            <button onClick={toggleMenu} className="lg:hidden w-10 h-10 flex items-center justify-center text-blue-900 cursor-pointer">
               <i className={`ri-${isMenuOpen ? 'close' : 'menu'}-line text-2xl`}></i>
             </button>
           </div>
 
-          {/* Mobile Navigation Menu */}
           {isMenuOpen && (
             <div className="lg:hidden mt-4 py-4 border-t border-gray-200">
               <div className="flex flex-col space-y-3">
-                <Link 
-                  href="/"
-                  onClick={() => setIsMenuOpen(false)}
-                  className="px-4 py-2 bg-blue-900 text-white rounded-full transition-colors text-center cursor-pointer"
-                >
-                  Inicio
-                </Link>
-                <Link 
-                  href="/nosotros"
-                  onClick={() => setIsMenuOpen(false)}
-                  className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer"
-                >
-                  Nosotros
-                </Link>
-                <Link 
-                  href="/admisiones"
-                  onClick={() => setIsMenuOpen(false)}
-                  className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer"
-                >
-                  Admisiones
-                </Link>
-                <Link 
-                  href="/contacto"
-                  onClick={() => setIsMenuOpen(false)}
-                  className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer"
-                >
-                  Contacto
-                </Link>
+                <Link href="/" onClick={() => setIsMenuOpen(false)} className="px-4 py-2 bg-blue-900 text-white rounded-full transition-colors text-center cursor-pointer">Inicio</Link>
+                <Link href="/nosotros" onClick={() => setIsMenuOpen(false)} className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer">Nosotros</Link>
+                <Link href="/admisiones" onClick={() => setIsMenuOpen(false)} className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer">Admisiones</Link>
+                <Link href="/contacto" onClick={() => setIsMenuOpen(false)} className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer">Contacto</Link>
                 <div className="flex flex-col space-y-2 pt-2">
-                  <a 
-                    href="https://lms30.uno-internacional.com/login/access" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="px-4 py-2 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition-colors text-center cursor-pointer"
-                  >
-                    UNOi Santillana
-                  </a>
-                  <a 
-                    href="https://www.cibercolegios.com/" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="px-4 py-2 bg-yellow-400 text-black rounded-full hover:bg-yellow-500 transition-colors text-center cursor-pointer"
-                  >
-                    Cibercolegios
-                  </a>
-                  <a 
-                    href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=12695&searchedCategoryId=&searchedAgreementName=PEDAGOGICOS%20ASOCIADOS%20SAS" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors text-center cursor-pointer"
-                  >
-                    PSE
-                  </a>
+                  <a href="https://lms30.uno-internacional.com/login/access" target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition-colors text-center cursor-pointer">UNOi Santillana</a>
+                  <a href="https://www.cibercolegios.com/" target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-yellow-400 text-black rounded-full hover:bg-yellow-500 transition-colors text-center cursor-pointer">Cibercolegios</a>
+                  <a href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=12695&searchedCategoryId=&searchedAgreementName=PEDAGOGICOS%20ASOCIADOS%20SAS" target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors text-center cursor-pointer">PSE</a>
                 </div>
               </div>
             </div>
@@ -162,6 +70,24 @@ export default function Nosotros() {
           </a>
         ))}
       </div>
+
+      {/* Embedded Genially Timeline */}
+      <section className="pt-24">
+        <div style={{ width: '100%' }}>
+          <div style={{ position: 'relative', paddingBottom: '56.25%', paddingTop: 0, height: 0 }}>
+            <iframe
+              title="Historia Gonzaguista"
+              frameBorder="0"
+              width="1200"
+              height="675"
+              style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+              src="https://view.genially.com/687902f51d38b6e8f6b5d3b3"
+              allowFullScreen
+              scrolling="yes"
+            ></iframe>
+          </div>
+        </div>
+      </section>
 
       {/* Hero Section */}
       <section className="pt-24 pb-12 bg-gradient-to-r from-blue-900 to-blue-700 text-white">
@@ -185,7 +111,7 @@ export default function Nosotros() {
                 institución educativa con el sueño de formar integralmente a los jóvenes de nuestra comunidad.
               </p>
               <p className="text-gray-600 mb-4">
-                A lo largo de estos 98 años, hemos mantenido nuestro compromiso con la excelencia 
+                A lo largo de estos 99 años, hemos mantenido nuestro compromiso con la excelencia 
                 académica, los valores católicos y la formación de líderes comprometidos con la sociedad.
               </p>
               <p className="text-gray-600">
@@ -214,9 +140,9 @@ export default function Nosotros() {
               </div>
               <h3 className="text-2xl font-bold text-blue-900 mb-4">Misión</h3>
               <p className="text-gray-700">
-                Formar integralmente a niños y jóvenes con excelencia académica, fundamentados 
-                en valores católicos, desarrollando competencias que les permitan ser líderes 
-                transformadores de la sociedad, comprometidos con la justicia, la paz y el bien común.
+                El COLEGIO NUEVO SAN LUIS GONZAGA tiene el propósito de formar integralmente a nuestros estudiantes desde los valores Gonzaguistas, 
+                potenciando sus dimensiones de aprendizaje, profundizando en las áreas de humanidades, ciencias, matemáticas e inglés, Todo ello, 
+                con un enfoque investigativo y tecnológico.
               </p>
             </div>
             <div className="bg-green-50 rounded-lg p-8">
@@ -225,9 +151,9 @@ export default function Nosotros() {
               </div>
               <h3 className="text-2xl font-bold text-blue-900 mb-4">Visión</h3>
               <p className="text-gray-700">
-                Ser reconocidos como la institución educativa líder en la región, distinguida 
-                por la excelencia académica, la formación en valores y la innovación pedagógica, 
-                contribuyendo al desarrollo integral de nuestros estudiantes y al progreso de la sociedad.
+                Evolucionar y crecer como una Institución de educación formal de calidad certificada dedicada a la formación y desarrollo de seres 
+                humanos integrales, con un currículo avanzado y proyectado hacia el bilingüismo, la investigación y la tecnología. Nos proyectamos 
+                para el año 2025 alcanzar altos estándares en el nivel de inglés de acuerdo con el Marco Común Europeo.
               </p>
             </div>
           </div>
