@@ -80,7 +80,7 @@ export default function Nosotros() {
               frameBorder="0"
               width="1200"
               height="675"
-              style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+              style={{ position: 'absolute', top: 0, left: 0, width: '90%', height: '90%' }}
               src="https://view.genially.com/687902f51d38b6e8f6b5d3b3"
               allowFullScreen
               scrolling="yes"
