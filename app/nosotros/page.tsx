@@ -71,9 +71,21 @@ export default function Nosotros() {
         ))}
       </div>
 
+      
+
+      {/* Hero Section */}
+      <section className="pt-24 pb-12 bg-gradient-to-r from-blue-900 to-blue-700 text-white">
+        <div className="max-w-7xl mx-auto px-6 text-center">
+          <h1 className="text-4xl md:text-5xl font-bold mb-6">Nosotros</h1>
+          <p className="text-xl text-blue-200 max-w-3xl mx-auto">
+            Conoce la rica historia y tradición educativa del Colegio Nuevo San Luis Gonzaga
+          </p>
+        </div>
+      </section>
+
       {/* Embedded Genially Timeline */}
       <section className="pt-24">
-        <div style={{ width: '90%' }}>
+        <div style={{ width: '90%', margin: '0 auto' }}>
           <div style={{ position: 'relative', paddingBottom: '56.25%', paddingTop: 0, height: 0 }}>
             <iframe
               title="Historia Gonzaguista"
@@ -86,16 +98,6 @@ export default function Nosotros() {
               scrolling="yes"
             ></iframe>
           </div>
-        </div>
-      </section>
-
-      {/* Hero Section */}
-      <section className="pt-24 pb-12 bg-gradient-to-r from-blue-900 to-blue-700 text-white">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">Nosotros</h1>
-          <p className="text-xl text-blue-200 max-w-3xl mx-auto">
-            Conoce la rica historia y tradición educativa del Colegio Nuevo San Luis Gonzaga
-          </p>
         </div>
       </section>
 
