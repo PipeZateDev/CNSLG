@@ -56,101 +56,118 @@ export default function Nosotros() {
         </div>
       </nav>
 
-      {/* Floating Social Media Buttons */}
-      <div className="fixed right-6 bottom-6 z-40 space-y-3">
-        {[
-          { href: "https://wa.me/573183365700", color: "bg-green-500 hover:bg-green-600", icon: "ri-whatsapp-line" },
-          { href: "https://www.instagram.com/colegionuevosanluisgonzaga/?hl=es", color: "bg-pink-500 hover:bg-pink-600", icon: "ri-instagram-line" },
-          { href: "https://www.facebook.com/colegionuevosanluisgonzaga", color: "bg-blue-600 hover:bg-blue-700", icon: "ri-facebook-line" },
-          { href: "https://www.tiktok.com/@nuevosanluisgonzaga", color: "bg-black hover:bg-gray-800", icon: "ri-tiktok-line" },
-          { href: "https://www.youtube.com/@colegionuevosanluisgonzaga5795", color: "bg-red-600 hover:bg-red-700", icon: "ri-youtube-line" },
-        ].map((item, idx) => (
-          <a key={idx} href={item.href} target="_blank" rel="noopener noreferrer" className={`w-12 h-12 ${item.color} text-white rounded-full flex items-center justify-center transition-all cursor-pointer shadow-lg opacity-80 hover:opacity-100`}>
-            <i className={`${item.icon} text-xl`}></i>
-          </a>
-        ))}
-      </div>
+      {/* Historia + Misión & Visión + Valores + Canva */}
+<section className="py-20 bg-white">
+  <div className="max-w-7xl mx-auto px-6">
+    <div className="grid md:grid-cols-2 gap-12 items-start">
+      <div>
+        {/* Historia */}
+        <h2 className="text-3xl font-bold text-blue-900 mb-6">Nuestra Historia Centenaria</h2>
+        <p className="text-gray-600 mb-4">
+          Fundado en 1926, el Colegio Nuevo San Luis Gonzaga ha sido un pilar fundamental 
+          en la educación colombiana durante casi un siglo...
+        </p>
+        <p className="text-gray-600 mb-4">
+          A lo largo de estos 99 años, hemos mantenido nuestro compromiso con la excelencia académica...
+        </p>
+        <p className="text-gray-600 mb-8">
+          Hoy, nos enorgullecemos de ser una institución reconocida por su calidad educativa...
+        </p>
 
-      
-
-      {/* Hero Section */}
-      <section className="pt-24 pb-12 bg-gradient-to-r from-blue-900 to-blue-700 text-white">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">Nosotros</h1>
-          <p className="text-xl text-blue-200 max-w-3xl mx-auto">
-            Conoce la rica historia y tradición educativa del Colegio Nuevo San Luis Gonzaga
-          </p>
-        </div>
-      </section>
-
-      {/* Historia + Misión & Visión + Canva */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-2 gap-12 items-start">
-            <div>
-              <h2 className="text-3xl font-bold text-blue-900 mb-6">Nuestra Historia Centenaria</h2>
-              <p className="text-gray-600 mb-4">
-                Fundado en 1926, el Colegio Nuevo San Luis Gonzaga ha sido un pilar fundamental 
-                en la educación colombiana durante casi un siglo...
-              </p>
-              <p className="text-gray-600 mb-4">
-                A lo largo de estos 99 años, hemos mantenido nuestro compromiso con la excelencia académica...
-              </p>
-              <p className="text-gray-600 mb-8">
-                Hoy, nos enorgullecemos de ser una institución reconocida por su calidad educativa...
-              </p>
-
-              {/* Misión y Visión */}
-              <div className="space-y-8">
-                <div className="bg-blue-50 rounded-lg p-6">
-                  <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-2">
-                    <i className="ri-target-line text-xl text-blue-600"></i>
-                  </div>
-                  <h3 className="text-xl font-bold text-blue-900 mb-2">Misión</h3>
-                  <p className="text-gray-700 text-sm">
-                    El COLEGIO NUEVO SAN LUIS GONZAGA tiene el propósito de formar integralmente a nuestros estudiantes...
-                  </p>
-                </div>
-                <div className="bg-green-50 rounded-lg p-6">
-                  <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-2">
-                    <i className="ri-eye-line text-xl text-green-600"></i>
-                  </div>
-                  <h3 className="text-xl font-bold text-blue-900 mb-2">Visión</h3>
-                  <p className="text-gray-700 text-sm">
-                    Evolucionar y crecer como una Institución de educación formal de calidad certificada...
-                  </p>
-                </div>
-              </div>
+        {/* Misión */}
+        <div className="space-y-8 mb-8">
+          <div className="bg-blue-50 rounded-lg p-6">
+            <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-2">
+              <i className="ri-target-line text-xl text-blue-600"></i>
             </div>
+            <h3 className="text-xl font-bold text-blue-900 mb-2">Misión</h3>
+            <p className="text-gray-700 text-sm">
+              El COLEGIO NUEVO SAN LUIS GONZAGA tiene el propósito de formar integralmente a nuestros estudiantes desde los valores 
+              Gonzaguistas, potenciando sus dimensiones de aprendizaje, profundizando en las áreas de humanidades, ciencias, matemáticas 
+              e inglés, Todo ello, con un enfoque investigativo y tecnológico.
+            </p>
+          </div>
 
-            {/* Canva Embed */}
-            <div>
-              <div style={{ width: '100%', margin: '0 auto' }}>
-                <div style={{ position: 'relative', paddingTop: '250%', height: 0, borderRadius: '8px', overflow: 'hidden', boxShadow: '0 2px 8px 0 rgba(63,69,81,0.16)' }}>
-                  <iframe
-                    loading="lazy"
-                    style={{ position: 'absolute', width: '100%', height: '100%', top: 0, left: 0, border: 'none', padding: 0, margin: 0 }}
-                    src="https://www.canva.com/design/DAGthMc6PCk/CtEaZeJ-hYtbOIvUKNgeqA/view?embed"
-                    allowFullScreen
-                    title="Historia Canva"
-                  ></iframe>
-                </div>
-                <div className="text-center mt-4">
-                  <a
-                    href="https://www.canva.com/design/DAGthMc6PCk/CtEaZeJ-hYtbOIvUKNgeqA/view?utm_content=DAGthMc6PCk&utm_campaign=designshare&utm_medium=embeds&utm_source=link"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-600 underline hover:text-blue-800 transition-colors"
-                  >
-                    History Timeline of CNSLFG
-                  </a>{' '}
-                  by Felipe ALzate, Support IT CNSLG
-                </div>
-              </div>
+          {/* Visión */}
+          <div className="bg-green-50 rounded-lg p-6">
+            <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-2">
+              <i className="ri-eye-line text-xl text-green-600"></i>
             </div>
+            <h3 className="text-xl font-bold text-blue-900 mb-2">Visión</h3>
+            <p className="text-gray-700 text-sm">
+              Evolucionar y crecer como una Institución de educación formal de calidad certificada dedicada a la formación y desarrollo 
+              de seres humanos integrales, con un currículo avanzado y proyectado hacia el bilingüismo, la investigación y la tecnología. 
+              Nos proyectamos para el año 2025 alcanzar altos estándares en el nivel de inglés de acuerdo con el Marco Común Europeo.
+            </p>
           </div>
         </div>
-      </section>
+
+        {/* Valores Institucionales */}
+        <div className="bg-yellow-50 rounded-lg p-6 mb-8">
+          <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mb-2">
+            <i className="ri-hand-heart-line text-xl text-yellow-600"></i>
+          </div>
+          <h3 className="text-xl font-bold text-blue-900 mb-2">Valores Institucionales</h3>
+          <ul className="list-disc pl-5 text-gray-700 text-sm space-y-2">
+            <li><strong>→ Principio de Identidad:</strong> sentimiento de pertenencia y rasgos distintivos de la comunidad Gonzaguista.</li>
+            <li><strong>→ Principio de Responsabilidad:</strong> conciencia de las consecuencias y capacidad para asumir compromisos.</li>
+            <li><strong>→ Principio de Justicia:</strong> respeto y defensa de los derechos de las personas, actuando con equidad.</li>
+            <li><strong>→ Principio de Trascendencia:</strong> vivir con sentido de misión, responsabilidad, armonía y entusiasmo.</li>
+            <li><strong>→ Principio de Tolerancia:</strong> respeto por los demás, aceptación de la individualidad y la diferencia.</li>
+          </ul>
+        </div>
+
+        {/* Decálogo */}
+        <div className="bg-purple-50 rounded-lg p-6">
+          <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-2">
+            <i className="ri-list-check text-xl text-purple-600"></i>
+          </div>
+          <h3 className="text-xl font-bold text-blue-900 mb-2">Decálogo del Nuevo San Luis Gonzaga</h3>
+          <ul className="list-disc pl-5 text-gray-700 text-sm space-y-1">
+            <li>1. Dios siempre presente en nuestras labores educativas.</li>
+            <li>2. Educamos con justicia y amor.</li>
+            <li>3. Actuamos con responsabilidad y decisión.</li>
+            <li>4. Prestamos un servicio de calidad con amabilidad.</li>
+            <li>5. Fomentamos el espíritu investigativo y deportivo.</li>
+            <li>6. Somos diligentes y creativos.</li>
+            <li>7. Estamos a la vanguardia de los conocimientos científicos y tecnológicos.</li>
+            <li>8. Reconocemos los derechos fundamentales de las personas.</li>
+            <li>9. Somos exitosos por nuestra organización.</li>
+            <li>10. Planeamos, hacemos, verificamos y actuamos.</li>
+          </ul>
+        </div>
+
+      </div>
+
+      {/* Canva Embed */}
+      <div>
+        <div style={{ width: '100%', margin: '0 auto' }}>
+          <div style={{ position: 'relative', paddingTop: '250%', height: 0, borderRadius: '8px', overflow: 'hidden', boxShadow: '0 2px 8px 0 rgba(63,69,81,0.16)' }}>
+            <iframe
+              loading="lazy"
+              style={{ position: 'absolute', width: '100%', height: '100%', top: 0, left: 0, border: 'none', padding: 0, margin: 0 }}
+              src="https://www.canva.com/design/DAGthMc6PCk/CtEaZeJ-hYtbOIvUKNgeqA/view?embed"
+              allowFullScreen
+              title="Historia Canva"
+            ></iframe>
+          </div>
+          <div className="text-center mt-4">
+            <a
+              href="https://www.canva.com/design/DAGthMc6PCk/CtEaZeJ-hYtbOIvUKNgeqA/view?utm_content=DAGthMc6PCk&utm_campaign=designshare&utm_medium=embeds&utm_source=link"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-600 underline hover:text-blue-800 transition-colors"
+            >
+              Timeline 100 Years CNSLG
+            </a>{' '}
+            by Felipe Alzate, Support IT CNSLG
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
 
       {/* Galería de Imágenes */}
       <section className="py-20 bg-white">
