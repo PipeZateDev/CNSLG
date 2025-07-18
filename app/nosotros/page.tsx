@@ -85,7 +85,7 @@ export default function Nosotros() {
 
       {/* Embedded Genially Timeline */}
       <section className="pt-24">
-        <div style={{ width: '60%', margin: '0 auto' }}>
+        <div style={{ width: '80%', margin: '0 auto' }}>
           <div style={{ position: 'relative', paddingBottom: '56.25%', paddingTop: 0, height: 0 }}>
             <iframe
               title="Historia Gonzaguista"
