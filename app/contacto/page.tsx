@@ -75,7 +75,7 @@ export default function Contacto() {
                   rel="noopener noreferrer"
                   className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors whitespace-nowrap cursor-pointer"
                 >
-                  PSE
+                  PSE - Pagos en Línea
                 </a>
               </div>
             </div>
@@ -144,7 +144,7 @@ export default function Contacto() {
                     rel="noopener noreferrer"
                     className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors text-center cursor-pointer"
                   >
-                    PSE
+                    PSE - Pagos en Línea
                   </a>
                 </div>
               </div>
@@ -208,9 +208,9 @@ export default function Contacto() {
                   <div>
                     <h4 className="font-semibold text-blue-900 mb-1">Teléfonos</h4>
                     <p className="text-gray-600">
-                      Línea Principal: (601) 234-5678<br />
+                      Línea Principal: (601) 7447473<br />
                       WhatsApp: +57 318 336 5700<br />
-                      Admisiones: (601) 234-5679
+                      Admisiones: (601) 7447473
                     </p>
                   </div>
                 </div>
@@ -222,9 +222,9 @@ export default function Contacto() {
                   <div>
                     <h4 className="font-semibold text-blue-900 mb-1">Correos Electrónicos</h4>
                     <p className="text-gray-600">
-                      info@colegionuevoslg.edu.co<br />
-                      admisiones@colegionuevoslg.edu.co<br />
-                      rectoria@colegionuevoslg.edu.co
+                      nuevo@slgonzaga.edu.co<br />
+                      admisiones@slgonzaga.edu.co<br />
+                      soporte@slgonzaga.edu.co
                     </p>
                   </div>
                 </div>
@@ -236,8 +236,8 @@ export default function Contacto() {
                   <div>
                     <h4 className="font-semibold text-blue-900 mb-1">Horarios de Atención</h4>
                     <p className="text-gray-600">
-                      Lunes a Viernes: 7:00 AM - 4:00 PM<br />
-                      Sábados: 8:00 AM - 12:00 PM<br />
+                      Lunes a Viernes: 7:00 AM - 5:00 PM<br />
+                      Sábados: Cerrado<br />
                       Domingos: Cerrado
                     </p>
                   </div>
@@ -297,7 +297,7 @@ export default function Contacto() {
               <h3 className="text-2xl font-bold text-blue-900 mb-8">Ubicación</h3>
               <div className="bg-white rounded-lg overflow-hidden shadow-lg">
                 <iframe 
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.8157!2d-74.0817!3d4.6533!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNMKwMzknMTEuOSJOIDc0wrAwNCc1NC4xIlc!5e0!3m2!1ses!2sco!4v1234567890"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.1254549286673!2d-74.08652182502036!3d4.748238495226936!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f845614d63d99%3A0xc6fb0207bcd2701a!2sColegio%20Nuevo%20San%20Luis%20Gonzaga!5e0!3m2!1ses!2sco!4v1752862372655!5m2!1ses!2sco"
                   width="100%" 
                   height="400" 
                   style={{ border: 0 }}
@@ -325,7 +325,7 @@ export default function Contacto() {
               <h3 className="text-xl font-bold text-blue-900 mb-2">Admisiones</h3>
               <p className="text-gray-600 mb-4">Información sobre inscripciones y proceso de admisión</p>
               <div className="space-y-2 text-sm text-gray-600">
-                <p><i className="ri-phone-line mr-2"></i>(601) 234-5679</p>
+                <p><i className="ri-phone-line mr-2"></i>(601) 7447473</p>
                 <p><i className="ri-mail-line mr-2"></i>admisiones@colegionuevoslg.edu.co</p>
               </div>
             </div>
@@ -334,11 +334,10 @@ export default function Contacto() {
               <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <i className="ri-graduation-cap-line text-2xl text-green-600"></i>
               </div>
-              <h3 className="text-xl font-bold text-blue-900 mb-2">Rectoría</h3>
+              <h3 className="text-xl font-bold text-blue-900 mb-2">Vicerrectoria</h3>
               <p className="text-gray-600 mb-4">Dirección académica y administrativa del colegio</p>
               <div className="space-y-2 text-sm text-gray-600">
-                <p><i className="ri-phone-line mr-2"></i>(601) 234-5680</p>
-                <p><i className="ri-mail-line mr-2"></i>rectoria@colegionuevoslg.edu.co</p>
+                <p><i className="ri-mail-line mr-2"></i>vicerrectoria@slgonzaga.edu.co</p>
               </div>
             </div>
 
@@ -349,8 +348,8 @@ export default function Contacto() {
               <h3 className="text-xl font-bold text-blue-900 mb-2">Secretaría Académica</h3>
               <p className="text-gray-600 mb-4">Certificados, constancias y documentos académicos</p>
               <div className="space-y-2 text-sm text-gray-600">
-                <p><i className="ri-phone-line mr-2"></i>(601) 234-5681</p>
-                <p><i className="ri-mail-line mr-2"></i>secretaria@colegionuevoslg.edu.co</p>
+                <p><i className="ri-phone-line mr-2"></i>(601) 7447473</p>
+                <p><i className="ri-mail-line mr-2"></i>secretaria@slgonzaga.edu.co</p>
               </div>
             </div>
 
@@ -361,8 +360,7 @@ export default function Contacto() {
               <h3 className="text-xl font-bold text-blue-900 mb-2">Psicología</h3>
               <p className="text-gray-600 mb-4">Acompañamiento psicopedagógico y bienestar estudiantil</p>
               <div className="space-y-2 text-sm text-gray-600">
-                <p><i className="ri-phone-line mr-2"></i>(601) 234-5682</p>
-                <p><i className="ri-mail-line mr-2"></i>psicologia@colegionuevoslg.edu.co</p>
+                <p><i className="ri-mail-line mr-2"></i>psicologia@slgonzaga.edu.co</p>
               </div>
             </div>
 
@@ -373,8 +371,7 @@ export default function Contacto() {
               <h3 className="text-xl font-bold text-blue-900 mb-2">Tesorería</h3>
               <p className="text-gray-600 mb-4">Pagos, facturación y asuntos financieros</p>
               <div className="space-y-2 text-sm text-gray-600">
-                <p><i className="ri-phone-line mr-2"></i>(601) 234-5683</p>
-                <p><i className="ri-mail-line mr-2"></i>tesoreria@colegionuevoslg.edu.co</p>
+                <p><i className="ri-mail-line mr-2"></i>tesoreria@slgonzaga.edu.co</p>
               </div>
             </div>
 
@@ -385,8 +382,7 @@ export default function Contacto() {
               <h3 className="text-xl font-bold text-blue-900 mb-2">Sistemas</h3>
               <p className="text-gray-600 mb-4">Soporte técnico y plataformas virtuales</p>
               <div className="space-y-2 text-sm text-gray-600">
-                <p><i className="ri-phone-line mr-2"></i>(601) 234-5684</p>
-                <p><i className="ri-mail-line mr-2"></i>sistemas@colegionuevoslg.edu.co</p>
+                <p><i className="ri-mail-line mr-2"></i>soportes@slgonzaga.edu.co</p>
               </div>
             </div>
           </div>
@@ -401,7 +397,7 @@ export default function Contacto() {
           <div className="space-y-6">
             <div className="border border-gray-200 rounded-lg p-6">
               <h4 className="font-semibold text-blue-900 mb-2">¿Cuáles son los horarios de clases?</h4>
-              <p className="text-gray-600">Las clases inician a las 7:00 AM y finalizan a las 3:00 PM de lunes a viernes. Los horarios pueden variar según el nivel educativo.</p>
+              <p className="text-gray-600">Las clases inician a las 7:20 AM y finalizan a las 3:30 PM de lunes a viernes. Los horarios pueden variar según el nivel educativo.</p>
             </div>
             
             <div className="border border-gray-200 rounded-lg p-6">
@@ -411,7 +407,7 @@ export default function Contacto() {
             
             <div className="border border-gray-200 rounded-lg p-6">
               <h4 className="font-semibold text-blue-900 mb-2">¿Cuándo inician las inscripciones para el próximo año?</h4>
-              <p className="text-gray-600">Las inscripciones para el año 2025 están abiertas desde octubre de 2024. Te recomendamos inscribirte pronto para asegurar tu cupo.</p>
+              <p className="text-gray-600">Las inscripciones para el año 2026 están abiertas desde octubre de 2025. Te recomendamos inscribirte pronto para asegurar tu cupo.</p>
             </div>
             
             <div className="border border-gray-200 rounded-lg p-6">

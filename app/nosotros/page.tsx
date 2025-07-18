@@ -48,7 +48,7 @@ export default function Nosotros() {
                 <div className="flex flex-col space-y-2 pt-2">
                   <a href="https://lms30.uno-internacional.com/login/access" target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition-colors text-center cursor-pointer">UNOi Santillana</a>
                   <a href="https://www.cibercolegios.com/" target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-yellow-400 text-black rounded-full hover:bg-yellow-500 transition-colors text-center cursor-pointer">Cibercolegios</a>
-                  <a href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=12695&searchedCategoryId=&searchedAgreementName=PEDAGOGICOS%20ASOCIADOS%20SAS" target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors text-center cursor-pointer">PSE</a>
+                  <a href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=12695&searchedCategoryId=&searchedAgreementName=PEDAGOGICOS%20ASOCIADOS%20SAS" target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors text-center cursor-pointer">PSE - Pagos en Línea</a>
                 </div>
               </div>
             </div>
@@ -95,9 +95,10 @@ export default function Nosotros() {
             </div>
             <h3 className="text-xl font-bold text-blue-900 mb-2">Visión</h3>
             <p className="text-gray-700 text-sm">
-              Evolucionar y crecer como una Institución de educación formal de calidad certificada dedicada a la formación y desarrollo 
-              de seres humanos integrales, con un currículo avanzado y proyectado hacia el bilingüismo, la investigación y la tecnología. 
-              Nos proyectamos para el año 2025 alcanzar altos estándares en el nivel de inglés de acuerdo con el Marco Común Europeo.
+              Evolucionar y crecer como una Institución de educación formal de calidad 
+              dedicada a la formación y desarrollo de seres humanos integrales, con un currículo avanzado y 
+              proyectado hacia el bilingüismo, la investigación, la tecnología y el deporte. Asimismo, proyectamos 
+              alcanzar altos estándares B2 en el nivel de inglés de acuerdo con el Marco Común Europeo.  
             </p>
           </div>
         </div>
