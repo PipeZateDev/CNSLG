@@ -83,24 +83,6 @@ export default function Nosotros() {
         </div>
       </section>
 
-      {/* Embedded Genially Timeline */}
-      <section className="pt-24">
-        <div style={{ width: '70%', margin: '0 auto' }}>
-          <div style={{ position: 'relative', paddingBottom: '56.25%', paddingTop: 0, height: 0 }}>
-            <iframe
-              title="Historia Gonzaguista"
-              frameBorder="0"
-              width="1200"
-              height="675"
-              style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
-              src="https://www.canva.com/design/DAGthMc6PCk/CtEaZeJ-hYtbOIvUKNgeqA/view"
-              allowFullScreen
-              scrolling="yes"
-            ></iframe>
-          </div>
-        </div>
-      </section>
-
       {/* Historia */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6">
@@ -121,16 +103,34 @@ export default function Nosotros() {
                 sus instalaciones modernas y su comunidad educativa comprometida con el futuro de Colombia.
               </p>
             </div>
-            <div className="relative">
-              <img 
-                src="https://readdy.ai/api/search-image?query=Historic%20Colombian%20school%20building%20from%201926%2C%20vintage%20architecture%2C%20educational%20institution%2C%20traditional%20brick%20building%2C%20students%20in%20historic%20uniforms%2C%20sepia%20tones%2C%20heritage%20photography%2C%20Catholic%20school%20history%2C%20Colombian%20education%20legacy&width=600&height=400&seq=history1&orientation=landscape"
-                alt="Historia del Colegio"
-                className="rounded-lg shadow-lg w-full h-80 object-cover object-top"
-              />
+            <div>
+              <div style={{ width: '100%', margin: '0 auto' }}>
+                <div style={{ position: 'relative', paddingTop: '250%', height: 0, borderRadius: '8px', overflow: 'hidden', boxShadow: '0 2px 8px 0 rgba(63,69,81,0.16)' }}>
+                  <iframe
+                    loading="lazy"
+                    style={{ position: 'absolute', width: '100%', height: '100%', top: 0, left: 0, border: 'none', padding: 0, margin: 0 }}
+                    src="https://www.canva.com/design/DAGthMc6PCk/CtEaZeJ-hYtbOIvUKNgeqA/view?embed"
+                    allowFullScreen
+                    title="Historia Canva"
+                  ></iframe>
+                </div>
+                <div className="text-center mt-4">
+                  <a
+                    href="https://www.canva.com/design/DAGthMc6PCk/CtEaZeJ-hYtbOIvUKNgeqA/view?utm_content=DAGthMc6PCk&utm_campaign=designshare&utm_medium=embeds&utm_source=link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-600 underline hover:text-blue-800 transition-colors"
+                  >
+                    White Colorful Doodle History Timeline Infographic
+                  </a>{' '}
+                  de Soporte CNSLG
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
+      
 
       {/* Misión y Visión */}
       <section className="py-20 bg-gray-50">
