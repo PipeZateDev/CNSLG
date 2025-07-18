@@ -83,26 +83,47 @@ export default function Nosotros() {
         </div>
       </section>
 
-      {/* Historia */}
+      {/* Historia + Misión & Visión + Canva */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
+          <div className="grid md:grid-cols-2 gap-12 items-start">
             <div>
               <h2 className="text-3xl font-bold text-blue-900 mb-6">Nuestra Historia Centenaria</h2>
               <p className="text-gray-600 mb-4">
                 Fundado en 1926, el Colegio Nuevo San Luis Gonzaga ha sido un pilar fundamental 
-                en la educación colombiana durante casi un siglo. Iniciamos como una pequeña 
-                institución educativa con el sueño de formar integralmente a los jóvenes de nuestra comunidad.
+                en la educación colombiana durante casi un siglo...
               </p>
               <p className="text-gray-600 mb-4">
-                A lo largo de estos 99 años, hemos mantenido nuestro compromiso con la excelencia 
-                académica, los valores católicos y la formación de líderes comprometidos con la sociedad.
+                A lo largo de estos 99 años, hemos mantenido nuestro compromiso con la excelencia académica...
               </p>
-              <p className="text-gray-600">
-                Hoy, nos enorgullecemos de ser una institución reconocida por su calidad educativa, 
-                sus instalaciones modernas y su comunidad educativa comprometida con el futuro de Colombia.
+              <p className="text-gray-600 mb-8">
+                Hoy, nos enorgullecemos de ser una institución reconocida por su calidad educativa...
               </p>
+
+              {/* Misión y Visión */}
+              <div className="space-y-8">
+                <div className="bg-blue-50 rounded-lg p-6">
+                  <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-2">
+                    <i className="ri-target-line text-xl text-blue-600"></i>
+                  </div>
+                  <h3 className="text-xl font-bold text-blue-900 mb-2">Misión</h3>
+                  <p className="text-gray-700 text-sm">
+                    El COLEGIO NUEVO SAN LUIS GONZAGA tiene el propósito de formar integralmente a nuestros estudiantes...
+                  </p>
+                </div>
+                <div className="bg-green-50 rounded-lg p-6">
+                  <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-2">
+                    <i className="ri-eye-line text-xl text-green-600"></i>
+                  </div>
+                  <h3 className="text-xl font-bold text-blue-900 mb-2">Visión</h3>
+                  <p className="text-gray-700 text-sm">
+                    Evolucionar y crecer como una Institución de educación formal de calidad certificada...
+                  </p>
+                </div>
+              </div>
             </div>
+
+            {/* Canva Embed */}
             <div>
               <div style={{ width: '100%', margin: '0 auto' }}>
                 <div style={{ position: 'relative', paddingTop: '250%', height: 0, borderRadius: '8px', overflow: 'hidden', boxShadow: '0 2px 8px 0 rgba(63,69,81,0.16)' }}>
@@ -121,42 +142,11 @@ export default function Nosotros() {
                     rel="noopener noreferrer"
                     className="text-blue-600 underline hover:text-blue-800 transition-colors"
                   >
-                    White Colorful Doodle History Timeline Infographic
+                    History Timeline of CNSLFG
                   </a>{' '}
-                  de Soporte CNSLG
+                  by Felipe ALzate, Support IT CNSLG
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-
-      {/* Misión y Visión */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-2 gap-8 mb-16">
-            <div className="bg-blue-50 rounded-lg p-8">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
-                <i className="ri-target-line text-2xl text-blue-600"></i>
-              </div>
-              <h3 className="text-2xl font-bold text-blue-900 mb-4">Misión</h3>
-              <p className="text-gray-700">
-                El COLEGIO NUEVO SAN LUIS GONZAGA tiene el propósito de formar integralmente a nuestros estudiantes desde los valores Gonzaguistas, 
-                potenciando sus dimensiones de aprendizaje, profundizando en las áreas de humanidades, ciencias, matemáticas e inglés, Todo ello, 
-                con un enfoque investigativo y tecnológico.
-              </p>
-            </div>
-            <div className="bg-green-50 rounded-lg p-8">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
-                <i className="ri-eye-line text-2xl text-green-600"></i>
-              </div>
-              <h3 className="text-2xl font-bold text-blue-900 mb-4">Visión</h3>
-              <p className="text-gray-700">
-                Evolucionar y crecer como una Institución de educación formal de calidad certificada dedicada a la formación y desarrollo de seres 
-                humanos integrales, con un currículo avanzado y proyectado hacia el bilingüismo, la investigación y la tecnología. Nos proyectamos 
-                para el año 2025 alcanzar altos estándares en el nivel de inglés de acuerdo con el Marco Común Europeo.
-              </p>
             </div>
           </div>
         </div>
