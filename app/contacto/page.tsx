@@ -194,8 +194,8 @@ export default function Contacto() {
                   <div>
                     <h4 className="font-semibold text-blue-900 mb-1">Dirección</h4>
                     <p className="text-gray-600">
-                      Calle 45 #23-67<br />
-                      Barrio San Luis Gonzaga<br />
+                      Carrera 92 #151b 61<br />
+                      Barrio Pinar de suba<br />
                       Bogotá, Colombia
                     </p>
                   </div>
@@ -210,7 +210,6 @@ export default function Contacto() {
                     <p className="text-gray-600">
                       Línea Principal: (601) 7447473<br />
                       WhatsApp: +57 318 336 5700<br />
-                      Admisiones: (601) 7447473
                     </p>
                   </div>
                 </div>
@@ -326,7 +325,7 @@ export default function Contacto() {
               <p className="text-gray-600 mb-4">Información sobre inscripciones y proceso de admisión</p>
               <div className="space-y-2 text-sm text-gray-600">
                 <p><i className="ri-phone-line mr-2"></i>(601) 7447473</p>
-                <p><i className="ri-mail-line mr-2"></i>admisiones@colegionuevoslg.edu.co</p>
+                <p><i className="ri-mail-line mr-2"></i>admisiones@slgonzaga.edu.co</p>
               </div>
             </div>
 
