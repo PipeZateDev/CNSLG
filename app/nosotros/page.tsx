@@ -109,11 +109,11 @@ export default function Nosotros() {
           </div>
           <h3 className="text-xl font-bold text-blue-900 mb-2">Valores Institucionales</h3>
           <ul className="list-disc pl-5 text-gray-700 text-sm space-y-2">
-            <li><strong>→ Principio de Identidad:</strong> sentimiento de pertenencia y rasgos distintivos de la comunidad Gonzaguista.</li>
-            <li><strong>→ Principio de Responsabilidad:</strong> conciencia de las consecuencias y capacidad para asumir compromisos.</li>
-            <li><strong>→ Principio de Justicia:</strong> respeto y defensa de los derechos de las personas, actuando con equidad.</li>
-            <li><strong>→ Principio de Trascendencia:</strong> vivir con sentido de misión, responsabilidad, armonía y entusiasmo.</li>
-            <li><strong>→ Principio de Tolerancia:</strong> respeto por los demás, aceptación de la individualidad y la diferencia.</li>
+            <li><strong>Principio de Identidad:</strong> sentimiento de pertenencia y rasgos distintivos de la comunidad Gonzaguista.</li>
+            <li><strong>Principio de Responsabilidad:</strong> conciencia de las consecuencias y capacidad para asumir compromisos.</li>
+            <li><strong>Principio de Justicia:</strong> respeto y defensa de los derechos de las personas, actuando con equidad.</li>
+            <li><strong>Principio de Trascendencia:</strong> vivir con sentido de misión, responsabilidad, armonía y entusiasmo.</li>
+            <li><strong>Principio de Tolerancia:</strong> respeto por los demás, aceptación de la individualidad y la diferencia.</li>
           </ul>
         </div>
 
