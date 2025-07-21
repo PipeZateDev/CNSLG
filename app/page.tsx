@@ -289,109 +289,71 @@ export default function Home() {
       </section>
 
       {/* Hero Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-blue-900 mb-6">
-            99 años de Excelencia Educativa
-          </h2>
-          <p className="text-xl text-gray-600 mb-12 max-w-4xl mx-auto">
-            Desde 1926, el Colegio Nuevo San Luis Gonzaga ha sido pionero en la formación integral 
-            de estudiantes con valores católicos, excelencia académica y compromiso social.
-          </p>
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
-            <div className="text-center">
-              <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <i className="ri-graduation-cap-line text-3xl text-blue-600"></i>
-              </div>
-              <h3 className="text-2xl font-bold text-blue-900 mb-2">5000+</h3>
-              <p className="text-gray-600">Graduados Exitosos</p>
-            </div>
-            <div className="text-center">
-              <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <i className="ri-award-line text-3xl text-green-600"></i>
-              </div>
-              <h3 className="text-2xl font-bold text-blue-900 mb-2">99</h3>
-              <p className="text-gray-600">Años de Tradición</p>
-            </div>
-            <div className="text-center">
-              <div className="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <i className="ri-star-line text-3xl text-purple-600"></i>
-              </div>
-              <h3 className="text-2xl font-bold text-blue-900 mb-2">100%</h3>
-              <p className="text-gray-600">Compromiso con la Calidad</p>
-            </div>
-          </div>
-          <div className="flex flex-col md:flex-row justify-center gap-4">
-            <Link 
-              href="/admisiones"
-              className="px-8 py-4 bg-blue-900 hover:bg-blue-800 text-white rounded-full font-semibold text-lg transition-colors whitespace-nowrap cursor-pointer"
-            >
-              Conoce Nuestras Admisiones
-            </Link>
-            <Link 
-              href="/nosotros"
-              className="px-8 py-4 border-2 border-blue-900 text-blue-900 hover:bg-blue-900 hover:text-white rounded-full font-semibold text-lg transition-colors whitespace-nowrap cursor-pointer"
-            >
-              Nuestra Historia
-            </Link>
-          </div>
+<section className="py-20 bg-white">
+  <div className="max-w-7xl mx-auto px-6 text-center">
+    <h2 className="text-4xl md:text-5xl font-bold text-blue-900 mb-6">
+      99 años de Excelencia Educativa
+    </h2>
+    <p className="text-xl text-gray-600 mb-12 max-w-4xl mx-auto">
+      Desde 1926, el Colegio Nuevo San Luis Gonzaga ha sido pionero en la formación integral 
+      de estudiantes con valores católicos, excelencia académica y compromiso social.
+    </p>
+    <div className="grid md:grid-cols-5 gap-8 mb-16">
+      <div className="text-center">
+        <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <i className="ri-graduation-cap-line text-3xl text-blue-600"></i>
         </div>
-      </section>
-
-      {/* Quick Access Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-3xl font-bold text-blue-900 text-center mb-12">
-            Acceso Rápido
-          </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Link 
-              href="/nosotros"
-              className="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition-shadow cursor-pointer group"
-            >
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-blue-200 transition-colors">
-                <i className="ri-book-open-line text-2xl text-blue-600"></i>
-              </div>
-              <h3 className="text-lg font-bold text-blue-900 mb-2">Nosotros</h3>
-              <p className="text-gray-600 text-sm">Conoce nuestra historia, misión y valores</p>
-            </Link>
-            <Link 
-              href="/admisiones"
-              className="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition-shadow cursor-pointer group"
-            >
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-green-200 transition-colors">
-                <i className="ri-user-add-line text-2xl text-green-600"></i>
-              </div>
-              <h3 className="text-lg font-bold text-blue-900 mb-2">Admisiones</h3>
-              <p className="text-gray-600 text-sm">Información sobre inscripciones y requisitos</p>
-            </Link>
-            <a 
-              href="https://www.cibercolegios.com/" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition-shadow cursor-pointer group"
-            >
-              <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-purple-200 transition-colors">
-                <i className="ri-computer-line text-2xl text-purple-600"></i>
-              </div>
-              <h3 className="text-lg font-bold text-blue-900 mb-2">Cibercolegios</h3>
-              <p className="text-gray-600 text-sm">Plataforma educativa virtual</p>
-            </a>
-            <Link 
-              href="/contacto"
-              className="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition-shadow cursor-pointer group"
-            >
-              <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-orange-200 transition-colors">
-                <i className="ri-phone-line text-2xl text-orange-600"></i>
-              </div>
-              <h3 className="text-lg font-bold text-blue-900 mb-2">Contacto</h3>
-              <p className="text-gray-600 text-sm">Información de contacto y ubicación</p>
-            </Link>
-          </div>
+        <h3 className="text-2xl font-bold text-blue-900 mb-2">+2850</h3>
+        <p className="text-gray-600">Graduados Exitosos</p>
+      </div>
+      <div className="text-center">
+        <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <i className="ri-award-line text-3xl text-green-600"></i>
         </div>
-      </section>
+        <h3 className="text-2xl font-bold text-blue-900 mb-2">99</h3>
+        <p className="text-gray-600">Años de Tradición</p>
+      </div>
+      <div className="text-center">
+        <div className="w-20 h-20 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <i className="ri-english-input text-3xl text-yellow-600"></i>
+        </div>
+        <h3 className="text-2xl font-bold text-blue-900 mb-2">Inglés</h3>
+        <p className="text-gray-600">con certificación TOEFL</p>
+      </div>
+      <div className="text-center">
+        <div className="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <i className="ri-star-line text-3xl text-purple-600"></i>
+        </div>
+        <h3 className="text-2xl font-bold text-blue-900 mb-2">100%</h3>
+        <p className="text-gray-600">Compromiso con la Calidad</p>
+      </div>
+      <div className="text-center">
+        <div className="w-20 h-20 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <i className="ri-group-line text-3xl text-pink-600"></i>
+        </div>
+        <h3 className="text-2xl font-bold text-blue-900 mb-2">99%</h3>
+        <p className="text-gray-600">Familias Satisfechas</p>
+      </div>
+    </div>
+    <div className="flex flex-col md:flex-row justify-center gap-4">
+      <Link 
+        href="/admisiones"
+        className="px-8 py-4 bg-blue-900 hover:bg-blue-800 text-white rounded-full font-semibold text-lg transition-colors whitespace-nowrap cursor-pointer"
+      >
+        Conoce Nuestras Admisiones
+      </Link>
+      <Link 
+        href="/nosotros"
+        className="px-8 py-4 border-2 border-blue-900 text-blue-900 hover:bg-blue-900 hover:text-white rounded-full font-semibold text-lg transition-colors whitespace-nowrap cursor-pointer"
+      >
+        Nuestra Historia
+      </Link>
+    </div>
+  </div>
+</section>
 
-      {/* News Section */}
+
+            {/* News Section */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <h2 className="text-3xl font-bold text-blue-900 text-center mb-12">
