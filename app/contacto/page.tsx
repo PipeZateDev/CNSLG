@@ -80,7 +80,7 @@ export default function Contacto() {
               </div>
             </div>
 
-            {/* Mobile Menu Button */}
+           {/* Mobile Menu Button */}
             <button 
               onClick={toggleMenu}
               className="lg:hidden w-10 h-10 flex items-center justify-center text-blue-900 cursor-pointer"
@@ -96,7 +96,7 @@ export default function Contacto() {
                 <Link 
                   href="/"
                   onClick={() => setIsMenuOpen(false)}
-                  className="px-4 py-2 bg-blue-900 text-white rounded-full transition-colors text-center cursor-pointer"
+                  className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer"
                 >
                   Inicio
                 </Link>
@@ -117,7 +117,7 @@ export default function Contacto() {
                 <Link 
                   href="/contacto"
                   onClick={() => setIsMenuOpen(false)}
-                  className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer"
+                  className="px-4 py-2 bg-blue-900 text-white rounded-full transition-colors text-center cursor-pointer"
                 >
                   Contacto
                 </Link>

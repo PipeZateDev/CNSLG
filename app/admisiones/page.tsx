@@ -137,7 +137,7 @@ const toggleMenu = () => {
                 <Link 
                   href="/"
                   onClick={() => setIsMenuOpen(false)}
-                  className="px-4 py-2 bg-blue-900 text-white rounded-full transition-colors text-center cursor-pointer"
+                  className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer"
                 >
                   Inicio
                 </Link>
@@ -151,7 +151,7 @@ const toggleMenu = () => {
                 <Link 
                   href="/admisiones"
                   onClick={() => setIsMenuOpen(false)}
-                  className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer"
+                  className="px-4 py-2 bg-blue-900 text-white rounded-full transition-colors text-center cursor-pointer"
                 >
                   Admisiones
                 </Link>
