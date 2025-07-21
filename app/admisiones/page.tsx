@@ -376,6 +376,48 @@ const toggleMenu = () => {
         </div>
       </section>
 
+
+{/* CTA Inscripción */}
+      <section className="py-20 bg-blue-900 text-white">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <h2 className="text-3xl font-bold mb-6">¿Listo para unirte a nuestra familia Gonzaguista?</h2>
+          <p className="text-xl text-blue-200 mb-8">
+            Completa tu solicitud de inscripción y da el primer paso hacia una educación de excelencia
+          </p>
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="px-8 py-4 bg-white text-blue-900 hover:bg-gray-100 rounded-full font-semibold text-lg transition-colors whitespace-nowrap cursor-pointer"
+          >
+            Solicitar Inscripción Ahora
+          </button>
+        </div>
+      </section>
+
+      {/* Modal de Inscripción */}
+      {isModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
+          <div className="bg-white rounded-lg overflow-hidden shadow-lg w-full max-w-4xl h-[80vh] flex flex-col">
+            <div className="flex justify-between items-center p-4 border-b border-gray-200">
+              <h3 className="text-xl font-semibold text-blue-900">Formulario de Inscripción</h3>
+              <button
+                onClick={() => setIsModalOpen(false)}
+                className="text-gray-500 hover:text-gray-700 text-2xl"
+              >
+                &times;
+              </button>
+            </div>
+            <div className="flex-1 overflow-hidden">
+              <iframe
+                src="https://appsprod.cibercolegios.com/ciber_enroll/?institutionId=95"
+                title="Formulario de Inscripción"
+                className="w-full h-full border-0"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      )}
+
+
       {/* Requisitos */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6">
@@ -453,45 +495,7 @@ const toggleMenu = () => {
         </div>
       </section>
 
-      {/* CTA Inscripción */}
-      <section className="py-20 bg-blue-900 text-white">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold mb-6">¿Listo para unirte a nuestra familia Gonzaguista?</h2>
-          <p className="text-xl text-blue-200 mb-8">
-            Completa tu solicitud de inscripción y da el primer paso hacia una educación de excelencia
-          </p>
-          <button
-            onClick={() => setIsModalOpen(true)}
-            className="px-8 py-4 bg-white text-blue-900 hover:bg-gray-100 rounded-full font-semibold text-lg transition-colors whitespace-nowrap cursor-pointer"
-          >
-            Solicitar Inscripción Ahora
-          </button>
-        </div>
-      </section>
-
-      {/* Modal de Inscripción */}
-      {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
-          <div className="bg-white rounded-lg overflow-hidden shadow-lg w-full max-w-4xl h-[80vh] flex flex-col">
-            <div className="flex justify-between items-center p-4 border-b border-gray-200">
-              <h3 className="text-xl font-semibold text-blue-900">Formulario de Inscripción</h3>
-              <button
-                onClick={() => setIsModalOpen(false)}
-                className="text-gray-500 hover:text-gray-700 text-2xl"
-              >
-                &times;
-              </button>
-            </div>
-            <div className="flex-1 overflow-hidden">
-              <iframe
-                src="https://appsprod.cibercolegios.com/ciber_enroll/?institutionId=95"
-                title="Formulario de Inscripción"
-                className="w-full h-full border-0"
-              ></iframe>
-            </div>
-          </div>
-        </div>
-      )}
+      
 
 
       {/* Footer */}
