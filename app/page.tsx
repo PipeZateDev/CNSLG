@@ -15,37 +15,37 @@ export default function Home() {
       description: ""
     },
     {
-      url: "https://i.ibb.co/JjT72RGG/2-Admisiones.png",
+      url: "https://i.ibb.co/RpGqBnyN/2-Adminsiones-2.png",
       title: "",//Admisiones
       description: ""
     },
     {
-      url: "https://i.ibb.co/hRcTQszV/3-Ingles.png",
+      url: "https://i.ibb.co/F4bpqwNS/3-Ingles-2.png",
       title: "",//Ingles
       description: ""
     },
     {
-      url: "https://i.ibb.co/DfjtHyJB/4-Rob-tica.png",
+      url: "https://i.ibb.co/NgptQsyQ/4-Robotica2.png",
       title: "",//Robótica
       description: ""
     },
     {
-      url: "https://i.ibb.co/1hWxrSh/5-Educaci-n.png",
+      url: "https://i.ibb.co/KctSsygQ/5-Educacion2.png",
       title: "",//Educacion
       description: ""
     },
     {
-      url: "https://i.ibb.co/QFqqrK64/6-Prom.png",
+      url: "https://i.ibb.co/8gLk4HDk/6-Prom-2.png",
       title: "",//Prom 2024
       description: ""
     },
     {
-      url: "https://i.ibb.co/1JhCL8ND/7-Deportes.png",
+      url: "https://i.ibb.co/LD8mhvkr/7-Deportes-2.png",
       title: "",//Deportes
       description: ""
     },
     {
-      url: "https://i.ibb.co/21dJk1xL/8-Instalaciones.png",
+      url: "https://i.ibb.co/G4bRfDfv/8-Instalaciones-2.png",
       title: "",//Instalaciones
       description: ""
     }
