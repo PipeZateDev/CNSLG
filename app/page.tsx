@@ -10,7 +10,7 @@ export default function Home() {
 
   const bannerImages = [
     {
-      url: "https://i.ibb.co/x8Cf9GQC/Open-House.png",
+      url: "https://i.ibb.co/vCpGdgff/Open-House2025.png",
       title: "Open House 2025",
       description: "Ven con tu familia y conoce nuestras instalaciones este 23 de Agosto"
     },
@@ -327,7 +327,7 @@ export default function Home() {
         <div className="w-20 h-20 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
           <i className="ri-english-input text-3xl text-yellow-600"></i>
         </div>
-        <h3 className="text-2xl font-bold text-blue-900 mb-2">Inglés</h3>
+        <h3 className="text-2xl font-bold text-blue-900 mb-2">Inglés Intensivo</h3>
         <p className="text-gray-600">con certificación TOEFL</p>
       </div>
       <div className="text-center">
@@ -372,7 +372,7 @@ export default function Home() {
           <div className="grid md:grid-cols-3 gap-8">
             <div className="bg-white rounded-lg shadow-lg overflow-hidden">
               <img 
-                src="https://readdy.ai/api/search-image?query=School%20open%20house%20event%2C%20parents%20and%20students%20touring%20facilities%2C%20Colombian%20school%20environment%2C%20welcoming%20atmosphere%2C%20educational%20tour%2C%20modern%20classrooms%2C%20informative%20presentations&width=400&height=250&seq=news1&orientation=landscape"
+                src="https://i.ibb.co/vCpGdgff/Open-House2025.png"
                 alt="Open House"
                 className="w-full h-48 object-cover object-top"
               />
