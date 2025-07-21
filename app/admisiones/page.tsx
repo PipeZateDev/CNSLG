@@ -259,7 +259,7 @@ const toggleMenu = () => {
               <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <i className="ri-graduation-cap-line text-2xl text-purple-600"></i>
               </div>
-              <h3 className="text-xl font-bold text-blue-900 mb-4">Bachillerato</h3>
+              <h3 className="text-xl font-bold text-blue-900 mb-4">Bachillerato y Média</h3>
               <p className="text-gray-600 mb-4">Grados 6° a 11° con énfasis académico</p>
               <ul className="text-sm text-gray-500 space-y-2">
                 <li>• Preparación universitaria</li>
@@ -282,7 +282,7 @@ const toggleMenu = () => {
               <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
                 <i className="ri-global-line text-blue-600"></i>
               </div>
-              <h4 className="font-semibold text-blue-900 mb-2">Educación Bilingüe</h4>
+              <h4 className="font-semibold text-blue-900 mb-2">Ingles Intensivo</h4>
               <p className="text-sm text-gray-600">Inglés intensivo desde preescolar con certificaciones internacionales</p>
             </div>
             <div className="bg-gray-50 rounded-lg p-6 text-center">
@@ -311,7 +311,7 @@ const toggleMenu = () => {
                 <i className="ri-microscope-line text-red-600"></i>
               </div>
               <h4 className="font-semibold text-blue-900 mb-2">Laboratorios</h4>
-              <p className="text-sm text-gray-600">Ciencias naturales, física, química y biología</p>
+              <p className="text-sm text-gray-600">Ciencias naturales, física, química, biología y matemáticas</p>
             </div>
             <div className="bg-gray-50 rounded-lg p-6 text-center">
               <div className="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-3">

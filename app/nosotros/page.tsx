@@ -227,42 +227,7 @@ export default function Nosotros() {
         </div>
       </section>
 
-      {/* Valores */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-3xl font-bold text-blue-900 mb-8 text-center">Nuestros Valores</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-white rounded-lg p-6 text-center shadow-lg">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <i className="ri-heart-line text-2xl text-blue-600"></i>
-              </div>
-              <h4 className="font-bold text-blue-900 mb-2">Amor</h4>
-              <p className="text-sm text-gray-600">Base de todas nuestras relaciones y acciones educativas</p>
-            </div>
-            <div className="bg-white rounded-lg p-6 text-center shadow-lg">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <i className="ri-shield-check-line text-2xl text-green-600"></i>
-              </div>
-              <h4 className="font-bold text-blue-900 mb-2">Respeto</h4>
-              <p className="text-sm text-gray-600">Valoramos la dignidad de cada persona en nuestra comunidad</p>
-            </div>
-            <div className="bg-white rounded-lg p-6 text-center shadow-lg">
-              <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <i className="ri-hand-heart-line text-2xl text-purple-600"></i>
-              </div>
-              <h4 className="font-bold text-blue-900 mb-2">Responsabilidad</h4>
-              <p className="text-sm text-gray-600">Compromiso con nuestros deberes y la sociedad</p>
-            </div>
-            <div className="bg-white rounded-lg p-6 text-center shadow-lg">
-              <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <i className="ri-star-line text-2xl text-orange-600"></i>
-              </div>
-              <h4 className="font-bold text-blue-900 mb-2">Excelencia</h4>
-              <p className="text-sm text-gray-600">Búsqueda constante de la calidad en todo lo que hacemos</p>
-            </div>
-          </div>
-        </div>
-      </section>
+      
 
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-12">
