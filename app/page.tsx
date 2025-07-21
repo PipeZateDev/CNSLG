@@ -10,8 +10,8 @@ export default function Home() {
 
   const bannerImages = [
     {
-      url: "https://i.ibb.co/x8Cf9GQC/Open-House.png",
-      title: "",
+      url: "https://i.ibb.co/tTmL0rkw/Open-House-2025.png", //OpenHouse
+      title: "", 
       description: ""
     },
     {
