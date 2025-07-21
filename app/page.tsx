@@ -10,6 +10,16 @@ export default function Home() {
 
   const bannerImages = [
     {
+      url: "https://i.ibb.co/x8Cf9GQC/Open-House.png",
+      title: "Open House 2025",
+      description: "Ven con tu familia y conoce nuestras instalaciones este 23 de Agosto"
+    },
+    {
+      url: "https://readdy.ai/api/search-image?query=Colombian%20students%20in%20modern%20English%20classroom%20with%20international%20flags%2C%20interactive%20whiteboards%2C%20intensive%20English%20learning%20program%2C%20bilingual%20education%2C%20speaking%20practice%20activities%2C%20modern%20language%20laboratory&width=1920&height=600&seq=banner2&orientation=landscape",
+      title: "Admisiones 2026",
+      description: "Educación bilingüe de excelencia"
+    },
+    {
       url: "https://readdy.ai/api/search-image?query=Colombian%20students%20in%20modern%20English%20classroom%20with%20international%20flags%2C%20interactive%20whiteboards%2C%20intensive%20English%20learning%20program%2C%20bilingual%20education%2C%20speaking%20practice%20activities%2C%20modern%20language%20laboratory&width=1920&height=600&seq=banner2&orientation=landscape",
       title: "Programa Intensivo de Inglés",
       description: "Educación bilingüe de excelencia"
