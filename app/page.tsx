@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -9,69 +8,29 @@ export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const bannerImages = [
-    {
-      url: "https://i.ibb.co/4wWf5vrK/1-Open-House.png", //OpenHouse
-      title: "", //OpenHouse
-      description: ""
-    },
-    {
-      url: "https://i.ibb.co/chKBQJdG/2-admisiones.png",
-      title: "",//Admisiones
-      description: ""
-    },
-    {
-      url: "https://i.ibb.co/99xnKPFq/3-ingles.png",
-      title: "",//Ingles
-      description: ""
-    },
-    {
-      url: "https://i.ibb.co/2YF20xT7/4-robotica.png",
-      title: "",//Robótica
-      description: ""
-    },
-    {
-      url: "https://i.ibb.co/HT4z9MMn/5-educacion.png",
-      title: "",//Educacion
-      description: ""
-    },
-    {
-      url: "https://i.ibb.co/B2x2fhNc/6-prom2024.png",
-      title: "",//Prom 2024
-      description: ""
-    },
-    {
-      url: "https://i.ibb.co/LD0TtMSJ/7-deportes.png",
-      title: "",//Deportes
-      description: ""
-    },
-    {
-      url: "https://i.ibb.co/fYvVNbMk/8-instalaciones.png",
-      title: "",//Instalaciones
-      description: ""
-    }
+    { url: "https://i.ibb.co/4wWf5vrK/1-Open-House.png", title: "", description: "" },
+    { url: "https://i.ibb.co/chKBQJdG/2-admisiones.png", title: "", description: "" },
+    { url: "https://i.ibb.co/99xnKPFq/3-ingles.png", title: "", description: "" },
+    { url: "https://i.ibb.co/2YF20xT7/4-robotica.png", title: "", description: "" },
+    { url: "https://i.ibb.co/HT4z9MMn/5-educacion.png", title: "", description: "" },
+    { url: "https://i.ibb.co/B2x2fhNc/6-prom2024.png", title: "", description: "" },
+    { url: "https://i.ibb.co/LD0TtMSJ/7-deportes.png", title: "", description: "" },
+    { url: "https://i.ibb.co/fYvVNbMk/8-instalaciones.png", title: "", description: "" }
   ];
 
-  // Auto-advance banner every 8 seconds
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => 
-        prevIndex === bannerImages.length - 1 ? 0 : prevIndex + 1
-      );
+      setCurrentImageIndex((prevIndex) => prevIndex === bannerImages.length - 1 ? 0 : prevIndex + 1);
     }, 8000);
-
     return () => clearInterval(interval);
   }, [bannerImages.length]);
 
   const nextImage = () => {
-    setCurrentImageIndex((prevIndex) => 
-      prevIndex === bannerImages.length - 1 ? 0 : prevIndex + 1
-    );
+    setCurrentImageIndex((prevIndex) => prevIndex === bannerImages.length - 1 ? 0 : prevIndex + 1);
   };
 
   const prevImage = () => {
-    setCurrentImageIndex((prevIndex) => 
-      prevIndex === 0 ? bannerImages.length - 1 : prevIndex - 1
-    );
+    setCurrentImageIndex((prevIndex) => prevIndex === 0 ? bannerImages.length - 1 : prevIndex - 1);
   };
 
   const toggleMenu = () => {
@@ -241,62 +200,36 @@ export default function Home() {
   ))}
 </div>
 
+
       {/* Banner Section */}
       <section className="pt-20 relative">
-        <div className="relative h-96 md:h-[500px] overflow-hidden">
+        <div className="relative h-96 md:h-[500px] overflow-hidden w-full md:w-[85%] mx-auto">
           {bannerImages.map((image, index) => (
-            <div
-              key={index}
-              className={`absolute inset-0 transition-opacity duration-500 ${
-                index === currentImageIndex ? 'opacity-100' : 'opacity-0'
-              }`}
-            >
-              <img
-                src={image.url}
-                alt={image.title}
-                className="w-full h-full object-cover object-center"
-              />
+            <div key={index} className={`absolute inset-0 transition-opacity duration-500 ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'}`}>
+              <img src={image.url} alt={image.title} className="w-full h-full object-cover object-center" />
               <div className="absolute inset-0 bg-blue-900/40"></div>
             </div>
           ))}
-          {/* Banner Content */}
           <div className="absolute inset-0 flex items-center justify-center text-center text-white z-10">
             <div className="max-w-4xl px-6">
-              <h1 className="text-3xl md:text-6xl font-bold mb-4">
-                {bannerImages[currentImageIndex].title}
-              </h1>
-              <p className="text-lg md:text-2xl mb-8">
-                {bannerImages[currentImageIndex].description}
-              </p>
+              <h1 className="text-3xl md:text-6xl font-bold mb-4">{bannerImages[currentImageIndex].title}</h1>
+              <p className="text-lg md:text-2xl mb-8">{bannerImages[currentImageIndex].description}</p>
             </div>
           </div>
-          {/* Navigation Arrows */}
-          <button
-            onClick={prevImage}
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-colors z-20"
-          >
+          <button onClick={prevImage} className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-colors z-20">
             <i className="ri-arrow-left-line text-white text-xl"></i>
           </button>
-          <button
-            onClick={nextImage}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-colors z-20"
-          >
+          <button onClick={nextImage} className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-colors z-20">
             <i className="ri-arrow-right-line text-white text-xl"></i>
           </button>
-          {/* Dots Indicator */}
           <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
             {bannerImages.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentImageIndex(index)}
-                className={`w-3 h-3 rounded-full transition-colors ${
-                  index === currentImageIndex ? 'bg-white' : 'bg-white/50'
-                }`}
-              />
+              <button key={index} onClick={() => setCurrentImageIndex(index)} className={`w-3 h-3 rounded-full transition-colors ${index === currentImageIndex ? 'bg-white' : 'bg-white/50'}`} />
             ))}
           </div>
         </div>
       </section>
+
 
       {/* Hero Section */}
 <section className="py-20 bg-white">
