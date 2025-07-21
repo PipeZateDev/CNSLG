@@ -10,44 +10,44 @@ export default function Home() {
 
   const bannerImages = [
     {
-      url: "https://i.ibb.co/tTmL0rkw/Open-House-2025.png", //OpenHouse
-      title: "", 
+      url: "https://i.ibb.co/4wWf5vrK/1-Open-House.png", //OpenHouse
+      title: "", //OpenHouse
       description: ""
     },
     {
-      url: "https://readdy.ai/api/search-image?query=Colombian%20students%20in%20modern%20English%20classroom%20with%20international%20flags%2C%20interactive%20whiteboards%2C%20intensive%20English%20learning%20program%2C%20bilingual%20education%2C%20speaking%20practice%20activities%2C%20modern%20language%20laboratory&width=1920&height=600&seq=banner2&orientation=landscape",
-      title: "Admisiones 2026",
-      description: "Educación bilingüe de excelencia"
+      url: "https://i.ibb.co/JjT72RGG/2-Admisiones.png",
+      title: "",//Admisiones
+      description: ""
     },
     {
-      url: "https://readdy.ai/api/search-image?query=Colombian%20students%20in%20modern%20English%20classroom%20with%20international%20flags%2C%20interactive%20whiteboards%2C%20intensive%20English%20learning%20program%2C%20bilingual%20education%2C%20speaking%20practice%20activities%2C%20modern%20language%20laboratory&width=1920&height=600&seq=banner2&orientation=landscape",
-      title: "Programa Intensivo de Inglés",
-      description: "Educación bilingüe de excelencia"
+      url: "https://i.ibb.co/hRcTQszV/3-Ingles.png",
+      title: "",//Ingles
+      description: ""
     },
     {
-      url: "https://i.ibb.co/k6BtVfLj/Grado2024.jpg",
-      title: "Prom 2024",
-      description: "Celebrando el éxito de nuestros estudiantes"
+      url: "https://i.ibb.co/DfjtHyJB/4-Rob-tica.png",
+      title: "",//Robótica
+      description: ""
     },
     {
-      url: "https://readdy.ai/api/search-image?query=Students%20building%20robots%20in%20modern%20STEM%20classroom%2C%20robotics%20programming%2C%20educational%20technology%2C%20hands-on%20learning%20with%20robotic%20kits%2C%20innovation%20and%20engineering%2C%20Colombian%20school%20environment%20with%20advanced%20equipment&width=1920&height=600&seq=banner3&orientation=landscape",
-      title: "Programa de Robótica",
-      description: "Innovación y tecnología educativa"
+      url: "https://i.ibb.co/1hWxrSh/5-Educaci-n.png",
+      title: "",//Educacion
+      description: ""
     },
     {
-      url: "https://i.ibb.co/mF8XZpZd/Religi-n.jpg",
-      title: "Educación con Amor",
-      description: "Formación integral con valores"
+      url: "https://i.ibb.co/QFqqrK64/6-Prom.png",
+      title: "",//Prom 2024
+      description: ""
     },
     {
-      url: "https://i.ibb.co/xScwcM2X/Jard-n.jpg",
-      title: "Instalaciones Innovadoras",
-      description: "Espacios diseñados para el aprendizaje"
+      url: "https://i.ibb.co/1JhCL8ND/7-Deportes.png",
+      title: "",//Deportes
+      description: ""
     },
     {
-      url: "https://i.ibb.co/fzF4Z8Lw/Intercolegiados.jpg",
-      title: "Variedad de Deportes y Artes",
-      description: "Desarrollo integral de talentos"
+      url: "https://i.ibb.co/21dJk1xL/8-Instalaciones.png",
+      title: "",//Instalaciones
+      description: ""
     }
   ];
 
