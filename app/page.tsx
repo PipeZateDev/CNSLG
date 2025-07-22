@@ -8,15 +8,15 @@ export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const bannerImages = [
-    { url: "https://i.ibb.co/twPVd8Nb/Open-House.jpg", title: "", description: "" },  //OpenHouse
-    { url: "https://i.ibb.co/HpbPkJbn/Admisiones.jpg", title: "", description: "" },  //Admisiones
-    { url: "https://i.ibb.co/gLt0kGY0/Lema.jpg", title: "", description: "" },        //Lema
-    { url: "https://i.ibb.co/spJQdbGy/Amor.jpg", title: "", description: "" },    //Educacion con amor
-    { url: "https://i.ibb.co/r2VGkH8h/Ingles.jpg", title: "", description: "" },      //Ingles 
-    //{ url: "https://i.ibb.co/B2x2fhNc/6-prom2024.png", title: "", description: "" },
-    //{ url: "https://i.ibb.co/LD0TtMSJ/7-deportes.png", title: "", description: "" },
-    //{ url: "https://i.ibb.co/fYvVNbMk/8-instalaciones.png", title: "", description: "" }
-  ];
+    { url: "https://i.ibb.co/0pCPHJyt/Open-House.jpg", title: "", description: "" },  //OpenHouse
+    { url: "https://i.ibb.co/PZpKz5kX/Admisiones.jpg", title: "", description: "" },  //Admisiones
+    { url: "https://i.ibb.co/YB5ggNnF/Lema.jpg", title: "", description: "" },        //Lema
+    { url: "https://i.ibb.co/XZxtZY9b/Amor.jpg", title: "", description: "" },    //Educacion con amor
+    { url: "https://i.ibb.co/WpBWH5H0/Ingles.jpg", title: "", description: "" },      //Ingles 
+    { url: "https://i.ibb.co/gbpLhCtd/Prom.jpg", title: "", description: "" }, //Prom
+    //{ url: "https://i.ibb.co/LD0TtMSJ/7-deportes.png", title: "", description: "" }, //Deportes
+    //{ url: "https://i.ibb.co/fYvVNbMk/8-instalaciones.png", title: "", description: "" } 
+    ];
 
   useEffect(() => {
     const interval = setInterval(() => {
