@@ -45,8 +45,8 @@ export default function Home() {
           <div className="flex items-center justify-between">
             <div className="flex items-center">
               <img 
-                src="https://i.ibb.co/xtFbq1Bd/LOGO-NSLG-2.png" 
-                alt="Logo Colegio Nuevo San Luis Gonzaga" 
+                src="https://i.ibb.co/spn4L9WW/LOGO-NSLG-2-Mini.png" 
+                alt="Logo Colegio Nuevo San Luis Gonzaga"
                 className="h-12 w-auto"
               />
             </div>
