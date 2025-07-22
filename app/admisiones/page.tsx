@@ -317,8 +317,7 @@ const toggleMenu = () => {
               <div className="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-3">
                 <i className="ri-book-open-line text-indigo-600"></i>
               </div>
-              <h4 className="font-semibold text-blue-900 mb-2">Biblioteca</h4>
-              <p className="text-sm text-gray-600">Amplio centro de recursos con bibliografía especializada</p>
+              
             </div>
             <div className="bg-gray-50 rounded-lg p-6 text-center">
               <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-3">
@@ -331,8 +330,7 @@ const toggleMenu = () => {
               <div className="w-12 h-12 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-3">
                 <i className="ri-restaurant-line text-teal-600"></i>
               </div>
-              <h4 className="font-semibold text-blue-900 mb-2">Cafetería</h4>
-              <p className="text-sm text-gray-600">Alimentación saludable y balanceada</p>
+              
             </div>
           </div>
         </div>

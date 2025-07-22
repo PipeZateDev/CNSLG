@@ -11,10 +11,10 @@ export default function Home() {
     { url: "https://i.ibb.co/4wWf5vrK/1-Open-House.png", title: "", description: "" },
     { url: "https://i.ibb.co/chKBQJdG/2-admisiones.png", title: "", description: "" },
     { url: "https://i.ibb.co/99xnKPFq/3-ingles.png", title: "", description: "" },
-    { url: "https://i.ibb.co/2YF20xT7/4-robotica.png", title: "", description: "" },
+    //{ url: "https://i.ibb.co/2YF20xT7/4-robotica.png", title: "", description: "" },
     { url: "https://i.ibb.co/HT4z9MMn/5-educacion.png", title: "", description: "" },
-    { url: "https://i.ibb.co/B2x2fhNc/6-prom2024.png", title: "", description: "" },
-    { url: "https://i.ibb.co/LD0TtMSJ/7-deportes.png", title: "", description: "" },
+    //{ url: "https://i.ibb.co/B2x2fhNc/6-prom2024.png", title: "", description: "" },
+    //{ url: "https://i.ibb.co/LD0TtMSJ/7-deportes.png", title: "", description: "" },
     { url: "https://i.ibb.co/fYvVNbMk/8-instalaciones.png", title: "", description: "" }
   ];
 
