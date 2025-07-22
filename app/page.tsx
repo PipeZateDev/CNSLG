@@ -21,7 +21,7 @@ export default function Home() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => prevIndex === bannerImages.length - 1 ? 0 : prevIndex + 1);
-    }, 8000);
+    }, 5000);
     return () => clearInterval(interval);
   }, [bannerImages.length]);
 
