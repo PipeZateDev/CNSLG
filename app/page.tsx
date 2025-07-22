@@ -8,11 +8,11 @@ export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const bannerImages = [
-    { url: "https://i.ibb.co/4wWf5vrK/1-Open-House.png", title: "", description: "" },  //OpenHouse
-    { url: "https://i.ibb.co/7dVX9gPn/2-Admisiones.png", title: "", description: "" },  //Admisiones
-    { url: "https://i.ibb.co/rRm1PLd2/8-Lema.png", title: "", description: "" },        //Lema
-    { url: "https://i.ibb.co/MDHBQPdm/5-Educaci-n.pn", title: "", description: "" },    //Educacion con amor
-    { url: "https://i.ibb.co/k6mfStFL/3-Ingles.png", title: "", description: "" },      //Ingles 
+    { url: "https://i.ibb.co/twPVd8Nb/Open-House.jpg", title: "", description: "" },  //OpenHouse
+    { url: "https://i.ibb.co/HpbPkJbn/Admisiones.jpg", title: "", description: "" },  //Admisiones
+    { url: "https://i.ibb.co/gLt0kGY0/Lema.jpg", title: "", description: "" },        //Lema
+    { url: "https://i.ibb.co/spJQdbGy/Amor.jpg", title: "", description: "" },    //Educacion con amor
+    { url: "https://i.ibb.co/r2VGkH8h/Ingles.jpg", title: "", description: "" },      //Ingles 
     //{ url: "https://i.ibb.co/B2x2fhNc/6-prom2024.png", title: "", description: "" },
     //{ url: "https://i.ibb.co/LD0TtMSJ/7-deportes.png", title: "", description: "" },
     //{ url: "https://i.ibb.co/fYvVNbMk/8-instalaciones.png", title: "", description: "" }
