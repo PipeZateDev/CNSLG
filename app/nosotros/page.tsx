@@ -155,45 +155,52 @@ export default function Nosotros() {
   </div>
 </section>
 
+
+
 {/* Sección: Valores + Decálogo */}
 <section className="py-20 bg-gray-50">
-  <div className="max-w-7xl mx-auto px-6 space-y-12">
-    {/* Valores Institucionales */}
-    <div className="bg-yellow-50 rounded-lg p-6">
-      <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mb-2">
-        <i className="ri-hand-heart-line text-xl text-yellow-600"></i>
+  <div className="max-w-7xl mx-auto px-6">
+    <div className="flex flex-col md:flex-row md:space-x-6 space-y-6 md:space-y-0">
+      
+      {/* Valores Institucionales */}
+      <div className="bg-yellow-50 rounded-lg p-6 flex-1">
+        <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mb-2">
+          <i className="ri-hand-heart-line text-xl text-yellow-600"></i>
+        </div>
+        <h3 className="text-xl font-bold text-blue-900 mb-2">Valores Institucionales</h3>
+        <ul className="list-disc pl-5 text-gray-700 text-sm space-y-2">
+          <li><strong>Principio de Identidad:</strong> sentimiento de pertenencia y rasgos distintivos de la comunidad Gonzaguista.</li>
+          <li><strong>Principio de Responsabilidad:</strong> conciencia de las consecuencias y capacidad para asumir compromisos.</li>
+          <li><strong>Principio de Justicia:</strong> respeto y defensa de los derechos de las personas, actuando con equidad.</li>
+          <li><strong>Principio de Trascendencia:</strong> vivir con sentido de misión, responsabilidad, armonía y entusiasmo.</li>
+          <li><strong>Principio de Tolerancia:</strong> respeto por los demás, aceptación de la individualidad y la diferencia.</li>
+        </ul>
       </div>
-      <h3 className="text-xl font-bold text-blue-900 mb-2">Valores Institucionales</h3>
-      <ul className="list-disc pl-5 text-gray-700 text-sm space-y-2">
-        <li><strong>Principio de Identidad:</strong> sentimiento de pertenencia y rasgos distintivos de la comunidad Gonzaguista.</li>
-        <li><strong>Principio de Responsabilidad:</strong> conciencia de las consecuencias y capacidad para asumir compromisos.</li>
-        <li><strong>Principio de Justicia:</strong> respeto y defensa de los derechos de las personas, actuando con equidad.</li>
-        <li><strong>Principio de Trascendencia:</strong> vivir con sentido de misión, responsabilidad, armonía y entusiasmo.</li>
-        <li><strong>Principio de Tolerancia:</strong> respeto por los demás, aceptación de la individualidad y la diferencia.</li>
-      </ul>
-    </div>
 
-    {/* Decálogo */}
-    <div className="bg-purple-50 rounded-lg p-6">
-      <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-2">
-        <i className="ri-list-check text-xl text-purple-600"></i>
+      {/* Decálogo */}
+      <div className="bg-purple-50 rounded-lg p-6 flex-1">
+        <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-2">
+          <i className="ri-list-check text-xl text-purple-600"></i>
+        </div>
+        <h3 className="text-xl font-bold text-blue-900 mb-2">Decálogo del Nuevo San Luis Gonzaga</h3>
+        <ul className="list-disc pl-5 text-gray-700 text-sm space-y-1">
+          <li>1. Dios siempre presente en nuestras labores educativas.</li>
+          <li>2. Educamos con justicia y amor.</li>
+          <li>3. Actuamos con responsabilidad y decisión.</li>
+          <li>4. Prestamos un servicio de calidad con amabilidad.</li>
+          <li>5. Fomentamos el espíritu investigativo y deportivo.</li>
+          <li>6. Somos diligentes y creativos.</li>
+          <li>7. Estamos a la vanguardia de los conocimientos científicos y tecnológicos.</li>
+          <li>8. Reconocemos los derechos fundamentales de las personas.</li>
+          <li>9. Somos exitosos por nuestra organización.</li>
+          <li>10. Planeamos, hacemos, verificamos y actuamos.</li>
+        </ul>
       </div>
-      <h3 className="text-xl font-bold text-blue-900 mb-2">Decálogo del Nuevo San Luis Gonzaga</h3>
-      <ul className="list-disc pl-5 text-gray-700 text-sm space-y-1">
-        <li>1. Dios siempre presente en nuestras labores educativas.</li>
-        <li>2. Educamos con justicia y amor.</li>
-        <li>3. Actuamos con responsabilidad y decisión.</li>
-        <li>4. Prestamos un servicio de calidad con amabilidad.</li>
-        <li>5. Fomentamos el espíritu investigativo y deportivo.</li>
-        <li>6. Somos diligentes y creativos.</li>
-        <li>7. Estamos a la vanguardia de los conocimientos científicos y tecnológicos.</li>
-        <li>8. Reconocemos los derechos fundamentales de las personas.</li>
-        <li>9. Somos exitosos por nuestra organización.</li>
-        <li>10. Planeamos, hacemos, verificamos y actuamos.</li>
-      </ul>
+
     </div>
   </div>
 </section>
+
 
 
 
