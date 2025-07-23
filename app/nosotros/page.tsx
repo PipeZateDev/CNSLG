@@ -56,7 +56,8 @@ export default function Nosotros() {
         </div>
       </nav>
 
-      {/* Historia + Misión & Visión + Valores + Canva */}
+      
+{/* Historia + Misión & Visión + Canva */}
 <section className="py-20 bg-white">
   <div className="max-w-7xl mx-auto px-6">
     <div className="grid md:grid-cols-2 gap-12 items-start">
@@ -103,95 +104,103 @@ export default function Nosotros() {
           </div>
         </div>
 
-        {/* Valores Institucionales */}
-        <div className="bg-yellow-50 rounded-lg p-6 mb-8">
-          <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mb-2">
-            <i className="ri-hand-heart-line text-xl text-yellow-600"></i>
+        {/* Canva Embed (Actualizado) */}
+        <div>
+          <div style={{ width: '100%', margin: '0 auto' }}>
+            <div style={{
+              position: 'relative',
+              width: '100%',
+              height: 0,
+              paddingTop: '125.0000%',
+              paddingBottom: 0,
+              boxShadow: '0 2px 8px 0 rgba(63,69,81,0.16)',
+              marginTop: '1.6em',
+              marginBottom: '0.9em',
+              overflow: 'hidden',
+              borderRadius: '8px',
+              willChange: 'transform'
+            }}>
+              <iframe
+                loading="lazy"
+                style={{
+                  position: 'absolute',
+                  width: '100%',
+                  height: '100%',
+                  top: 0,
+                  left: 0,
+                  border: 'none',
+                  padding: 0,
+                  margin: 0
+                }}
+                src="https://www.canva.com/design/DAGt7hE4YGs/bhZrgMbKfPaECdSdwufBPw/view?embed"
+                allowFullScreen
+                allow="fullscreen"
+                title="TimeLine-CNSLG"
+              ></iframe>
+            </div>
+            <div className="text-center mt-4">
+              <a
+                href="https://www.canva.com/design/DAGt7hE4YGs/bhZrgMbKfPaECdSdwufBPw/view?utm_content=DAGt7hE4YGs&utm_campaign=designshare&utm_medium=embeds&utm_source=link"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 underline hover:text-blue-800 transition-colors"
+              >
+                TimeLine-CNSLG
+              </a>{' '}
+              de Soporte CNSLG
+            </div>
           </div>
-          <h3 className="text-xl font-bold text-blue-900 mb-2">Valores Institucionales</h3>
-          <ul className="list-disc pl-5 text-gray-700 text-sm space-y-2">
-            <li><strong>Principio de Identidad:</strong> sentimiento de pertenencia y rasgos distintivos de la comunidad Gonzaguista.</li>
-            <li><strong>Principio de Responsabilidad:</strong> conciencia de las consecuencias y capacidad para asumir compromisos.</li>
-            <li><strong>Principio de Justicia:</strong> respeto y defensa de los derechos de las personas, actuando con equidad.</li>
-            <li><strong>Principio de Trascendencia:</strong> vivir con sentido de misión, responsabilidad, armonía y entusiasmo.</li>
-            <li><strong>Principio de Tolerancia:</strong> respeto por los demás, aceptación de la individualidad y la diferencia.</li>
-          </ul>
         </div>
-
-        {/* Decálogo */}
-        <div className="bg-purple-50 rounded-lg p-6">
-          <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-2">
-            <i className="ri-list-check text-xl text-purple-600"></i>
-          </div>
-          <h3 className="text-xl font-bold text-blue-900 mb-2">Decálogo del Nuevo San Luis Gonzaga</h3>
-          <ul className="list-disc pl-5 text-gray-700 text-sm space-y-1">
-            <li>1. Dios siempre presente en nuestras labores educativas.</li>
-            <li>2. Educamos con justicia y amor.</li>
-            <li>3. Actuamos con responsabilidad y decisión.</li>
-            <li>4. Prestamos un servicio de calidad con amabilidad.</li>
-            <li>5. Fomentamos el espíritu investigativo y deportivo.</li>
-            <li>6. Somos diligentes y creativos.</li>
-            <li>7. Estamos a la vanguardia de los conocimientos científicos y tecnológicos.</li>
-            <li>8. Reconocemos los derechos fundamentales de las personas.</li>
-            <li>9. Somos exitosos por nuestra organización.</li>
-            <li>10. Planeamos, hacemos, verificamos y actuamos.</li>
-          </ul>
-        </div>
-
       </div>
-
-      {/* Canva Embed (Actualizado) */}
-<div>
-  <div style={{ width: '100%', margin: '0 auto' }}>
-    <div style={{
-      position: 'relative',
-      width: '100%',
-      height: 0,
-      paddingTop: '125.0000%',
-      paddingBottom: 0,
-      boxShadow: '0 2px 8px 0 rgba(63,69,81,0.16)',
-      marginTop: '1.6em',
-      marginBottom: '0.9em',
-      overflow: 'hidden',
-      borderRadius: '8px',
-      willChange: 'transform'
-    }}>
-      <iframe
-        loading="lazy"
-        style={{
-          position: 'absolute',
-          width: '100%',
-          height: '100%',
-          top: 0,
-          left: 0,
-          border: 'none',
-          padding: 0,
-          margin: 0
-        }}
-        src="https://www.canva.com/design/DAGt7hE4YGs/bhZrgMbKfPaECdSdwufBPw/view?embed"
-        allowFullScreen
-        allow="fullscreen"
-        title="TimeLine-CNSLG"
-      ></iframe>
-    </div>
-    <div className="text-center mt-4">
-      <a
-        href="https://www.canva.com/design/DAGt7hE4YGs/bhZrgMbKfPaECdSdwufBPw/view?utm_content=DAGt7hE4YGs&utm_campaign=designshare&utm_medium=embeds&utm_source=link"
-        target="_blank"
-        rel="noopener noreferrer"
-        //className="text-blue-600 underline hover:text-blue-800 transition-colors"
-      >
-        TimeLine-CNSLG
-      </a>{' '}
-      de Soporte CNSLG
-    </div>
-  </div>
-</div>
-
-
     </div>
   </div>
 </section>
+
+{/* Valores Institucionales + Decálogo */}
+<section className="py-20 bg-white">
+  <div className="max-w-7xl mx-auto px-6">
+    <div className="flex flex-col md:flex-row gap-8">
+      
+      {/* Valores Institucionales */}
+      <div className="bg-yellow-50 rounded-lg p-6 flex-1">
+        <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mb-2">
+          <i className="ri-hand-heart-line text-xl text-yellow-600"></i>
+        </div>
+        <h3 className="text-xl font-bold text-blue-900 mb-2">Valores Institucionales</h3>
+        <ul className="list-disc pl-5 text-gray-700 text-sm space-y-2">
+          <li><strong>Principio de Identidad:</strong> sentimiento de pertenencia y rasgos distintivos de la comunidad Gonzaguista.</li>
+          <li><strong>Principio de Responsabilidad:</strong> conciencia de las consecuencias y capacidad para asumir compromisos.</li>
+          <li><strong>Principio de Justicia:</strong> respeto y defensa de los derechos de las personas, actuando con equidad.</li>
+          <li><strong>Principio de Trascendencia:</strong> vivir con sentido de misión, responsabilidad, armonía y entusiasmo.</li>
+          <li><strong>Principio de Tolerancia:</strong> respeto por los demás, aceptación de la individualidad y la diferencia.</li>
+        </ul>
+      </div>
+
+      {/* Decálogo */}
+      <div className="bg-purple-50 rounded-lg p-6 flex-1">
+        <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-2">
+          <i className="ri-list-check text-xl text-purple-600"></i>
+        </div>
+        <h3 className="text-xl font-bold text-blue-900 mb-2">Decálogo del Nuevo San Luis Gonzaga</h3>
+        <ul className="list-disc pl-5 text-gray-700 text-sm space-y-1">
+          <li>1. Dios siempre presente en nuestras labores educativas.</li>
+          <li>2. Educamos con justicia y amor.</li>
+          <li>3. Actuamos con responsabilidad y decisión.</li>
+          <li>4. Prestamos un servicio de calidad con amabilidad.</li>
+          <li>5. Fomentamos el espíritu investigativo y deportivo.</li>
+          <li>6. Somos diligentes y creativos.</li>
+          <li>7. Estamos a la vanguardia de los conocimientos científicos y tecnológicos.</li>
+          <li>8. Reconocemos los derechos fundamentales de las personas.</li>
+          <li>9. Somos exitosos por nuestra organización.</li>
+          <li>10. Planeamos, hacemos, verificamos y actuamos.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
 
       {/* Galería de Imágenes */}
       <section className="py-20 bg-white">
