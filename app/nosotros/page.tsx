@@ -140,7 +140,6 @@ export default function Nosotros() {
 
       </div>
 
-      {/* Canva Embed */}
       {/* Canva Embed (Actualizado) */}
 <div>
   <div style={{ width: '100%', margin: '0 auto' }}>
@@ -180,7 +179,7 @@ export default function Nosotros() {
         href="https://www.canva.com/design/DAGt7hE4YGs/bhZrgMbKfPaECdSdwufBPw/view?utm_content=DAGt7hE4YGs&utm_campaign=designshare&utm_medium=embeds&utm_source=link"
         target="_blank"
         rel="noopener noreferrer"
-        className="text-blue-600 underline hover:text-blue-800 transition-colors"
+        //className="text-blue-600 underline hover:text-blue-800 transition-colors"
       >
         TimeLine-CNSLG
       </a>{' '}
