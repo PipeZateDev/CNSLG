@@ -58,6 +58,142 @@ export default function Nosotros() {
 
 
 
+{/* Sección: Historia + Misión/Visión + Canva */}
+<section className="py-20 bg-white">
+  <div className="max-w-7xl mx-auto px-6">
+    <div className="grid md:grid-cols-2 gap-12 items-start">
+      {/* Columna izquierda: Historia + Misión + Visión */}
+      <div>
+        {/* Historia */}
+        <h2 className="text-3xl font-bold text-blue-900 mb-6">Nuestra Historia Centenaria</h2>
+        <p className="text-gray-600 mb-4">
+          Fundado en 1926, el Colegio Nuevo San Luis Gonzaga ha sido un pilar fundamental 
+          en la educación colombiana durante casi un siglo...
+        </p>
+        <p className="text-gray-600 mb-4">
+          A lo largo de estos 99 años, hemos mantenido nuestro compromiso con la excelencia académica...
+        </p>
+        <p className="text-gray-600 mb-8">
+          Hoy, nos enorgullecemos de ser una institución reconocida por su calidad educativa...
+        </p>
+
+        {/* Misión */}
+        <div className="bg-blue-50 rounded-lg p-6 mb-6">
+          <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-2">
+            <i className="ri-target-line text-xl text-blue-600"></i>
+          </div>
+          <h3 className="text-xl font-bold text-blue-900 mb-2">Misión</h3>
+          <p className="text-gray-700 text-sm">
+            El COLEGIO NUEVO SAN LUIS GONZAGA tiene el propósito de formar integralmente a nuestros estudiantes desde los valores 
+            Gonzaguistas, potenciando sus dimensiones de aprendizaje, profundizando en las áreas de humanidades, ciencias, matemáticas 
+            e inglés, Todo ello, con un enfoque investigativo y tecnológico.
+          </p>
+        </div>
+
+        {/* Visión */}
+        <div className="bg-green-50 rounded-lg p-6">
+          <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-2">
+            <i className="ri-eye-line text-xl text-green-600"></i>
+          </div>
+          <h3 className="text-xl font-bold text-blue-900 mb-2">Visión</h3>
+          <p className="text-gray-700 text-sm">
+            Evolucionar y crecer como una Institución de educación formal de calidad 
+            dedicada a la formación y desarrollo de seres humanos integrales, con un currículo avanzado y 
+            proyectado hacia el bilingüismo, la investigación, la tecnología y el deporte. Asimismo, proyectamos 
+            alcanzar altos estándares B2 en el nivel de inglés de acuerdo con el Marco Común Europeo.  
+          </p>
+        </div>
+      </div>
+
+      {/* Columna derecha: Canva embed */}
+      <div>
+        <div style={{ width: '100%', margin: '0 auto' }}>
+          <div style={{
+            position: 'relative',
+            width: '100%',
+            height: 0,
+            paddingTop: '125.0000%',
+            paddingBottom: 0,
+            boxShadow: '0 2px 8px 0 rgba(63,69,81,0.16)',
+            marginTop: '1.6em',
+            marginBottom: '0.9em',
+            overflow: 'hidden',
+            borderRadius: '8px',
+            willChange: 'transform'
+          }}>
+            <iframe
+              loading="lazy"
+              style={{
+                position: 'absolute',
+                width: '100%',
+                height: '100%',
+                top: 0,
+                left: 0,
+                border: 'none',
+                padding: 0,
+                margin: 0
+              }}
+              src="https://www.canva.com/design/DAGt7hE4YGs/bhZrgMbKfPaECdSdwufBPw/view?embed"
+              allowFullScreen
+              allow="fullscreen"
+              title="TimeLine-CNSLG"
+            ></iframe>
+          </div>
+          <div className="text-center mt-4">
+            <a
+              href="https://www.canva.com/design/DAGt7hE4YGs/bhZrgMbKfPaECdSdwufBPw/view?utm_content=DAGt7hE4YGs&utm_campaign=designshare&utm_medium=embeds&utm_source=link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              TimeLine - 
+            </a>{' '}
+            de Soporte CNSLG
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{/* Sección: Valores + Decálogo */}
+<section className="py-20 bg-gray-50">
+  <div className="max-w-7xl mx-auto px-6 space-y-12">
+    {/* Valores Institucionales */}
+    <div className="bg-yellow-50 rounded-lg p-6">
+      <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mb-2">
+        <i className="ri-hand-heart-line text-xl text-yellow-600"></i>
+      </div>
+      <h3 className="text-xl font-bold text-blue-900 mb-2">Valores Institucionales</h3>
+      <ul className="list-disc pl-5 text-gray-700 text-sm space-y-2">
+        <li><strong>Principio de Identidad:</strong> sentimiento de pertenencia y rasgos distintivos de la comunidad Gonzaguista.</li>
+        <li><strong>Principio de Responsabilidad:</strong> conciencia de las consecuencias y capacidad para asumir compromisos.</li>
+        <li><strong>Principio de Justicia:</strong> respeto y defensa de los derechos de las personas, actuando con equidad.</li>
+        <li><strong>Principio de Trascendencia:</strong> vivir con sentido de misión, responsabilidad, armonía y entusiasmo.</li>
+        <li><strong>Principio de Tolerancia:</strong> respeto por los demás, aceptación de la individualidad y la diferencia.</li>
+      </ul>
+    </div>
+
+    {/* Decálogo */}
+    <div className="bg-purple-50 rounded-lg p-6">
+      <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-2">
+        <i className="ri-list-check text-xl text-purple-600"></i>
+      </div>
+      <h3 className="text-xl font-bold text-blue-900 mb-2">Decálogo del Nuevo San Luis Gonzaga</h3>
+      <ul className="list-disc pl-5 text-gray-700 text-sm space-y-1">
+        <li>1. Dios siempre presente en nuestras labores educativas.</li>
+        <li>2. Educamos con justicia y amor.</li>
+        <li>3. Actuamos con responsabilidad y decisión.</li>
+        <li>4. Prestamos un servicio de calidad con amabilidad.</li>
+        <li>5. Fomentamos el espíritu investigativo y deportivo.</li>
+        <li>6. Somos diligentes y creativos.</li>
+        <li>7. Estamos a la vanguardia de los conocimientos científicos y tecnológicos.</li>
+        <li>8. Reconocemos los derechos fundamentales de las personas.</li>
+        <li>9. Somos exitosos por nuestra organización.</li>
+        <li>10. Planeamos, hacemos, verificamos y actuamos.</li>
+      </ul>
+    </div>
+  </div>
+</section>
 
 
 
