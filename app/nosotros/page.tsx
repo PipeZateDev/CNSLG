@@ -56,80 +56,11 @@ export default function Nosotros() {
         </div>
       </nav>
 
-      
 
-{/* Historia, Misión y Visión + Canva */}
-      <section className="py-16 px-6 md:px-12">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-          <div>
-            <h2 className="text-3xl font-bold mb-4">Nuestra Historia</h2>
-            <p className="mb-6 text-justify">
-              Fundado con el compromiso de transformar vidas a través de la educación, nuestro colegio ha sido un pilar en la comunidad durante más de 20 años. Cada paso ha estado guiado por la pasión por enseñar y formar seres humanos integrales.
-            </p>
-            <h3 className="text-2xl font-semibold mb-2">Misión</h3>
-            <p className="mb-6 text-justify">
-              Brindar una educación de calidad basada en valores, promoviendo el pensamiento crítico, la creatividad y la responsabilidad social en nuestros estudiantes.
-            </p>
-            <h3 className="text-2xl font-semibold mb-2">Visión</h3>
-            <p className="text-justify">
-              Ser una institución educativa reconocida por su excelencia académica y su compromiso con el desarrollo integral de los estudiantes, adaptándonos a los desafíos del mundo moderno.
-            </p>
-          </div>
-          <div>
-            <div style={{ position: 'relative', width: '100%', height: 0, paddingTop: '125.0000%', paddingBottom: 0, boxShadow: '0 2px 8px 0 rgba(63,69,81,0.16)', marginTop: '1.6em', marginBottom: '0.9em', overflow: 'hidden', borderRadius: '8px', willChange: 'transform' }}>
-              <iframe
-                loading="lazy"
-                style={{ position: 'absolute', width: '100%', height: '100%', top: 0, left: 0, border: 'none', padding: 0, margin: 0 }}
-                src="https://www.canva.com/design/DAGt7hE4YGs/bhZrgMbKfPaECdSdwufBPw/view?embed"
-                allowFullScreen
-                allow="fullscreen"
-                title="TimeLine-CNSLG"
-              ></iframe>
-            </div>
-            <div className="text-center mt-4">
-              <a
-                href="https://www.canva.com/design/DAGt7hE4YGs/bhZrgMbKfPaECdSdwufBPw/view?utm_content=DAGt7hE4YGs&utm_campaign=designshare&utm_medium=embeds&utm_source=link"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                TimeLine-CNSLG
-              </a>{' '}
-              de Soporte CNSLG
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Valores y Decálogo */}
-      <section className="py-16 px-6 md:px-12">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
-          <div className="bg-yellow-50 rounded-lg p-6">
-            <h3 className="text-xl font-bold text-blue-900 mb-4">Valores Institucionales</h3>
-            <ul className="list-disc pl-5 text-gray-700 text-sm space-y-2">
-              <li><strong>Principio de Identidad:</strong> sentimiento de pertenencia y rasgos distintivos de la comunidad Gonzaguista.</li>
-              <li><strong>Principio de Responsabilidad:</strong> conciencia de las consecuencias y capacidad para asumir compromisos.</li>
-              <li><strong>Principio de Justicia:</strong> respeto y defensa de los derechos de las personas, actuando con equidad.</li>
-              <li><strong>Principio de Trascendencia:</strong> vivir con sentido de misión, responsabilidad, armonía y entusiasmo.</li>
-              <li><strong>Principio de Tolerancia:</strong> respeto por los demás, aceptación de la individualidad y la diferencia.</li>
-            </ul>
-          </div>
-          <div className="bg-purple-50 rounded-lg p-6">
-            <h3 className="text-xl font-bold text-blue-900 mb-4">Decálogo del Nuevo San Luis Gonzaga</h3>
-            <ul className="list-disc pl-5 text-gray-700 text-sm space-y-1">
-              <li>1. Dios siempre presente en nuestras labores educativas.</li>
-              <li>2. Educamos con justicia y amor.</li>
-              <li>3. Actuamos con responsabilidad y decisión.</li>
-              <li>4. Prestamos un servicio de calidad con amabilidad.</li>
-              <li>5. Fomentamos el espíritu investigativo y deportivo.</li>
-              <li>6. Somos diligentes y creativos.</li>
-              <li>7. Estamos a la vanguardia de los conocimientos científicos y tecnológicos.</li>
-              <li>8. Reconocemos los derechos fundamentales de las personas.</li>
-              <li>9. Somos exitosos por nuestra organización.</li>
-              <li>10. Planeamos, hacemos, verificamos y actuamos.</li>
-            </ul>
-          </div>
-        </div>
-      </section>
+
+
+
 
 
 
