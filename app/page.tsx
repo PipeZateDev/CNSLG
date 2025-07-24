@@ -8,7 +8,7 @@ export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const bannerImages = [
-    { url: "https://i.ibb.co/0pCPHJyt/Open-House.jpg", title: "", description: "" },  //OpenHouse
+    { url: "https://i.ibb.co/WWBQJWsj/Open-Pokemon-Comp.jpg", title: "", description: "" },  //OpenHouse
     { url: "https://i.ibb.co/PZpKz5kX/Admisiones.jpg", title: "", description: "" },  //Admisiones
     { url: "https://i.ibb.co/YB5ggNnF/Lema.jpg", title: "", description: "" },        //Lema
     { url: "https://i.ibb.co/XZxtZY9b/Amor.jpg", title: "", description: "" },    //Educacion con amor
