@@ -65,7 +65,7 @@ export default function Nosotros() {
       {/* Columna izquierda: Historia + Misión + Visión */}
       <div>
         {/* Historia */}
-        <h2></h2>
+        <h2> </h2>
         <h2 className="text-3xl font-bold text-blue-900 mb-6">Nuestra Historia Centenaria</h2>
         <p className="text-gray-600 mb-4">
           Fundado en 1926, el Colegio Nuevo San Luis Gonzaga ha sido un pilar fundamental 
