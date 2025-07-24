@@ -99,7 +99,7 @@ export default function Admisiones() {
           { href: "https://www.tiktok.com/@nuevosanluisgonzaga", color: "bg-black hover:bg-gray-800", icon: "ri-tiktok-line" },
           { href: "https://www.youtube.com/@colegionuevosanluisgonzaga5795", color: "bg-red-600 hover:bg-red-700", icon: "ri-youtube-line" },
         ].map((item, idx) => (
-          <a key={idx} href={item.href} target="_blank" rel="noopener noreferrer" className={`w-12 h-12 ${item.color} text-white rounded-full flex items-center justify-center transition-all shadow-lg opacity-80 hover:opacity-100`}>
+          <a key={idx} href={item.href} target="_blank" rel="noopener noreferrer" className={`w-12 h-12 ${item.color} text-white rounded-full flex items-center justify-center transition-all shadow-lg opacity-8.0 hover:opacity-100`}>
             <i className={`${item.icon} text-xl`}></i>
           </a>
         ))}
@@ -142,7 +142,7 @@ export default function Admisiones() {
               <h3 className="text-xl font-bold text-blue-900 mb-4">Primaria</h3>
               <p className="text-gray-600 mb-4">Grados 1° a 5° con educación personalizada</p>
               <ul className="text-sm text-gray-500 space-y-2">
-                <li>• Bilingüe (español-inglés)</li>
+                <li>• Ingles intensivo A2</li>
                 <li>• Tecnología educativa</li>
                 <li>• Formación en valores</li>
                 <li>• Desarrollo de competencias</li>
@@ -153,9 +153,10 @@ export default function Admisiones() {
               <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <i className="ri-graduation-cap-line text-2xl text-purple-600"></i>
               </div>
-              <h3 className="text-xl font-bold text-blue-900 mb-4">Bachillerato y Média</h3>
+              <h3 className="text-xl font-bold text-blue-900 mb-4">Bachillerato y Media</h3>
               <p className="text-gray-600 mb-4">Grados 6° a 11° con énfasis académico</p>
               <ul className="text-sm text-gray-500 space-y-2">
+                <li>• Ingles intensivo B2+</li>
                 <li>• Preparación universitaria</li>
                 <li>• Énfasis en ciencias</li>
                 <li>• Liderazgo estudiantil</li>
@@ -356,7 +357,7 @@ export default function Admisiones() {
         </div>
       </section>
 
-      
+
 
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-12">
