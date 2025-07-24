@@ -4,56 +4,12 @@ import { useState } from 'react';
 import Link from 'next/link';
 
 export default function Admisiones() {
-  const [showInscriptionForm, setShowInscriptionForm] = useState(false);
-  const [menuAbierto, setMenuAbierto] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const [formData, setFormData] = useState({
-    studentName: '',
-    birthDate: '',
-    grade: '',
-    parentName: '',
-    phone: '',
-    email: '',
-    address: '',
-    previousSchool: '',
-    comments: ''
-  });
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!formData.studentName || !formData.birthDate || !formData.grade || !formData.parentName || !formData.phone || !formData.email) {
-      alert('Por favor complete todos los campos obligatorios');
-      return;
-    }
-
-    alert('Solicitud de inscripción enviada exitosamente. Nos pondremos en contacto pronto.');
-
-    setFormData({
-      studentName: '',
-      birthDate: '',
-      grade: '',
-      parentName: '',
-      phone: '',
-      email: '',
-      address: '',
-      previousSchool: '',
-      comments: ''
-    });
-
-    setShowInscriptionForm(false);
-  };
-
-const toggleMenu = () => {
+  const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
@@ -67,66 +23,36 @@ const toggleMenu = () => {
                 className="h-12 w-auto"
               />
             </div>
-            
+
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center space-x-8">
-              <Link 
-                href="/"
-                className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer"
-              >
+              <Link href="/" className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors">
                 Inicio
               </Link>
-              <Link 
-                href="/nosotros"
-                className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer"
-              >
+              <Link href="/nosotros" className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors">
                 Nosotros
               </Link>
-              <Link 
-                href="/admisiones"
-                className="px-4 py-2 bg-blue-900 text-white rounded-full transition-colors whitespace-nowrap cursor-pointer"
-              >
+              <Link href="/admisiones" className="px-4 py-2 bg-blue-900 text-white rounded-full transition-colors">
                 Admisiones
               </Link>
-              <Link 
-                href="/contacto"
-                className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer"
-              >
+              <Link href="/contacto" className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors">
                 Contacto
               </Link>
               <div className="flex space-x-2 ml-8">
-                <a 
-                  href="https://lms30.uno-internacional.com/login/access" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="px-4 py-2 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition-colors whitespace-nowrap cursor-pointer"
-                >
+                <a href="https://lms30.uno-internacional.com/login/access" target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition-colors">
                   UNOi Santillana
                 </a>
-                <a 
-                  href="https://www.cibercolegios.com/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="px-4 py-2 bg-yellow-400 text-black rounded-full hover:bg-yellow-500 transition-colors whitespace-nowrap cursor-pointer"
-                >
+                <a href="https://www.cibercolegios.com/" target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-yellow-400 text-black rounded-full hover:bg-yellow-500 transition-colors">
                   Cibercolegios
                 </a>
-                <a 
-                  href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=12695&searchedCategoryId=&searchedAgreementName=PEDAGOGICOS%20ASOCIADOS%20SAS" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors whitespace-nowrap cursor-pointer"
-                >
+                <a href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=12695&searchedCategoryId=&searchedAgreementName=PEDAGOGICOS%20ASOCIADOS%20SAS" target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors">
                   PSE - Pagos en Línea
                 </a>
               </div>
             </div>
 
             {/* Mobile Menu Button */}
-            <button 
-              onClick={toggleMenu}
-              className="lg:hidden w-10 h-10 flex items-center justify-center text-blue-900 cursor-pointer"
-            >
+            <button onClick={toggleMenu} className="lg:hidden w-10 h-10 flex items-center justify-center text-blue-900">
               <i className={`ri-${isMenuOpen ? 'close' : 'menu'}-line text-2xl`}></i>
             </button>
           </div>
@@ -135,57 +61,26 @@ const toggleMenu = () => {
           {isMenuOpen && (
             <div className="lg:hidden mt-4 py-4 border-t border-gray-200">
               <div className="flex flex-col space-y-3">
-                <Link 
-                  href="/"
-                  onClick={() => setIsMenuOpen(false)}
-                  className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer"
-                >
+                <Link href="/" onClick={() => setIsMenuOpen(false)} className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center">
                   Inicio
                 </Link>
-                <Link 
-                  href="/nosotros"
-                  onClick={() => setIsMenuOpen(false)}
-                  className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer"
-                >
+                <Link href="/nosotros" onClick={() => setIsMenuOpen(false)} className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center">
                   Nosotros
                 </Link>
-                <Link 
-                  href="/admisiones"
-                  onClick={() => setIsMenuOpen(false)}
-                  className="px-4 py-2 bg-blue-900 text-white rounded-full transition-colors text-center cursor-pointer"
-                >
+                <Link href="/admisiones" onClick={() => setIsMenuOpen(false)} className="px-4 py-2 bg-blue-900 text-white rounded-full transition-colors text-center">
                   Admisiones
                 </Link>
-                <Link 
-                  href="/contacto"
-                  onClick={() => setIsMenuOpen(false)}
-                  className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer"
-                >
+                <Link href="/contacto" onClick={() => setIsMenuOpen(false)} className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center">
                   Contacto
                 </Link>
                 <div className="flex flex-col space-y-2 pt-2">
-                  <a 
-                    href="https://lms30.uno-internacional.com/login/access" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="px-4 py-2 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition-colors text-center cursor-pointer"
-                  >
+                  <a href="https://lms30.uno-internacional.com/login/access" target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-purple-600 text-white rounded-full hover:bg-purple-700 text-center">
                     UNOi Santillana
                   </a>
-                  <a 
-                    href="https://www.cibercolegios.com/" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="px-4 py-2 bg-yellow-400 text-black rounded-full hover:bg-yellow-500 transition-colors text-center cursor-pointer"
-                  >
+                  <a href="https://www.cibercolegios.com/" target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-yellow-400 text-black rounded-full hover:bg-yellow-500 text-center">
                     Cibercolegios
                   </a>
-                  <a 
-                    href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=12695&searchedCategoryId=&searchedAgreementName=PEDAGOGICOS%20ASOCIADOS%20SAS" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors text-center cursor-pointer"
-                  >
+                  <a href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=12695&searchedCategoryId=&searchedAgreementName=PEDAGOGICOS%20ASOCIADOS%20SAS" target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 text-center">
                     PSE - Pagos en Línea
                   </a>
                 </div>
@@ -195,7 +90,7 @@ const toggleMenu = () => {
         </div>
       </nav>
 
-      {/* Floating Social Media Buttons */}
+      {/* Floating Social Buttons */}
       <div className="fixed right-6 bottom-6 z-40 space-y-3">
         {[
           { href: "https://wa.me/573183365700", color: "bg-green-500 hover:bg-green-600", icon: "ri-whatsapp-line" },
@@ -204,22 +99,21 @@ const toggleMenu = () => {
           { href: "https://www.tiktok.com/@nuevosanluisgonzaga", color: "bg-black hover:bg-gray-800", icon: "ri-tiktok-line" },
           { href: "https://www.youtube.com/@colegionuevosanluisgonzaga5795", color: "bg-red-600 hover:bg-red-700", icon: "ri-youtube-line" },
         ].map((item, idx) => (
-          <a key={idx} href={item.href} target="_blank" rel="noopener noreferrer" className={`w-12 h-12 ${item.color} text-white rounded-full flex items-center justify-center transition-all cursor-pointer shadow-lg opacity-80 hover:opacity-100`}>
+          <a key={idx} href={item.href} target="_blank" rel="noopener noreferrer" className={`w-12 h-12 ${item.color} text-white rounded-full flex items-center justify-center transition-all shadow-lg opacity-80 hover:opacity-100`}>
             <i className={`${item.icon} text-xl`}></i>
           </a>
         ))}
       </div>
-
-
       {/* Hero Section */}
-      <section className="pt-24 pb-12 bg-gradient-to-r from-green-600 to-green-500 text-white">
-        <div className="max-w-7xl mx-auto px-6 text-center">
+      <section className="pt-24 pb-12 bg-gradient-to-r from-green-600 to-green-500 text-white text-center">
+        <div className="max-w-7xl mx-auto px-6">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">Admisiones</h1>
           <p className="text-xl text-green-100 max-w-3xl mx-auto">
             Únete a nuestra comunidad educativa y forma parte de una tradición de excelencia académica
           </p>
         </div>
       </section>
+
 
       {/* Niveles Educativos */}
       <section className="py-20 bg-gray-50">
@@ -313,23 +207,14 @@ const toggleMenu = () => {
               <h4 className="font-semibold text-blue-900 mb-2">Laboratorios</h4>
               <p className="text-sm text-gray-600">Ciencias naturales, física, química, biología y matemáticas</p>
             </div>
-            <div className="bg-gray-50 rounded-lg p-6 text-center">
-              <div className="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                <i className="ri-book-open-line text-indigo-600"></i>
-              </div>
-              
-            </div>
+            
             <div className="bg-gray-50 rounded-lg p-6 text-center">
               <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-3">
                 <i className="ri-user-heart-line text-yellow-600"></i>
               </div>
               <h4 className="font-semibold text-blue-900 mb-2">Psicología</h4>
               <p className="text-sm text-gray-600">Acompañamiento psicopedagógico integral</p>
-            </div>
-            <div className="bg-gray-50 rounded-lg p-6 text-center">
-              <div className="w-12 h-12 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                <i className="ri-restaurant-line text-teal-600"></i>
-              </div>
+            
               
             </div>
           </div>
@@ -374,7 +259,6 @@ const toggleMenu = () => {
         </div>
       </section>
 
-
 {/* CTA Inscripción */}
       <section className="py-20 bg-blue-900 text-white">
         <div className="max-w-4xl mx-auto px-6 text-center">
@@ -382,145 +266,36 @@ const toggleMenu = () => {
           <p className="text-xl text-blue-200 mb-8">
             Completa tu solicitud de inscripción y da el primer paso hacia una educación de excelencia
           </p>
-          <button
-            onClick={() => setIsModalOpen(true)}
-            className="px-8 py-4 bg-white text-blue-900 hover:bg-gray-100 rounded-full font-semibold text-lg transition-colors whitespace-nowrap cursor-pointer"
+          <a
+            href="https://appsprod.cibercolegios.com/ciber_enroll/?institutionId=95"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block px-8 py-4 bg-white text-blue-900 hover:bg-gray-100 rounded-full font-semibold text-lg transition-colors"
           >
             Solicitar Inscripción Ahora
-          </button>
+          </a>
         </div>
       </section>
-
-      {/* Modal de Inscripción */}
-      {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
-          <div className="bg-white rounded-lg overflow-hidden shadow-lg w-full max-w-4xl h-[80vh] flex flex-col">
-            <div className="flex justify-between items-center p-4 border-b border-gray-200">
-              <h3 className="text-xl font-semibold text-blue-900">Formulario de Inscripción</h3>
-              <button
-                onClick={() => setIsModalOpen(false)}
-                className="text-gray-500 hover:text-gray-700 text-2xl"
-              >
-                &times;
-              </button>
-            </div>
-            <div className="flex-1 overflow-hidden">
-              <iframe
-                src="https://appsprod.cibercolegios.com/ciber_enroll/?institutionId=95"
-                title="Formulario de Inscripción"
-                className="w-full h-full border-0"
-              ></iframe>
-            </div>
-          </div>
-        </div>
-      )}
-
-
-      {/* Requisitos */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-3xl font-bold text-blue-900 text-center mb-12">Requisitos de Admisión</h2>
-          
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-blue-50 rounded-lg p-8">
-              <h3 className="text-xl font-bold text-blue-900 mb-4">Documentos Requeridos</h3>
-              <ul className="space-y-2 text-gray-700">
-                <li className="flex items-start">
-                  <i className="ri-check-line text-green-600 mr-2 mt-1"></i>
-                  Registro civil de nacimiento (original)
-                </li>
-                <li className="flex items-start">
-                  <i className="ri-check-line text-green-600 mr-2 mt-1"></i>
-                  Fotocopia de la cédula de ciudadanía de los padres
-                </li>
-                <li className="flex items-start">
-                  <i className="ri-check-line text-green-600 mr-2 mt-1"></i>
-                  Certificado médico actualizado
-                </li>
-                <li className="flex items-start">
-                  <i className="ri-check-line text-green-600 mr-2 mt-1"></i>
-                  Carnet de vacunas al día
-                </li>
-                <li className="flex items-start">
-                  <i className="ri-check-line text-green-600 mr-2 mt-1"></i>
-                  Boletín de calificaciones del último año cursado
-                </li>
-                <li className="flex items-start">
-                  <i className="ri-check-line text-green-600 mr-2 mt-1"></i>
-                  Certificado de comportamiento del colegio anterior
-                </li>
-                <li className="flex items-start">
-                  <i className="ri-check-line text-green-600 mr-2 mt-1"></i>
-                  3 fotos tamaño 3x4 fondo blanco
-                </li>
-              </ul>
-            </div>
-            
-            <div className="bg-green-50 rounded-lg p-8">
-              <h3 className="text-xl font-bold text-blue-900 mb-4">Fechas Importantes</h3>
-              <div className="space-y-4 text-gray-700">
-                <div className="flex items-center">
-                  <i className="ri-calendar-line text-blue-600 mr-3"></i>
-                  <div>
-                    <p className="font-semibold">Inscripciones Abiertas</p>
-                    <p className="text-sm text-gray-600">Julio - Diciembre 2025</p>
-                  </div>
-                </div>
-                <div className="flex items-center">
-                  <i className="ri-calendar-line text-blue-600 mr-3"></i>
-                  <div>
-                    <p className="font-semibold">Entrevistas</p>
-                    <p className="text-sm text-gray-600">Julio - Febrero 2026</p>
-                  </div>
-                </div>
-                <div className="flex items-center">
-                  <i className="ri-calendar-line text-blue-600 mr-3"></i>
-                  <div>
-                    <p className="font-semibold">Matrículas</p>
-                    <p className="text-sm text-gray-600">Agosto - Abril 2026</p>
-                  </div>
-                </div>
-                <div className="flex items-center">
-                  <i className="ri-calendar-line text-blue-600 mr-3"></i>
-                  <div>
-                    <p className="font-semibold">Inicio de Clases</p>
-                    <p className="text-sm text-gray-600">Febrero 2026</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      
-
 
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-12">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-4 gap-8">
             <div>
-              <img 
-                src="https://static.readdy.ai/image/b422d9997318ba9404c133396eb0082a/f0b6df53262c2786638b3d4d8768e052.png" 
-                alt="Logo Colegio Nuevo San Luis Gonzaga" 
-                className="h-16 w-auto mb-4"
-              />
+              <img src="https://static.readdy.ai/image/b422d9997318ba9404c133396eb0082a/f0b6df53262c2786638b3d4d8768e052.png" alt="Logo Colegio Nuevo San Luis Gonzaga" className="h-16 w-auto mb-4" />
               <p className="text-gray-400 text-sm">
                 Formando líderes del futuro desde 1926 con excelencia académica y valores católicos.
               </p>
             </div>
-            
             <div>
               <h4 className="font-semibold mb-4">Enlaces Rápidos</h4>
               <ul className="space-y-2 text-sm text-gray-400">
-                <li><Link href="/" className="hover:text-white transition-colors cursor-pointer">Inicio</Link></li>
-                <li><Link href="/admisiones" className="hover:text-white transition-colors cursor-pointer">Admisiones</Link></li>
-                <li><Link href="/nosotros" className="hover:text-white transition-colors cursor-pointer">Nosotros</Link></li>
-                <li><Link href="/contacto" className="hover:text-white transition-colors cursor-pointer">Contacto</Link></li>
+                <li><Link href="/" className="hover:text-white">Inicio</Link></li>
+                <li><Link href="/admisiones" className="hover:text-white">Admisiones</Link></li>
+                <li><Link href="/nosotros" className="hover:text-white">Nosotros</Link></li>
+                <li><Link href="/contacto" className="hover:text-white">Contacto</Link></li>
               </ul>
             </div>
-            
             <div>
               <h4 className="font-semibold mb-4">Servicios</h4>
               <ul className="space-y-2 text-sm text-gray-400">
@@ -530,42 +305,23 @@ const toggleMenu = () => {
                 <li>Educación Bilingüe</li>
               </ul>
             </div>
-            
             <div>
               <h4 className="font-semibold mb-4">Plataformas</h4>
               <div className="space-y-2">
-                <a 
-                  href="https://lms30.uno-internacional.com/login/access" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="block text-sm text-gray-400 hover:text-white transition-colors cursor-pointer"
-                >
+                <a href="https://lms30.uno-internacional.com/login/access" target="_blank" rel="noopener noreferrer" className="block text-sm text-gray-400 hover:text-white">
                   UNOi Santillana
                 </a>
-                <a 
-                  href="https://www.cibercolegios.com/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="block text-sm text-gray-400 hover:text-white transition-colors cursor-pointer"
-                >
+                <a href="https://www.cibercolegios.com/" target="_blank" rel="noopener noreferrer" className="block text-sm text-gray-400 hover:text-white">
                   Cibercolegios
                 </a>
-                <a 
-                  href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=12695&searchedCategoryId=&searchedAgreementName=PEDAGOGICOS%20ASOCIADOS%20SAS" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="block text-sm text-gray-400 hover:text-white transition-colors cursor-pointer"
-                >
+                <a href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=12695&searchedCategoryId=&searchedAgreementName=PEDAGOGICOS%20ASOCIADOS%20SAS" target="_blank" rel="noopener noreferrer" className="block text-sm text-gray-400 hover:text-white">
                   PSE - Pagos en Línea
                 </a>
               </div>
             </div>
           </div>
-          
           <div className="border-t border-gray-800 mt-8 pt-8 text-center">
-            <p className="text-gray-400 text-sm">
-            © 2025 Colegio Nuevo San Luis Gonzaga. Todos los derechos reservados.
-            </p>
+            <p className="text-gray-400 text-sm">© 2025 Colegio Nuevo San Luis Gonzaga. Todos los derechos reservados.</p>
           </div>
         </div>
       </footer>

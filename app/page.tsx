@@ -8,20 +8,21 @@ export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const bannerImages = [
-    { url: "https://i.ibb.co/WWBQJWsj/Open-Pokemon-Comp.jpg", title: "", description: "" },  //OpenHouse
-    { url: "https://i.ibb.co/PZpKz5kX/Admisiones.jpg", title: "", description: "" },  //Admisiones
-    { url: "https://i.ibb.co/YB5ggNnF/Lema.jpg", title: "", description: "" },        //Lema
-    { url: "https://i.ibb.co/XZxtZY9b/Amor.jpg", title: "", description: "" },    //Educacion con amor
-    { url: "https://i.ibb.co/WpBWH5H0/Ingles.jpg", title: "", description: "" },      //Ingles 
-    { url: "https://i.ibb.co/gbpLhCtd/Prom.jpg", title: "", description: "" }, //Prom
-    //{ url: "https://i.ibb.co/LD0TtMSJ/7-deportes.png", title: "", description: "" }, //Deportes
+    { url: "https://i.ibb.co/mCG7xd6C/1.jpg", title: "", description: "" },  //OpenHouse
+    { url: "https://i.ibb.co/4n2KgQTP/9.jpg", title: "", description: "" },  //DíaFamilia
+    { url: "https://i.ibb.co/Wp5W862T/2.jpg", title: "", description: "" },  //Admisiones
+    { url: "https://i.ibb.co/1fwdk3FQ/3.jpg", title: "", description: "" },        //Lema
+    { url: "https://i.ibb.co/VpghYymD/6.jpg", title: "", description: "" },    //Educacion con amor
+    { url: "https://i.ibb.co/WWFpKXmM/4.jpg", title: "", description: "" },      //Ingles 
+    { url: "https://i.ibb.co/1gsPzf4/8.jpg", title: "", description: "" }, //Prom
+    { url: "https://i.ibb.co/N2jyWxS1/7.jpg", title: "", description: "" }, //Deportes
     //{ url: "https://i.ibb.co/fYvVNbMk/8-instalaciones.png", title: "", description: "" } 
     ];
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => prevIndex === bannerImages.length - 1 ? 0 : prevIndex + 1);
-    }, 5000);
+    }, 5500);
     return () => clearInterval(interval);
   }, [bannerImages.length]);
 
