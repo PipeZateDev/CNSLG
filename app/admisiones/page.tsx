@@ -259,24 +259,6 @@ export default function Admisiones() {
         </div>
       </section>
 
-{/* CTA Inscripción */}
-      <section className="py-20 bg-blue-900 text-white">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold mb-6">¿Listo para unirte a nuestra familia Gonzaguista?</h2>
-          <p className="text-xl text-blue-200 mb-8">
-            Completa tu solicitud de inscripción y da el primer paso hacia una educación de excelencia
-          </p>
-          <a
-            href="https://appsprod.cibercolegios.com/ciber_enroll/?institutionId=95"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block px-8 py-4 bg-white text-blue-900 hover:bg-gray-100 rounded-full font-semibold text-lg transition-colors"
-          >
-            Solicitar Inscripción Ahora
-          </a>
-        </div>
-      </section>
-
 
 {/* Requisitos */}
       <section className="py-20 bg-white">
@@ -355,6 +337,26 @@ export default function Admisiones() {
         </div>
       </section>
 
+
+{/* CTA Inscripción */}
+      <section className="py-20 bg-blue-900 text-white">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <h2 className="text-3xl font-bold mb-6">¿Listo para unirte a nuestra familia Gonzaguista?</h2>
+          <p className="text-xl text-blue-200 mb-8">
+            Completa tu solicitud de inscripción y da el primer paso hacia una educación de excelencia
+          </p>
+          <a
+            href="https://appsprod.cibercolegios.com/ciber_enroll/?institutionId=95"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block px-8 py-4 bg-white text-blue-900 hover:bg-gray-100 rounded-full font-semibold text-lg transition-colors"
+          >
+            Solicitar Inscripción Ahora
+          </a>
+        </div>
+      </section>
+
+      
 
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-12">
