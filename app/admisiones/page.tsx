@@ -277,6 +277,85 @@ export default function Admisiones() {
         </div>
       </section>
 
+
+{/* Requisitos */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <h2 className="text-3xl font-bold text-blue-900 text-center mb-12">Requisitos de Admisión</h2>
+          
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="bg-blue-50 rounded-lg p-8">
+              <h3 className="text-xl font-bold text-blue-900 mb-4">Documentos Requeridos</h3>
+              <ul className="space-y-2 text-gray-700">
+                <li className="flex items-start">
+                  <i className="ri-check-line text-green-600 mr-2 mt-1"></i>
+                  Registro civil de nacimiento (original)
+                </li>
+                <li className="flex items-start">
+                  <i className="ri-check-line text-green-600 mr-2 mt-1"></i>
+                  Fotocopia de la cédula de ciudadanía de los padres
+                </li>
+                <li className="flex items-start">
+                  <i className="ri-check-line text-green-600 mr-2 mt-1"></i>
+                  Certificado médico actualizado
+                </li>
+                <li className="flex items-start">
+                  <i className="ri-check-line text-green-600 mr-2 mt-1"></i>
+                  Carnet de vacunas al día
+                </li>
+                <li className="flex items-start">
+                  <i className="ri-check-line text-green-600 mr-2 mt-1"></i>
+                  Boletín de calificaciones del último año cursado
+                </li>
+                <li className="flex items-start">
+                  <i className="ri-check-line text-green-600 mr-2 mt-1"></i>
+                  Certificado de comportamiento del colegio anterior
+                </li>
+                <li className="flex items-start">
+                  <i className="ri-check-line text-green-600 mr-2 mt-1"></i>
+                  3 fotos tamaño 3x4 fondo blanco
+                </li>
+              </ul>
+            </div>
+            
+            <div className="bg-green-50 rounded-lg p-8">
+              <h3 className="text-xl font-bold text-blue-900 mb-4">Fechas Importantes</h3>
+              <div className="space-y-4 text-gray-700">
+                <div className="flex items-center">
+                  <i className="ri-calendar-line text-blue-600 mr-3"></i>
+                  <div>
+                    <p className="font-semibold">Inscripciones Abiertas</p>
+                    <p className="text-sm text-gray-600">Julio - Diciembre 2025</p>
+                  </div>
+                </div>
+                <div className="flex items-center">
+                  <i className="ri-calendar-line text-blue-600 mr-3"></i>
+                  <div>
+                    <p className="font-semibold">Entrevistas</p>
+                    <p className="text-sm text-gray-600">Julio - Febrero 2026</p>
+                  </div>
+                </div>
+                <div className="flex items-center">
+                  <i className="ri-calendar-line text-blue-600 mr-3"></i>
+                  <div>
+                    <p className="font-semibold">Matrículas</p>
+                    <p className="text-sm text-gray-600">Agosto - Abril 2026</p>
+                  </div>
+                </div>
+                <div className="flex items-center">
+                  <i className="ri-calendar-line text-blue-600 mr-3"></i>
+                  <div>
+                    <p className="font-semibold">Inicio de Clases</p>
+                    <p className="text-sm text-gray-600">Febrero 2026</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-12">
         <div className="max-w-7xl mx-auto px-6">
