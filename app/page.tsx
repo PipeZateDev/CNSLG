@@ -22,7 +22,7 @@ export default function Home() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => prevIndex === bannerImages.length - 1 ? 0 : prevIndex + 1);
-    }, 5500);
+    }, 6000);
     return () => clearInterval(interval);
   }, [bannerImages.length]);
 
@@ -206,7 +206,7 @@ export default function Home() {
       <section className="pt-20 relative">
         <div className="relative h-96 md:h-[650px] overflow-hidden w-full md:w-[85%] mx-auto">
           {bannerImages.map((image, index) => (
-            <div key={index} className={`absolute inset-0 transition-opacity duration-500 ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'}`}>
+            <div key={index} className={`absolute inset-0 transition-opacity duration-500 ${index === currentImageIndex ? 'opacity-50' : 'opacity-0'}`}>
               <img src={image.url} alt={image.title} className="w-full h-full object-cover object-center" />
               <div className="absolute inset-0 bg-blue-900/40"></div>
             </div>
