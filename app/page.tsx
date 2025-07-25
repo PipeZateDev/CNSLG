@@ -206,9 +206,10 @@ export default function Home() {
       <section className="pt-20 relative">
         <div className="relative h-96 md:h-[650px] overflow-hidden w-full md:w-[80%] mx-auto">
           {bannerImages.map((image, index) => (
-            <div key={index} className={`absolute inset-0 transition duration-600 ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'}`}>
+            <div key={index} className={`absolute inset-0 transition-opacity duration-600 ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'}`}>
               <img src={image.url} alt={image.title} className="w-full h-full object-cover object-center" />
-              <div className="absolute inset-0 bg-blue-900/40"></div>
+              {/* <div className="absolute inset-0 bg-blue-900/40"></div> */} // Eliminar o comentar
+
             </div>
           ))}
           <div className="absolute inset-0 flex items-center justify-center text-center text-white z-10">
