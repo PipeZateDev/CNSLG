@@ -318,42 +318,51 @@ export default function Home() {
             Noticias y Eventos
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-              <img 
-                src="https://i.ibb.co/vCpGdgff/Open-House2025.png"
-                alt="Open House"
-                className="w-full h-48 object-cover object-top"
-              />
-              <div className="p-6">
-                <span className="text-sm text-blue-600 font-semibold">20 Jun 2025</span>
-                <h3 className="text-lg font-bold text-blue-900 mb-2 mt-1">Open House 2025</h3>
-                <p className="text-gray-600 text-sm">Conoce nuestras instalaciones y proceso de admisión para el próximo año escolar.</p>
+            {/* Noticias con botón de publicación */}
+            {{
+              image: "https://i.ibb.co/vCpGdgff/Open-House2025.png",
+              title: "Open House 2025",
+              date: "20 Jun 2025",
+              description: "Conoce nuestras instalaciones y proceso de admisión para el próximo año escolar.",
+              link: "https://www.facebook.com/colegionuevosanluisgonzaga/posts/1234567890"
+            },
+            {
+              image: "https://readdy.ai/api/search-image?query=School%20science%20fair%20with%20student%20projects%2C%20STEM%20exhibition%2C%20innovative%20experiments%2C%20proud%20students%20presenting%2C%20educational%20achievement%2C%20modern%20school%20facilities%2C%20scientific%20learning&width=400&height=250&seq=news2&orientation=landscape",
+              title: "Feria de Ciencias 2024",
+              date: "10 Oct 2024",
+              description: "Nuestros estudiantes brillaron con proyectos innovadores en ciencia y tecnología.",
+              link: ""
+            },
+            {
+              image: "https://readdy.ai/api/search-image?query=School%20sports%20championship%20celebration%2C%20students%20with%20trophies%20and%20medals%2C%20athletic%20achievement%2C%20team%20spirit%2C%20Colombian%20school%20sports%2C%20victory%20celebration%2C%20proud%20athletes&width=400&height=250&seq=news3&orientation=landscape",
+              title: "Campeones Robótica",
+              date: "05 Nov 2023",
+              description: "Nuestro equipo de robótica obtivo el 1er puesto en el campeonato mundial 2023.",
+              link: "https://www.instagram.com/p/abcdefghijklm/"
+            }].map((item, idx) => (
+              <div key={idx} className="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col">
+                <img 
+                  src={item.image}
+                  alt={item.title}
+                  className="w-full h-48 object-cover object-top"
+                />
+                <div className="p-6 flex-1 flex flex-col">
+                  <span className="text-sm text-blue-600 font-semibold">{item.date}</span>
+                  <h3 className="text-lg font-bold text-blue-900 mb-2 mt-1">{item.title}</h3>
+                  <p className="text-gray-600 text-sm mb-4">{item.description}</p>
+                  <a
+                    href={item.link || undefined}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`mt-auto px-4 py-2 rounded-full font-semibold text-white transition-colors text-center ${item.link ? "bg-blue-900 hover:bg-blue-800 cursor-pointer" : "bg-gray-400 cursor-not-allowed"}`}
+                    tabIndex={item.link ? 0 : -1}
+                    aria-disabled={!item.link}
+                  >
+                    Ver publicación
+                  </a>
+                </div>
               </div>
-            </div>
-            <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-              <img 
-                src="https://readdy.ai/api/search-image?query=School%20science%20fair%20with%20student%20projects%2C%20STEM%20exhibition%2C%20innovative%20experiments%2C%20proud%20students%20presenting%2C%20educational%20achievement%2C%20modern%20school%20facilities%2C%20scientific%20learning&width=400&height=250&seq=news2&orientation=landscape"
-                alt="Feria de Ciencias"
-                className="w-full h-48 object-cover object-top"
-              />
-              <div className="p-6">
-                <span className="text-sm text-blue-600 font-semibold">10 Oct 2024</span>
-                <h3 className="text-lg font-bold text-blue-900 mb-2 mt-1">Feria de Ciencias 2024</h3>
-                <p className="text-gray-600 text-sm">Nuestros estudiantes brillaron con proyectos innovadores en ciencia y tecnología.</p>
-              </div>
-            </div>
-            <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-              <img 
-                src="https://readdy.ai/api/search-image?query=School%20sports%20championship%20celebration%2C%20students%20with%20trophies%20and%20medals%2C%20athletic%20achievement%2C%20team%20spirit%2C%20Colombian%20school%20sports%2C%20victory%20celebration%2C%20proud%20athletes&width=400&height=250&seq=news3&orientation=landscape"
-                alt="Olimpiadas Deportivas"
-                className="w-full h-48 object-cover object-top"
-              />
-              <div className="p-6">
-                <span className="text-sm text-blue-600 font-semibold">05 Nov 2023</span>
-                <h3 className="text-lg font-bold text-blue-900 mb-2 mt-1">Campeones Robótica</h3>
-                <p className="text-gray-600 text-sm">Nuestro equipo de robótica obtivo el 1er puesto en el campeonato mundial 2023.</p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
