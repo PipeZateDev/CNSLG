@@ -154,19 +154,26 @@ export default function Contacto() {
       </nav>
 
       {/* Floating Social Media Buttons */}
-      <div className="fixed right-6 bottom-6 z-40 space-y-3">
-        {[
-          { href: "https://wa.me/573183365700", color: "bg-green-500 hover:bg-green-600", icon: "ri-whatsapp-line" },
-          { href: "https://www.instagram.com/colegionuevosanluisgonzaga/?hl=es", color: "bg-pink-500 hover:bg-pink-600", icon: "ri-instagram-line" },
-          { href: "https://www.facebook.com/colegionuevosanluisgonzaga", color: "bg-blue-600 hover:bg-blue-700", icon: "ri-facebook-line" },
-          { href: "https://www.tiktok.com/@nuevosanluisgonzaga", color: "bg-black hover:bg-gray-800", icon: "ri-tiktok-line" },
-          { href: "https://www.youtube.com/@colegionuevosanluisgonzaga5795", color: "bg-red-600 hover:bg-red-700", icon: "ri-youtube-line" },
-        ].map((item, idx) => (
-          <a key={idx} href={item.href} target="_blank" rel="noopener noreferrer" className={`w-12 h-12 ${item.color} text-white rounded-full flex items-center justify-center transition-all cursor-pointer shadow-lg opacity-80 hover:opacity-100`}>
-            <i className={`${item.icon} text-xl`}></i>
-          </a>
-        ))}
-      </div>
+<div className="fixed right-6 bottom-6 z-40 space-y-3">
+  {[
+    { href: "https://wa.me/573183365700", color: "bg-green-500 hover:bg-green-600", icon: "ri-whatsapp-line" },
+    { href: "https://www.instagram.com/colegionuevosanluisgonzaga/?hl=es", color: "bg-pink-500 hover:bg-pink-600", icon: "ri-instagram-line" },
+    { href: "https://www.facebook.com/colegionuevosanluisgonzaga", color: "bg-blue-600 hover:bg-blue-700", icon: "ri-facebook-line" },
+    { href: "https://www.tiktok.com/@nuevosanluisgonzaga", color: "bg-black hover:bg-gray-800", icon: "ri-tiktok-line" },
+    { href: "https://www.youtube.com/@colegionuevosanluisgonzaga5795", color: "bg-red-600 hover:bg-red-700", icon: "ri-youtube-line" },
+  ].map((item, idx) => (
+    <a
+      key={idx}
+      href={item.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`w-12 h-12 ${item.color} text-white rounded-full flex items-center justify-center transition-all cursor-pointer shadow-lg opacity-70 hover:opacity-100`}
+    >
+      <i className={`${item.icon} text-xl`}></i>
+    </a>
+  ))}
+</div>
+
 
       {/* Hero Section */}
       <section className="pt-24 pb-12 bg-gradient-to-r from-blue-900 to-blue-700 text-white">
