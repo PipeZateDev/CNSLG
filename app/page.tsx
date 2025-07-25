@@ -194,7 +194,7 @@ export default function Home() {
       href={item.href}
       target="_blank"
       rel="noopener noreferrer"
-      className={`w-12 h-12 ${item.color} text-white rounded-full flex items-center justify-center transition-all cursor-pointer shadow-lg opacity-80 hover:opacity-100`}
+      className={`w-12 h-12 ${item.color} text-white rounded-full flex items-center justify-center transition-all cursor-pointer shadow-lg opacity-70 hover:opacity-100`}
     >
       <i className={`${item.icon} text-xl`}></i>
     </a>
@@ -206,7 +206,7 @@ export default function Home() {
       <section className="pt-20 relative">
         <div className="relative h-96 md:h-[650px] overflow-hidden w-full md:w-[85%] mx-auto">
           {bannerImages.map((image, index) => (
-            <div key={index} className={`absolute inset-0 transition-opacity duration-500 ${index === currentImageIndex ? 'opacity-200' : 'opacity-0'}`}>
+            <div key={index} className={`absolute inset-0 transition-opacity duration-600 ${index === currentImageIndex ? 'opacity-100' : 'opacity-50'}`}>
               <img src={image.url} alt={image.title} className="w-full h-full object-cover object-center" />
               <div className="absolute inset-0 bg-blue-900/40"></div>
             </div>
