@@ -3,162 +3,9 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
-function Navbar({ active }: { active: string }) {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  return (
-    <nav className="fixed top-0 w-full bg-white shadow-lg z-50">
-      <div className="px-6 py-4">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center">
-            <img 
-              src="https://i.ibb.co/spn4L9WW/LOGO-NSLG-2-Mini.png" 
-              alt="Logo Colegio Nuevo San Luis Gonzaga"
-              className="h-12 w-auto"
-            />
-          </div>
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-8">
-            <Link 
-              href="/"
-              className={`px-4 py-2 rounded-full transition-colors whitespace-nowrap cursor-pointer ${active === "inicio" ? "bg-blue-900 text-white" : "text-blue-900 hover:bg-blue-50"}`}
-            >
-              Inicio
-            </Link>
-            <Link 
-              href="/nosotros"
-              className={`px-4 py-2 rounded-full transition-colors whitespace-nowrap cursor-pointer ${active === "nosotros" ? "bg-blue-900 text-white" : "text-blue-900 hover:bg-blue-50"}`}
-            >
-              Nosotros
-            </Link>
-            <Link 
-              href="/admisiones"
-              className={`px-4 py-2 rounded-full transition-colors whitespace-nowrap cursor-pointer ${active === "admisiones" ? "bg-blue-900 text-white" : "text-blue-900 hover:bg-blue-50"}`}
-            >
-              Admisiones
-            </Link>
-            <Link 
-              href="/admin"
-              className={`px-4 py-2 rounded-full transition-colors whitespace-nowrap cursor-pointer ${active === "admin" ? "bg-blue-900 text-white" : "text-blue-900 hover:bg-blue-50"}`}
-            >
-              Administración
-            </Link>
-            <Link 
-              href="/contacto"
-              className={`px-4 py-2 rounded-full transition-colors whitespace-nowrap cursor-pointer ${active === "contacto" ? "bg-blue-900 text-white" : "text-blue-900 hover:bg-blue-50"}`}
-            >
-              Contacto
-            </Link>
-            <div className="flex space-x-2 ml-8">
-              <a 
-                href="https://lms30.uno-internacional.com/login/access" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="px-4 py-2 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition-colors whitespace-nowrap cursor-pointer"
-              >
-                UNOi Santillana
-              </a>
-              <a 
-                href="https://www.cibercolegios.com/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="px-4 py-2 bg-yellow-400 text-black rounded-full hover:bg-yellow-500 transition-colors whitespace-nowrap cursor-pointer"
-              >
-                Cibercolegios
-              </a>
-              <a 
-                href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=12695&searchedCategoryId=&searchedAgreementName=PEDAGOGICOS%20ASOCIADOS%20SAS" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors whitespace-nowrap cursor-pointer"
-              >
-                PSE - Pagos en Línea
-              </a>
-            </div>
-          </div>
-          {/* Mobile Menu Button */}
-          <button 
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden w-10 h-10 flex items-center justify-center text-blue-900 cursor-pointer"
-          >
-            <i className={`ri-${isMenuOpen ? 'close' : 'menu'}-line text-2xl`}></i>
-          </button>
-        </div>
-        {/* Mobile Navigation Menu */}
-        {isMenuOpen && (
-          <div className="lg:hidden mt-4 py-4 border-t border-gray-200">
-            <div className="flex flex-col space-y-3">
-              <Link 
-                href="/"
-                onClick={() => setIsMenuOpen(false)}
-                className={`px-4 py-2 rounded-full transition-colors text-center cursor-pointer ${active === "inicio" ? "bg-blue-900 text-white" : "text-blue-900 hover:bg-blue-50"}`}
-              >
-                Inicio
-              </Link>
-              <Link 
-                href="/nosotros"
-                onClick={() => setIsMenuOpen(false)}
-                className={`px-4 py-2 rounded-full transition-colors text-center cursor-pointer ${active === "nosotros" ? "bg-blue-900 text-white" : "text-blue-900 hover:bg-blue-50"}`}
-              >
-                Nosotros
-              </Link>
-              <Link 
-                href="/admisiones"
-                onClick={() => setIsMenuOpen(false)}
-                className={`px-4 py-2 rounded-full transition-colors text-center cursor-pointer ${active === "admisiones" ? "bg-blue-900 text-white" : "text-blue-900 hover:bg-blue-50"}`}
-              >
-                Admisiones
-              </Link>
-              <Link 
-                href="/admin"
-                onClick={() => setIsMenuOpen(false)}
-                className={`px-4 py-2 rounded-full transition-colors text-center cursor-pointer ${active === "admin" ? "bg-blue-900 text-white" : "text-blue-900 hover:bg-blue-50"}`}
-              >
-                Administración
-              </Link>
-              <Link 
-                href="/contacto"
-                onClick={() => setIsMenuOpen(false)}
-                className={`px-4 py-2 rounded-full transition-colors text-center cursor-pointer ${active === "contacto" ? "bg-blue-900 text-white" : "text-blue-900 hover:bg-blue-50"}`}
-              >
-                Contacto
-              </Link>
-              <div className="flex flex-col space-y-2 pt-2">
-                <a 
-                  href="https://lms30.uno-internacional.com/login/access" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="px-4 py-2 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition-colors text-center cursor-pointer"
-                >
-                  UNOi Santillana
-                </a>
-                <a 
-                  href="https://www.cibercolegios.com/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="px-4 py-2 bg-yellow-400 text-black rounded-full hover:bg-yellow-500 transition-colors text-center cursor-pointer"
-                >
-                  Cibercolegios
-                </a>
-                <a 
-                  href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=12695&searchedCategoryId=&searchedAgreementName=PEDAGOGICOS%20ASOCIADOS%20SAS" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors text-center cursor-pointer"
-                >
-                  PSE - Pagos en Línea
-                </a>
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
-    </nav>
-  );
-}
-
 export default function Home() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const bannerImages = [
     { url: "https://i.ibb.co/mCG7xd6C/1.jpg", title: "", description: "" },  //OpenHouse
@@ -187,10 +34,150 @@ export default function Home() {
     setCurrentImageIndex((prevIndex) => prevIndex === 0 ? bannerImages.length - 1 : prevIndex - 1);
   };
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
-      <Navbar active="inicio" />
+      <nav className="fixed top-0 w-full bg-white shadow-lg z-50">
+        <div className="px-6 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center">
+              <img 
+                src="https://i.ibb.co/spn4L9WW/LOGO-NSLG-2-Mini.png" 
+                alt="Logo Colegio Nuevo San Luis Gonzaga"
+                className="h-12 w-auto"
+              />
+            </div>
+            
+            {/* Desktop Navigation */}
+            <div className="hidden lg:flex items-center space-x-8">
+              <Link 
+                href="/"
+                className="px-4 py-2 bg-blue-900 text-white rounded-full transition-colors whitespace-nowrap cursor-pointer"
+              >
+                Inicio
+              </Link>
+              <Link 
+                href="/nosotros"
+                className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer"
+              >
+                Nosotros
+              </Link>
+              <Link 
+                href="/admisiones"
+                className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer"
+              >
+                Admisiones
+              </Link>
+              <Link 
+                href="/contacto"
+                className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer"
+              >
+                Contacto
+              </Link>
+              <div className="flex space-x-2 ml-8">
+                <a 
+                  href="https://lms30.uno-internacional.com/login/access" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="px-4 py-2 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition-colors whitespace-nowrap cursor-pointer"
+                >
+                  UNOi Santillana
+                </a>
+                <a 
+                  href="https://www.cibercolegios.com/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="px-4 py-2 bg-yellow-400 text-black rounded-full hover:bg-yellow-500 transition-colors whitespace-nowrap cursor-pointer"
+                >
+                  Cibercolegios
+                </a>
+                <a 
+                  href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=12695&searchedCategoryId=&searchedAgreementName=PEDAGOGICOS%20ASOCIADOS%20SAS" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors whitespace-nowrap cursor-pointer"
+                >
+                  PSE - Pagos en Línea
+                </a>
+              </div>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <button 
+              onClick={toggleMenu}
+              className="lg:hidden w-10 h-10 flex items-center justify-center text-blue-900 cursor-pointer"
+            >
+              <i className={`ri-${isMenuOpen ? 'close' : 'menu'}-line text-2xl`}></i>
+            </button>
+          </div>
+
+          {/* Mobile Navigation Menu */}
+          {isMenuOpen && (
+            <div className="lg:hidden mt-4 py-4 border-t border-gray-200">
+              <div className="flex flex-col space-y-3">
+                <Link 
+                  href="/"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="px-4 py-2 bg-blue-900 text-white rounded-full transition-colors text-center cursor-pointer"
+                >
+                  Inicio
+                </Link>
+                <Link 
+                  href="/nosotros"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer"
+                >
+                  Nosotros
+                </Link>
+                <Link 
+                  href="/admisiones"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer"
+                >
+                  Admisiones
+                </Link>
+                <Link 
+                  href="/contacto"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer"
+                >
+                  Contacto
+                </Link>
+                <div className="flex flex-col space-y-2 pt-2">
+                  <a 
+                    href="https://lms30.uno-internacional.com/login/access" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="px-4 py-2 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition-colors text-center cursor-pointer"
+                  >
+                    UNOi Santillana
+                  </a>
+                  <a 
+                    href="https://www.cibercolegios.com/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="px-4 py-2 bg-yellow-400 text-black rounded-full hover:bg-yellow-500 transition-colors text-center cursor-pointer"
+                  >
+                    Cibercolegios
+                  </a>
+                  <a 
+                    href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=12695&searchedCategoryId=&searchedAgreementName=PEDAGOGICOS%20ASOCIADOS%20SAS" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors text-center cursor-pointer"
+                  >
+                    PSE - Pagos en Línea
+                  </a>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </nav>
 
 
       {/* Floating Social Media Buttons */}
@@ -378,7 +365,6 @@ export default function Home() {
                 <li><Link href="/" className="hover:text-white transition-colors cursor-pointer">Inicio</Link></li>
                 <li><Link href="/admisiones" className="hover:text-white transition-colors cursor-pointer">Admisiones</Link></li>
                 <li><Link href="/nosotros" className="hover:text-white transition-colors cursor-pointer">Nosotros</Link></li>
-                <li><Link href="/admin" className="hover:text-white transition-colors cursor-pointer">Administración</Link></li>
                 <li><Link href="/contacto" className="hover:text-white transition-colors cursor-pointer">Contacto</Link></li>
               </ul>
             </div>
