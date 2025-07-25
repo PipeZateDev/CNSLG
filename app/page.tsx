@@ -73,6 +73,12 @@ export default function Home() {
                 Admisiones
               </Link>
               <Link 
+                href="/noticias"
+                className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer"
+              >
+                Noticias y Eventos
+              </Link>
+              <Link 
                 href="/contacto"
                 className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer"
               >
@@ -139,6 +145,13 @@ export default function Home() {
                   className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer"
                 >
                   Admisiones
+                </Link>
+                <Link 
+                  href="/noticias"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer"
+                >
+                  Noticias y Eventos
                 </Link>
                 <Link 
                   href="/contacto"
@@ -365,6 +378,7 @@ export default function Home() {
                 <li><Link href="/" className="hover:text-white transition-colors cursor-pointer">Inicio</Link></li>
                 <li><Link href="/admisiones" className="hover:text-white transition-colors cursor-pointer">Admisiones</Link></li>
                 <li><Link href="/nosotros" className="hover:text-white transition-colors cursor-pointer">Nosotros</Link></li>
+                <li><Link href="/noticias" className="hover:text-white transition-colors cursor-pointer">Noticias y Eventos</Link></li>
                 <li><Link href="/contacto" className="hover:text-white transition-colors cursor-pointer">Contacto</Link></li>
               </ul>
             </div>
