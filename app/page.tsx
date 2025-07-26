@@ -138,7 +138,13 @@ export default function Home() {
               >
                 Admisiones
               </Link>
-              {/* Admin tab removed from navigation */}
+              <Link 
+                href="/admin"
+                onClick={handleAdminClick}
+                className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer hidden"
+              >
+                Admin
+              </Link>
               <Link 
                 href="/contacto"
                 className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer"
@@ -207,7 +213,13 @@ export default function Home() {
                 >
                   Admisiones
                 </Link>
-                {/* Admin tab removed from mobile navigation */}
+                <Link 
+                  href="/admin"
+                  onClick={e => { setIsMenuOpen(false); handleAdminClick(e); }}
+                  className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer hidden"
+                >
+                  Admin
+                </Link>
                 <Link 
                   href="/contacto"
                   onClick={() => setIsMenuOpen(false)}
@@ -426,7 +438,7 @@ export default function Home() {
               <p className="text-gray-400 text-sm">
                 Formando líderes del futuro desde 1926 con excelencia académica y valores católicos.
               </p>
-              {/* Admin button below logo and slogan */}
+              {/* Admin Button in Footer */}
               <div className="flex justify-center mt-4">
                 <button
                   onClick={handleAdminClick}
@@ -492,9 +504,6 @@ export default function Home() {
           </div>
         </div>
       </footer>
-    </div>
-  );
-}
     </div>
   );
 }
