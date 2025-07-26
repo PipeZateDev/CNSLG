@@ -62,6 +62,13 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-white">
+      {/* Fixed Admin Button Top Right */}
+      <button
+        onClick={handleAdminClick}
+        className="fixed top-2 right-6 z-[101] px-4 py-2 bg-blue-900 text-white rounded-full shadow-lg hover:bg-blue-800 transition-colors"
+      >
+        Admin
+      </button>
       {/* Admin Login Modal */}
       {showAdminModal && (
         <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-[100]">
