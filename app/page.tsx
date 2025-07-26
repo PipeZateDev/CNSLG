@@ -76,7 +76,7 @@ export default function Home() {
                 href="/admin"
                 className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer"
               >
-                Administración
+                Admin
               </Link>
               <Link 
                 href="/contacto"
@@ -151,7 +151,7 @@ export default function Home() {
                   onClick={() => setIsMenuOpen(false)}
                   className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer"
                 >
-                  Administración
+                  Admin
                 </Link>
                 <Link 
                   href="/contacto"
@@ -183,7 +183,7 @@ export default function Home() {
                     rel="noopener noreferrer"
                     className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors text-center cursor-pointer"
                   >
-                    PSE - Pagos en Línea
+                    Pagos PSE
                   </a>
                 </div>
               </div>
