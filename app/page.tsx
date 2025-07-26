@@ -6,10 +6,6 @@ import Link from 'next/link';
 export default function Home() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [showAdminModal, setShowAdminModal] = useState(false);
-  const [adminUser, setAdminUser] = useState('');
-  const [adminPass, setAdminPass] = useState('');
-  const [adminError, setAdminError] = useState('');
 
   const bannerImages = [
     { url: "https://i.ibb.co/mCG7xd6C/1.jpg", title: "", description: "" },  //OpenHouse
@@ -42,63 +38,8 @@ export default function Home() {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const handleAdminClick = (e?: React.MouseEvent) => {
-    if (e) e.preventDefault();
-    setShowAdminModal(true);
-    setAdminUser('');
-    setAdminPass('');
-    setAdminError('');
-  };
-
-  const handleAdminLogin = () => {
-    if (adminUser === 'admin' && adminPass === 'SLGonzaga1') {
-      setShowAdminModal(false);
-      setAdminError('');
-      window.location.href = '/admin';
-    } else {
-      setAdminError('Usuario o contraseña incorrectos');
-    }
-  };
-
   return (
     <div className="min-h-screen bg-white">
-      {/* Admin Login Modal */}
-      {showAdminModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-[100]">
-          <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-xs">
-            <h2 className="text-xl font-bold mb-4 text-blue-900">Acceso Admin</h2>
-            <input
-              type="text"
-              placeholder="Usuario"
-              value={adminUser}
-              onChange={e => setAdminUser(e.target.value)}
-              className="w-full mb-3 px-3 py-2 border rounded focus:outline-none"
-            />
-            <input
-              type="password"
-              placeholder="Contraseña"
-              value={adminPass}
-              onChange={e => setAdminPass(e.target.value)}
-              className="w-full mb-3 px-3 py-2 border rounded focus:outline-none"
-            />
-            {adminError && <div className="text-red-600 text-sm mb-2">{adminError}</div>}
-            <div className="flex gap-2">
-              <button
-                onClick={handleAdminLogin}
-                className="flex-1 px-4 py-2 bg-blue-900 text-white rounded hover:bg-blue-800"
-              >
-                Ingresar
-              </button>
-              <button
-                onClick={() => setShowAdminModal(false)}
-                className="flex-1 px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400"
-              >
-                Cancelar
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
       {/* Navigation */}
       <nav className="fixed top-0 w-full bg-white shadow-lg z-50">
         <div className="px-6 py-4">
@@ -131,14 +72,12 @@ export default function Home() {
               >
                 Admisiones
               </Link>
-              {/* Admin tab hidden */}
-              {/* <Link 
+              <Link 
                 href="/admin"
-                onClick={handleAdminClick}
                 className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer"
               >
                 Admin
-              </Link> */}
+              </Link>
               <Link 
                 href="/contacto"
                 className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer"
@@ -207,14 +146,13 @@ export default function Home() {
                 >
                   Admisiones
                 </Link>
-                {/* Admin tab hidden */}
-                {/* <Link 
+                <Link 
                   href="/admin"
-                  onClick={e => { setIsMenuOpen(false); handleAdminClick(e); }}
+                  onClick={() => setIsMenuOpen(false)}
                   className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer"
                 >
                   Admin
-                </Link> */}
+                </Link>
                 <Link 
                   href="/contacto"
                   onClick={() => setIsMenuOpen(false)}
@@ -433,15 +371,6 @@ export default function Home() {
               <p className="text-gray-400 text-sm">
                 Formando líderes del futuro desde 1926 con excelencia académica y valores católicos.
               </p>
-              {/* Admin button in footer centered */}
-              <div className="flex justify-center">
-                <button
-                  onClick={handleAdminClick}
-                  className="mt-4 px-4 py-2 bg-blue-900 text-white rounded-full shadow hover:bg-blue-800 transition-colors"
-                >
-                  Admin
-                </button>
-              </div>
             </div>
             <div>
               <h4 className="font-semibold mb-4">Enlaces Rápidos</h4>
