@@ -361,16 +361,25 @@ export default function Home() {
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-12">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-4 gap-8 text-center">
             <div>
               <img 
                 src="https://static.readdy.ai/image/b422d9997318ba9404c133396eb0082a/f0b6df53262c2786638b3d4d8768e052.png" 
                 alt="Logo Colegio Nuevo San Luis Gonzaga" 
-                className="h-16 w-auto mb-4"
+                className="h-16 w-auto mb-4 mx-auto"
               />
               <p className="text-gray-400 text-sm">
                 Formando líderes del futuro desde 1926 con excelencia académica y valores católicos.
               </p>
+              {/* Admin Button in Footer */}
+              <div className="flex flex-col items-center mt-4">
+                <Link
+                  href="/admin"
+                  className="px-6 py-2 bg-blue-900 text-white rounded-full shadow hover:bg-blue-800 transition-colors mb-2"
+                >
+                  Administración
+                </Link>
+              </div>
             </div>
             <div>
               <h4 className="font-semibold mb-4">Enlaces Rápidos</h4>
