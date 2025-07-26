@@ -53,7 +53,7 @@ export default function Home() {
             </div>
             
             {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center space-x-4">
+            <div className="hidden lg:flex items-center space-x-2">
               <Link 
                 href="/"
                 className="px-4 py-2 bg-blue-900 text-white rounded-full transition-colors whitespace-nowrap cursor-pointer"
@@ -74,7 +74,7 @@ export default function Home() {
               </Link>
               <Link 
                 href="/admin"
-                className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer"
+                className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer hidden"
               >
                 Admin
               </Link>
