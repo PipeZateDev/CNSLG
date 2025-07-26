@@ -63,12 +63,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white">
       {/* Fixed Admin Button Top Right */}
-      <button
-        onClick={handleAdminClick}
-        className="fixed top-2 right-6 z-[101] px-4 py-2 bg-blue-900 text-white rounded-full shadow-lg hover:bg-blue-800 transition-colors"
-      >
-        Admin
-      </button>
+      {/* (Eliminado el botón de admin de la parte superior derecha) */}
       {/* Admin Login Modal */}
       {showAdminModal && (
         <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-[100]">
@@ -284,7 +279,7 @@ export default function Home() {
 
       {/* Banner Section */}
       <section className="pt-20 relative">
-        <div className="relative h-96 md:h-[650px] overflow-hidden w-full md:w-[80%] mx-auto">
+        <div className="relative h-96 w-full md:w-[85%] md:h-[650px] overflow-hidden mx-auto">
           {bannerImages.map((image, index) => (
             <div key={index} className={`absolute inset-0 transition-opacity duration-600 ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'}`}>
               <img src={image.url} alt={image.title} className="w-full h-full object-cover object-center" />
@@ -507,3 +502,4 @@ export default function Home() {
     </div>
   );
 }
+
