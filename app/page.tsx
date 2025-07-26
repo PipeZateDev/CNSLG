@@ -15,7 +15,7 @@ export default function Home() {
     { url: "https://i.ibb.co/VpghYymD/6.jpg", title: "", description: "" },    //Educacion con amor
     { url: "https://i.ibb.co/WWFpKXmM/4.jpg", title: "", description: "" },      //Ingles 
     //{ url: "https://i.ibb.co/1gsPzf4/8.jpg", title: "", description: "" }, //Prom
-    { url: "https://i.ibb.co/N2jyWxS1/7.jpg", title: "", description: "" }, //Deportes
+    //{ url: "https://i.ibb.co/N2jyWxS1/7.jpg", title: "", description: "" }, //Deportes
     //{ url: "https://i.ibb.co/fYvVNbMk/8-instalaciones.png", title: "", description: "" } 
     ];
 
