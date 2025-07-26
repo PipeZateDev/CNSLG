@@ -62,6 +62,13 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-white">
+      {/* Fixed Admin Button Top Right */}
+      <button
+        onClick={handleAdminClick}
+        className="fixed top-2 right-6 z-[101] px-4 py-2 bg-blue-900 text-white rounded-full shadow-lg hover:bg-blue-800 transition-colors"
+      >
+        Admin
+      </button>
       {/* Admin Login Modal */}
       {showAdminModal && (
         <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-[100]">
@@ -131,6 +138,14 @@ export default function Home() {
               >
                 Admisiones
               </Link>
+              {/* Admin tab hidden */}
+              {/* <Link 
+                href="/admin"
+                onClick={handleAdminClick}
+                className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer"
+              >
+                Admin
+              </Link> */}
               <Link 
                 href="/contacto"
                 className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer"
@@ -199,6 +214,14 @@ export default function Home() {
                 >
                   Admisiones
                 </Link>
+                {/* Admin tab hidden */}
+                {/* <Link 
+                  href="/admin"
+                  onClick={e => { setIsMenuOpen(false); handleAdminClick(e); }}
+                  className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer"
+                >
+                  Admin
+                </Link> */}
                 <Link 
                   href="/contacto"
                   onClick={() => setIsMenuOpen(false)}
@@ -417,12 +440,12 @@ export default function Home() {
               <p className="text-gray-400 text-sm">
                 Formando líderes del futuro desde 1926 con excelencia académica y valores católicos.
               </p>
-              {/* Admin link debajo del logo y slogan */}
+              {/* Admin button in footer */}
               <button
                 onClick={handleAdminClick}
-                className="mt-4 px-4 py-2 bg-blue-900 text-white rounded-full shadow hover:bg-blue-800 transition-colors text-sm"
+                className="mt-4 px-4 py-2 bg-blue-900 text-white rounded-full shadow hover:bg-blue-800 transition-colors"
               >
-                Ingresar como Admin
+                Admin
               </button>
             </div>
             <div>
@@ -470,20 +493,6 @@ export default function Home() {
                   className="block text-sm text-gray-400 hover:text-white transition-colors cursor-pointer"
                 >
                   PSE - Pagos en Línea
-                </a>
-              </div>
-            </div>
-          </div>
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center">
-            <p className="text-gray-400 text-sm">
-            © 2025 Colegio Nuevo San Luis Gonzaga. Todos los derechos reservados.
-            </p>
-          </div>
-        </div>
-      </footer>
-    </div>
-  );
-}
                 </a>
               </div>
             </div>
