@@ -224,7 +224,7 @@ export default function Home() {
       {/* Banner Section */}
       <section className="pt-20 relative">
         <div
-          className="relative h-96 md:h-[550px] overflow-hidden w-full md:w-[90%] mx-auto"
+          className="relative h-96 md:h-[600px] overflow-hidden w-full md:w-[90%] mx-auto"
           onMouseDown={handleMouseDown}
           onMouseUp={handleMouseUp}
         >
