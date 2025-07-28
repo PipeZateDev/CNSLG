@@ -14,41 +14,16 @@ export default function Admin() {
   const [error, setError] = useState('');
 
   // Banner images state
-  const [bannerImages, setBannerImages] = useState([
-    { url: "https://i.ibb.co/mCG7xd6C/1.jpg", title: "", description: "" },
-    { url: "https://i.ibb.co/4n2KgQTP/9.jpg", title: "", description: "" },
-    { url: "https://i.ibb.co/Wp5W862T/2.jpg", title: "", description: "" },
-    { url: "https://i.ibb.co/1fwdk3FQ/3.jpg", title: "", description: "" },
-    { url: "https://i.ibb.co/VpghYymD/6.jpg", title: "", description: "" },
-    { url: "https://i.ibb.co/WWFpKXmM/4.jpg", title: "", description: "" },
-    { url: "https://i.ibb.co/N2jyWxS1/7.jpg", title: "", description: "" }
-  ]);
+  const [bannerImages, setBannerImages] = useState<{ url: string; title?: string; description?: string }[]>([]);
   const [bannerForm, setBannerForm] = useState({ url: '', title: '', description: '' });
+  const [editBannerIdx, setEditBannerIdx] = useState<number | null>(null);
 
   // News state
-  const [news, setNews] = useState([
-    {
-      title: "Open House 2025",
-      date: "20 Jun 2025",
-      description: "Conoce nuestras instalaciones y proceso de admisión para el próximo año escolar.",
-      image: "https://i.ibb.co/vCpGdgff/Open-House2025.png"
-    },
-    {
-      title: "Feria de Ciencias 2024",
-      date: "10 Oct 2024",
-      description: "Nuestros estudiantes brillaron con proyectos innovadores en ciencia y tecnología.",
-      image: "https://readdy.ai/api/search-image?query=School%20science%20fair%20with%20student%20projects%2C%20STEM%20exhibition%2C%20innovative%20experiments%2C%20proud%20students%20presenting%2C%20educational%20achievement%2C%20modern%20school%20facilities%2C%20scientific%20learning&width=400&height=250&seq=news2&orientation=landscape"
-    },
-    {
-      title: "Campeones Robótica",
-      date: "05 Nov 2023",
-      description: "Nuestro equipo de robótica obtivo el 1er puesto en el campeonato mundial 2023.",
-      image: "https://readdy.ai/api/search-image?query=School%20sports%20championship%20celebration%2C%20students%20with%20trophies%20and%20medals%2C%20athletic%20achievement%2C%20team%20spirit%2C%20Colombian%20school%20sports%2C%20victory%20celebration%2C%20proud%20athletes&width=400&height=250&seq=news3&orientation=landscape"
-    }
-  ]);
+  const [news, setNews] = useState<{ title: string; date: string; description: string; image: string }[]>([]);
   const [newsForm, setNewsForm] = useState({ title: '', date: '', description: '', image: '' });
+  const [editNewsIdx, setEditNewsIdx] = useState<number | null>(null);
 
-  // Al cargar, lee de localStorage
+  // Cargar datos publicados al iniciar
   useEffect(() => {
     const storedBanner = localStorage.getItem('bannerImages');
     const storedNews = localStorage.getItem('news');
@@ -56,7 +31,7 @@ export default function Admin() {
     if (storedNews) setNews(JSON.parse(storedNews));
   }, []);
 
-  // Guardar en localStorage cuando cambian
+  // Guardar cambios automáticamente en localStorage (publicados)
   useEffect(() => {
     localStorage.setItem('bannerImages', JSON.stringify(bannerImages));
   }, [bannerImages]);
@@ -70,11 +45,32 @@ export default function Admin() {
   };
   const handleBannerSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (bannerForm.url) {
+    if (!bannerForm.url) return;
+    if (editBannerIdx !== null) {
+      setBannerImages(bannerImages.map((img, idx) => idx === editBannerIdx ? { ...bannerForm } : img));
+      setEditBannerIdx(null);
+    } else {
       setBannerImages([...bannerImages, { ...bannerForm }]);
-      setBannerForm({ url: '', title: '', description: '' });
-      // localStorage se actualiza por el useEffect
     }
+    setBannerForm({ url: '', title: '', description: '' });
+  };
+  const handleEditBanner = (idx: number) => {
+    // Validar que el índice exista y el objeto tenga las propiedades necesarias
+    const img = bannerImages[idx];
+    setBannerForm({
+      url: img?.url || '',
+      title: img?.title || '',
+      description: img?.description || ''
+    });
+    setEditBannerIdx(idx);
+  };
+  const handleCancelEditBanner = () => {
+    setBannerForm({ url: '', title: '', description: '' });
+    setEditBannerIdx(null);
+  };
+  const removeBannerImage = (idx: number) => {
+    setBannerImages(bannerImages.filter((_, i) => i !== idx));
+    if (editBannerIdx === idx) handleCancelEditBanner();
   };
 
   // News form handlers
@@ -83,21 +79,26 @@ export default function Admin() {
   };
   const handleNewsSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (newsForm.title && newsForm.date && newsForm.description && newsForm.image) {
+    if (!newsForm.title || !newsForm.date || !newsForm.description || !newsForm.image) return;
+    if (editNewsIdx !== null) {
+      setNews(news.map((item, idx) => idx === editNewsIdx ? { ...newsForm } : item));
+      setEditNewsIdx(null);
+    } else {
       setNews([{ ...newsForm }, ...news]);
-      setNewsForm({ title: '', date: '', description: '', image: '' });
-      // localStorage se actualiza por el useEffect
     }
+    setNewsForm({ title: '', date: '', description: '', image: '' });
   };
-
-  // Remove banner image
-  const removeBannerImage = (idx: number) => {
-    setBannerImages(bannerImages.filter((_, i) => i !== idx));
+  const handleEditNews = (idx: number) => {
+    setNewsForm(news[idx]);
+    setEditNewsIdx(idx);
   };
-
-  // Remove news item
+  const handleCancelEditNews = () => {
+    setNewsForm({ title: '', date: '', description: '', image: '' });
+    setEditNewsIdx(null);
+  };
   const removeNews = (idx: number) => {
     setNews(news.filter((_, i) => i !== idx));
+    if (editNewsIdx === idx) handleCancelEditNews();
   };
 
   // Handle login
@@ -109,8 +110,6 @@ export default function Admin() {
       setError('Usuario o contraseña incorrectos.');
     }
   };
-
-  // Handle cancel
   const handleCancel = () => {
     router.push('/');
   };
@@ -223,9 +222,16 @@ export default function Admin() {
                   className="w-full px-4 py-2 rounded border border-gray-300"
                 />
               </div>
-              <button type="submit" className="px-6 py-2 bg-blue-900 text-white rounded-full font-semibold hover:bg-blue-800 transition-colors">
-                Agregar Imagen
-              </button>
+              <div className="flex gap-2">
+                <button type="submit" className="px-6 py-2 bg-blue-900 text-white rounded-full font-semibold hover:bg-blue-800 transition-colors">
+                  {editBannerIdx !== null ? 'Guardar Cambios' : 'Agregar Imagen'}
+                </button>
+                {editBannerIdx !== null && (
+                  <button type="button" onClick={handleCancelEditBanner} className="px-6 py-2 bg-gray-400 text-white rounded-full font-semibold hover:bg-gray-500 transition-colors">
+                    Cancelar
+                  </button>
+                )}
+              </div>
             </form>
             <div className="grid md:grid-cols-4 gap-4">
               {bannerImages.map((img, idx) => (
@@ -236,6 +242,12 @@ export default function Admin() {
                     className="absolute top-2 right-2 bg-red-600 text-white rounded-full px-2 py-1 text-xs"
                   >
                     Eliminar
+                  </button>
+                  <button
+                    onClick={() => handleEditBanner(idx)}
+                    className="absolute top-2 left-2 bg-yellow-500 text-white rounded-full px-2 py-1 text-xs"
+                  >
+                    Editar
                   </button>
                   <div className="mt-2 text-sm">
                     <strong>{img.title}</strong>
@@ -292,9 +304,16 @@ export default function Admin() {
                   required
                 />
               </div>
-              <button type="submit" className="px-6 py-2 bg-blue-900 text-white rounded-full font-semibold hover:bg-blue-800 transition-colors">
-                Agregar Noticia
-              </button>
+              <div className="flex gap-2">
+                <button type="submit" className="px-6 py-2 bg-blue-900 text-white rounded-full font-semibold hover:bg-blue-800 transition-colors">
+                  {editNewsIdx !== null ? 'Guardar Cambios' : 'Agregar Noticia'}
+                </button>
+                {editNewsIdx !== null && (
+                  <button type="button" onClick={handleCancelEditNews} className="px-6 py-2 bg-gray-400 text-white rounded-full font-semibold hover:bg-gray-500 transition-colors">
+                    Cancelar
+                  </button>
+                )}
+              </div>
             </form>
             <div className="grid md:grid-cols-3 gap-8">
               {news.map((item, idx) => (
@@ -310,6 +329,12 @@ export default function Admin() {
                   >
                     Eliminar
                   </button>
+                  <button
+                    onClick={() => handleEditNews(idx)}
+                    className="absolute top-2 left-2 bg-yellow-500 text-white rounded-full px-2 py-1 text-xs"
+                  >
+                    Editar
+                  </button>
                   <div className="p-6">
                     <span className="text-sm text-blue-600 font-semibold">{item.date}</span>
                     <h3 className="text-lg font-bold text-blue-900 mb-2 mt-1">{item.title}</h3>
@@ -321,87 +346,7 @@ export default function Admin() {
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12 mt-12">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div>
-              <img 
-                src="https://static.readdy.ai/image/b422d9997318ba9404c133396eb0082a/f0b6df53262c2786638b3d4d8768e052.png" 
-                alt="Logo Colegio Nuevo San Luis Gonzaga" 
-                className="h-16 w-auto mb-4"
-              />
-              <p className="text-gray-400 text-sm">
-                Formando líderes del futuro desde 1926 con excelencia académica y valores católicos.
-              </p>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Enlaces Rápidos</h4>
-              <ul className="space-y-2 text-sm text-gray-400">
-                <li><Link href="/" className="hover:text-white transition-colors cursor-pointer">Inicio</Link></li>
-                <li><Link href="/admisiones" className="hover:text-white transition-colors cursor-pointer">Admisiones</Link></li>
-                <li><Link href="/nosotros" className="hover:text-white transition-colors cursor-pointer">Nosotros</Link></li>
-                {/* Admin link hidden */}
-                <li><Link href="/admin" className="hidden">Administración</Link></li>
-                <li><Link href="/contacto" className="hover:text-white transition-colors cursor-pointer">Contacto</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Servicios</h4>
-              <ul className="space-y-2 text-sm text-gray-400">
-                <li>Preescolar</li>
-                <li>Educación Primaria</li>
-                <li>Educación Secundaria</li>
-                <li>Educación Bilingüe</li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Plataformas</h4>
-              <div className="space-y-2">
-                <a 
-                  href="https://lms30.uno-internacional.com/login/access" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="block text-sm text-gray-400 hover:text-white transition-colors cursor-pointer"
-                >
-                  UNOi Santillana
-                </a>
-                <a 
-                  href="https://www.cibercolegios.com/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="block text-sm text-gray-400 hover:text-white transition-colors cursor-pointer"
-                >
-                  Cibercolegios
-                </a>
-                <a 
-                  href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=12695&searchedCategoryId=&searchedAgreementName=PEDAGOGICOS%20ASOCIADOS%20SAS" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="block text-sm text-gray-400 hover:text-white transition-colors cursor-pointer"
-                >
-                  PSE - Pagos en Línea
-                </a>
-              </div>
-            </div>
-          </div>
-          {/* Link for admin access */}
-          <div className="flex justify-center mt-8">
-            <Link
-              href="/admin"
-              className="text-blue-400 hover:text-blue-300 transition-colors cursor-pointer"
-            >
-              Ingreso como Administrador
-            </Link>
-          </div>
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center">
-            <p className="text-gray-400 text-sm">
-            © 2025 Colegio Nuevo San Luis Gonzaga. Todos los derechos reservados.
-            </p>
-          </div>
-        </div>
-      </footer>
+      {/* ...existing footer... */}
     </div>
   );
 }
