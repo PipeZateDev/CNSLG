@@ -2,6 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { parse } from 'date-fns';
+import { isValid } from 'date-fns';
+import { compareDesc } from 'date-fns';
 
 export default function Home() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -61,6 +64,36 @@ export default function Home() {
 
   const handleMouseUp = () => {
     setIsPaused(false);
+  };
+
+  // Carrusel de noticias
+  const [newsPage, setNewsPage] = useState(0);
+  const NEWS_PER_PAGE = 6;
+
+  // Ordenar noticias por fecha descendente (más reciente primero)
+  const sortedNews = [...news].sort((a, b) => {
+    // Intenta parsear la fecha en formato "dd MMM yyyy"
+    const dateA = parse(a.date, 'dd MMM yyyy', new Date());
+    const dateB = parse(b.date, 'dd MMM yyyy', new Date());
+    if (isValid(dateA) && isValid(dateB)) {
+      return compareDesc(dateA, dateB);
+    }
+    // Si alguna fecha no es válida, mantener el orden original
+    return 0;
+  });
+
+  const totalPages = Math.ceil(sortedNews.length / NEWS_PER_PAGE);
+
+  const pagedNews = sortedNews.slice(
+    newsPage * NEWS_PER_PAGE,
+    newsPage * NEWS_PER_PAGE + NEWS_PER_PAGE
+  );
+
+  const handlePrevNews = () => {
+    setNewsPage((prev) => (prev === 0 ? totalPages - 1 : prev - 1));
+  };
+  const handleNextNews = () => {
+    setNewsPage((prev) => (prev === totalPages - 1 ? 0 : prev + 1));
   };
 
   return (
@@ -381,28 +414,60 @@ export default function Home() {
           <h2 className="text-3xl font-bold text-blue-900 text-center mb-12">
             Noticias y Eventos
           </h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {news.length > 0 ? (
-              news.map((item, idx) => (
-                <div key={idx} className="bg-white rounded-lg shadow-lg overflow-hidden">
-                  <img 
-                    src={item.image}
-                    alt={item.title}
-                    className="w-full h-48 object-cover object-top"
-                  />
-                  <div className="p-6">
-                    <span className="text-sm text-blue-600 font-semibold">{item.date}</span>
-                    <h3 className="text-lg font-bold text-blue-900 mb-2 mt-1">{item.title}</h3>
-                    <p className="text-gray-600 text-sm">{item.description}</p>
+          <div className="relative">
+            {sortedNews.length > NEWS_PER_PAGE && (
+              <button
+                onClick={handlePrevNews}
+                className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-blue-900 text-white rounded-full w-10 h-10 flex items-center justify-center hover:bg-blue-800 transition-colors"
+                aria-label="Anterior"
+              >
+                <i className="ri-arrow-left-s-line text-2xl"></i>
+              </button>
+            )}
+            <div className="grid md:grid-cols-3 gap-8">
+              {pagedNews.length > 0 ? (
+                pagedNews.map((item, idx) => (
+                  <div key={idx} className="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <img 
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-48 object-cover object-top"
+                    />
+                    <div className="p-6">
+                      <span className="text-sm text-blue-600 font-semibold">{item.date}</span>
+                      <h3 className="text-lg font-bold text-blue-900 mb-2 mt-1">{item.title}</h3>
+                      <p className="text-gray-600 text-sm">{item.description}</p>
+                    </div>
                   </div>
+                ))
+              ) : (
+                <div className="col-span-3 text-center text-gray-400 py-12">
+                  No hay noticias publicadas.
                 </div>
-              ))
-            ) : (
-              <div className="col-span-3 text-center text-gray-400 py-12">
-                No hay noticias publicadas.
-              </div>
+              )}
+            </div>
+            {sortedNews.length > NEWS_PER_PAGE && (
+              <button
+                onClick={handleNextNews}
+                className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-blue-900 text-white rounded-full w-10 h-10 flex items-center justify-center hover:bg-blue-800 transition-colors"
+                aria-label="Siguiente"
+              >
+                <i className="ri-arrow-right-s-line text-2xl"></i>
+              </button>
             )}
           </div>
+          {sortedNews.length > NEWS_PER_PAGE && (
+            <div className="flex justify-center mt-6 space-x-2">
+              {Array.from({ length: totalPages }).map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setNewsPage(idx)}
+                  className={`w-3 h-3 rounded-full ${newsPage === idx ? 'bg-blue-900' : 'bg-blue-200'} transition-colors`}
+                  aria-label={`Página ${idx + 1}`}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
