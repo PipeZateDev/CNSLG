@@ -245,6 +245,18 @@ export default function Home() {
                   </a>
                 </div>
               )}
+              {index === 2 && currentImageIndex === 2 && (
+                <div className="absolute top-8 left-1/2 transform -translate-x-1/2 z-20">
+                  <Link
+                    href="/admisiones"
+                    className="px-6 py-3 bg-gray-700/70 text-white rounded-full font-semibold hover:bg-gray-600/70 transition-colors"
+                    onMouseEnter={() => setIsPaused(true)}
+                    onMouseLeave={() => setIsPaused(false)}
+                  >
+                    Agenda tu cupo
+                  </Link>
+                </div>
+              )}
             </div>
           ))}
           <div className="absolute inset-0 flex items-center justify-center text-center text-white z-10">
