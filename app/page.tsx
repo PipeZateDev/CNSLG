@@ -72,12 +72,12 @@ export default function Home() {
               >
                 Admisiones
               </Link>
-              <Link 
+              {/* <Link 
                 href="/admin"
                 className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer"
               >
                 Administración
-              </Link>
+              </Link> */}
               <Link 
                 href="/contacto"
                 className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer"
@@ -146,13 +146,13 @@ export default function Home() {
                 >
                   Admisiones
                 </Link>
-                <Link 
+                {/* <Link 
                   href="/admin"
                   onClick={() => setIsMenuOpen(false)}
                   className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer"
                 >
                   Administración
-                </Link>
+                </Link> */}
                 <Link 
                   href="/contacto"
                   onClick={() => setIsMenuOpen(false)}
@@ -426,17 +426,75 @@ export default function Home() {
             © 2025 Colegio Nuevo San Luis Gonzaga. Todos los derechos reservados.
             </p>
           </div>
-          {/* Botón de administración centrado debajo de los derechos reservados */}
-          <div className="flex justify-center mt-6">
-            <Link
-              href="/admin"
-              className="px-6 py-3 bg-blue-900 hover:bg-blue-800 text-white rounded-full font-semibold transition-colors text-center"
-            >
-              Ingreso como administrador
-            </Link>
-          </div>
+          {/* Botón de administración con validación */}
+          <AdminLoginButton />
         </div>
       </footer>
+    </div>
+  );
+}
+
+// Componente para el botón de acceso de administrador con validación
+function AdminLoginButton() {
+  const [showForm, setShowForm] = useState(false);
+  const [user, setUser] = useState('');
+  const [pass, setPass] = useState('');
+  const [error, setError] = useState('');
+
+  const handleAccess = (e: React.FormEvent) => {
+    e.preventDefault();
+    const validUsers = ['Admin', 'admin', 'Soporte', 'soporte'];
+    if (validUsers.includes(user.trim()) && pass === 'Admin.2024') {
+      window.location.href = '/admin';
+    } else {
+      setError('Usuario o contraseña incorrectos');
+    }
+  };
+
+  return (
+    <div className="flex flex-col items-center mt-6">
+      {!showForm ? (
+        <button
+          className="px-6 py-3 bg-blue-900 hover:bg-blue-800 text-white rounded-full font-semibold transition-colors text-center"
+          onClick={() => setShowForm(true)}
+        >
+          Ingreso como administrador
+        </button>
+      ) : (
+        <form onSubmit={handleAccess} className="bg-gray-800 p-6 rounded-lg flex flex-col items-center w-full max-w-xs">
+          <input
+            type="text"
+            placeholder="Usuario"
+            className="mb-3 px-4 py-2 rounded border border-gray-300 w-full text-black"
+            value={user}
+            onChange={e => setUser(e.target.value)}
+            autoFocus
+          />
+          <input
+            type="password"
+            placeholder="Contraseña"
+            className="mb-3 px-4 py-2 rounded border border-gray-300 w-full text-black"
+            value={pass}
+            onChange={e => setPass(e.target.value)}
+          />
+          {error && <div className="text-red-400 mb-2 text-sm">{error}</div>}
+          <div className="flex gap-2 w-full">
+            <button
+              type="submit"
+              className="flex-1 px-4 py-2 bg-blue-900 hover:bg-blue-800 text-white rounded-full font-semibold transition-colors"
+            >
+              Entrar
+            </button>
+            <button
+              type="button"
+              className="flex-1 px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-full font-semibold transition-colors"
+              onClick={() => { setShowForm(false); setUser(''); setPass(''); setError(''); }}
+            >
+              Cancelar
+            </button>
+          </div>
+        </form>
+      )}
     </div>
   );
 }
