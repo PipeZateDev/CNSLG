@@ -421,19 +421,19 @@ export default function Home() {
               </div>
             </div>
           </div>
-          {/* Botón de administración centrado */}
-          <div className="flex justify-center mt-8">
+          <div className="border-t border-gray-800 mt-8 pt-8 text-center">
+            <p className="text-gray-400 text-sm">
+            © 2025 Colegio Nuevo San Luis Gonzaga. Todos los derechos reservados.
+            </p>
+          </div>
+          {/* Botón de administración centrado debajo de los derechos reservados */}
+          <div className="flex justify-center mt-6">
             <Link
               href="/admin"
               className="px-6 py-3 bg-blue-900 hover:bg-blue-800 text-white rounded-full font-semibold transition-colors text-center"
             >
               Ingreso como administrador
             </Link>
-          </div>
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center">
-            <p className="text-gray-400 text-sm">
-            © 2025 Colegio Nuevo San Luis Gonzaga. Todos los derechos reservados.
-            </p>
           </div>
         </div>
       </footer>
