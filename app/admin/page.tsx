@@ -158,7 +158,8 @@ export default function Admin() {
               <Link href="/" className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer">Inicio</Link>
               <Link href="/nosotros" className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer">Nosotros</Link>
               <Link href="/admisiones" className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer">Admisiones</Link>
-              <Link href="/admin" className="px-4 py-2 bg-blue-900 text-white rounded-full transition-colors whitespace-nowrap cursor-pointer">Administración</Link>
+              {/* Admin link hidden */}
+              <Link href="/admin" className="hidden">Administración</Link>
               <Link href="/contacto" className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer">Contacto</Link>
             </div>
           </div>
@@ -322,7 +323,8 @@ export default function Admin() {
                 <li><Link href="/" className="hover:text-white transition-colors cursor-pointer">Inicio</Link></li>
                 <li><Link href="/admisiones" className="hover:text-white transition-colors cursor-pointer">Admisiones</Link></li>
                 <li><Link href="/nosotros" className="hover:text-white transition-colors cursor-pointer">Nosotros</Link></li>
-                <li><Link href="/admin" className="hover:text-white transition-colors cursor-pointer">Administración</Link></li>
+                {/* Admin link hidden */}
+                <li><Link href="/admin" className="hidden">Administración</Link></li>
                 <li><Link href="/contacto" className="hover:text-white transition-colors cursor-pointer">Contacto</Link></li>
               </ul>
             </div>
@@ -364,6 +366,15 @@ export default function Admin() {
                 </a>
               </div>
             </div>
+          </div>
+          {/* Link for admin access */}
+          <div className="flex justify-center mt-8">
+            <Link
+              href="/admin"
+              className="text-blue-400 hover:text-blue-300 transition-colors cursor-pointer"
+            >
+              Ingreso como Administrador
+            </Link>
           </div>
           <div className="border-t border-gray-800 mt-8 pt-8 text-center">
             <p className="text-gray-400 text-sm">
