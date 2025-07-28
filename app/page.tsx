@@ -216,8 +216,8 @@ export default function Home() {
 
 
       {/* Banner Section */}
-      <section className="pt-16 relative">
-        <div className="relative h-64 md:h-[400px] overflow-hidden w-full md:w-[80%] mx-auto">
+      <section className="pt-20 relative">
+        <div className="relative h-96 md:h-[600px] overflow-hidden w-full md:w-[90%] mx-auto">
           {bannerImages.map((image, index) => (
             <div key={index} className={`absolute inset-0 transition-opacity duration-600 ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'}`}>
               <img src={image.url} alt={image.title} className="w-full h-full object-cover object-center" />
@@ -245,77 +245,79 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Hero Section */}
-      <section className="py-10 bg-white">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-blue-900 mb-4">
-            99 años de Excelencia Educativa
-          </h2>
-          <p className="text-xl text-gray-600 mb-8 max-w-4xl mx-auto">
-            Desde 1926, el Colegio Nuevo San Luis Gonzaga ha sido pionero en la formación integral 
-            de estudiantes con valores católicos, excelencia académica y compromiso social.
-          </p>
-          <div className="grid md:grid-cols-5 gap-6 mb-10">
-            <div className="text-center">
-              <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <i className="ri-graduation-cap-line text-3xl text-blue-600"></i>
-              </div>
-              <h3 className="text-2xl font-bold text-blue-900 mb-2">+2850</h3>
-              <p className="text-gray-600">Graduados Exitosos</p>
-            </div>
-            <div className="text-center">
-              <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <i className="ri-award-line text-3xl text-green-600"></i>
-              </div>
-              <h3 className="text-2xl font-bold text-blue-900 mb-2">99</h3>
-              <p className="text-gray-600">Años de Tradición</p>
-            </div>
-            <div className="text-center">
-              <div className="w-20 h-20 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <i className="ri-english-input text-3xl text-yellow-600"></i>
-              </div>
-              <h3 className="text-2xl font-bold text-blue-900 mb-2">Inglés Intensivo</h3>
-              <p className="text-gray-600">con certificación TOEFL</p>
-            </div>
-            <div className="text-center">
-              <div className="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <i className="ri-star-line text-3xl text-purple-600"></i>
-              </div>
-              <h3 className="text-2xl font-bold text-blue-900 mb-2">100%</h3>
-              <p className="text-gray-600">Compromiso con la Calidad</p>
-            </div>
-            <div className="text-center">
-              <div className="w-20 h-20 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <i className="ri-group-line text-3xl text-pink-600"></i>
-              </div>
-              <h3 className="text-2xl font-bold text-blue-900 mb-2">99%</h3>
-              <p className="text-gray-600">Familias Satisfechas</p>
-            </div>
-          </div>
-          <div className="flex flex-col md:flex-row justify-center gap-4">
-            <Link 
-              href="/admisiones"
-              className="px-8 py-4 bg-blue-900 hover:bg-blue-800 text-white rounded-full font-semibold text-lg transition-colors whitespace-nowrap cursor-pointer"
-            >
-              Conoce Nuestras Admisiones
-            </Link>
-            <Link 
-              href="/nosotros"
-              className="px-8 py-4 border-2 border-blue-900 text-blue-900 hover:bg-blue-900 hover:text-white rounded-full font-semibold text-lg transition-colors whitespace-nowrap cursor-pointer"
-            >
-              Nuestra Historia
-            </Link>
-          </div>
-        </div>
-      </section>
 
-      {/* News Section */}
-      <section className="py-10 bg-white">
+      {/* Hero Section */}
+<section className="py-20 bg-white">
+  <div className="max-w-7xl mx-auto px-6 text-center">
+    <h2 className="text-4xl md:text-5xl font-bold text-blue-900 mb-6">
+      99 años de Excelencia Educativa
+    </h2>
+    <p className="text-xl text-gray-600 mb-12 max-w-4xl mx-auto">
+      Desde 1926, el Colegio Nuevo San Luis Gonzaga ha sido pionero en la formación integral 
+      de estudiantes con valores católicos, excelencia académica y compromiso social.
+    </p>
+    <div className="grid md:grid-cols-5 gap-8 mb-16">
+      <div className="text-center">
+        <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <i className="ri-graduation-cap-line text-3xl text-blue-600"></i>
+        </div>
+        <h3 className="text-2xl font-bold text-blue-900 mb-2">+2850</h3>
+        <p className="text-gray-600">Graduados Exitosos</p>
+      </div>
+      <div className="text-center">
+        <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <i className="ri-award-line text-3xl text-green-600"></i>
+        </div>
+        <h3 className="text-2xl font-bold text-blue-900 mb-2">99</h3>
+        <p className="text-gray-600">Años de Tradición</p>
+      </div>
+      <div className="text-center">
+        <div className="w-20 h-20 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <i className="ri-english-input text-3xl text-yellow-600"></i>
+        </div>
+        <h3 className="text-2xl font-bold text-blue-900 mb-2">Inglés Intensivo</h3>
+        <p className="text-gray-600">con certificación TOEFL</p>
+      </div>
+      <div className="text-center">
+        <div className="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <i className="ri-star-line text-3xl text-purple-600"></i>
+        </div>
+        <h3 className="text-2xl font-bold text-blue-900 mb-2">100%</h3>
+        <p className="text-gray-600">Compromiso con la Calidad</p>
+      </div>
+      <div className="text-center">
+        <div className="w-20 h-20 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <i className="ri-group-line text-3xl text-pink-600"></i>
+        </div>
+        <h3 className="text-2xl font-bold text-blue-900 mb-2">99%</h3>
+        <p className="text-gray-600">Familias Satisfechas</p>
+      </div>
+    </div>
+    <div className="flex flex-col md:flex-row justify-center gap-4">
+      <Link 
+        href="/admisiones"
+        className="px-8 py-4 bg-blue-900 hover:bg-blue-800 text-white rounded-full font-semibold text-lg transition-colors whitespace-nowrap cursor-pointer"
+      >
+        Conoce Nuestras Admisiones
+      </Link>
+      <Link 
+        href="/nosotros"
+        className="px-8 py-4 border-2 border-blue-900 text-blue-900 hover:bg-blue-900 hover:text-white rounded-full font-semibold text-lg transition-colors whitespace-nowrap cursor-pointer"
+      >
+        Nuestra Historia
+      </Link>
+    </div>
+  </div>
+</section>
+
+
+            {/* News Section */}
+      <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-3xl font-bold text-blue-900 text-center mb-8">
+          <h2 className="text-3xl font-bold text-blue-900 text-center mb-12">
             Noticias y Eventos
           </h2>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-3 gap-8">
             <div className="bg-white rounded-lg shadow-lg overflow-hidden">
               <img 
                 src="https://i.ibb.co/vCpGdgff/Open-House2025.png"
@@ -424,17 +426,17 @@ export default function Home() {
             © 2025 Colegio Nuevo San Luis Gonzaga. Todos los derechos reservados.
             </p>
           </div>
-          {/* Botón de administración con validación */}
-          <AdminLoginButton />
         </div>
       </footer>
+      {/* Botón de administración debajo del footer */}
+      <AdminLoginModalButton />
     </div>
   );
 }
 
-// Componente para el botón de acceso de administrador con validación
-function AdminLoginButton() {
-  const [showForm, setShowForm] = useState(false);
+// Botón gris que abre un modal para credenciales de administrador
+function AdminLoginModalButton() {
+  const [showModal, setShowModal] = useState(false);
   const [user, setUser] = useState('');
   const [pass, setPass] = useState('');
   const [error, setError] = useState('');
@@ -450,51 +452,55 @@ function AdminLoginButton() {
   };
 
   return (
-    <div className="flex flex-col items-center mt-6">
-      {!showForm ? (
+    <>
+      <div className="flex justify-center mt-6 mb-8">
         <button
-          className="px-6 py-3 bg-blue-900 hover:bg-blue-800 text-white rounded-full font-semibold transition-colors text-center"
-          onClick={() => setShowForm(true)}
+          className="px-6 py-3 bg-gray-700 hover:bg-gray-800 text-white rounded-full font-semibold transition-colors text-center"
+          onClick={() => setShowModal(true)}
         >
           Ingreso como administrador
         </button>
-      ) : (
-        <form onSubmit={handleAccess} className="bg-gray-800 p-6 rounded-lg flex flex-col items-center w-full max-w-xs">
-          <input
-            type="text"
-            placeholder="Usuario"
-            className="mb-3 px-4 py-2 rounded border border-gray-300 w-full text-black"
-            value={user}
-            onChange={e => setUser(e.target.value)}
-            autoFocus
-          />
-          <input
-            type="password"
-            placeholder="Contraseña"
-            className="mb-3 px-4 py-2 rounded border border-gray-300 w-full text-black"
-            value={pass}
-            onChange={e => setPass(e.target.value)}
-          />
-          {error && <div className="text-red-400 mb-2 text-sm">{error}</div>}
-          <div className="flex gap-2 w-full">
-            <button
-              type="submit"
-              className="flex-1 px-4 py-2 bg-blue-900 hover:bg-blue-800 text-white rounded-full font-semibold transition-colors"
-            >
-              Entrar
-            </button>
-            <button
-              type="button"
-              className="flex-1 px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-full font-semibold transition-colors"
-              onClick={() => { setShowForm(false); setUser(''); setPass(''); setError(''); }}
-            >
-              Cancelar
-            </button>
+      </div>
+      {showModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+          <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-xs flex flex-col items-center">
+            <h2 className="text-lg font-bold text-blue-900 mb-4">Acceso Administrador</h2>
+            <form onSubmit={handleAccess} className="w-full flex flex-col items-center">
+              <input
+                type="text"
+                placeholder="Usuario"
+                className="mb-3 px-4 py-2 rounded border border-gray-300 w-full text-black"
+                value={user}
+                onChange={e => setUser(e.target.value)}
+                autoFocus
+              />
+              <input
+                type="password"
+                placeholder="Contraseña"
+                className="mb-3 px-4 py-2 rounded border border-gray-300 w-full text-black"
+                value={pass}
+                onChange={e => setPass(e.target.value)}
+              />
+              {error && <div className="text-red-500 mb-2 text-sm">{error}</div>}
+              <div className="flex gap-2 w-full">
+                <button
+                  type="submit"
+                  className="flex-1 px-4 py-2 bg-blue-900 hover:bg-blue-800 text-white rounded-full font-semibold transition-colors"
+                >
+                  Entrar
+                </button>
+                <button
+                  type="button"
+                  className="flex-1 px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-full font-semibold transition-colors"
+                  onClick={() => { setShowModal(false); setUser(''); setPass(''); setError(''); }}
+                >
+                  Cancelar
+                </button>
+              </div>
+            </form>
           </div>
-        </form>
+        </div>
       )}
-    </div>
-  );
-}
+    </>
   );
 }
