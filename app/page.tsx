@@ -238,6 +238,8 @@ export default function Home() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="px-6 py-3 bg-gray-700/70 text-white rounded-full font-semibold hover:bg-gray-600/70 transition-colors"
+                    onMouseEnter={() => setIsPaused(true)}
+                    onMouseLeave={() => setIsPaused(false)}
                   >
                     Agenda tu cupo
                   </a>
