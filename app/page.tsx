@@ -382,13 +382,29 @@ export default function Home() {
                 <li><Link href="/contacto" className="hover:text-white transition-colors cursor-pointer">Contacto</Link></li>
               </ul>
             </div>
+            {/* Nueva columna de datos de contacto */}
             <div>
-              <h4 className="font-semibold mb-4">Servicios</h4>
+              <h4 className="font-semibold mb-4">Contacto</h4>
               <ul className="space-y-2 text-sm text-gray-400">
-                <li>Preescolar</li>
-                <li>Educación Primaria</li>
-                <li>Educación Secundaria</li>
-                <li>Educación Bilingüe</li>
+                <li>
+                  <span className="font-semibold text-white">Correo:</span>
+                  <div className="ml-2">
+                    <div>nuevo@slgonzaga.edu.co</div>
+                    <div>admisione​s@slgonzaga.edu.co</div>
+                    <div>soporte@slgonzaga.edu.co</div>
+                  </div>
+                </li>
+                <li>
+                  <span className="font-semibold text-white">Teléfonos:</span>
+                  <div className="ml-2">
+                    <div>3183365700</div>
+                    <div>+601 744 7473</div>
+                  </div>
+                </li>
+                <li>
+                  <span className="font-semibold text-white">Dirección:</span>
+                  <div className="ml-2">Cra. 92 #151b – 61</div>
+                </li>
               </ul>
             </div>
             <div>
