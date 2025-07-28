@@ -382,31 +382,7 @@ export default function Home() {
                 <li><Link href="/contacto" className="hover:text-white transition-colors cursor-pointer">Contacto</Link></li>
               </ul>
             </div>
-            {/* Nueva columna de datos de contacto */}
-            <div>
-              <h4 className="font-semibold mb-4">Contacto</h4>
-              <ul className="space-y-2 text-sm text-gray-400">
-                <li>
-                  <span className="font-semibold text-white">Correo:</span>
-                  <div className="ml-2">
-                    <div>nuevo@slgonzaga.edu.co</div>
-                    <div>admisione​s@slgonzaga.edu.co</div>
-                    <div>soporte@slgonzaga.edu.co</div>
-                  </div>
-                </li>
-                <li>
-                  <span className="font-semibold text-white">Teléfonos:</span>
-                  <div className="ml-2">
-                    <div>3183365700</div>
-                    <div>+601 744 7473</div>
-                  </div>
-                </li>
-                <li>
-                  <span className="font-semibold text-white">Dirección:</span>
-                  <div className="ml-2">Cra. 92 #151b – 61</div>
-                </li>
-              </ul>
-            </div>
+            {/* Plataformas ahora en la tercera columna */}
             <div>
               <h4 className="font-semibold mb-4">Plataformas</h4>
               <div className="space-y-2">
@@ -436,6 +412,31 @@ export default function Home() {
                 </a>
               </div>
             </div>
+            {/* Contacto ahora en la cuarta columna */}
+            <div>
+              <h4 className="font-semibold mb-4">Contacto</h4>
+              <ul className="space-y-2 text-sm text-gray-400">
+                <li>
+                  <span className="font-semibold text-white">Correo:</span>
+                  <div className="ml-2">
+                    <div>nuevo@slgonzaga.edu.co</div>
+                    <div>admisione​s@slgonzaga.edu.co</div>
+                    <div>soporte@slgonzaga.edu.co</div>
+                  </div>
+                </li>
+                <li>
+                  <span className="font-semibold text-white">Teléfonos:</span>
+                  <div className="ml-2">
+                    <div>3183365700</div>
+                    <div>+601 744 7473</div>
+                  </div>
+                </li>
+                <li>
+                  <span className="font-semibold text-white">Dirección:</span>
+                  <div className="ml-2">Cra. 92 #151b – 61</div>
+                </li>
+              </ul>
+            </div>
           </div>
           <div className="border-t border-gray-800 mt-8 pt-8 text-center">
             <p className="text-gray-400 text-sm">
@@ -445,7 +446,7 @@ export default function Home() {
         </div>
       </footer>
       {/* Botón de administración debajo del footer */}
-      <AdminLoginModalButton />
+      {/* <AdminLoginModalButton /> */}
     </div>
   );
 }
