@@ -232,12 +232,12 @@ export default function Home() {
             <div key={index} className={`absolute inset-0 transition-opacity duration-600 ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'}`}>
               <img src={image.url} alt={image.title} className="w-full h-full object-cover object-center" />
               {index === 0 && currentImageIndex === 0 && (
-                <div className="absolute inset-0 flex items-center justify-center z-20">
+                <div className="absolute top-8 left-1/2 transform -translate-x-1/2 z-20">
                   <a
                     href="https://docs.google.com/forms/d/e/1FAIpQLSeORCc-ICVrWFFREQ_THIBY5lPYKMXKB1WLAqobKrfWScRqSg/viewform?usp=sharing&ouid=114310616812674125470"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-6 py-3 bg-blue-900 text-white rounded-full font-semibold hover:bg-blue-800 transition-colors"
+                    className="px-6 py-3 bg-gray-700/70 text-white rounded-full font-semibold hover:bg-gray-600/70 transition-colors"
                   >
                     Agenda tu cupo
                   </a>
