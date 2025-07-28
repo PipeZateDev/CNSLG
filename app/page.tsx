@@ -72,12 +72,12 @@ export default function Home() {
               >
                 Admisiones
               </Link>
-              {/* <Link 
+              <Link 
                 href="/admin"
                 className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer"
               >
                 Administración
-              </Link> */}
+              </Link>
               <Link 
                 href="/contacto"
                 className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer"
@@ -146,13 +146,13 @@ export default function Home() {
                 >
                   Admisiones
                 </Link>
-                {/* <Link 
+                <Link 
                   href="/admin"
                   onClick={() => setIsMenuOpen(false)}
                   className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer"
                 >
                   Administración
-                </Link> */}
+                </Link>
                 <Link 
                   href="/contacto"
                   onClick={() => setIsMenuOpen(false)}
@@ -217,7 +217,7 @@ export default function Home() {
 
       {/* Banner Section */}
       <section className="pt-20 relative">
-        <div className="relative h-96 md:h-[600px] overflow-hidden w-full md:w-[90%] mx-auto">
+        <div className="relative h-96 md:h-[650px] overflow-hidden w-full md:w-[80%] mx-auto">
           {bannerImages.map((image, index) => (
             <div key={index} className={`absolute inset-0 transition-opacity duration-600 ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'}`}>
               <img src={image.url} alt={image.title} className="w-full h-full object-cover object-center" />
@@ -378,11 +378,19 @@ export default function Home() {
                 <li><Link href="/" className="hover:text-white transition-colors cursor-pointer">Inicio</Link></li>
                 <li><Link href="/admisiones" className="hover:text-white transition-colors cursor-pointer">Admisiones</Link></li>
                 <li><Link href="/nosotros" className="hover:text-white transition-colors cursor-pointer">Nosotros</Link></li>
-                {/* <li><Link href="/admin" className="hover:text-white transition-colors cursor-pointer">Administración</Link></li> */}
+                <li><Link href="/admin" className="hover:text-white transition-colors cursor-pointer">Administración</Link></li>
                 <li><Link href="/contacto" className="hover:text-white transition-colors cursor-pointer">Contacto</Link></li>
               </ul>
             </div>
-            {/* Plataformas ahora en la tercera columna */}
+            <div>
+              <h4 className="font-semibold mb-4">Servicios</h4>
+              <ul className="space-y-2 text-sm text-gray-400">
+                <li>Preescolar</li>
+                <li>Educación Primaria</li>
+                <li>Educación Secundaria</li>
+                <li>Educación Bilingüe</li>
+              </ul>
+            </div>
             <div>
               <h4 className="font-semibold mb-4">Plataformas</h4>
               <div className="space-y-2">
@@ -412,48 +420,23 @@ export default function Home() {
                 </a>
               </div>
             </div>
-            {/* Contacto ahora en la cuarta columna */}
-            <div>
-              <h4 className="font-semibold mb-4">Contacto</h4>
-              <ul className="space-y-2 text-sm text-gray-400">
-                <li>
-                  <span className="font-semibold text-white">Correo:</span>
-                  <div className="ml-2">
-                    <div>nuevo@slgonzaga.edu.co</div>
-                    <div>admisione​s@slgonzaga.edu.co</div>
-                    <div>soporte@slgonzaga.edu.co</div>
-                  </div>
-                </li>
-                <li>
-                  <span className="font-semibold text-white">Teléfonos:</span>
-                  <div className="ml-2">
-                    <div>3183365700</div>
-                    <div>+601 744 7473</div>
-                  </div>
-                </li>
-                <li>
-                  <span className="font-semibold text-white">Dirección:</span>
-                  <div className="ml-2">Cra. 92 #151b – 61</div>
-                </li>
-              </ul>
-            </div>
           </div>
           <div className="border-t border-gray-800 mt-8 pt-8 text-center">
             <p className="text-gray-400 text-sm">
             © 2025 Colegio Nuevo San Luis Gonzaga. Todos los derechos reservados.
             </p>
           </div>
+          {/* Botón de administración centrado debajo de los derechos reservados */}
+          <div className="flex justify-center mt-6">
+            <Link
+              href="/admin"
+              className="px-6 py-3 bg-blue-900 hover:bg-blue-800 text-white rounded-full font-semibold transition-colors text-center"
+            >
+              Ingreso como administrador
+            </Link>
+          </div>
         </div>
       </footer>
-      {/* Link para ir al Panel de administración debajo del footer */}
-      <div className="flex justify-center mt-6 mb-8">
-        <Link
-          href="/admin"
-          className="text-gray-500 hover:text-blue-900 underline font-semibold transition-colors"
-        >
-          Ir al Panel de administración
-        </Link>
-      </div>
     </div>
   );
 }
