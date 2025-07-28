@@ -378,7 +378,7 @@ export default function Home() {
                 <li><Link href="/" className="hover:text-white transition-colors cursor-pointer">Inicio</Link></li>
                 <li><Link href="/admisiones" className="hover:text-white transition-colors cursor-pointer">Admisiones</Link></li>
                 <li><Link href="/nosotros" className="hover:text-white transition-colors cursor-pointer">Nosotros</Link></li>
-                <li><Link href="/admin" className="hover:text-white transition-colors cursor-pointer">Administración</Link></li>
+                {/* <li><Link href="/admin" className="hover:text-white transition-colors cursor-pointer">Administración</Link></li> */}
                 <li><Link href="/contacto" className="hover:text-white transition-colors cursor-pointer">Contacto</Link></li>
               </ul>
             </div>
@@ -445,79 +445,15 @@ export default function Home() {
           </div>
         </div>
       </footer>
-      {/* Botón de administración debajo del footer */}
-      {/* <AdminLoginModalButton /> */}
-    </div>
-  );
-}
-
-// Botón gris que abre un modal para credenciales de administrador
-function AdminLoginModalButton() {
-  const [showModal, setShowModal] = useState(false);
-  const [user, setUser] = useState('');
-  const [pass, setPass] = useState('');
-  const [error, setError] = useState('');
-
-  const handleAccess = (e: React.FormEvent) => {
-    e.preventDefault();
-    const validUsers = ['Admin', 'admin', 'Soporte', 'soporte'];
-    if (validUsers.includes(user.trim()) && pass === 'Admin.2024') {
-      window.location.href = '/admin';
-    } else {
-      setError('Usuario o contraseña incorrectos');
-    }
-  };
-
-  return (
-    <>
+      {/* Link para ir al Panel de administración debajo del footer */}
       <div className="flex justify-center mt-6 mb-8">
-        <button
-          className="px-6 py-3 bg-gray-700 hover:bg-gray-800 text-white rounded-full font-semibold transition-colors text-center"
-          onClick={() => setShowModal(true)}
+        <Link
+          href="/admin"
+          className="text-gray-500 hover:text-blue-900 underline font-semibold transition-colors"
         >
-          Ingreso como administrador
-        </button>
+          Ir al Panel de administración
+        </Link>
       </div>
-      {showModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-          <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-xs flex flex-col items-center">
-            <h2 className="text-lg font-bold text-blue-900 mb-4">Acceso Administrador</h2>
-            <form onSubmit={handleAccess} className="w-full flex flex-col items-center">
-              <input
-                type="text"
-                placeholder="Usuario"
-                className="mb-3 px-4 py-2 rounded border border-gray-300 w-full text-black"
-                value={user}
-                onChange={e => setUser(e.target.value)}
-                autoFocus
-              />
-              <input
-                type="password"
-                placeholder="Contraseña"
-                className="mb-3 px-4 py-2 rounded border border-gray-300 w-full text-black"
-                value={pass}
-                onChange={e => setPass(e.target.value)}
-              />
-              {error && <div className="text-red-500 mb-2 text-sm">{error}</div>}
-              <div className="flex gap-2 w-full">
-                <button
-                  type="submit"
-                  className="flex-1 px-4 py-2 bg-blue-900 hover:bg-blue-800 text-white rounded-full font-semibold transition-colors"
-                >
-                  Entrar
-                </button>
-                <button
-                  type="button"
-                  className="flex-1 px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-full font-semibold transition-colors"
-                  onClick={() => { setShowModal(false); setUser(''); setPass(''); setError(''); }}
-                >
-                  Cancelar
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
-    </>
+    </div>
   );
 }
