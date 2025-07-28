@@ -8,40 +8,32 @@ export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
 
-  // Leer imágenes del banner y noticias desde localStorage (publicadas por el admin)
-  const [bannerImages, setBannerImages] = useState([]);
-  const [news, setNews] = useState([]);
-
-  useEffect(() => {
-    const storedBanner = localStorage.getItem('bannerImages');
-    const storedNews = localStorage.getItem('news');
-    setBannerImages(storedBanner ? JSON.parse(storedBanner) : []);
-    setNews(storedNews ? JSON.parse(storedNews) : []);
-  }, []);
+  const bannerImages = [
+    { url: "https://i.ibb.co/mCG7xd6C/1.jpg", title: "", description: "" },  //OpenHouse
+    { url: "https://i.ibb.co/4n2KgQTP/9.jpg", title: "", description: "" },  //DíaFamilia
+    { url: "https://i.ibb.co/Wp5W862T/2.jpg", title: "", description: "" },  //Admisiones
+    { url: "https://i.ibb.co/1fwdk3FQ/3.jpg", title: "", description: "" },  //Lema
+    { url: "https://i.ibb.co/VpghYymD/6.jpg", title: "", description: "" },  //Educacion con amor
+    { url: "https://i.ibb.co/WWFpKXmM/4.jpg", title: "", description: "" },  //Ingles 
+    //{ url: "https://i.ibb.co/1gsPzf4/8.jpg", title: "", description: "" }, //Prom
+    { url: "https://i.ibb.co/N2jyWxS1/7.jpg", title: "", description: "" },  //Deportes
+    //{ url: "https://i.ibb.co/fYvVNbMk/8-instalaciones.png", title: "", description: "" } 
+    ];
 
   useEffect(() => {
     if (isPaused) return;
-    if (bannerImages.length === 0) return;
     const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) =>
-        prevIndex === bannerImages.length - 1 ? 0 : prevIndex + 1
-      );
+      setCurrentImageIndex((prevIndex) => (prevIndex === bannerImages.length - 1 ? 0 : prevIndex + 1));
     }, 6000);
     return () => clearInterval(interval);
   }, [bannerImages.length, isPaused]);
 
   const nextImage = () => {
-    if (bannerImages.length === 0) return;
-    setCurrentImageIndex((prevIndex) =>
-      prevIndex === bannerImages.length - 1 ? 0 : prevIndex + 1
-    );
+    setCurrentImageIndex((prevIndex) => prevIndex === bannerImages.length - 1 ? 0 : prevIndex + 1);
   };
 
   const prevImage = () => {
-    if (bannerImages.length === 0) return;
-    setCurrentImageIndex((prevIndex) =>
-      prevIndex === 0 ? bannerImages.length - 1 : prevIndex - 1
-    );
+    setCurrentImageIndex((prevIndex) => prevIndex === 0 ? bannerImages.length - 1 : prevIndex - 1);
   };
 
   const toggleMenu = () => {
@@ -236,57 +228,41 @@ export default function Home() {
           onMouseDown={handleMouseDown}
           onMouseUp={handleMouseUp}
         >
-          {bannerImages.length > 0 ? (
-            bannerImages.map((image, index) => (
-              <div key={index} className={`absolute inset-0 transition-opacity duration-600 ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'}`}>
-                {image?.url ? (
-                  <img src={image.url} alt={image.title || ''} className="w-full h-full object-cover object-center" />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center bg-gray-200 text-gray-500">
-                    Imagen no disponible
-                  </div>
-                )}
-                {index === 0 && currentImageIndex === 0 && (
-                  <div className="absolute top-8 left-1/2 transform -translate-x-1/2 z-20">
-                    <a
-                      href="https://docs.google.com/forms/d/e/1FAIpQLSeORCc-ICVrWFFREQ_THIBY5lPYKMXKB1WLAqobKrfWScRqSg/viewform?usp=sharing&ouid=114310616812674125470"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-8 py-4 bg-white/70 text-blue-900 rounded-full font-semibold text-lg hover:bg-white/80 transition-colors"
-                      onMouseEnter={() => setIsPaused(true)}
-                      onMouseLeave={() => setIsPaused(false)}
-                    >
-                      Agenda tu cupo
-                    </a>
-                  </div>
-                )}
-                {index === 2 && currentImageIndex === 2 && (
-                  <div className="absolute top-8 left-1/2 transform -translate-x-1/2 z-20">
-                    <Link
-                      href="/admisiones"
-                      className="px-8 py-4 bg-white/70 text-blue-900 rounded-full font-semibold text-lg hover:bg-white/80 transition-colors"
-                      onMouseEnter={() => setIsPaused(true)}
-                      onMouseLeave={() => setIsPaused(false)}
-                    >
-                      Agenda tu cupo
-                    </Link>
-                  </div>
-                )}
-              </div>
-            ))
-          ) : (
-            <div className="flex items-center justify-center h-full bg-gray-100 text-gray-400">
-              No hay imágenes de banner publicadas.
+          {bannerImages.map((image, index) => (
+            <div key={index} className={`absolute inset-0 transition-opacity duration-600 ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'}`}>
+              <img src={image.url} alt={image.title} className="w-full h-full object-cover object-center" />
+              {index === 0 && currentImageIndex === 0 && (
+                <div className="absolute top-8 left-1/2 transform -translate-x-1/2 z-20">
+                  <a
+                    href="https://docs.google.com/forms/d/e/1FAIpQLSeORCc-ICVrWFFREQ_THIBY5lPYKMXKB1WLAqobKrfWScRqSg/viewform?usp=sharing&ouid=114310616812674125470"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-8 py-4 bg-white/70 text-blue-900 rounded-full font-semibold text-lg hover:bg-white/80 transition-colors"
+                    onMouseEnter={() => setIsPaused(true)}
+                    onMouseLeave={() => setIsPaused(false)}
+                  >
+                    Agenda tu cupo
+                  </a>
+                </div>
+              )}
+              {index === 2 && currentImageIndex === 2 && (
+                <div className="absolute top-8 left-1/2 transform -translate-x-1/2 z-20">
+                  <Link
+                    href="/admisiones"
+                    className="px-8 py-4 bg-white/70 text-blue-900 rounded-full font-semibold text-lg hover:bg-white/80 transition-colors"
+                    onMouseEnter={() => setIsPaused(true)}
+                    onMouseLeave={() => setIsPaused(false)}
+                  >
+                    Agenda tu cupo
+                  </Link>
+                </div>
+              )}
             </div>
-          )}
+          ))}
           <div className="absolute inset-0 flex items-center justify-center text-center text-white z-10">
             <div className="max-w-4xl px-6">
-              <h1 className="text-3xl md:text-6xl font-bold mb-4">
-                {bannerImages[currentImageIndex]?.title || ''}
-              </h1>
-              <p className="text-lg md:text-2xl mb-8">
-                {bannerImages[currentImageIndex]?.description || ''}
-              </p>
+              <h1 className="text-3xl md:text-6xl font-bold mb-4">{bannerImages[currentImageIndex].title}</h1>
+              <p className="text-lg md:text-2xl mb-8">{bannerImages[currentImageIndex].description}</p>
             </div>
           </div>
           <button onClick={prevImage} className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-colors z-20">
@@ -376,32 +352,42 @@ export default function Home() {
             Noticias y Eventos
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
-            {news.length > 0 ? (
-              news.map((item, idx) => (
-                <div key={idx} className="bg-white rounded-lg shadow-lg overflow-hidden">
-                  {item?.image ? (
-                    <img
-                      src={item.image}
-                      alt={item.title || ''}
-                      className="w-full h-48 object-cover object-top"
-                    />
-                  ) : (
-                    <div className="w-full h-48 flex items-center justify-center bg-gray-200 text-gray-500">
-                      Imagen no disponible
-                    </div>
-                  )}
-                  <div className="p-6">
-                    <span className="text-sm text-blue-600 font-semibold">{item.date || ''}</span>
-                    <h3 className="text-lg font-bold text-blue-900 mb-2 mt-1">{item.title || ''}</h3>
-                    <p className="text-gray-600 text-sm">{item.description || ''}</p>
-                  </div>
-                </div>
-              ))
-            ) : (
-              <div className="col-span-3 text-center text-gray-400 py-12">
-                No hay noticias publicadas.
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+              <img 
+                src="https://i.ibb.co/vCpGdgff/Open-House2025.png"
+                alt="Open House"
+                className="w-full h-48 object-cover object-top"
+              />
+              <div className="p-6">
+                <span className="text-sm text-blue-600 font-semibold">20 Jun 2025</span>
+                <h3 className="text-lg font-bold text-blue-900 mb-2 mt-1">Open House 2025</h3>
+                <p className="text-gray-600 text-sm">Conoce nuestras instalaciones y proceso de admisión para el próximo año escolar.</p>
               </div>
-            )}
+            </div>
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+              <img 
+                src="https://readdy.ai/api/search-image?query=School%20science%20fair%20with%20student%20projects%2C%20STEM%20exhibition%2C%20innovative%20experiments%2C%20proud%20students%20presenting%2C%20educational%20achievement%2C%20modern%20school%20facilities%2C%20scientific%20learning&width=400&height=250&seq=news2&orientation=landscape"
+                alt="Feria de Ciencias"
+                className="w-full h-48 object-cover object-top"
+              />
+              <div className="p-6">
+                <span className="text-sm text-blue-600 font-semibold">10 Oct 2024</span>
+                <h3 className="text-lg font-bold text-blue-900 mb-2 mt-1">Feria de Ciencias 2024</h3>
+                <p className="text-gray-600 text-sm">Nuestros estudiantes brillaron con proyectos innovadores en ciencia y tecnología.</p>
+              </div>
+            </div>
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+              <img 
+                src="https://readdy.ai/api/search-image?query=School%20sports%20championship%20celebration%2C%20students%20with%20trophies%20and%20medals%2C%20athletic%20achievement%2C%20team%20spirit%2C%20Colombian%20school%20sports%2C%20victory%20celebration%2C%20proud%20athletes&width=400&height=250&seq=news3&orientation=landscape"
+                alt="Olimpiadas Deportivas"
+                className="w-full h-48 object-cover object-top"
+              />
+              <div className="p-6">
+                <span className="text-sm text-blue-600 font-semibold">05 Nov 2023</span>
+                <h3 className="text-lg font-bold text-blue-900 mb-2 mt-1">Campeones Robótica</h3>
+                <p className="text-gray-600 text-sm">Nuestro equipo de robótica obtivo el 1er puesto en el campeonato mundial 2023.</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -489,17 +475,4 @@ export default function Home() {
     </div>
   );
 }
-          <div className="flex justify-center mt-6">
-            <Link
-              href="/admin"
-              className="px-6 py-3 bg-blue-900 hover:bg-blue-800 text-white rounded-full font-semibold transition-colors text-center"
-            >
-              Ingreso como administrador
-            </Link>
-          </div>
-        </div>
-      </footer>
-    </div>
-  )
-
 
