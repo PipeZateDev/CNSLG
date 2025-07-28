@@ -237,7 +237,7 @@ export default function Home() {
                     href="https://docs.google.com/forms/d/e/1FAIpQLSeORCc-ICVrWFFREQ_THIBY5lPYKMXKB1WLAqobKrfWScRqSg/viewform?usp=sharing&ouid=114310616812674125470"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-6 py-3 bg-gray-700/70 text-white rounded-full font-semibold hover:bg-gray-600/70 transition-colors"
+                    className="px-8 py-4 bg-white/70 text-blue-900 rounded-full font-semibold text-lg hover:bg-white/80 transition-colors"
                     onMouseEnter={() => setIsPaused(true)}
                     onMouseLeave={() => setIsPaused(false)}
                   >
@@ -249,7 +249,7 @@ export default function Home() {
                 <div className="absolute top-8 left-1/2 transform -translate-x-1/2 z-20">
                   <Link
                     href="/admisiones"
-                    className="px-6 py-3 bg-gray-700/70 text-white rounded-full font-semibold hover:bg-gray-600/70 transition-colors"
+                    className="px-8 py-4 bg-white/70 text-blue-900 rounded-full font-semibold text-lg hover:bg-white/80 transition-colors"
                     onMouseEnter={() => setIsPaused(true)}
                     onMouseLeave={() => setIsPaused(false)}
                   >
