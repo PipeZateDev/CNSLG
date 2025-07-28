@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
@@ -48,6 +48,22 @@ export default function Admin() {
   ]);
   const [newsForm, setNewsForm] = useState({ title: '', date: '', description: '', image: '' });
 
+  // Al cargar, lee de localStorage
+  useEffect(() => {
+    const storedBanner = localStorage.getItem('bannerImages');
+    const storedNews = localStorage.getItem('news');
+    if (storedBanner) setBannerImages(JSON.parse(storedBanner));
+    if (storedNews) setNews(JSON.parse(storedNews));
+  }, []);
+
+  // Guardar en localStorage cuando cambian
+  useEffect(() => {
+    localStorage.setItem('bannerImages', JSON.stringify(bannerImages));
+  }, [bannerImages]);
+  useEffect(() => {
+    localStorage.setItem('news', JSON.stringify(news));
+  }, [news]);
+
   // Banner form handlers
   const handleBannerChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setBannerForm({ ...bannerForm, [e.target.name]: e.target.value });
@@ -57,6 +73,7 @@ export default function Admin() {
     if (bannerForm.url) {
       setBannerImages([...bannerImages, { ...bannerForm }]);
       setBannerForm({ url: '', title: '', description: '' });
+      // localStorage se actualiza por el useEffect
     }
   };
 
@@ -69,6 +86,7 @@ export default function Admin() {
     if (newsForm.title && newsForm.date && newsForm.description && newsForm.image) {
       setNews([{ ...newsForm }, ...news]);
       setNewsForm({ title: '', date: '', description: '', image: '' });
+      // localStorage se actualiza por el useEffect
     }
   };
 

@@ -18,64 +18,35 @@ export default function Admisiones() {
           <div className="flex items-center justify-between">
             <div className="flex items-center">
               <img 
-                src="https://i.ibb.co/spn4L9WW/LOGO-NSLG-2-Mini.png" 
-                alt="Logo Colegio Nuevo San Luis Gonzaga"
+                src="https://static.readdy.ai/image/b422d9997318ba9404c133396eb0082a/f0b6df53262c2786638b3d4d8768e052.png" 
+                alt="Logo Colegio Nuevo San Luis Gonzaga" 
                 className="h-12 w-auto"
               />
             </div>
-            
+
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center space-x-8">
-              <Link 
-                href="/"
-                className="px-4 py-2 bg-blue-900 text-white rounded-full transition-colors whitespace-nowrap cursor-pointer"
-              >
+              <Link href="/" className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors">
                 Inicio
               </Link>
-              <Link 
-                href="/nosotros"
-                className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer"
-              >
+              <Link href="/nosotros" className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors">
                 Nosotros
               </Link>
-              <Link 
-                href="/admisiones"
-                className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer"
-              >
+              <Link href="/admisiones" className="px-4 py-2 bg-blue-900 text-white rounded-full transition-colors">
                 Admisiones
               </Link>
-              {/* Admin link hidden */}
-              <Link href="/admin" className="hidden">Administración</Link>
-              <Link 
-                href="/contacto"
-                className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer"
-              >
+              <Link href="/contacto" className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors">
                 Contacto
               </Link>
               <div className="flex space-x-2 ml-8">
-                <a 
-                  href="https://lms30.uno-internacional.com/login/access" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="px-3 py-1 bg-purple-600 text-white rounded-full text-sm hover:bg-purple-700 transition-colors whitespace-nowrap cursor-pointer"
-                >
+                <a href="https://lms30.uno-internacional.com/login/access" target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition-colors">
                   UNOi Santillana
                 </a>
-                <a 
-                  href="https://www.cibercolegios.com/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="px-3 py-1 bg-yellow-400 text-black rounded-full text-sm hover:bg-yellow-500 transition-colors whitespace-nowrap cursor-pointer"
-                >
+                <a href="https://www.cibercolegios.com/" target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-yellow-400 text-black rounded-full hover:bg-yellow-500 transition-colors">
                   Cibercolegios
                 </a>
-                <a 
-                  href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=12695&searchedCategoryId=&searchedAgreementName=PEDAGOGICOS%20ASOCIADOS%20SAS" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="px-3 py-1 bg-blue-600 text-white rounded-full text-sm hover:bg-blue-700 transition-colors whitespace-nowrap cursor-pointer"
-                >
-                  Pagos PSE
+                <a href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=12695&searchedCategoryId=&searchedAgreementName=PEDAGOGICOS%20ASOCIADOS%20SAS" target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors">
+                  PSE - Pagos en Línea
                 </a>
               </div>
             </div>
@@ -110,7 +81,7 @@ export default function Admisiones() {
                     Cibercolegios
                   </a>
                   <a href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=12695&searchedCategoryId=&searchedAgreementName=PEDAGOGICOS%20ASOCIADOS%20SAS" target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 text-center">
-                    Pagos PSE
+                    PSE - Pagos en Línea
                   </a>
                 </div>
               </div>
@@ -401,11 +372,7 @@ export default function Admisiones() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-4 gap-8">
             <div>
-              <img 
-                src="https://static.readdy.ai/image/b422d9997318ba9404c133396eb0082a/f0b6df53262c2786638b3d4d8768e052.png" 
-                alt="Logo Colegio Nuevo San Luis Gonzaga" 
-                className="h-16 w-auto mb-4"
-              />
+              <img src="https://static.readdy.ai/image/b422d9997318ba9404c133396eb0082a/f0b6df53262c2786638b3d4d8768e052.png" alt="Logo Colegio Nuevo San Luis Gonzaga" className="h-16 w-auto mb-4" />
               <p className="text-gray-400 text-sm">
                 Formando líderes del futuro desde 1926 con excelencia académica y valores católicos.
               </p>
@@ -413,12 +380,10 @@ export default function Admisiones() {
             <div>
               <h4 className="font-semibold mb-4">Enlaces Rápidos</h4>
               <ul className="space-y-2 text-sm text-gray-400">
-                <li><Link href="/" className="hover:text-white transition-colors cursor-pointer">Inicio</Link></li>
-                <li><Link href="/admisiones" className="hover:text-white transition-colors cursor-pointer">Admisiones</Link></li>
-                <li><Link href="/nosotros" className="hover:text-white transition-colors cursor-pointer">Nosotros</Link></li>
-                {/* Admin link hidden */}
-                <li><Link href="/admin" className="hidden">Administración</Link></li>
-                <li><Link href="/contacto" className="hover:text-white transition-colors cursor-pointer">Contacto</Link></li>
+                <li><Link href="/" className="hover:text-white">Inicio</Link></li>
+                <li><Link href="/admisiones" className="hover:text-white">Admisiones</Link></li>
+                <li><Link href="/nosotros" className="hover:text-white">Nosotros</Link></li>
+                <li><Link href="/contacto" className="hover:text-white">Contacto</Link></li>
               </ul>
             </div>
             <div>
@@ -433,46 +398,20 @@ export default function Admisiones() {
             <div>
               <h4 className="font-semibold mb-4">Plataformas</h4>
               <div className="space-y-2">
-                <a 
-                  href="https://lms30.uno-internacional.com/login/access" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="block text-sm text-gray-400 hover:text-white transition-colors cursor-pointer"
-                >
+                <a href="https://lms30.uno-internacional.com/login/access" target="_blank" rel="noopener noreferrer" className="block text-sm text-gray-400 hover:text-white">
                   UNOi Santillana
                 </a>
-                <a 
-                  href="https://www.cibercolegios.com/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="block text-sm text-gray-400 hover:text-white transition-colors cursor-pointer"
-                >
+                <a href="https://www.cibercolegios.com/" target="_blank" rel="noopener noreferrer" className="block text-sm text-gray-400 hover:text-white">
                   Cibercolegios
                 </a>
-                <a 
-                  href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=12695&searchedCategoryId=&searchedAgreementName=PEDAGOGICOS%20ASOCIADOS%20SAS" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="block text-sm text-gray-400 hover:text-white transition-colors cursor-pointer"
-                >
-                  Pagos PSE
+                <a href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=12695&searchedCategoryId=&searchedAgreementName=PEDAGOGICOS%20ASOCIADOS%20SAS" target="_blank" rel="noopener noreferrer" className="block text-sm text-gray-400 hover:text-white">
+                  PSE - Pagos en Línea
                 </a>
               </div>
             </div>
           </div>
           <div className="border-t border-gray-800 mt-8 pt-8 text-center">
-            <p className="text-gray-400 text-sm">
-            © 2025 Colegio Nuevo San Luis Gonzaga. Todos los derechos reservados.
-            </p>
-          </div>
-          {/* Botón de administración centrado debajo de los derechos reservados */}
-          <div className="flex justify-center mt-6">
-            <Link
-              href="/admin"
-              className="px-6 py-3 bg-blue-900 hover:bg-blue-800 text-white rounded-full font-semibold transition-colors text-center"
-            >
-              Ingreso como administrador
-            </Link>
+            <p className="text-gray-400 text-sm">© 2025 Colegio Nuevo San Luis Gonzaga. Todos los derechos reservados.</p>
           </div>
         </div>
       </footer>
