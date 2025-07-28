@@ -6,6 +6,7 @@ import Link from 'next/link';
 export default function Home() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
 
   const bannerImages = [
     { url: "https://i.ibb.co/mCG7xd6C/1.jpg", title: "", description: "" },  //OpenHouse
@@ -20,11 +21,12 @@ export default function Home() {
     ];
 
   useEffect(() => {
+    if (isPaused) return;
     const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => prevIndex === bannerImages.length - 1 ? 0 : prevIndex + 1);
+      setCurrentImageIndex((prevIndex) => (prevIndex === bannerImages.length - 1 ? 0 : prevIndex + 1));
     }, 6000);
     return () => clearInterval(interval);
-  }, [bannerImages.length]);
+  }, [bannerImages.length, isPaused]);
 
   const nextImage = () => {
     setCurrentImageIndex((prevIndex) => prevIndex === bannerImages.length - 1 ? 0 : prevIndex + 1);
@@ -36,6 +38,14 @@ export default function Home() {
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleMouseDown = () => {
+    setIsPaused(true);
+  };
+
+  const handleMouseUp = () => {
+    setIsPaused(false);
   };
 
   return (
@@ -213,12 +223,14 @@ export default function Home() {
 
       {/* Banner Section */}
       <section className="pt-20 relative">
-        <div className="relative h-96 md:h-[650px] overflow-hidden w-full md:w-[80%] mx-auto">
+        <div
+          className="relative h-96 md:h-[600px] overflow-hidden w-full md:w-[85%] mx-auto"
+          onMouseDown={handleMouseDown}
+          onMouseUp={handleMouseUp}
+        >
           {bannerImages.map((image, index) => (
             <div key={index} className={`absolute inset-0 transition-opacity duration-600 ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'}`}>
               <img src={image.url} alt={image.title} className="w-full h-full object-cover object-center" />
-              {/* <div className="absolute inset-0 bg-blue-900/40"></div> */} // Eliminar o comentar
-
             </div>
           ))}
           <div className="absolute inset-0 flex items-center justify-center text-center text-white z-10">
