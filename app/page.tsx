@@ -216,8 +216,8 @@ export default function Home() {
 
 
       {/* Banner Section */}
-      <section className="pt-20 relative">
-        <div className="relative h-96 md:h-[650px] overflow-hidden w-full md:w-[80%] mx-auto">
+      <section className="pt-16 relative">
+        <div className="relative h-64 md:h-[400px] overflow-hidden w-full md:w-[80%] mx-auto">
           {bannerImages.map((image, index) => (
             <div key={index} className={`absolute inset-0 transition-opacity duration-600 ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'}`}>
               <img src={image.url} alt={image.title} className="w-full h-full object-cover object-center" />
@@ -245,79 +245,77 @@ export default function Home() {
         </div>
       </section>
 
-
       {/* Hero Section */}
-<section className="py-20 bg-white">
-  <div className="max-w-7xl mx-auto px-6 text-center">
-    <h2 className="text-4xl md:text-5xl font-bold text-blue-900 mb-6">
-      99 años de Excelencia Educativa
-    </h2>
-    <p className="text-xl text-gray-600 mb-12 max-w-4xl mx-auto">
-      Desde 1926, el Colegio Nuevo San Luis Gonzaga ha sido pionero en la formación integral 
-      de estudiantes con valores católicos, excelencia académica y compromiso social.
-    </p>
-    <div className="grid md:grid-cols-5 gap-8 mb-16">
-      <div className="text-center">
-        <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-          <i className="ri-graduation-cap-line text-3xl text-blue-600"></i>
+      <section className="py-10 bg-white">
+        <div className="max-w-7xl mx-auto px-6 text-center">
+          <h2 className="text-4xl md:text-5xl font-bold text-blue-900 mb-4">
+            99 años de Excelencia Educativa
+          </h2>
+          <p className="text-xl text-gray-600 mb-8 max-w-4xl mx-auto">
+            Desde 1926, el Colegio Nuevo San Luis Gonzaga ha sido pionero en la formación integral 
+            de estudiantes con valores católicos, excelencia académica y compromiso social.
+          </p>
+          <div className="grid md:grid-cols-5 gap-6 mb-10">
+            <div className="text-center">
+              <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i className="ri-graduation-cap-line text-3xl text-blue-600"></i>
+              </div>
+              <h3 className="text-2xl font-bold text-blue-900 mb-2">+2850</h3>
+              <p className="text-gray-600">Graduados Exitosos</p>
+            </div>
+            <div className="text-center">
+              <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i className="ri-award-line text-3xl text-green-600"></i>
+              </div>
+              <h3 className="text-2xl font-bold text-blue-900 mb-2">99</h3>
+              <p className="text-gray-600">Años de Tradición</p>
+            </div>
+            <div className="text-center">
+              <div className="w-20 h-20 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i className="ri-english-input text-3xl text-yellow-600"></i>
+              </div>
+              <h3 className="text-2xl font-bold text-blue-900 mb-2">Inglés Intensivo</h3>
+              <p className="text-gray-600">con certificación TOEFL</p>
+            </div>
+            <div className="text-center">
+              <div className="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i className="ri-star-line text-3xl text-purple-600"></i>
+              </div>
+              <h3 className="text-2xl font-bold text-blue-900 mb-2">100%</h3>
+              <p className="text-gray-600">Compromiso con la Calidad</p>
+            </div>
+            <div className="text-center">
+              <div className="w-20 h-20 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i className="ri-group-line text-3xl text-pink-600"></i>
+              </div>
+              <h3 className="text-2xl font-bold text-blue-900 mb-2">99%</h3>
+              <p className="text-gray-600">Familias Satisfechas</p>
+            </div>
+          </div>
+          <div className="flex flex-col md:flex-row justify-center gap-4">
+            <Link 
+              href="/admisiones"
+              className="px-8 py-4 bg-blue-900 hover:bg-blue-800 text-white rounded-full font-semibold text-lg transition-colors whitespace-nowrap cursor-pointer"
+            >
+              Conoce Nuestras Admisiones
+            </Link>
+            <Link 
+              href="/nosotros"
+              className="px-8 py-4 border-2 border-blue-900 text-blue-900 hover:bg-blue-900 hover:text-white rounded-full font-semibold text-lg transition-colors whitespace-nowrap cursor-pointer"
+            >
+              Nuestra Historia
+            </Link>
+          </div>
         </div>
-        <h3 className="text-2xl font-bold text-blue-900 mb-2">+2850</h3>
-        <p className="text-gray-600">Graduados Exitosos</p>
-      </div>
-      <div className="text-center">
-        <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-          <i className="ri-award-line text-3xl text-green-600"></i>
-        </div>
-        <h3 className="text-2xl font-bold text-blue-900 mb-2">99</h3>
-        <p className="text-gray-600">Años de Tradición</p>
-      </div>
-      <div className="text-center">
-        <div className="w-20 h-20 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
-          <i className="ri-english-input text-3xl text-yellow-600"></i>
-        </div>
-        <h3 className="text-2xl font-bold text-blue-900 mb-2">Inglés Intensivo</h3>
-        <p className="text-gray-600">con certificación TOEFL</p>
-      </div>
-      <div className="text-center">
-        <div className="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-          <i className="ri-star-line text-3xl text-purple-600"></i>
-        </div>
-        <h3 className="text-2xl font-bold text-blue-900 mb-2">100%</h3>
-        <p className="text-gray-600">Compromiso con la Calidad</p>
-      </div>
-      <div className="text-center">
-        <div className="w-20 h-20 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
-          <i className="ri-group-line text-3xl text-pink-600"></i>
-        </div>
-        <h3 className="text-2xl font-bold text-blue-900 mb-2">99%</h3>
-        <p className="text-gray-600">Familias Satisfechas</p>
-      </div>
-    </div>
-    <div className="flex flex-col md:flex-row justify-center gap-4">
-      <Link 
-        href="/admisiones"
-        className="px-8 py-4 bg-blue-900 hover:bg-blue-800 text-white rounded-full font-semibold text-lg transition-colors whitespace-nowrap cursor-pointer"
-      >
-        Conoce Nuestras Admisiones
-      </Link>
-      <Link 
-        href="/nosotros"
-        className="px-8 py-4 border-2 border-blue-900 text-blue-900 hover:bg-blue-900 hover:text-white rounded-full font-semibold text-lg transition-colors whitespace-nowrap cursor-pointer"
-      >
-        Nuestra Historia
-      </Link>
-    </div>
-  </div>
-</section>
+      </section>
 
-
-            {/* News Section */}
-      <section className="py-20 bg-white">
+      {/* News Section */}
+      <section className="py-10 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-3xl font-bold text-blue-900 text-center mb-12">
+          <h2 className="text-3xl font-bold text-blue-900 text-center mb-8">
             Noticias y Eventos
           </h2>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-6">
             <div className="bg-white rounded-lg shadow-lg overflow-hidden">
               <img 
                 src="https://i.ibb.co/vCpGdgff/Open-House2025.png"
@@ -496,5 +494,7 @@ function AdminLoginButton() {
         </form>
       )}
     </div>
+  );
+}
   );
 }
