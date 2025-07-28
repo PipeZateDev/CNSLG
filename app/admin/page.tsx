@@ -2,8 +2,11 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 export default function Admin() {
+  const router = useRouter();
+
   // Modal state
   const [isModalOpen, setIsModalOpen] = useState(true);
   const [username, setUsername] = useState('');
@@ -89,6 +92,11 @@ export default function Admin() {
     }
   };
 
+  // Handle cancel
+  const handleCancel = () => {
+    router.push('/');
+  };
+
   return (
     <div className="min-h-screen bg-white">
       {/* Modal de validación */}
@@ -117,7 +125,13 @@ export default function Admin() {
               />
             </div>
             {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
-            <div className="flex justify-end">
+            <div className="flex justify-between">
+              <button
+                onClick={handleCancel}
+                className="px-6 py-2 bg-gray-500 text-white rounded-full hover:bg-gray-600 transition-colors"
+              >
+                Cancelar
+              </button>
               <button
                 onClick={handleLogin}
                 className="px-6 py-2 bg-blue-900 text-white rounded-full hover:bg-blue-800 transition-colors"
