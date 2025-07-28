@@ -7,7 +7,6 @@ export default function Home() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const bannerImages = [
     { url: "https://i.ibb.co/mCG7xd6C/1.jpg", title: "", description: "" },  //OpenHouse
@@ -16,8 +15,10 @@ export default function Home() {
     { url: "https://i.ibb.co/1fwdk3FQ/3.jpg", title: "", description: "" },  //Lema
     { url: "https://i.ibb.co/VpghYymD/6.jpg", title: "", description: "" },  //Educacion con amor
     { url: "https://i.ibb.co/WWFpKXmM/4.jpg", title: "", description: "" },  //Ingles 
+    //{ url: "https://i.ibb.co/1gsPzf4/8.jpg", title: "", description: "" }, //Prom
     { url: "https://i.ibb.co/N2jyWxS1/7.jpg", title: "", description: "" },  //Deportes
-  ];
+    //{ url: "https://i.ibb.co/fYvVNbMk/8-instalaciones.png", title: "", description: "" } 
+    ];
 
   useEffect(() => {
     if (isPaused) return;
@@ -45,14 +46,6 @@ export default function Home() {
 
   const handleMouseUp = () => {
     setIsPaused(false);
-  };
-
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
   };
 
   return (
@@ -238,14 +231,16 @@ export default function Home() {
           {bannerImages.map((image, index) => (
             <div key={index} className={`absolute inset-0 transition-opacity duration-600 ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'}`}>
               <img src={image.url} alt={image.title} className="w-full h-full object-cover object-center" />
-              {index === 0 && (
-                <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
-                  <button
-                    onClick={openModal}
+              {index === 0 && currentImageIndex === 0 && (
+                <div className="absolute inset-0 flex items-center justify-center z-20">
+                  <a
+                    href="https://docs.google.com/forms/d/e/1FAIpQLSeORCc-ICVrWFFREQ_THIBY5lPYKMXKB1WLAqobKrfWScRqSg/viewform?usp=sharing&ouid=114310616812674125470"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="px-6 py-3 bg-blue-900 text-white rounded-full font-semibold hover:bg-blue-800 transition-colors"
                   >
                     Agenda tu cupo
-                  </button>
+                  </a>
                 </div>
               )}
             </div>
@@ -270,24 +265,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Modal */}
-      {isModalOpen && (
-        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-96">
-            <button
-              onClick={closeModal}
-              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
-            >
-              ✕
-            </button>
-            <iframe
-              src="https://docs.google.com/forms/d/e/1FAIpQLSeORCc-ICVrWFFREQ_THIBY5lPYKMXKB1WLAqobKrfWScRqSg/viewform?usp=sharing&ouid=114310616812674125470"
-              title="Agenda tu cupo"
-              className="w-full h-96 border-none"
-            ></iframe>
-          </div>
-        </div>
-      )}
 
       {/* Hero Section */}
 <section className="py-20 bg-white">
