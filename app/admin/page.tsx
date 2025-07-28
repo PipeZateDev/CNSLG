@@ -101,7 +101,7 @@ export default function Admin() {
     <div className="min-h-screen bg-white">
       {/* Modal de validación */}
       {isModalOpen && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg w-96">
             <h2 className="text-2xl font-bold text-blue-900 mb-4 text-center">Acceso a Administración</h2>
             <div className="mb-4">
