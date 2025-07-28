@@ -303,6 +303,7 @@ export default function Admin() {
           </div>
         </div>
       </section>
+
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-12 mt-12">
         <div className="max-w-7xl mx-auto px-6">
