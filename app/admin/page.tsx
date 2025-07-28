@@ -4,6 +4,12 @@ import { useState } from 'react';
 import Link from 'next/link';
 
 export default function Admin() {
+  // Modal state
+  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
   // Banner images state
   const [bannerImages, setBannerImages] = useState([
     { url: "https://i.ibb.co/mCG7xd6C/1.jpg", title: "", description: "" },
@@ -73,8 +79,56 @@ export default function Admin() {
     setNews(news.filter((_, i) => i !== idx));
   };
 
+  // Handle login
+  const handleLogin = () => {
+    if (username === 'admin' && password === 'Admin.2024') {
+      setIsModalOpen(false);
+      setError('');
+    } else {
+      setError('Usuario o contraseña incorrectos.');
+    }
+  };
+
   return (
     <div className="min-h-screen bg-white">
+      {/* Modal de validación */}
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-96">
+            <h2 className="text-2xl font-bold text-blue-900 mb-4 text-center">Acceso a Administración</h2>
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700">Usuario</label>
+              <input
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+                placeholder="Ingrese su usuario"
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700">Contraseña</label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+                placeholder="Ingrese su contraseña"
+              />
+            </div>
+            {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
+            <div className="flex justify-end">
+              <button
+                onClick={handleLogin}
+                className="px-6 py-2 bg-blue-900 text-white rounded-full hover:bg-blue-800 transition-colors"
+              >
+                Ingresar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Navigation */}
       <nav className="fixed top-0 w-full bg-white shadow-lg z-50">
         <div className="px-6 py-4">
