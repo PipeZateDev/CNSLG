@@ -50,31 +50,19 @@ export default function Admin() {
 
   // Al cargar, lee de localStorage
   useEffect(() => {
-    const storedBanner = localStorage.getItem('bannerImagesDraft');
-    const storedNews = localStorage.getItem('newsDraft');
+    const storedBanner = localStorage.getItem('bannerImages');
+    const storedNews = localStorage.getItem('news');
     if (storedBanner) setBannerImages(JSON.parse(storedBanner));
     if (storedNews) setNews(JSON.parse(storedNews));
   }, []);
 
-  // Guardar borradores en localStorage cuando cambian
+  // Guardar en localStorage cuando cambian
   useEffect(() => {
-    localStorage.setItem('bannerImagesDraft', JSON.stringify(bannerImages));
+    localStorage.setItem('bannerImages', JSON.stringify(bannerImages));
   }, [bannerImages]);
   useEffect(() => {
-    localStorage.setItem('newsDraft', JSON.stringify(news));
-  }, [news]);
-
-  // Publicar banners
-  const handlePublishBanner = () => {
-    localStorage.setItem('bannerImages', JSON.stringify(bannerImages));
-    alert('Imágenes del banner publicadas en la página de inicio.');
-  };
-
-  // Publicar noticias
-  const handlePublishNews = () => {
     localStorage.setItem('news', JSON.stringify(news));
-    alert('Noticias publicadas en la página de inicio.');
-  };
+  }, [news]);
 
   // Banner form handlers
   const handleBannerChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -239,13 +227,6 @@ export default function Admin() {
                 Agregar Imagen
               </button>
             </form>
-            <button
-              type="button"
-              onClick={handlePublishBanner}
-              className="mt-4 px-6 py-2 bg-green-700 text-white rounded-full font-semibold hover:bg-green-800 transition-colors"
-            >
-              Publicar Banner
-            </button>
             <div className="grid md:grid-cols-4 gap-4">
               {bannerImages.map((img, idx) => (
                 <div key={idx} className="bg-white rounded-lg shadow p-2 relative">
@@ -315,13 +296,6 @@ export default function Admin() {
                 Agregar Noticia
               </button>
             </form>
-            <button
-              type="button"
-              onClick={handlePublishNews}
-              className="mt-4 px-6 py-2 bg-green-700 text-white rounded-full font-semibold hover:bg-green-800 transition-colors"
-            >
-              Publicar Noticias
-            </button>
             <div className="grid md:grid-cols-3 gap-8">
               {news.map((item, idx) => (
                 <div key={idx} className="bg-white rounded-lg shadow-lg overflow-hidden relative">
