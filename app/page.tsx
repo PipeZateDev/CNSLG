@@ -11,11 +11,11 @@ export default function Home() {
     { url: "https://i.ibb.co/mCG7xd6C/1.jpg", title: "", description: "" },  //OpenHouse
     { url: "https://i.ibb.co/4n2KgQTP/9.jpg", title: "", description: "" },  //DíaFamilia
     { url: "https://i.ibb.co/Wp5W862T/2.jpg", title: "", description: "" },  //Admisiones
-    { url: "https://i.ibb.co/1fwdk3FQ/3.jpg", title: "", description: "" },        //Lema
-    { url: "https://i.ibb.co/VpghYymD/6.jpg", title: "", description: "" },    //Educacion con amor
-    { url: "https://i.ibb.co/WWFpKXmM/4.jpg", title: "", description: "" },      //Ingles 
+    { url: "https://i.ibb.co/1fwdk3FQ/3.jpg", title: "", description: "" },  //Lema
+    { url: "https://i.ibb.co/VpghYymD/6.jpg", title: "", description: "" },  //Educacion con amor
+    { url: "https://i.ibb.co/WWFpKXmM/4.jpg", title: "", description: "" },  //Ingles 
     //{ url: "https://i.ibb.co/1gsPzf4/8.jpg", title: "", description: "" }, //Prom
-    { url: "https://i.ibb.co/N2jyWxS1/7.jpg", title: "", description: "" }, //Deportes
+    { url: "https://i.ibb.co/N2jyWxS1/7.jpg", title: "", description: "" },  //Deportes
     //{ url: "https://i.ibb.co/fYvVNbMk/8-instalaciones.png", title: "", description: "" } 
     ];
 
@@ -72,12 +72,8 @@ export default function Home() {
               >
                 Admisiones
               </Link>
-              <Link 
-                href="/admin"
-                className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer"
-              >
-                Administración
-              </Link>
+              {/* Admin link hidden */}
+              <Link href="/admin" className="hidden">Administración</Link>
               <Link 
                 href="/contacto"
                 className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer"
@@ -378,7 +374,8 @@ export default function Home() {
                 <li><Link href="/" className="hover:text-white transition-colors cursor-pointer">Inicio</Link></li>
                 <li><Link href="/admisiones" className="hover:text-white transition-colors cursor-pointer">Admisiones</Link></li>
                 <li><Link href="/nosotros" className="hover:text-white transition-colors cursor-pointer">Nosotros</Link></li>
-                <li><Link href="/admin" className="hover:text-white transition-colors cursor-pointer">Administración</Link></li>
+                {/* Admin link hidden */}
+                <li><Link href="/admin" className="hidden">Administración</Link></li>
                 <li><Link href="/contacto" className="hover:text-white transition-colors cursor-pointer">Contacto</Link></li>
               </ul>
             </div>
@@ -440,3 +437,4 @@ export default function Home() {
     </div>
   );
 }
+
