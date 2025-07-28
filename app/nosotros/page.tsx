@@ -15,44 +15,68 @@ export default function Nosotros() {
           <div className="flex items-center justify-between">
             <div className="flex items-center">
               <img 
-                src="https://static.readdy.ai/image/b422d9997318ba9404c133396eb0082a/f0b6df53262c2786638b3d4d8768e052.png" 
-                alt="Logo Colegio Nuevo San Luis Gonzaga" 
+                src="https://i.ibb.co/spn4L9WW/LOGO-NSLG-2-Mini.png" 
+                alt="Logo Colegio Nuevo San Luis Gonzaga"
                 className="h-12 w-auto"
               />
             </div>
-
+            
+            {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center space-x-8">
-              <Link href="/" className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer">Inicio</Link>
-              <Link href="/nosotros" className="px-4 py-2 bg-blue-900 text-white rounded-full transition-colors whitespace-nowrap cursor-pointer">Nosotros</Link>
-              <Link href="/admisiones" className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer">Admisiones</Link>
-              <Link href="/contacto" className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer">Contacto</Link>
+              <Link 
+                href="/"
+                className="px-4 py-2 bg-blue-900 text-white rounded-full transition-colors whitespace-nowrap cursor-pointer"
+              >
+                Inicio
+              </Link>
+              <Link 
+                href="/nosotros"
+                className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer"
+              >
+                Nosotros
+              </Link>
+              <Link 
+                href="/admisiones"
+                className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer"
+              >
+                Admisiones
+              </Link>
+              {/* Admin link hidden */}
+              <Link href="/admin" className="hidden">Administración</Link>
+              <Link 
+                href="/contacto"
+                className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer"
+              >
+                Contacto
+              </Link>
               <div className="flex space-x-2 ml-8">
-                <a href="https://lms30.uno-internacional.com/login/access" target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition-colors whitespace-nowrap cursor-pointer">UNOi Santillana</a>
-                <a href="https://www.cibercolegios.com/" target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-yellow-400 text-black rounded-full hover:bg-yellow-500 transition-colors whitespace-nowrap cursor-pointer">Cibercolegios</a>
-                <a href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=12695&searchedCategoryId=&searchedAgreementName=PEDAGOGICOS%20ASOCIADOS%20SAS" target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors whitespace-nowrap cursor-pointer">PSE - Pagos en Línea</a>
+                <a 
+                  href="https://lms30.uno-internacional.com/login/access" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="px-3 py-1 bg-purple-600 text-white rounded-full text-sm hover:bg-purple-700 transition-colors whitespace-nowrap cursor-pointer"
+                >
+                  UNOi Santillana
+                </a>
+                <a 
+                  href="https://www.cibercolegios.com/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="px-3 py-1 bg-yellow-400 text-black rounded-full text-sm hover:bg-yellow-500 transition-colors whitespace-nowrap cursor-pointer"
+                >
+                  Cibercolegios
+                </a>
+                <a 
+                  href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=12695&searchedCategoryId=&searchedAgreementName=PEDAGOGICOS%20ASOCIADOS%20SAS" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="px-3 py-1 bg-blue-600 text-white rounded-full text-sm hover:bg-blue-700 transition-colors whitespace-nowrap cursor-pointer"
+                >
+                  Pagos PSE
+                </a>
               </div>
             </div>
-
-            <button onClick={toggleMenu} className="lg:hidden w-10 h-10 flex items-center justify-center text-blue-900 cursor-pointer">
-              <i className={`ri-${isMenuOpen ? 'close' : 'menu'}-line text-2xl`}></i>
-            </button>
           </div>
-
-          {isMenuOpen && (
-            <div className="lg:hidden mt-4 py-4 border-t border-gray-200">
-              <div className="flex flex-col space-y-3">
-                <Link href="/" onClick={() => setIsMenuOpen(false)} className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer">Inicio</Link>
-                <Link href="/nosotros" onClick={() => setIsMenuOpen(false)} className="px-4 py-2 bg-blue-900 text-white rounded-full transition-colors text-center cursor-pointer">Nosotros</Link>
-                <Link href="/admisiones" onClick={() => setIsMenuOpen(false)} className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer">Admisiones</Link>
-                <Link href="/contacto" onClick={() => setIsMenuOpen(false)} className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer">Contacto</Link>
-                <div className="flex flex-col space-y-2 pt-2">
-                  <a href="https://lms30.uno-internacional.com/login/access" target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition-colors text-center cursor-pointer">UNOi Santillana</a>
-                  <a href="https://www.cibercolegios.com/" target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-yellow-400 text-black rounded-full hover:bg-yellow-500 transition-colors text-center cursor-pointer">Cibercolegios</a>
-                  <a href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=12695&searchedCategoryId=&searchedAgreementName=PEDAGOGICOS%20ASOCIADOS%20SAS" target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors text-center cursor-pointer">PSE - Pagos en Línea</a>
-                </div>
-              </div>
-            </div>
-          )}
         </div>
       </nav>
 
@@ -286,28 +310,28 @@ export default function Nosotros() {
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-12">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-4 gap-8 text-center">
+          <div className="grid md:grid-cols-4 gap-8">
             <div>
               <img 
                 src="https://static.readdy.ai/image/b422d9997318ba9404c133396eb0082a/f0b6df53262c2786638b3d4d8768e052.png" 
                 alt="Logo Colegio Nuevo San Luis Gonzaga" 
-                className="h-16 w-auto mb-4 mx-auto"
+                className="h-16 w-auto mb-4"
               />
               <p className="text-gray-400 text-sm">
                 Formando líderes del futuro desde 1926 con excelencia académica y valores católicos.
               </p>
             </div>
-            
             <div>
               <h4 className="font-semibold mb-4">Enlaces Rápidos</h4>
               <ul className="space-y-2 text-sm text-gray-400">
                 <li><Link href="/" className="hover:text-white transition-colors cursor-pointer">Inicio</Link></li>
                 <li><Link href="/admisiones" className="hover:text-white transition-colors cursor-pointer">Admisiones</Link></li>
                 <li><Link href="/nosotros" className="hover:text-white transition-colors cursor-pointer">Nosotros</Link></li>
+                {/* Admin link hidden */}
+                <li><Link href="/admin" className="hidden">Administración</Link></li>
                 <li><Link href="/contacto" className="hover:text-white transition-colors cursor-pointer">Contacto</Link></li>
               </ul>
             </div>
-            
             <div>
               <h4 className="font-semibold mb-4">Servicios</h4>
               <ul className="space-y-2 text-sm text-gray-400">
@@ -317,7 +341,6 @@ export default function Nosotros() {
                 <li>Educación Bilingüe</li>
               </ul>
             </div>
-            
             <div>
               <h4 className="font-semibold mb-4">Plataformas</h4>
               <div className="space-y-2">
@@ -343,16 +366,24 @@ export default function Nosotros() {
                   rel="noopener noreferrer"
                   className="block text-sm text-gray-400 hover:text-white transition-colors cursor-pointer"
                 >
-                  PSE - Pagos en Línea
+                  Pagos PSE
                 </a>
               </div>
             </div>
           </div>
-          
           <div className="border-t border-gray-800 mt-8 pt-8 text-center">
             <p className="text-gray-400 text-sm">
-              © 2025 Colegio Nuevo San Luis Gonzaga. Todos los derechos reservados.
+            © 2025 Colegio Nuevo San Luis Gonzaga. Todos los derechos reservados.
             </p>
+          </div>
+          {/* Botón de administración centrado debajo de los derechos reservados */}
+          <div className="flex justify-center mt-6">
+            <Link
+              href="/admin"
+              className="px-6 py-3 bg-blue-900 hover:bg-blue-800 text-white rounded-full font-semibold transition-colors text-center"
+            >
+              Ingreso como administrador
+            </Link>
           </div>
         </div>
       </footer>

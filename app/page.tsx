@@ -413,7 +413,7 @@ export default function Home() {
                   rel="noopener noreferrer"
                   className="block text-sm text-gray-400 hover:text-white transition-colors cursor-pointer"
                 >
-                  PSE - Pagos en Línea
+                  Pagos PSE
                 </a>
               </div>
             </div>
