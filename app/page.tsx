@@ -6,10 +6,6 @@ import Link from 'next/link';
 export default function Home() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [showAdminModal, setShowAdminModal] = useState(false);
-  const [adminUser, setAdminUser] = useState('');
-  const [adminPass, setAdminPass] = useState('');
-  const [adminError, setAdminError] = useState('');
 
   const bannerImages = [
     { url: "https://i.ibb.co/mCG7xd6C/1.jpg", title: "", description: "" },  //OpenHouse
@@ -19,7 +15,7 @@ export default function Home() {
     { url: "https://i.ibb.co/VpghYymD/6.jpg", title: "", description: "" },    //Educacion con amor
     { url: "https://i.ibb.co/WWFpKXmM/4.jpg", title: "", description: "" },      //Ingles 
     //{ url: "https://i.ibb.co/1gsPzf4/8.jpg", title: "", description: "" }, //Prom
-    //{ url: "https://i.ibb.co/N2jyWxS1/7.jpg", title: "", description: "" }, //Deportes
+    { url: "https://i.ibb.co/N2jyWxS1/7.jpg", title: "", description: "" }, //Deportes
     //{ url: "https://i.ibb.co/fYvVNbMk/8-instalaciones.png", title: "", description: "" } 
     ];
 
@@ -42,66 +38,8 @@ export default function Home() {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const handleAdminClick = (e?: React.MouseEvent) => {
-    if (e) e.preventDefault();
-    setShowAdminModal(true);
-    setAdminUser('');
-    setAdminPass('');
-    setAdminError('');
-  };
-
-  const handleAdminLogin = () => {
-    if (
-      (adminUser === 'admin' || adminUser === 'soporte') &&
-      adminPass === 'Admin.2024'
-    ) {
-      setShowAdminModal(false);
-      setAdminError('');
-      window.location.href = '/admin';
-    } else {
-      setAdminError('Usuario o contraseña incorrectos');
-    }
-  };
-
   return (
     <div className="min-h-screen bg-white">
-      {/* Admin Login Modal */}
-      {showAdminModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-[100]">
-          <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-xs">
-            <h2 className="text-xl font-bold mb-4 text-blue-900">Acceso Administración</h2>
-            <input
-              type="text"
-              placeholder="Usuario"
-              value={adminUser}
-              onChange={e => setAdminUser(e.target.value)}
-              className="w-full mb-3 px-3 py-2 border rounded focus:outline-none"
-            />
-            <input
-              type="password"
-              placeholder="Contraseña"
-              value={adminPass}
-              onChange={e => setAdminPass(e.target.value)}
-              className="w-full mb-3 px-3 py-2 border rounded focus:outline-none"
-            />
-            {adminError && <div className="text-red-600 text-sm mb-2">{adminError}</div>}
-            <div className="flex gap-2">
-              <button
-                onClick={handleAdminLogin}
-                className="flex-1 px-4 py-2 bg-blue-900 text-white rounded hover:bg-blue-800"
-              >
-                Ingresar
-              </button>
-              <button
-                onClick={() => setShowAdminModal(false)}
-                className="flex-1 px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400"
-              >
-                Cancelar
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
       {/* Navigation */}
       <nav className="fixed top-0 w-full bg-white shadow-lg z-50">
         <div className="px-6 py-4">
@@ -115,7 +53,7 @@ export default function Home() {
             </div>
             
             {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center space-x-2">
+            <div className="hidden lg:flex items-center space-x-8">
               <Link 
                 href="/"
                 className="px-4 py-2 bg-blue-900 text-white rounded-full transition-colors whitespace-nowrap cursor-pointer"
@@ -136,9 +74,9 @@ export default function Home() {
               </Link>
               <Link 
                 href="/admin"
-                className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer hidden"
+                className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer"
               >
-                Admin
+                Administración
               </Link>
               <Link 
                 href="/contacto"
@@ -169,7 +107,7 @@ export default function Home() {
                   rel="noopener noreferrer"
                   className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors whitespace-nowrap cursor-pointer"
                 >
-                  Pagos PSE
+                  PSE - Pagos en Línea
                 </a>
               </div>
             </div>
@@ -213,7 +151,7 @@ export default function Home() {
                   onClick={() => setIsMenuOpen(false)}
                   className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer"
                 >
-                  Admin
+                  Administración
                 </Link>
                 <Link 
                   href="/contacto"
@@ -245,7 +183,7 @@ export default function Home() {
                     rel="noopener noreferrer"
                     className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors text-center cursor-pointer"
                   >
-                    Pagos PSE
+                    PSE - Pagos en Línea
                   </a>
                 </div>
               </div>
@@ -423,25 +361,16 @@ export default function Home() {
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-12">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-4 gap-8 text-center">
+          <div className="grid md:grid-cols-4 gap-8">
             <div>
               <img 
                 src="https://static.readdy.ai/image/b422d9997318ba9404c133396eb0082a/f0b6df53262c2786638b3d4d8768e052.png" 
                 alt="Logo Colegio Nuevo San Luis Gonzaga" 
-                className="h-16 w-auto mb-4 mx-auto"
+                className="h-16 w-auto mb-4"
               />
               <p className="text-gray-400 text-sm">
                 Formando líderes del futuro desde 1926 con excelencia académica y valores católicos.
               </p>
-              {/* Admin Button in Footer */}
-              <div className="flex flex-col items-center mt-4">
-                <button
-                  onClick={handleAdminClick}
-                  className="px-6 py-2 bg-blue-900 text-white rounded-full shadow hover:bg-blue-800 transition-colors mb-2"
-                >
-                  Administración
-                </button>
-              </div>
             </div>
             <div>
               <h4 className="font-semibold mb-4">Enlaces Rápidos</h4>
@@ -491,6 +420,15 @@ export default function Home() {
                 </a>
               </div>
             </div>
+          </div>
+          {/* Botón de administración centrado */}
+          <div className="flex justify-center mt-8">
+            <Link
+              href="/admin"
+              className="px-6 py-3 bg-blue-900 hover:bg-blue-800 text-white rounded-full font-semibold transition-colors text-center"
+            >
+              Ingreso como administrador
+            </Link>
           </div>
           <div className="border-t border-gray-800 mt-8 pt-8 text-center">
             <p className="text-gray-400 text-sm">
