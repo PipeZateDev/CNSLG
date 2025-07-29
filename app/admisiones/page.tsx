@@ -61,26 +61,18 @@ export default function Admisiones() {
           {isMenuOpen && (
             <div className="lg:hidden mt-4 py-4 border-t border-gray-200">
               <div className="flex flex-col space-y-3">
-                <Link href="/" onClick={() => setIsMenuOpen(false)} className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center">
-                  Inicio
-                </Link>
-                <Link href="/nosotros" onClick={() => setIsMenuOpen(false)} className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center">
-                  Nosotros
-                </Link>
-                <Link href="/admisiones" onClick={() => setIsMenuOpen(false)} className="px-4 py-2 bg-blue-900 text-white rounded-full transition-colors text-center">
-                  Admisiones
-                </Link>
-                <Link href="/contacto" onClick={() => setIsMenuOpen(false)} className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center">
-                  Contacto
-                </Link>
-                <div className="flex flex-col space-y-2 pt-2">
-                  <a href="https://lms30.uno-internacional.com/login/access" target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-purple-600 text-white rounded-full hover:bg-purple-700 text-center">
+                <Link href="/" onClick={() => setIsMenuOpen(false)} className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer">Inicio</Link>
+                <Link href="/nosotros" onClick={() => setIsMenuOpen(false)} className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer">Nosotros</Link>
+                <Link href="/admisiones" onClick={() => setIsMenuOpen(false)} className="px-4 py-2 bg-blue-900 text-white rounded-full transition-colors text-center cursor-pointer">Admisiones</Link>
+                <Link href="/contacto" onClick={() => setIsMenuOpen(false)} className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer">Contacto</Link>
+                <div className="flex flex-col space-y-2">
+                  <a href="https://lms30.uno-internacional.com/login/access" target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition-colors text-center">
                     UNOi Santillana
                   </a>
-                  <a href="https://www.cibercolegios.com/" target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-yellow-400 text-black rounded-full hover:bg-yellow-500 text-center">
+                  <a href="https://www.cibercolegios.com/" target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-yellow-400 text-black rounded-full hover:bg-yellow-500 transition-colors text-center">
                     Cibercolegios
                   </a>
-                  <a href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=12695&searchedCategoryId=&searchedAgreementName=PEDAGOGICOS%20ASOCIADOS%20SAS" target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 text-center">
+                  <a href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=12695&searchedCategoryId=&searchedAgreementName=PEDAGOGICOS%20ASOCIADOS%20SAS" target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors text-center">
                     PSE - Pagos en Línea
                   </a>
                 </div>
@@ -90,328 +82,172 @@ export default function Admisiones() {
         </div>
       </nav>
 
-      {/* Floating Social Media Buttons */}
-<div className="fixed right-6 bottom-6 z-40 space-y-3">
-  {[
-    { href: "https://wa.me/573183365700", color: "bg-green-500 hover:bg-green-600", icon: "ri-whatsapp-line" },
-    { href: "https://www.instagram.com/colegionuevosanluisgonzaga/?hl=es", color: "bg-pink-500 hover:bg-pink-600", icon: "ri-instagram-line" },
-    { href: "https://www.facebook.com/colegionuevosanluisgonzaga", color: "bg-blue-600 hover:bg-blue-700", icon: "ri-facebook-line" },
-    { href: "https://www.tiktok.com/@nuevosanluisgonzaga", color: "bg-black hover:bg-gray-800", icon: "ri-tiktok-line" },
-    { href: "https://www.youtube.com/@colegionuevosanluisgonzaga5795", color: "bg-red-600 hover:bg-red-700", icon: "ri-youtube-line" },
-  ].map((item, idx) => (
-    <a
-      key={idx}
-      href={item.href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={`w-12 h-12 ${item.color} text-white rounded-full flex items-center justify-center transition-all cursor-pointer shadow-lg opacity-70 hover:opacity-100`}
-    >
-      <i className={`${item.icon} text-xl`}></i>
-    </a>
-  ))}
-</div>
-
-
-      {/* Hero Section */}
-      <section className="pt-24 pb-12 bg-gradient-to-r from-green-600 to-green-500 text-white text-center">
-        <div className="max-w-7xl mx-auto px-6">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">Admisiones</h1>
-          <p className="text-xl text-green-100 max-w-3xl mx-auto">
-            Únete a nuestra comunidad educativa y forma parte de una tradición de excelencia académica
+      {/* Main Content */}
+      <div className="pt-16 pb-8 px-4 sm:px-6 lg:px-8">
+        <h1 className="text-4xl sm:text-5xl font-extrabold text-center text-blue-900 mb-8">
+          Admisiones
+        </h1>
+        <div className="max-w-3xl mx-auto text-lg text-gray-700 space-y-4">
+          <p>
+            Bienvenido a la sección de admisiones del Colegio Nuevo San Luis Gonzaga. Aquí encontrarás toda la información necesaria sobre nuestro proceso de admisión, requisitos y fechas importantes.
+          </p>
+          <p>
+            Nuestro colegio ofrece una educación de alta calidad, con un enfoque en el desarrollo integral de nuestros estudiantes. Contamos con un equipo de docentes altamente capacitados y comprometidos con la formación académica y personal de cada niño.
+          </p>
+          <p>
+            Si estás interesado en que tu hijo forme parte de nuestra comunidad educativa, te invitamos a seguir leyendo para conocer más sobre el proceso de admisión.
           </p>
         </div>
-      </section>
 
-
-      {/* Niveles Educativos */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-3xl font-bold text-blue-900 text-center mb-12">Niveles Educativos</h2>
-          
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
-            <div className="bg-white rounded-lg shadow-lg p-8 text-center">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <i className="ri-bear-smile-line text-2xl text-blue-600"></i>
-              </div>
-              <h3 className="text-xl font-bold text-blue-900 mb-4">Preescolar</h3>
-              <p className="text-gray-600 mb-4">Jardín y Transición para niños de 4 a 5 años</p>
-              <ul className="text-sm text-gray-500 space-y-2">
-                <li>• Desarrollo integral</li>
-                <li>• Metodología lúdica</li>
-                <li>• Estimulación temprana</li>
-                <li>• Adaptación escolar</li>
-              </ul>
-            </div>
-
-            <div className="bg-white rounded-lg shadow-lg p-8 text-center">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <i className="ri-book-line text-2xl text-green-600"></i>
-              </div>
-              <h3 className="text-xl font-bold text-blue-900 mb-4">Primaria</h3>
-              <p className="text-gray-600 mb-4">Grados 1° a 5° con educación personalizada</p>
-              <ul className="text-sm text-gray-500 space-y-2">
-                <li>• Ingles intensivo A2</li>
-                <li>• Tecnología educativa</li>
-                <li>• Formación en valores</li>
-                <li>• Desarrollo de competencias</li>
-              </ul>
-            </div>
-
-            <div className="bg-white rounded-lg shadow-lg p-8 text-center">
-              <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <i className="ri-graduation-cap-line text-2xl text-purple-600"></i>
-              </div>
-              <h3 className="text-xl font-bold text-blue-900 mb-4">Bachillerato y Media</h3>
-              <p className="text-gray-600 mb-4">Grados 6° a 11° con énfasis académico</p>
-              <ul className="text-sm text-gray-500 space-y-2">
-                <li>• Ingles intensivo B2+</li>
-                <li>• Preparación universitaria</li>
-                <li>• Énfasis en ciencias</li>
-                <li>• Liderazgo estudiantil</li>
-                <li>• Proyectos de investigación</li>
-              </ul>
-            </div>
+        {/* Admission Process Section */}
+        <div className="mt-12">
+          <h2 className="text-3xl sm:text-4xl font-bold text-center text-blue-900 mb-6">
+            Proceso de Admisión
+          </h2>
+          <div className="max-w-4xl mx-auto bg-white shadow-md rounded-lg p-6">
+            <ol className="list-decimal list-inside space-y-4 text-gray-700">
+              <li>
+                <span className="font-semibold text-blue-900">Solicitud de Inscripción:</span> Completa el formulario de solicitud de inscripción en línea a través de nuestro sitio web.
+              </li>
+              <li>
+                <span className="font-semibold text-blue-900">Documentación Requerida:</span> Adjunta los documentos solicitados, como copia del documento de identidad, fotos recientes y certificados académicos anteriores.
+              </li>
+              <li>
+                <span className="font-semibold text-blue-900">Entrevista Personal:</span> Programa una entrevista personal con el equipo de admisiones del colegio.
+              </li>
+              <li>
+                <span className="font-semibold text-blue-900">Evaluación Académica:</span> Dependiendo del grado al que desees postular, se realizará una evaluación académica.
+              </li>
+              <li>
+                <span className="font-semibold text-blue-900">Notificación de Aceptación:</span> Recibirás una notificación por correo electrónico sobre la decisión de admisión.
+              </li>
+              <li>
+                <span className="font-semibold text-blue-900">Matrícula:</span> Realiza el pago de la matrícula y completa el proceso de inscripción.
+              </li>
+            </ol>
           </div>
         </div>
-      </section>
 
-      {/* Servicios Académicos */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-3xl font-bold text-blue-900 text-center mb-12">Servicios Académicos</h2>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-gray-50 rounded-lg p-6 text-center">
-              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                <i className="ri-global-line text-blue-600"></i>
-              </div>
-              <h4 className="font-semibold text-blue-900 mb-2">Ingles Intensivo</h4>
-              <p className="text-sm text-gray-600">Inglés intensivo desde preescolar con certificaciones internacionales</p>
-            </div>
-            <div className="bg-gray-50 rounded-lg p-6 text-center">
-              <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                <i className="ri-computer-line text-green-600"></i>
-              </div>
-              <h4 className="font-semibold text-blue-900 mb-2">Tecnología</h4>
-              <p className="text-sm text-gray-600">Laboratorios modernos, aulas digitales y plataformas virtuales</p>
-            </div>
-            <div className="bg-gray-50 rounded-lg p-6 text-center">
-              <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                <i className="ri-football-line text-purple-600"></i>
-              </div>
-              <h4 className="font-semibold text-blue-900 mb-2">Deportes</h4>
-              <p className="text-sm text-gray-600">Fútbol, voleibol, baloncesto y atletismo</p>
-            </div>
-            <div className="bg-gray-50 rounded-lg p-6 text-center">
-              <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                <i className="ri-music-line text-orange-600"></i>
-              </div>
-              <h4 className="font-semibold text-blue-900 mb-2">Artes</h4>
-              <p className="text-sm text-gray-600">Música, teatro, danza y artes plásticas</p>
-            </div>
-            <div className="bg-gray-50 rounded-lg p-6 text-center">
-              <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                <i className="ri-microscope-line text-red-600"></i>
-              </div>
-              <h4 className="font-semibold text-blue-900 mb-2">Laboratorios</h4>
-              <p className="text-sm text-gray-600">Ciencias naturales, física, química, biología y matemáticas</p>
-            </div>
-            
-            <div className="bg-gray-50 rounded-lg p-6 text-center">
-              <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                <i className="ri-user-heart-line text-yellow-600"></i>
-              </div>
-              <h4 className="font-semibold text-blue-900 mb-2">Psicología</h4>
-              <p className="text-sm text-gray-600">Acompañamiento psicopedagógico integral</p>
-            
-              
-            </div>
+        {/* Requirements Section */}
+        <div className="mt-12">
+          <h2 className="text-3xl sm:text-4xl font-bold text-center text-blue-900 mb-6">
+            Requisitos de Admisión
+          </h2>
+          <div className="max-w-4xl mx-auto bg-white shadow-md rounded-lg p-6">
+            <ul className="list-disc list-inside space-y-4 text-gray-700">
+              <li>Copia del documento de identidad del estudiante.</li>
+              <li>Fotos recientes del estudiante.</li>
+              <li>Certificados académicos anteriores (si aplica).</li>
+              <li>Informe de comportamiento y recomendaciones de la institución educativa anterior.</li>
+              <li>Realizar el pago de la tarifa de inscripción.</li>
+            </ul>
           </div>
         </div>
-      </section>
 
-      {/* Proceso de Admisión */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-3xl font-bold text-blue-900 text-center mb-12">Proceso de Admisión</h2>
-          
-          <div className="grid md:grid-cols-4 gap-6">
-            <div className="bg-white rounded-lg p-6 text-center shadow-lg">
-              <div className="w-12 h-12 bg-blue-500 text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold">
-                1
-              </div>
-              <h4 className="font-semibold text-blue-900 mb-2">Solicitud</h4>
-              <p className="text-sm text-gray-600">Completa el formulario de inscripción con todos los datos solicitados</p>
-            </div>
-            <div className="bg-white rounded-lg p-6 text-center shadow-lg">
-              <div className="w-12 h-12 bg-green-500 text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold">
-                2
-              </div>
-              <h4 className="font-semibold text-blue-900 mb-2">Documentos</h4>
-              <p className="text-sm text-gray-600">Entrega los documentos requeridos según el nivel educativo</p>
-            </div>
-            <div className="bg-white rounded-lg p-6 text-center shadow-lg">
-              <div className="w-12 h-12 bg-purple-500 text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold">
-                3
-              </div>
-              <h4 className="font-semibold text-blue-900 mb-2">Entrevista</h4>
-              <p className="text-sm text-gray-600">Entrevista con el estudiante y los padres de familia</p>
-            </div>
-            <div className="bg-white rounded-lg p-6 text-center shadow-lg">
-              <div className="w-12 h-12 bg-orange-500 text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold">
-                4
-              </div>
-              <h4 className="font-semibold text-blue-900 mb-2">Matrícula</h4>
-              <p className="text-sm text-gray-600">Formaliza la matrícula y bienvenida a la familia gonzaguista</p>
-            </div>
+        {/* Important Dates Section */}
+        <div className="mt-12">
+          <h2 className="text-3xl sm:text-4xl font-bold text-center text-blue-900 mb-6">
+            Fechas Importantes
+          </h2>
+          <div className="max-w-4xl mx-auto bg-white shadow-md rounded-lg p-6">
+            <p className="text-gray-700 mb-4">
+              A continuación, algunas fechas importantes que debes tener en cuenta:
+            </p>
+            <ul className="list-disc list-inside space-y-4 text-gray-700">
+              <li>
+                <span className="font-semibold text-blue-900">Apertura de Inscripciones:</span> 1 de octubre de 2025
+              </li>
+              <li>
+                <span className="font-semibold text-blue-900">Cierre de Inscripciones:</span> 15 de noviembre de 2025
+              </li>
+              <li>
+                <span className="font-semibold text-blue-900">Entrevistas:</span> Del 20 al 30 de noviembre de 2025
+              </li>
+              <li>
+                <span className="font-semibold text-blue-900">Publicación de Resultados:</span> 5 de diciembre de 2025
+              </li>
+              <li>
+                <span className="font-semibold text-blue-900">Matrícula Abierta:</span> Del 6 al 20 de diciembre de 2025
+              </li>
+            </ul>
           </div>
         </div>
-      </section>
-
-
-{/* Requisitos */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-3xl font-bold text-blue-900 text-center mb-12">Requisitos de Admisión</h2>
-          
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-blue-50 rounded-lg p-8">
-              <h3 className="text-xl font-bold text-blue-900 mb-4">Documentos Requeridos</h3>
-              <ul className="space-y-2 text-gray-700">
-                <li className="flex items-start">
-                  <i className="ri-check-line text-green-600 mr-2 mt-1"></i>
-                  Registro civil de nacimiento (original)
-                </li>
-                <li className="flex items-start">
-                  <i className="ri-check-line text-green-600 mr-2 mt-1"></i>
-                  Fotocopia de la cédula de ciudadanía de los padres
-                </li>
-                <li className="flex items-start">
-                  <i className="ri-check-line text-green-600 mr-2 mt-1"></i>
-                  Certificado médico actualizado
-                </li>
-                <li className="flex items-start">
-                  <i className="ri-check-line text-green-600 mr-2 mt-1"></i>
-                  Carnet de vacunas al día
-                </li>
-                <li className="flex items-start">
-                  <i className="ri-check-line text-green-600 mr-2 mt-1"></i>
-                  Boletín de calificaciones del último año cursado
-                </li>
-                <li className="flex items-start">
-                  <i className="ri-check-line text-green-600 mr-2 mt-1"></i>
-                  Certificado de comportamiento del colegio anterior
-                </li>
-                <li className="flex items-start">
-                  <i className="ri-check-line text-green-600 mr-2 mt-1"></i>
-                  3 fotos tamaño 3x4 fondo blanco
-                </li>
-              </ul>
-            </div>
-            
-            <div className="bg-green-50 rounded-lg p-8">
-              <h3 className="text-xl font-bold text-blue-900 mb-4">Fechas Importantes</h3>
-              <div className="space-y-4 text-gray-700">
-                <div className="flex items-center">
-                  <i className="ri-calendar-line text-blue-600 mr-3"></i>
-                  <div>
-                    <p className="font-semibold">Inscripciones Abiertas</p>
-                    <p className="text-sm text-gray-600">Julio - Diciembre 2025</p>
-                  </div>
-                </div>
-                <div className="flex items-center">
-                  <i className="ri-calendar-line text-blue-600 mr-3"></i>
-                  <div>
-                    <p className="font-semibold">Entrevistas</p>
-                    <p className="text-sm text-gray-600">Julio - Febrero 2026</p>
-                  </div>
-                </div>
-                <div className="flex items-center">
-                  <i className="ri-calendar-line text-blue-600 mr-3"></i>
-                  <div>
-                    <p className="font-semibold">Matrículas</p>
-                    <p className="text-sm text-gray-600">Agosto - Abril 2026</p>
-                  </div>
-                </div>
-                <div className="flex items-center">
-                  <i className="ri-calendar-line text-blue-600 mr-3"></i>
-                  <div>
-                    <p className="font-semibold">Inicio de Clases</p>
-                    <p className="text-sm text-gray-600">Febrero 2026</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-
-{/* CTA Inscripción */}
-      <section className="py-20 bg-blue-900 text-white">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold mb-6">¿Listo para unirte a nuestra familia Gonzaguista?</h2>
-          <p className="text-xl text-blue-200 mb-8">
-            Completa tu solicitud de inscripción y da el primer paso hacia una educación de excelencia
-          </p>
-          <a
-            href="https://appsprod.cibercolegios.com/ciber_enroll/?institutionId=95"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block px-8 py-4 bg-white text-blue-900 hover:bg-gray-100 rounded-full font-semibold text-lg transition-colors"
-          >
-            Solicitar Inscripción Ahora
-          </a>
-        </div>
-      </section>
-
-
+      </div>
 
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-12">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-4 gap-8 text-center">
             <div>
-              <img src="https://static.readdy.ai/image/b422d9997318ba9404c133396eb0082a/f0b6df53262c2786638b3d4d8768e052.png" alt="Logo Colegio Nuevo San Luis Gonzaga" className="h-16 w-auto mb-4" />
-              <p className="text-gray-400 text-sm">
-                Formando líderes del futuro desde 1926 con excelencia académica y valores católicos.
-              </p>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Enlaces Rápidos</h4>
-              <ul className="space-y-2 text-sm text-gray-400">
-                <li><Link href="/" className="hover:text-white">Inicio</Link></li>
-                <li><Link href="/admisiones" className="hover:text-white">Admisiones</Link></li>
-                <li><Link href="/nosotros" className="hover:text-white">Nosotros</Link></li>
-                <li><Link href="/contacto" className="hover:text-white">Contacto</Link></li>
+              <h3 className="text-lg font-semibold mb-4">Enlaces Rápidos</h3>
+              <ul className="space-y-2">
+                <li>
+                  <Link href="/" className="text-gray-400 hover:text-white transition-colors">
+                    Inicio
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/nosotros" className="text-gray-400 hover:text-white transition-colors">
+                    Nosotros
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/admisiones" className="text-gray-400 hover:text-white transition-colors">
+                    Admisiones
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/contacto" className="text-gray-400 hover:text-white transition-colors">
+                    Contacto
+                  </Link>
+                </li>
               </ul>
             </div>
+
             <div>
-              <h4 className="font-semibold mb-4">Servicios</h4>
-              <ul className="space-y-2 text-sm text-gray-400">
-                <li>Preescolar</li>
-                <li>Educación Primaria</li>
-                <li>Educación Secundaria</li>
-                <li>Educación Bilingüe</li>
+              <h3 className="text-lg font-semibold mb-4">Contáctanos</h3>
+              <ul className="space-y-2">
+                <li className="text-gray-400">
+                  <i className="ri-map-pin-line"></i> Calle Falsa 123, Bogotá, Colombia
+                </li>
+                <li className="text-gray-400">
+                  <i className="ri-mail-line"></i> info@colegionuevosanluisgonzaga.edu.co
+                </li>
+                <li className="text-gray-400">
+                  <i className="ri-phone-line"></i> +57 1 2345678
+                </li>
               </ul>
             </div>
+
             <div>
-              <h4 className="font-semibold mb-4">Plataformas</h4>
-              <div className="space-y-2">
-                <a href="https://lms30.uno-internacional.com/login/access" target="_blank" rel="noopener noreferrer" className="block text-sm text-gray-400 hover:text-white">
-                  UNOi Santillana
+              <h3 className="text-lg font-semibold mb-4">Síguenos</h3>
+              <div className="flex justify-center space-x-4">
+                <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                  <i className="ri-facebook-line"></i>
                 </a>
-                <a href="https://www.cibercolegios.com/" target="_blank" rel="noopener noreferrer" className="block text-sm text-gray-400 hover:text-white">
-                  Cibercolegios
+                <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                  <i className="ri-instagram-line"></i>
                 </a>
-                <a href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=12695&searchedCategoryId=&searchedAgreementName=PEDAGOGICOS%20ASOCIADOS%20SAS" target="_blank" rel="noopener noreferrer" className="block text-sm text-gray-400 hover:text-white">
-                  PSE - Pagos en Línea
+                <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                  <i className="ri-twitter-line"></i>
+                </a>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                  <i className="ri-youtube-line"></i>
                 </a>
               </div>
             </div>
-          </div>
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center">
-            <p className="text-gray-400 text-sm">© 2025 Colegio Nuevo San Luis Gonzaga. Todos los derechos reservados.</p>
+
+            <div>
+              <h3 className="text-lg font-semibold mb-4">Información Adicional</h3>
+              <p className="text-gray-400 text-sm">
+                © 2025 Colegio Nuevo San Luis Gonzaga. Todos los derechos reservados.
+              </p>
+              <div className="mt-2">
+                <Link href="/admin" className="underline hover:text-blue-300">
+                  Ingresar al panel de administración
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </footer>

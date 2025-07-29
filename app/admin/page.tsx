@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
@@ -36,46 +36,93 @@ export default function Admin() {
   const [editGalleryIdx, setEditGalleryIdx] = useState<number | null>(null);
   const [draggedGalleryIdx, setDraggedGalleryIdx] = useState<number | null>(null);
 
-  // Cargar datos desde la API
+  // Estados para datos originales de la base de datos
+  const [originalBanner, setOriginalBanner] = useState<any[]>([]);
+  const [originalNews, setOriginalNews] = useState<any[]>([]);
+  const [originalGallery, setOriginalGallery] = useState<any[]>([]);
+
+  // Cargar datos desde la base de datos al montar
   useEffect(() => {
-    // Solo ejecuta en el cliente (Next.js App Router puede intentar SSR)
-    if (typeof window === "undefined") return;
     fetch('/api/banner')
       .then(res => res.json())
-      .then(data => setBannerImages(Array.isArray(data) ? data : []));
+      .then(data => {
+        setBannerImages(Array.isArray(data) ? data : []);
+        setOriginalBanner(Array.isArray(data) ? data : []);
+      });
     fetch('/api/news')
       .then(res => res.json())
-      .then(data => setNews(Array.isArray(data) ? data : []));
+      .then(data => {
+        setNews(Array.isArray(data) ? data : []);
+        setOriginalNews(Array.isArray(data) ? data : []);
+      });
     fetch('/api/gallery')
       .then(res => res.json())
-      .then(data => setGallery(Array.isArray(data) ? data : []));
+      .then(data => {
+        setGallery(Array.isArray(data) ? data : []);
+        setOriginalGallery(Array.isArray(data) ? data : []);
+      });
   }, []);
 
-  // Guardar cambios en MongoDB Atlas usando endpoints internos
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    fetch('/api/banner', {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ items: bannerImages })
-    });
-  }, [bannerImages]);
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    fetch('/api/news', {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ items: news })
-    });
-  }, [news]);
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    fetch('/api/gallery', {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ items: gallery })
-    });
-  }, [gallery]);
+  // Función para comparar si un objeto existe en un array (por campos)
+  function isItemInArray(item: any, arr: any[]) {
+    return arr.some(dbItem =>
+      Object.keys(item).every(key => dbItem[key] === item[key])
+    );
+  }
+
+  // Guardar solo los nuevos en la base de datos
+  const saveBanner = async () => {
+    const newItems = bannerImages.filter(item => !isItemInArray(item, originalBanner));
+    if (newItems.length > 0) {
+      await fetch('/api/banner', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ items: [...originalBanner, ...newItems] })
+      });
+      setOriginalBanner([...originalBanner, ...newItems]);
+      alert('Banner guardado.');
+    } else {
+      alert('No hay cambios nuevos para guardar.');
+    }
+  };
+
+  const saveNews = async () => {
+    const newItems = news.filter(item => !isItemInArray(item, originalNews));
+    if (newItems.length > 0) {
+      await fetch('/api/news', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ items: [...originalNews, ...newItems] })
+      });
+      setOriginalNews([...originalNews, ...newItems]);
+      alert('Noticias guardadas.');
+    } else {
+      alert('No hay cambios nuevos para guardar.');
+    }
+  };
+
+  const saveGallery = async () => {
+    const newItems = gallery.filter(item => !isItemInArray(item, originalGallery));
+    if (newItems.length > 0) {
+      await fetch('/api/gallery', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ items: [...originalGallery, ...newItems] })
+      });
+      setOriginalGallery([...originalGallery, ...newItems]);
+      alert('Galería guardada.');
+    } else {
+      alert('No hay cambios nuevos para guardar.');
+    }
+  };
+
+  // Cerrar sesión (opcional)
+  const handleLogout = () => {
+    setIsModalOpen(true);
+    setUsername('');
+    setPassword('');
+    setError('');
+  };
 
   // Banner form handlers
   const handleBannerChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -361,6 +408,12 @@ export default function Admin() {
                 )}
               </div>
             </form>
+            <button
+              onClick={saveBanner}
+              className="mt-4 px-6 py-2 bg-green-700 text-white rounded-full font-semibold hover:bg-green-800 transition-colors"
+            >
+              Guardar cambios
+            </button>
             <div className="grid md:grid-cols-4 gap-4">
               {bannerImages.map((img, idx) => (
                 <div
@@ -452,6 +505,12 @@ export default function Admin() {
                 )}
               </div>
             </form>
+            <button
+              onClick={saveNews}
+              className="mt-4 px-6 py-2 bg-green-700 text-white rounded-full font-semibold hover:bg-green-800 transition-colors"
+            >
+              Guardar cambios
+            </button>
             <div className="grid md:grid-cols-3 gap-8">
               {news.map((item, idx) => (
                 <div
@@ -544,6 +603,12 @@ export default function Admin() {
                 )}
               </div>
             </form>
+            <button
+              onClick={saveGallery}
+              className="mt-4 px-6 py-2 bg-green-700 text-white rounded-full font-semibold hover:bg-green-800 transition-colors"
+            >
+              Guardar cambios
+            </button>
             <div className="grid md:grid-cols-5 gap-4">
               {gallery.map((img, idx) => (
                 <div
@@ -578,7 +643,19 @@ export default function Admin() {
           </div>
         </div>
       </section>
-      {/* ...existing footer... */}
+      {/* Footer */}
+      <footer className="bg-blue-900 text-white py-6 mt-12">
+        <div className="max-w-7xl mx-auto px-6 text-center">
+          <div className="text-sm">
+            © {new Date().getFullYear()} Colegio Nuevo San Luis Gonzaga. Todos los derechos reservados.
+          </div>
+          <div className="mt-2">
+            <Link href="/admin" className="underline hover:text-blue-300">
+              Ingresar al panel de administración
+            </Link>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }

@@ -353,6 +353,11 @@ export default function Nosotros() {
             <p className="text-gray-400 text-sm">
               © 2025 Colegio Nuevo San Luis Gonzaga. Todos los derechos reservados.
             </p>
+            <div className="mt-2">
+              <Link href="/admin" className="underline hover:text-blue-300">
+                Ingresar al panel de administración
+              </Link>
+            </div>
           </div>
         </div>
       </footer>
