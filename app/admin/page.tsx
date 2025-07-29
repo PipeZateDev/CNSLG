@@ -4,6 +4,11 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
+// Agrega este import para usar la API de tu backend
+// (No puedes conectar directamente a MongoDB Atlas desde el frontend por seguridad.)
+// Debes crear una API en /api que maneje la conexión a MongoDB.
+// Aquí te muestro cómo hacerlo con fetch a endpoints internos de Next.js API routes.
+
 export default function Admin() {
   const router = useRouter();
 
@@ -37,25 +42,44 @@ export default function Admin() {
   const [editGalleryIdx, setEditGalleryIdx] = useState<number | null>(null);
   const [draggedGalleryIdx, setDraggedGalleryIdx] = useState<number | null>(null);
 
-  // Cargar datos publicados al iniciar
+  // Cambia los efectos para cargar datos desde la API (MongoDB Atlas)
   useEffect(() => {
-    const storedBanner = localStorage.getItem('bannerImages');
-    const storedNews = localStorage.getItem('news');
-    const storedGallery = localStorage.getItem('gallery');
-    if (storedBanner) setBannerImages(JSON.parse(storedBanner));
-    if (storedNews) setNews(JSON.parse(storedNews));
-    if (storedGallery) setGallery(JSON.parse(storedGallery));
+    // Leer datos de MongoDB Atlas usando endpoints internos
+    fetch('/api/banner')
+      .then(res => res.json())
+      .then(data => setBannerImages(data || []));
+    fetch('/api/news')
+      .then(res => res.json())
+      .then(data => setNews(data || []));
+    fetch('/api/gallery')
+      .then(res => res.json())
+      .then(data => setGallery(data || []));
   }, []);
 
-  // Guardar cambios automáticamente en localStorage (publicados)
+  // Guardar cambios en MongoDB Atlas usando endpoints internos
   useEffect(() => {
-    localStorage.setItem('bannerImages', JSON.stringify(bannerImages));
+    if (bannerImages.length > 0)
+      fetch('/api/banner', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(bannerImages)
+      });
   }, [bannerImages]);
   useEffect(() => {
-    localStorage.setItem('news', JSON.stringify(news));
+    if (news.length > 0)
+      fetch('/api/news', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(news)
+      });
   }, [news]);
   useEffect(() => {
-    localStorage.setItem('gallery', JSON.stringify(gallery));
+    if (gallery.length > 0)
+      fetch('/api/gallery', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(gallery)
+      });
   }, [gallery]);
 
   // Banner form handlers
