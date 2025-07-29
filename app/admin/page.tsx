@@ -237,8 +237,8 @@ export default function Admin() {
   };
 
   // Instrucción para subir imágenes a imgbb
-  const imgbbUser = "PipeZate";
-  const imgbbAlbum = "https://ibb.co/album/hc2G29";
+  const imgbbUser = "Soporte";
+  const imgbbAlbum = "https://soporte-cnslg.imgbb.com/";
   const imgbbProfile = "https://PipeZate.imgbb.com/";
 
   return (

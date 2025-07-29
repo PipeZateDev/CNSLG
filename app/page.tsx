@@ -206,7 +206,7 @@ export default function Home() {
 
       {/* Banner Section */}
       <section className="pt-20 relative">
-        <div className="relative h-96 md:h-[650px] overflow-hidden w-full md:w-[80%] mx-auto">
+        <div className="relative h-96 md:h-[600px] overflow-hidden w-full md:w-[80%] mx-auto">
           {bannerImages.length === 0 ? (
             <div className="flex items-center justify-center h-full text-gray-400">
               No hay imágenes de banner disponibles.
