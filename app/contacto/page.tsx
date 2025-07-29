@@ -430,75 +430,15 @@ export default function Contacto() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-4 gap-8 text-center">
-            <div>
-              <img 
-                src="https://static.readdy.ai/image/b422d9997318ba9404c133396eb0082a/f0b6df53262c2786638b3d4d8768e052.png" 
-                alt="Logo Colegio Nuevo San Luis Gonzaga" 
-                className="h-16 w-auto mb-4 mx-auto"
-              />
-              <p className="text-gray-400 text-sm">
-                Formando líderes del futuro desde 1926 con excelencia académica y valores católicos.
-              </p>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold mb-4">Enlaces Rápidos</h4>
-              <ul className="space-y-2 text-sm text-gray-400">
-                <li><Link href="/" className="hover:text-white transition-colors cursor-pointer">Inicio</Link></li>
-                <li><Link href="/admisiones" className="hover:text-white transition-colors cursor-pointer">Admisiones</Link></li>
-                <li><Link href="/nosotros" className="hover:text-white transition-colors cursor-pointer">Nosotros</Link></li>
-                <li><Link href="/contacto" className="hover:text-white transition-colors cursor-pointer">Contacto</Link></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold mb-4">Servicios</h4>
-              <ul className="space-y-2 text-sm text-gray-400">
-                <li>Preescolar</li>
-                <li>Educación Primaria</li>
-                <li>Educación Secundaria</li>
-                <li>Educación Bilingüe</li>
-              </ul>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold mb-4">Plataformas</h4>
-              <div className="space-y-2">
-                <a 
-                  href="https://lms30.uno-internacional.com/login/access" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="block text-sm text-gray-400 hover:text-white transition-colors cursor-pointer"
-                >
-                  UNOi Santillana
-                </a>
-                <a 
-                  href="https://www.cibercolegios.com/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="block text-sm text-gray-400 hover:text-white transition-colors cursor-pointer"
-                >
-                  Cibercolegios
-                </a>
-                <a 
-                  href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=12695&searchedCategoryId=&searchedAgreementName=PEDAGOGICOS%20ASOCIADOS%20SAS" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="block text-sm text-gray-400 hover:text-white transition-colors cursor-pointer"
-                >
-                  PSE - Pagos en Línea
-                </a>
-              </div>
-            </div>
+      <footer className="bg-blue-900 text-white py-6 mt-12">
+        <div className="max-w-7xl mx-auto px-6 text-center">
+          <div className="text-sm">
+            © {new Date().getFullYear()} Colegio Nuevo San Luis Gonzaga. Todos los derechos reservados.
           </div>
-          
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center">
-            <p className="text-gray-400 text-sm">
-              © 2025 Colegio Nuevo San Luis Gonzaga. Todos los derechos reservados.
-            </p>
+          <div className="mt-2">
+            <Link href="/admin" className="underline hover:text-blue-300">
+              Ingresar al panel de administración
+            </Link>
           </div>
         </div>
       </footer>
