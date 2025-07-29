@@ -4,6 +4,39 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
+// Utilidades para Google Sheets
+const SHEET_ID = '2PACX-1vSantrG3KyxrpRWutuIkoLZpr2MJXcmHbvfPsMP6eOYcuTnXS38V_gstOvk8TdyHWIOZW6OXuBdqPLm';
+const SHEET_BASE = 'https://docs.google.com/spreadsheets/d/e/' + SHEET_ID + '/gviz/tq?tqx=out:json&sheet=';
+
+// Helper para leer datos de Google Sheets
+async function fetchSheet(tab: string) {
+  const res = await fetch(SHEET_BASE + tab);
+  const text = await res.text();
+  // Elimina el "google.visualization.Query.setResponse(" y el paréntesis final
+  const json = JSON.parse(text.substring(47, text.length - 2));
+  const cols = json.table.cols.map((c: any) => c.label);
+  return json.table.rows.map((row: any) => {
+    const obj: any = {};
+    row.c.forEach((cell: any, idx: number) => {
+      obj[cols[idx]] = cell ? cell.v : '';
+    });
+    return obj;
+  });
+}
+
+// Helper para guardar datos en Google Sheets vía Apps Script WebApp
+// Debes crear un WebApp en tu Google Sheets y poner la URL aquí
+const SHEETS_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbwqxnP4uVQfvJhlcnqhnx-x0g_yMwt_BhK3I1GM8RHf-wkMqPvoAay_2xDS8N5FaS9Z/exec'; // <-- Debes crear y poner tu URL
+
+async function saveSheet(tab: string, data: any[]) {
+  // El WebApp debe aceptar POST { tab, data }
+  await fetch(SHEETS_WEBAPP_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ tab, data }),
+  });
+}
+
 export default function Admin() {
   const router = useRouter();
 
@@ -13,49 +46,42 @@ export default function Admin() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  // Banner images state
+  // Cambia los estados iniciales a vacíos, se llenarán desde Google Sheets
   const [bannerImages, setBannerImages] = useState<{ url: string; title?: string; description?: string }[]>([]);
+  const [news, setNews] = useState<{ title: string; date: string; description: string; image: string }[]>([]);
+  const [gallery, setGallery] = useState<{ url: string; title?: string }[]>([]);
+
+  // Banner form state
   const [bannerForm, setBannerForm] = useState({ url: '', title: '', description: '' });
   const [editBannerIdx, setEditBannerIdx] = useState<number | null>(null);
   const [draggedBannerIdx, setDraggedBannerIdx] = useState<number | null>(null);
 
-  // News state
-  const [news, setNews] = useState<{ title: string; date: string; description: string; image: string }[]>([]);
+  // News form state
   const [newsForm, setNewsForm] = useState({ title: '', date: '', description: '', image: '' });
   const [editNewsIdx, setEditNewsIdx] = useState<number | null>(null);
   const [draggedNewsIdx, setDraggedNewsIdx] = useState<number | null>(null);
 
   // Galería state y handlers (deben estar antes del return)
-  const [gallery, setGallery] = useState<{ url: string; title?: string }[]>([
-    { url: "https://readdy.ai/api/search-image?query=Modern%20school%20classroom%20with%20students%20studying%2C%20Colombian%20students%20in%20uniforms%2C%20contemporary%20educational%20environment%2C%20natural%20lighting%2C%20academic%20atmosphere%2C%20engaged%20learning%2C%20blue%20and%20white%20uniforms&width=400&height=300&seq=gallery1&orientation=landscape", title: "Estudiantes en clase" },
-    { url: "https://readdy.ai/api/search-image?query=School%20sports%20activities%2C%20students%20playing%20soccer%2C%20Colombian%20school%20sports%2C%20outdoor%20activities%2C%20teamwork%2C%20athletic%20field%2C%20healthy%20lifestyle%2C%20school%20sports%20uniform&width=400&height=300&seq=gallery2&orientation=landscape", title: "Actividades deportivas" },
-    { url: "https://readdy.ai/api/search-image?query=School%20science%20laboratory%2C%20students%20conducting%20experiments%2C%20modern%20lab%20equipment%2C%20STEM%20education%2C%20Colombian%20school%20facilities%2C%20laboratory%20safety%2C%20educational%20technology%2C%20scientific%20learning&width=400&height=300&seq=gallery3&orientation=landscape", title: "Laboratorio de ciencias" },
-    { url: "https://readdy.ai/api/search-image?query=School%20library%20with%20students%20reading%2C%20modern%20educational%20library%2C%20quiet%20study%20space%2C%20book%20shelves%2C%20academic%20research%2C%20Colombian%20school%20interior%2C%20reading%20culture%2C%20educational%20resources&width=400&height=300&seq=gallery4&orientation=landscape", title: "Biblioteca escolar" },
-    { url: "https://readdy.ai/api/search-image?query=School%20graduation%20ceremony%2C%20students%20in%20caps%20and%20gowns%2C%20proud%20families%2C%20academic%20achievement%2C%20Colombian%20graduation%20tradition%2C%20celebration%20of%20success%2C%20educational%20milestone&width=400&height=300&seq=gallery6&orientation=landscape", title: "Ceremonia de graduación" }
-  ]);
   const [galleryForm, setGalleryForm] = useState({ url: '', title: '' });
   const [editGalleryIdx, setEditGalleryIdx] = useState<number | null>(null);
   const [draggedGalleryIdx, setDraggedGalleryIdx] = useState<number | null>(null);
 
-  // Cargar datos publicados al iniciar
+  // Cargar datos desde Google Sheets al iniciar
   useEffect(() => {
-    const storedBanner = localStorage.getItem('bannerImages');
-    const storedNews = localStorage.getItem('news');
-    const storedGallery = localStorage.getItem('gallery');
-    if (storedBanner) setBannerImages(JSON.parse(storedBanner));
-    if (storedNews) setNews(JSON.parse(storedNews));
-    if (storedGallery) setGallery(JSON.parse(storedGallery));
+    fetchSheet('BANNER').then(rows => setBannerImages(rows));
+    fetchSheet('NEWS').then(rows => setNews(rows));
+    fetchSheet('GALERY').then(rows => setGallery(rows));
   }, []);
 
-  // Guardar cambios automáticamente en localStorage (publicados)
+  // Guardar cambios en Google Sheets cuando cambian los datos
   useEffect(() => {
-    localStorage.setItem('bannerImages', JSON.stringify(bannerImages));
+    if (bannerImages.length > 0) saveSheet('BANNER', bannerImages);
   }, [bannerImages]);
   useEffect(() => {
-    localStorage.setItem('news', JSON.stringify(news));
+    if (news.length > 0) saveSheet('NEWS', news);
   }, [news]);
   useEffect(() => {
-    localStorage.setItem('gallery', JSON.stringify(gallery));
+    if (gallery.length > 0) saveSheet('GALERY', gallery);
   }, [gallery]);
 
   // Banner form handlers
@@ -280,18 +306,20 @@ export default function Admin() {
 
           {/* Sección para subir imágenes a imgbb */}
           <div className="mb-10 bg-blue-50 rounded-lg p-6 shadow text-center">
-            <h3 className="text-lg font-semibold text-blue-900 mb-2">Sube tus imágenes a imgbb</h3>
+            <h3 className="text-lg font-semibold text-blue-900 mb-2">¿Cómo subir imágenes?</h3>
             <p className="text-gray-700 mb-2">
-              1. Sube la imagen al <a href={imgbbAlbum} target="_blank" rel="noopener noreferrer" className="text-blue-700 underline">álbum CNSLG</a> de imgbb.<br />
-              2. Copia la URL directa y pégala en el campo correspondiente de Banner, Noticias o Galería.
+              Sube tus imágenes a <a href={imgbbProfile} target="_blank" rel="noopener noreferrer" className="text-blue-700 underline">imgbb.com</a> usando el usuario <span className="font-semibold">{imgbbUser}</span> y el álbum <a href={imgbbAlbum} target="_blank" rel="noopener noreferrer" className="text-blue-700 underline">CNSLG</a>.
+            </p>
+            <p className="text-gray-700 mb-2">
+              Luego, copia la URL directa de la imagen y pégala en el campo correspondiente de la sección que desees (Banner, Noticias o Galería).
             </p>
             <a
-              href={imgbbAlbum}
+              href="https://imgbb.com/"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block mt-2 px-6 py-2 bg-blue-900 text-white rounded-full font-semibold hover:bg-blue-800 transition-colors"
             >
-              Ir al álbum CNSLG en imgbb
+              Ir a imgbb.com
             </a>
           </div>
 
