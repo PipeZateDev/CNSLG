@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
@@ -22,6 +22,10 @@ export default function Admin() {
   const [news, setNews] = useState<{ title: string; date: string; description: string; image: string }[]>([]);
   const [newsForm, setNewsForm] = useState({ title: '', date: '', description: '', image: '' });
   const [editNewsIdx, setEditNewsIdx] = useState<number | null>(null);
+
+  // Drag state for banner and news
+  const [draggedBannerIdx, setDraggedBannerIdx] = useState<number | null>(null);
+  const [draggedNewsIdx, setDraggedNewsIdx] = useState<number | null>(null);
 
   // Cargar datos publicados al iniciar
   useEffect(() => {
@@ -55,7 +59,6 @@ export default function Admin() {
     setBannerForm({ url: '', title: '', description: '' });
   };
   const handleEditBanner = (idx: number) => {
-    // Validar que el índice exista y el objeto tenga las propiedades necesarias
     const img = bannerImages[idx];
     setBannerForm({
       url: img?.url || '',
@@ -72,6 +75,18 @@ export default function Admin() {
     setBannerImages(bannerImages.filter((_, i) => i !== idx));
     if (editBannerIdx === idx) handleCancelEditBanner();
   };
+
+  // Drag and drop for banner
+  const handleBannerDragStart = (idx: number) => setDraggedBannerIdx(idx);
+  const handleBannerDragOver = (idx: number) => {
+    if (draggedBannerIdx === null || draggedBannerIdx === idx) return;
+    const updated = [...bannerImages];
+    const [removed] = updated.splice(draggedBannerIdx, 1);
+    updated.splice(idx, 0, removed);
+    setBannerImages(updated);
+    setDraggedBannerIdx(idx);
+  };
+  const handleBannerDragEnd = () => setDraggedBannerIdx(null);
 
   // News form handlers
   const handleNewsChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -100,6 +115,18 @@ export default function Admin() {
     setNews(news.filter((_, i) => i !== idx));
     if (editNewsIdx === idx) handleCancelEditNews();
   };
+
+  // Drag and drop for news
+  const handleNewsDragStart = (idx: number) => setDraggedNewsIdx(idx);
+  const handleNewsDragOver = (idx: number) => {
+    if (draggedNewsIdx === null || draggedNewsIdx === idx) return;
+    const updated = [...news];
+    const [removed] = updated.splice(draggedNewsIdx, 1);
+    updated.splice(idx, 0, removed);
+    setNews(updated);
+    setDraggedNewsIdx(idx);
+  };
+  const handleNewsDragEnd = () => setDraggedNewsIdx(null);
 
   // Handle login
   const handleLogin = () => {
@@ -235,7 +262,16 @@ export default function Admin() {
             </form>
             <div className="grid md:grid-cols-4 gap-4">
               {bannerImages.map((img, idx) => (
-                <div key={idx} className="bg-white rounded-lg shadow p-2 relative">
+                <div
+                  key={idx}
+                  className={`bg-white rounded-lg shadow p-2 relative ${draggedBannerIdx === idx ? 'opacity-60' : ''}`}
+                  draggable
+                  onDragStart={() => handleBannerDragStart(idx)}
+                  onDragOver={(e) => { e.preventDefault(); handleBannerDragOver(idx); }}
+                  onDragEnd={handleBannerDragEnd}
+                  onDrop={handleBannerDragEnd}
+                  style={{ cursor: 'grab' }}
+                >
                   <img src={img.url} alt={img.title} className="w-full h-32 object-cover rounded" />
                   <button
                     onClick={() => removeBannerImage(idx)}
@@ -273,12 +309,12 @@ export default function Admin() {
                 />
               </div>
               <div className="mb-4">
+                {/* Campo de fecha tipo date */}
                 <input
-                  type="text"
+                  type="date"
                   name="date"
                   value={newsForm.date}
                   onChange={handleNewsChange}
-                  placeholder="Fecha (ej: 20 Jun 2025)"
                   className="w-full px-4 py-2 rounded border border-gray-300"
                   required
                 />
@@ -317,7 +353,16 @@ export default function Admin() {
             </form>
             <div className="grid md:grid-cols-3 gap-8">
               {news.map((item, idx) => (
-                <div key={idx} className="bg-white rounded-lg shadow-lg overflow-hidden relative">
+                <div
+                  key={idx}
+                  className={`bg-white rounded-lg shadow-lg overflow-hidden relative ${draggedNewsIdx === idx ? 'opacity-60' : ''}`}
+                  draggable
+                  onDragStart={() => handleNewsDragStart(idx)}
+                  onDragOver={(e) => { e.preventDefault(); handleNewsDragOver(idx); }}
+                  onDragEnd={handleNewsDragEnd}
+                  onDrop={handleNewsDragEnd}
+                  style={{ cursor: 'grab' }}
+                >
                   <img 
                     src={item.image}
                     alt={item.title}
