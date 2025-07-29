@@ -229,6 +229,31 @@ export default function Home() {
             bannerImages.map((image, index) => (
               <div key={index} className={`absolute inset-0 transition-opacity duration-600 ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'}`}>
                 <img src={image.link} alt={image.Titulo} className="w-full h-full object-cover object-center" />
+                {/* Botón solo en la primera imagen */}
+                {index === 0 && (
+                  <a
+                    href="https://docs.google.com/forms/d/e/1FAIpQLSeORCc-ICVrWFFREQ_THIBY5lPYKMXKB1WLAqobKrfWScRqSg/viewform?usp=sharing&ouid=114310616812674125470"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="absolute left-1/2 transform -translate-x-1/2"
+                    style={{
+                      top: '10%',
+                      zIndex: 30,
+                    }}
+                  >
+                    <span className="px-8 py-4 rounded-full font-bold text-blue-900 text-lg"
+                      style={{
+                        background: 'rgba(255,255,255,0.3)',
+                        backdropFilter: 'blur(2px)',
+                        border: '2px solid #1e3a8a',
+                        boxShadow: '0 2px 8px rgba(30,58,138,0.10)',
+                        display: 'inline-block',
+                      }}
+                    >
+                      Aparta tu cupo ahora
+                    </span>
+                  </a>
+                )}
               </div>
             ))
           )}
