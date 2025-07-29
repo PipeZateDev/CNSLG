@@ -17,22 +17,34 @@ export default function Admin() {
   const [bannerImages, setBannerImages] = useState<{ url: string; title?: string; description?: string }[]>([]);
   const [bannerForm, setBannerForm] = useState({ url: '', title: '', description: '' });
   const [editBannerIdx, setEditBannerIdx] = useState<number | null>(null);
+  const [draggedBannerIdx, setDraggedBannerIdx] = useState<number | null>(null);
 
   // News state
   const [news, setNews] = useState<{ title: string; date: string; description: string; image: string }[]>([]);
   const [newsForm, setNewsForm] = useState({ title: '', date: '', description: '', image: '' });
   const [editNewsIdx, setEditNewsIdx] = useState<number | null>(null);
-
-  // Drag state for banner and news
-  const [draggedBannerIdx, setDraggedBannerIdx] = useState<number | null>(null);
   const [draggedNewsIdx, setDraggedNewsIdx] = useState<number | null>(null);
+
+  // Galería state y handlers (deben estar antes del return)
+  const [gallery, setGallery] = useState<{ url: string; title?: string }[]>([
+    { url: "https://readdy.ai/api/search-image?query=Modern%20school%20classroom%20with%20students%20studying%2C%20Colombian%20students%20in%20uniforms%2C%20contemporary%20educational%20environment%2C%20natural%20lighting%2C%20academic%20atmosphere%2C%20engaged%20learning%2C%20blue%20and%20white%20uniforms&width=400&height=300&seq=gallery1&orientation=landscape", title: "Estudiantes en clase" },
+    { url: "https://readdy.ai/api/search-image?query=School%20sports%20activities%2C%20students%20playing%20soccer%2C%20Colombian%20school%20sports%2C%20outdoor%20activities%2C%20teamwork%2C%20athletic%20field%2C%20healthy%20lifestyle%2C%20school%20sports%20uniform&width=400&height=300&seq=gallery2&orientation=landscape", title: "Actividades deportivas" },
+    { url: "https://readdy.ai/api/search-image?query=School%20science%20laboratory%2C%20students%20conducting%20experiments%2C%20modern%20lab%20equipment%2C%20STEM%20education%2C%20Colombian%20school%20facilities%2C%20laboratory%20safety%2C%20educational%20technology%2C%20scientific%20learning&width=400&height=300&seq=gallery3&orientation=landscape", title: "Laboratorio de ciencias" },
+    { url: "https://readdy.ai/api/search-image?query=School%20library%20with%20students%20reading%2C%20modern%20educational%20library%2C%20quiet%20study%20space%2C%20book%20shelves%2C%20academic%20research%2C%20Colombian%20school%20interior%2C%20reading%20culture%2C%20educational%20resources&width=400&height=300&seq=gallery4&orientation=landscape", title: "Biblioteca escolar" },
+    { url: "https://readdy.ai/api/search-image?query=School%20graduation%20ceremony%2C%20students%20in%20caps%20and%20gowns%2C%20proud%20families%2C%20academic%20achievement%2C%20Colombian%20graduation%20tradition%2C%20celebration%20of%20success%2C%20educational%20milestone&width=400&height=300&seq=gallery6&orientation=landscape", title: "Ceremonia de graduación" }
+  ]);
+  const [galleryForm, setGalleryForm] = useState({ url: '', title: '' });
+  const [editGalleryIdx, setEditGalleryIdx] = useState<number | null>(null);
+  const [draggedGalleryIdx, setDraggedGalleryIdx] = useState<number | null>(null);
 
   // Cargar datos publicados al iniciar
   useEffect(() => {
     const storedBanner = localStorage.getItem('bannerImages');
     const storedNews = localStorage.getItem('news');
+    const storedGallery = localStorage.getItem('gallery');
     if (storedBanner) setBannerImages(JSON.parse(storedBanner));
     if (storedNews) setNews(JSON.parse(storedNews));
+    if (storedGallery) setGallery(JSON.parse(storedGallery));
   }, []);
 
   // Guardar cambios automáticamente en localStorage (publicados)
@@ -42,6 +54,9 @@ export default function Admin() {
   useEffect(() => {
     localStorage.setItem('news', JSON.stringify(news));
   }, [news]);
+  useEffect(() => {
+    localStorage.setItem('gallery', JSON.stringify(gallery));
+  }, [gallery]);
 
   // Banner form handlers
   const handleBannerChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -127,6 +142,48 @@ export default function Admin() {
     setDraggedNewsIdx(idx);
   };
   const handleNewsDragEnd = () => setDraggedNewsIdx(null);
+
+  // Gallery form handlers
+  const handleGalleryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setGalleryForm({ ...galleryForm, [e.target.name]: e.target.value });
+  };
+  const handleGallerySubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!galleryForm.url) return;
+    if (editGalleryIdx !== null) {
+      setGallery(gallery.map((img, idx) => idx === editGalleryIdx ? { ...galleryForm } : img));
+      setEditGalleryIdx(null);
+    } else {
+      setGallery([{ ...galleryForm }, ...gallery]);
+    }
+    setGalleryForm({ url: '', title: '' });
+  };
+  const handleEditGallery = (idx: number) => {
+    const img = gallery[idx];
+    setGalleryForm({
+      url: img?.url || '',
+      title: img?.title || ''
+    });
+    setEditGalleryIdx(idx);
+  };
+  const handleCancelEditGallery = () => {
+    setGalleryForm({ url: '', title: '' });
+    setEditGalleryIdx(null);
+  };
+  const removeGalleryImage = (idx: number) => {
+    setGallery(gallery.filter((_, i) => i !== idx));
+    if (editGalleryIdx === idx) handleCancelEditGallery();
+  };
+  const handleGalleryDragStart = (idx: number) => setDraggedGalleryIdx(idx);
+  const handleGalleryDragOver = (idx: number) => {
+    if (draggedGalleryIdx === null || draggedGalleryIdx === idx) return;
+    const updated = [...gallery];
+    const [removed] = updated.splice(draggedGalleryIdx, 1);
+    updated.splice(idx, 0, removed);
+    setGallery(updated);
+    setDraggedGalleryIdx(idx);
+  };
+  const handleGalleryDragEnd = () => setDraggedGalleryIdx(null);
 
   // Handle login
   const handleLogin = () => {
@@ -384,6 +441,74 @@ export default function Admin() {
                     <span className="text-sm text-blue-600 font-semibold">{item.date}</span>
                     <h3 className="text-lg font-bold text-blue-900 mb-2 mt-1">{item.title}</h3>
                     <p className="text-gray-600 text-sm">{item.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          {/* Gallery Management */}
+          <div className="mt-16">
+            <h3 className="text-xl font-semibold text-blue-900 mb-4">Gestionar imágenes de la galería</h3>
+            <form onSubmit={handleGallerySubmit} className="bg-blue-50 p-6 rounded-lg shadow mb-6">
+              <div className="mb-4">
+                <input
+                  type="text"
+                  name="url"
+                  value={galleryForm.url}
+                  onChange={handleGalleryChange}
+                  placeholder="URL de la imagen"
+                  className="w-full px-4 py-2 rounded border border-gray-300"
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <input
+                  type="text"
+                  name="title"
+                  value={galleryForm.title}
+                  onChange={handleGalleryChange}
+                  placeholder="Título (opcional)"
+                  className="w-full px-4 py-2 rounded border border-gray-300"
+                />
+              </div>
+              <div className="flex gap-2">
+                <button type="submit" className="px-6 py-2 bg-blue-900 text-white rounded-full font-semibold hover:bg-blue-800 transition-colors">
+                  {editGalleryIdx !== null ? 'Guardar Cambios' : 'Agregar Imagen'}
+                </button>
+                {editGalleryIdx !== null && (
+                  <button type="button" onClick={handleCancelEditGallery} className="px-6 py-2 bg-gray-400 text-white rounded-full font-semibold hover:bg-gray-500 transition-colors">
+                    Cancelar
+                  </button>
+                )}
+              </div>
+            </form>
+            <div className="grid md:grid-cols-5 gap-4">
+              {gallery.map((img, idx) => (
+                <div
+                  key={idx}
+                  className={`bg-white rounded-lg shadow p-2 relative ${draggedGalleryIdx === idx ? 'opacity-60' : ''}`}
+                  draggable
+                  onDragStart={() => handleGalleryDragStart(idx)}
+                  onDragOver={(e) => { e.preventDefault(); handleGalleryDragOver(idx); }}
+                  onDragEnd={handleGalleryDragEnd}
+                  onDrop={handleGalleryDragEnd}
+                  style={{ cursor: 'grab' }}
+                >
+                  <img src={img.url} alt={img.title} className="w-full h-32 object-cover rounded" />
+                  <button
+                    onClick={() => removeGalleryImage(idx)}
+                    className="absolute top-2 right-2 bg-red-600 text-white rounded-full px-2 py-1 text-xs"
+                  >
+                    Eliminar
+                  </button>
+                  <button
+                    onClick={() => handleEditGallery(idx)}
+                    className="absolute top-2 left-2 bg-yellow-500 text-white rounded-full px-2 py-1 text-xs"
+                  >
+                    Editar
+                  </button>
+                  <div className="mt-2 text-sm text-center">
+                    <strong>{img.title}</strong>
                   </div>
                 </div>
               ))}
