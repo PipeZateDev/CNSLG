@@ -1,11 +1,13 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 
 export default function Home() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   // Banner y noticias desde la API
   const [bannerImages, setBannerImages] = useState<{ link: string; Titulo?: string; Descripción?: string }[]>([]);
@@ -22,11 +24,17 @@ export default function Home() {
 
   useEffect(() => {
     if (bannerImages.length === 0) return;
-    const interval = setInterval(() => {
+    if (isPaused) {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+      return;
+    }
+    intervalRef.current = setInterval(() => {
       setCurrentImageIndex((prevIndex) => prevIndex === bannerImages.length - 1 ? 0 : prevIndex + 1);
     }, 6000);
-    return () => clearInterval(interval);
-  }, [bannerImages.length]);
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, [bannerImages.length, isPaused]);
 
   const nextImage = () => {
     setCurrentImageIndex((prevIndex) => prevIndex === bannerImages.length - 1 ? 0 : prevIndex + 1);
@@ -206,7 +214,13 @@ export default function Home() {
 
       {/* Banner Section */}
       <section className="pt-20 relative">
-        <div className="relative h-96 md:h-[600px] overflow-hidden w-full md:w-[80%] mx-auto">
+        <div
+          className="relative h-[600px] md:h-[600px] overflow-hidden w-full md:w-[80%] mx-auto"
+          onMouseDown={() => setIsPaused(true)}
+          onMouseUp={() => setIsPaused(false)}
+          onMouseLeave={() => setIsPaused(false)}
+          style={{ userSelect: 'none' }}
+        >
           {bannerImages.length === 0 ? (
             <div className="flex items-center justify-center h-full text-gray-400">
               No hay imágenes de banner disponibles.
