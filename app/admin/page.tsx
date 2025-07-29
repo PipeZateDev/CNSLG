@@ -5,9 +5,35 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 // Helper para guardar datos en Google Sheets vía Apps Script WebApp
-const SHEETS_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbwqxnP4uVQfvJhlcnqhnx-x0g_yMwt_BhK3I1GM8RHf-wkMqPvoAay_2xDS8N5FaS9Z/exec';
+const SHEETS_WEBAPP_URL = 'https://script.google.com/macros/library/d/1Y2e50R3pGUPxKcZLdP4-gXS0oJ0FRqRoq79syQfSTiwDXvg8tNhlPk4O/1';
 
 async function saveSheet(tab: string, data: any[]) {
+  // Solución CORS: No es posible desde el navegador si el WebApp no tiene CORS habilitado.
+  // Si ves el error "blocked by CORS policy", el problema está en la configuración del WebApp de Google Apps Script.
+  // Debes modificar el Apps Script para permitir CORS:
+
+  // 1. Abre tu Apps Script y reemplaza tu función doPost por esto:
+  // function doPost(e) {
+  //   // ...tu lógica...
+  //   return ContentService
+  //     .createTextOutput(JSON.stringify({ success: true }))
+  //     .setMimeType(ContentService.MimeType.JSON)
+  //     .setHeader("Access-Control-Allow-Origin", "*");
+  // }
+  //
+  // 2. Si usas doGet, igual:
+  // function doGet(e) {
+  //   // ...tu lógica...
+  //   return ContentService
+  //     .createTextOutput("OK")
+  //     .setMimeType(ContentService.MimeType.TEXT)
+  //     .setHeader("Access-Control-Allow-Origin", "*");
+  // }
+  //
+  // 3. Vuelve a desplegar el WebApp.
+  //
+  // Si no puedes modificar el WebApp, deberás hacer la petición desde un backend propio (Node.js API) y no desde el navegador.
+
   await fetch(SHEETS_WEBAPP_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
