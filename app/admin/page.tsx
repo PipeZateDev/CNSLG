@@ -46,20 +46,20 @@ export default function Admin() {
     fetch('/api/banner')
       .then(res => res.json())
       .then(data => {
-        setBannerImages(Array.isArray(data) ? data : []);
         setOriginalBanner(Array.isArray(data) ? data : []);
+        setBannerImages(Array.isArray(data) ? data : []);
       });
     fetch('/api/news')
       .then(res => res.json())
       .then(data => {
-        setNews(Array.isArray(data) ? data : []);
         setOriginalNews(Array.isArray(data) ? data : []);
+        setNews(Array.isArray(data) ? data : []);
       });
     fetch('/api/gallery')
       .then(res => res.json())
       .then(data => {
-        setGallery(Array.isArray(data) ? data : []);
         setOriginalGallery(Array.isArray(data) ? data : []);
+        setGallery(Array.isArray(data) ? data : []);
       });
   }, []);
 
@@ -175,7 +175,7 @@ export default function Admin() {
       setNews(news.map((item, idx) => idx === editNewsIdx ? { ...newsForm } : item));
       setEditNewsIdx(null);
     } else {
-      setNews([{ ...newsForm }, ...news]);
+      setNews([...news, { ...newsForm }]);
     }
     setNewsForm({ Titulo: '', Descripción: '', fecha: '', link: '' });
   };
@@ -215,7 +215,7 @@ export default function Admin() {
       setGallery(gallery.map((img, idx) => idx === editGalleryIdx ? { ...galleryForm } : img));
       setEditGalleryIdx(null);
     } else {
-      setGallery([{ ...galleryForm }, ...gallery]);
+      setGallery([...gallery, { ...galleryForm }]);
     }
     setGalleryForm({ Titulo: '', Descripción: '', fecha: '', link: '' });
   };
@@ -414,7 +414,7 @@ export default function Admin() {
             >
               Guardar cambios
             </button>
-            <div className="grid md:grid-cols-4 gap-4">
+            <div className="grid md:grid-cols-4 gap-4 mt-4">
               {bannerImages.map((img, idx) => (
                 <div
                   key={idx}
@@ -442,6 +442,7 @@ export default function Admin() {
                   <div className="mt-2 text-sm">
                     <strong>{img.Titulo}</strong>
                     <div>{img.Descripción}</div>
+                    <div className="text-xs text-gray-500">{img.fecha}</div>
                   </div>
                 </div>
               ))}
@@ -511,7 +512,7 @@ export default function Admin() {
             >
               Guardar cambios
             </button>
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-3 gap-8 mt-4">
               {news.map((item, idx) => (
                 <div
                   key={idx}
@@ -609,7 +610,7 @@ export default function Admin() {
             >
               Guardar cambios
             </button>
-            <div className="grid md:grid-cols-5 gap-4">
+            <div className="grid md:grid-cols-5 gap-4 mt-4">
               {gallery.map((img, idx) => (
                 <div
                   key={idx}
@@ -636,6 +637,8 @@ export default function Admin() {
                   </button>
                   <div className="mt-2 text-sm text-center">
                     <strong>{img.Titulo}</strong>
+                    <div>{img.Descripción}</div>
+                    <div className="text-xs text-gray-500">{img.fecha}</div>
                   </div>
                 </div>
               ))}
