@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
@@ -18,111 +18,73 @@ export default function Admin() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  // Banner state
-  const [bannerImages, setBannerImages] = useState<{ Titulo: string; Descripción: string; fecha: string; link: string }[]>([]);
-  const [bannerForm, setBannerForm] = useState({ Titulo: '', Descripción: '', fecha: '', link: '' });
+  // Banner images state
+  const [bannerImages, setBannerImages] = useState<{ url: string; title?: string; description?: string }[]>([]);
+  const [bannerForm, setBannerForm] = useState({ url: '', title: '', description: '' });
   const [editBannerIdx, setEditBannerIdx] = useState<number | null>(null);
   const [draggedBannerIdx, setDraggedBannerIdx] = useState<number | null>(null);
 
   // News state
-  const [news, setNews] = useState<{ Titulo: string; Descripción: string; fecha: string; link: string }[]>([]);
-  const [newsForm, setNewsForm] = useState({ Titulo: '', Descripción: '', fecha: '', link: '' });
+  const [news, setNews] = useState<{ title: string; date: string; description: string; image: string }[]>([]);
+  const [newsForm, setNewsForm] = useState({ title: '', date: '', description: '', image: '' });
   const [editNewsIdx, setEditNewsIdx] = useState<number | null>(null);
   const [draggedNewsIdx, setDraggedNewsIdx] = useState<number | null>(null);
 
-  // Gallery state
-  const [gallery, setGallery] = useState<{ Titulo: string; Descripción: string; fecha: string; link: string }[]>([]);
-  const [galleryForm, setGalleryForm] = useState({ Titulo: '', Descripción: '', fecha: '', link: '' });
+  // Galería state y handlers (deben estar antes del return)
+  const [gallery, setGallery] = useState<{ url: string; title?: string }[]>([
+    { url: "https://readdy.ai/api/search-image?query=Modern%20school%20classroom%20with%20students%20studying%2C%20Colombian%20students%20in%20uniforms%2C%20contemporary%20educational%20environment%2C%20natural%20lighting%2C%20academic%20atmosphere%2C%20engaged%20learning%2C%20blue%20and%20white%20uniforms&width=400&height=300&seq=gallery1&orientation=landscape", title: "Estudiantes en clase" },
+    { url: "https://readdy.ai/api/search-image?query=School%20sports%20activities%2C%20students%20playing%20soccer%2C%20Colombian%20school%20sports%2C%20outdoor%20activities%2C%20teamwork%2C%20athletic%20field%2C%20healthy%20lifestyle%2C%20school%20sports%20uniform&width=400&height=300&seq=gallery2&orientation=landscape", title: "Actividades deportivas" },
+    { url: "https://readdy.ai/api/search-image?query=School%20science%20laboratory%2C%20students%20conducting%20experiments%2C%20modern%20lab%20equipment%2C%20STEM%20education%2C%20Colombian%20school%20facilities%2C%20laboratory%20safety%2C%20educational%20technology%2C%20scientific%20learning&width=400&height=300&seq=gallery3&orientation=landscape", title: "Laboratorio de ciencias" },
+    { url: "https://readdy.ai/api/search-image?query=School%20library%20with%20students%20reading%2C%20modern%20educational%20library%2C%20quiet%20study%20space%2C%20book%20shelves%2C%20academic%20research%2C%20Colombian%20school%20interior%2C%20reading%20culture%2C%20educational%20resources&width=400&height=300&seq=gallery4&orientation=landscape", title: "Biblioteca escolar" },
+    { url: "https://readdy.ai/api/search-image?query=School%20graduation%20ceremony%2C%20students%20in%20caps%20and%20gowns%2C%20proud%20families%2C%20academic%20achievement%2C%20Colombian%20graduation%20tradition%2C%20celebration%20of%20success%2C%20educational%20milestone&width=400&height=300&seq=gallery6&orientation=landscape", title: "Ceremonia de graduación" }
+  ]);
+  const [galleryForm, setGalleryForm] = useState({ url: '', title: '' });
   const [editGalleryIdx, setEditGalleryIdx] = useState<number | null>(null);
   const [draggedGalleryIdx, setDraggedGalleryIdx] = useState<number | null>(null);
 
-  // Estados para datos originales de la base de datos
-  const [originalBanner, setOriginalBanner] = useState<any[]>([]);
-  const [originalNews, setOriginalNews] = useState<any[]>([]);
-  const [originalGallery, setOriginalGallery] = useState<any[]>([]);
-
-  // Cargar datos desde la base de datos al montar
+  // Cambia los efectos para cargar datos desde la API (MongoDB Atlas)
   useEffect(() => {
+    // Solo ejecuta en el cliente (Next.js App Router puede intentar SSR)
+    if (typeof window === "undefined") return;
     fetch('/api/banner')
       .then(res => res.json())
-      .then(data => {
-        setOriginalBanner(Array.isArray(data) ? data : []);
-        setBannerImages(Array.isArray(data) ? data : []);
-      });
+      .then(data => setBannerImages(Array.isArray(data) ? data : []));
     fetch('/api/news')
       .then(res => res.json())
-      .then(data => {
-        setOriginalNews(Array.isArray(data) ? data : []);
-        setNews(Array.isArray(data) ? data : []);
-      });
+      .then(data => setNews(Array.isArray(data) ? data : []));
     fetch('/api/gallery')
       .then(res => res.json())
-      .then(data => {
-        setOriginalGallery(Array.isArray(data) ? data : []);
-        setGallery(Array.isArray(data) ? data : []);
-      });
+      .then(data => setGallery(Array.isArray(data) ? data : []));
   }, []);
 
-  // Función para comparar si un objeto existe en un array (por campos)
-  function isItemInArray(item: any, arr: any[]) {
-    return arr.some(dbItem =>
-      Object.keys(item).every(key => dbItem[key] === item[key])
-    );
-  }
-
-  // Guardar solo los nuevos en la base de datos
-  const saveBanner = async () => {
-    const newItems = bannerImages.filter(item => !isItemInArray(item, originalBanner));
-    if (newItems.length > 0) {
-      await fetch('/api/banner', {
+  // Guardar cambios en MongoDB Atlas usando endpoints internos
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (bannerImages.length > 0)
+      fetch('/api/banner', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ items: [...originalBanner, ...newItems] })
+        body: JSON.stringify(bannerImages)
       });
-      setOriginalBanner([...originalBanner, ...newItems]);
-      alert('Banner guardado.');
-    } else {
-      alert('No hay cambios nuevos para guardar.');
-    }
-  };
-
-  const saveNews = async () => {
-    const newItems = news.filter(item => !isItemInArray(item, originalNews));
-    if (newItems.length > 0) {
-      await fetch('/api/news', {
+  }, [bannerImages]);
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (news.length > 0)
+      fetch('/api/news', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ items: [...originalNews, ...newItems] })
+        body: JSON.stringify(news)
       });
-      setOriginalNews([...originalNews, ...newItems]);
-      alert('Noticias guardadas.');
-    } else {
-      alert('No hay cambios nuevos para guardar.');
-    }
-  };
-
-  const saveGallery = async () => {
-    const newItems = gallery.filter(item => !isItemInArray(item, originalGallery));
-    if (newItems.length > 0) {
-      await fetch('/api/gallery', {
+  }, [news]);
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (gallery.length > 0)
+      fetch('/api/gallery', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ items: [...originalGallery, ...newItems] })
+        body: JSON.stringify(gallery)
       });
-      setOriginalGallery([...originalGallery, ...newItems]);
-      alert('Galería guardada.');
-    } else {
-      alert('No hay cambios nuevos para guardar.');
-    }
-  };
-
-  // Cerrar sesión (opcional)
-  const handleLogout = () => {
-    setIsModalOpen(true);
-    setUsername('');
-    setPassword('');
-    setError('');
-  };
+  }, [gallery]);
 
   // Banner form handlers
   const handleBannerChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -130,21 +92,26 @@ export default function Admin() {
   };
   const handleBannerSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!bannerForm.Titulo || !bannerForm.Descripción || !bannerForm.fecha || !bannerForm.link) return;
+    if (!bannerForm.url) return;
     if (editBannerIdx !== null) {
       setBannerImages(bannerImages.map((img, idx) => idx === editBannerIdx ? { ...bannerForm } : img));
       setEditBannerIdx(null);
     } else {
       setBannerImages([...bannerImages, { ...bannerForm }]);
     }
-    setBannerForm({ Titulo: '', Descripción: '', fecha: '', link: '' });
+    setBannerForm({ url: '', title: '', description: '' });
   };
   const handleEditBanner = (idx: number) => {
-    setBannerForm(bannerImages[idx]);
+    const img = bannerImages[idx];
+    setBannerForm({
+      url: img?.url || '',
+      title: img?.title || '',
+      description: img?.description || ''
+    });
     setEditBannerIdx(idx);
   };
   const handleCancelEditBanner = () => {
-    setBannerForm({ Titulo: '', Descripción: '', fecha: '', link: '' });
+    setBannerForm({ url: '', title: '', description: '' });
     setEditBannerIdx(null);
   };
   const removeBannerImage = (idx: number) => {
@@ -170,21 +137,21 @@ export default function Admin() {
   };
   const handleNewsSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!newsForm.Titulo || !newsForm.Descripción || !newsForm.fecha || !newsForm.link) return;
+    if (!newsForm.title || !newsForm.date || !newsForm.description || !newsForm.image) return;
     if (editNewsIdx !== null) {
       setNews(news.map((item, idx) => idx === editNewsIdx ? { ...newsForm } : item));
       setEditNewsIdx(null);
     } else {
-      setNews([...news, { ...newsForm }]);
+      setNews([{ ...newsForm }, ...news]);
     }
-    setNewsForm({ Titulo: '', Descripción: '', fecha: '', link: '' });
+    setNewsForm({ title: '', date: '', description: '', image: '' });
   };
   const handleEditNews = (idx: number) => {
     setNewsForm(news[idx]);
     setEditNewsIdx(idx);
   };
   const handleCancelEditNews = () => {
-    setNewsForm({ Titulo: '', Descripción: '', fecha: '', link: '' });
+    setNewsForm({ title: '', date: '', description: '', image: '' });
     setEditNewsIdx(null);
   };
   const removeNews = (idx: number) => {
@@ -205,26 +172,30 @@ export default function Admin() {
   const handleNewsDragEnd = () => setDraggedNewsIdx(null);
 
   // Gallery form handlers
-  const handleGalleryChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleGalleryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setGalleryForm({ ...galleryForm, [e.target.name]: e.target.value });
   };
   const handleGallerySubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!galleryForm.Titulo || !galleryForm.Descripción || !galleryForm.fecha || !galleryForm.link) return;
+    if (!galleryForm.url) return;
     if (editGalleryIdx !== null) {
       setGallery(gallery.map((img, idx) => idx === editGalleryIdx ? { ...galleryForm } : img));
       setEditGalleryIdx(null);
     } else {
-      setGallery([...gallery, { ...galleryForm }]);
+      setGallery([{ ...galleryForm }, ...gallery]);
     }
-    setGalleryForm({ Titulo: '', Descripción: '', fecha: '', link: '' });
+    setGalleryForm({ url: '', title: '' });
   };
   const handleEditGallery = (idx: number) => {
-    setGalleryForm(gallery[idx]);
+    const img = gallery[idx];
+    setGalleryForm({
+      url: img?.url || '',
+      title: img?.title || ''
+    });
     setEditGalleryIdx(idx);
   };
   const handleCancelEditGallery = () => {
-    setGalleryForm({ Titulo: '', Descripción: '', fecha: '', link: '' });
+    setGalleryForm({ url: '', title: '' });
     setEditGalleryIdx(null);
   };
   const removeGalleryImage = (idx: number) => {
@@ -361,8 +332,8 @@ export default function Admin() {
               <div className="mb-4">
                 <input
                   type="text"
-                  name="link"
-                  value={bannerForm.link}
+                  name="url"
+                  value={bannerForm.url}
                   onChange={handleBannerChange}
                   placeholder="URL de la imagen"
                   className="w-full px-4 py-2 rounded border border-gray-300"
@@ -372,8 +343,8 @@ export default function Admin() {
               <div className="mb-4">
                 <input
                   type="text"
-                  name="Titulo"
-                  value={bannerForm.Titulo}
+                  name="title"
+                  value={bannerForm.title}
                   onChange={handleBannerChange}
                   placeholder="Título (opcional)"
                   className="w-full px-4 py-2 rounded border border-gray-300"
@@ -381,19 +352,10 @@ export default function Admin() {
               </div>
               <div className="mb-4">
                 <textarea
-                  name="Descripción"
-                  value={bannerForm.Descripción}
+                  name="description"
+                  value={bannerForm.description}
                   onChange={handleBannerChange}
                   placeholder="Descripción (opcional)"
-                  className="w-full px-4 py-2 rounded border border-gray-300"
-                />
-              </div>
-              <div className="mb-4">
-                <input
-                  type="date"
-                  name="fecha"
-                  value={bannerForm.fecha}
-                  onChange={handleBannerChange}
                   className="w-full px-4 py-2 rounded border border-gray-300"
                 />
               </div>
@@ -408,13 +370,7 @@ export default function Admin() {
                 )}
               </div>
             </form>
-            <button
-              onClick={saveBanner}
-              className="mt-4 px-6 py-2 bg-green-700 text-white rounded-full font-semibold hover:bg-green-800 transition-colors"
-            >
-              Guardar cambios
-            </button>
-            <div className="grid md:grid-cols-4 gap-4 mt-4">
+            <div className="grid md:grid-cols-4 gap-4">
               {bannerImages.map((img, idx) => (
                 <div
                   key={idx}
@@ -426,7 +382,7 @@ export default function Admin() {
                   onDrop={handleBannerDragEnd}
                   style={{ cursor: 'grab' }}
                 >
-                  <img src={img.link} alt={img.Titulo} className="w-full h-32 object-cover rounded" />
+                  <img src={img.url} alt={img.title} className="w-full h-32 object-cover rounded" />
                   <button
                     onClick={() => removeBannerImage(idx)}
                     className="absolute top-2 right-2 bg-red-600 text-white rounded-full px-2 py-1 text-xs"
@@ -440,9 +396,8 @@ export default function Admin() {
                     Editar
                   </button>
                   <div className="mt-2 text-sm">
-                    <strong>{img.Titulo}</strong>
-                    <div>{img.Descripción}</div>
-                    <div className="text-xs text-gray-500">{img.fecha}</div>
+                    <strong>{img.title}</strong>
+                    <div>{img.description}</div>
                   </div>
                 </div>
               ))}
@@ -455,8 +410,8 @@ export default function Admin() {
               <div className="mb-4">
                 <input
                   type="text"
-                  name="Titulo"
-                  value={newsForm.Titulo}
+                  name="title"
+                  value={newsForm.title}
                   onChange={handleNewsChange}
                   placeholder="Título"
                   className="w-full px-4 py-2 rounded border border-gray-300"
@@ -467,8 +422,8 @@ export default function Admin() {
                 {/* Campo de fecha tipo date */}
                 <input
                   type="date"
-                  name="fecha"
-                  value={newsForm.fecha}
+                  name="date"
+                  value={newsForm.date}
                   onChange={handleNewsChange}
                   className="w-full px-4 py-2 rounded border border-gray-300"
                   required
@@ -476,8 +431,8 @@ export default function Admin() {
               </div>
               <div className="mb-4">
                 <textarea
-                  name="Descripción"
-                  value={newsForm.Descripción}
+                  name="description"
+                  value={newsForm.description}
                   onChange={handleNewsChange}
                   placeholder="Descripción"
                   className="w-full px-4 py-2 rounded border border-gray-300"
@@ -487,8 +442,8 @@ export default function Admin() {
               <div className="mb-4">
                 <input
                   type="text"
-                  name="link"
-                  value={newsForm.link}
+                  name="image"
+                  value={newsForm.image}
                   onChange={handleNewsChange}
                   placeholder="URL de la imagen"
                   className="w-full px-4 py-2 rounded border border-gray-300"
@@ -506,13 +461,7 @@ export default function Admin() {
                 )}
               </div>
             </form>
-            <button
-              onClick={saveNews}
-              className="mt-4 px-6 py-2 bg-green-700 text-white rounded-full font-semibold hover:bg-green-800 transition-colors"
-            >
-              Guardar cambios
-            </button>
-            <div className="grid md:grid-cols-3 gap-8 mt-4">
+            <div className="grid md:grid-cols-3 gap-8">
               {news.map((item, idx) => (
                 <div
                   key={idx}
@@ -525,8 +474,8 @@ export default function Admin() {
                   style={{ cursor: 'grab' }}
                 >
                   <img 
-                    src={item.link}
-                    alt={item.Titulo}
+                    src={item.image}
+                    alt={item.title}
                     className="w-full h-48 object-cover object-top"
                   />
                   <button
@@ -542,9 +491,9 @@ export default function Admin() {
                     Editar
                   </button>
                   <div className="p-6">
-                    <span className="text-sm text-blue-600 font-semibold">{item.fecha}</span>
-                    <h3 className="text-lg font-bold text-blue-900 mb-2 mt-1">{item.Titulo}</h3>
-                    <p className="text-gray-600 text-sm">{item.Descripción}</p>
+                    <span className="text-sm text-blue-600 font-semibold">{item.date}</span>
+                    <h3 className="text-lg font-bold text-blue-900 mb-2 mt-1">{item.title}</h3>
+                    <p className="text-gray-600 text-sm">{item.description}</p>
                   </div>
                 </div>
               ))}
@@ -557,8 +506,8 @@ export default function Admin() {
               <div className="mb-4">
                 <input
                   type="text"
-                  name="link"
-                  value={galleryForm.link}
+                  name="url"
+                  value={galleryForm.url}
                   onChange={handleGalleryChange}
                   placeholder="URL de la imagen"
                   className="w-full px-4 py-2 rounded border border-gray-300"
@@ -568,28 +517,10 @@ export default function Admin() {
               <div className="mb-4">
                 <input
                   type="text"
-                  name="Titulo"
-                  value={galleryForm.Titulo}
+                  name="title"
+                  value={galleryForm.title}
                   onChange={handleGalleryChange}
                   placeholder="Título (opcional)"
-                  className="w-full px-4 py-2 rounded border border-gray-300"
-                />
-              </div>
-              <div className="mb-4">
-                <textarea
-                  name="Descripción"
-                  value={galleryForm.Descripción}
-                  onChange={handleGalleryChange}
-                  placeholder="Descripción (opcional)"
-                  className="w-full px-4 py-2 rounded border border-gray-300"
-                />
-              </div>
-              <div className="mb-4">
-                <input
-                  type="date"
-                  name="fecha"
-                  value={galleryForm.fecha}
-                  onChange={handleGalleryChange}
                   className="w-full px-4 py-2 rounded border border-gray-300"
                 />
               </div>
@@ -604,13 +535,7 @@ export default function Admin() {
                 )}
               </div>
             </form>
-            <button
-              onClick={saveGallery}
-              className="mt-4 px-6 py-2 bg-green-700 text-white rounded-full font-semibold hover:bg-green-800 transition-colors"
-            >
-              Guardar cambios
-            </button>
-            <div className="grid md:grid-cols-5 gap-4 mt-4">
+            <div className="grid md:grid-cols-5 gap-4">
               {gallery.map((img, idx) => (
                 <div
                   key={idx}
@@ -622,7 +547,7 @@ export default function Admin() {
                   onDrop={handleGalleryDragEnd}
                   style={{ cursor: 'grab' }}
                 >
-                  <img src={img.link} alt={img.Titulo} className="w-full h-32 object-cover rounded" />
+                  <img src={img.url} alt={img.title} className="w-full h-32 object-cover rounded" />
                   <button
                     onClick={() => removeGalleryImage(idx)}
                     className="absolute top-2 right-2 bg-red-600 text-white rounded-full px-2 py-1 text-xs"
@@ -636,9 +561,7 @@ export default function Admin() {
                     Editar
                   </button>
                   <div className="mt-2 text-sm text-center">
-                    <strong>{img.Titulo}</strong>
-                    <div>{img.Descripción}</div>
-                    <div className="text-xs text-gray-500">{img.fecha}</div>
+                    <strong>{img.title}</strong>
                   </div>
                 </div>
               ))}
@@ -646,19 +569,7 @@ export default function Admin() {
           </div>
         </div>
       </section>
-      {/* Footer */}
-      <footer className="bg-blue-900 text-white py-6 mt-12">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <div className="text-sm">
-            © {new Date().getFullYear()} Colegio Nuevo San Luis Gonzaga. Todos los derechos reservados.
-          </div>
-          <div className="mt-2">
-            <Link href="/admin" className="underline hover:text-blue-300">
-              Ingresar al panel de administración
-            </Link>
-          </div>
-        </div>
-      </footer>
+      {/* ...existing footer... */}
     </div>
   );
 }
