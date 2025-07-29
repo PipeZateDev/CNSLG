@@ -190,7 +190,10 @@ export default function Home() {
       </nav>
 
       {/* Letrero informativo debajo de la barra de navegación */}
-      <div className="w-full bg-blue-900 text-white text-center py-3 px-2 font-bold text-base md:text-xl lg:text-2xl shadow z-40 relative overflow-hidden">
+      <div
+        className="w-full text-white text-center py-3 px-2 font-bold text-base md:text-xl lg:text-2xl shadow z-40 relative"
+        style={{ background: '#123788ff' }}
+      >
         <span className="block whitespace-nowrap">
           ¿Qué esperas para ser parte de la familia Gonzaguista en sus 100 años? - Matricúlate ahora
         </span>
