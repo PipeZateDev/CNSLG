@@ -6,61 +6,36 @@ import Link from 'next/link';
 export default function Home() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isPaused, setIsPaused] = useState(false);
 
-  // Banner images state: ahora se cargan desde localStorage (publicadas por el admin)
-  const [bannerImages, setBannerImages] = useState<{ url: string; title?: string; description?: string }[]>([]);
+  const bannerImages = [
+    { url: "https://i.ibb.co/mCG7xd6C/1.jpg", title: "", description: "" },  //OpenHouse
+    { url: "https://i.ibb.co/4n2KgQTP/9.jpg", title: "", description: "" },  //DíaFamilia
+    { url: "https://i.ibb.co/Wp5W862T/2.jpg", title: "", description: "" },  //Admisiones
+    { url: "https://i.ibb.co/1fwdk3FQ/3.jpg", title: "", description: "" },        //Lema
+    { url: "https://i.ibb.co/VpghYymD/6.jpg", title: "", description: "" },    //Educacion con amor
+    { url: "https://i.ibb.co/WWFpKXmM/4.jpg", title: "", description: "" },      //Ingles 
+    //{ url: "https://i.ibb.co/1gsPzf4/8.jpg", title: "", description: "" }, //Prom
+    { url: "https://i.ibb.co/N2jyWxS1/7.jpg", title: "", description: "" }, //Deportes
+    //{ url: "https://i.ibb.co/fYvVNbMk/8-instalaciones.png", title: "", description: "" } 
+    ];
 
   useEffect(() => {
-    const storedBanner = localStorage.getItem('bannerImages');
-    if (storedBanner) {
-      setBannerImages(JSON.parse(storedBanner));
-    } else {
-      setBannerImages([]); // Si no hay imágenes publicadas, muestra vacío
-    }
-  }, []);
-
-  useEffect(() => {
-    if (isPaused) return;
-    if (bannerImages.length === 0) return;
     const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) =>
-        prevIndex === bannerImages.length - 1 ? 0 : prevIndex + 1
-      );
+      setCurrentImageIndex((prevIndex) => prevIndex === bannerImages.length - 1 ? 0 : prevIndex + 1);
     }, 6000);
     return () => clearInterval(interval);
-  }, [bannerImages.length, isPaused]);
+  }, [bannerImages.length]);
 
   const nextImage = () => {
-    setCurrentImageIndex((prevIndex) =>
-      bannerImages.length > 0
-        ? prevIndex === bannerImages.length - 1
-          ? 0
-          : prevIndex + 1
-        : 0
-    );
+    setCurrentImageIndex((prevIndex) => prevIndex === bannerImages.length - 1 ? 0 : prevIndex + 1);
   };
 
   const prevImage = () => {
-    setCurrentImageIndex((prevIndex) =>
-      bannerImages.length > 0
-        ? prevIndex === 0
-          ? bannerImages.length - 1
-          : prevIndex - 1
-        : 0
-    );
+    setCurrentImageIndex((prevIndex) => prevIndex === 0 ? bannerImages.length - 1 : prevIndex - 1);
   };
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
-  };
-
-  const handleMouseDown = () => {
-    setIsPaused(true);
-  };
-
-  const handleMouseUp = () => {
-    setIsPaused(false);
   };
 
   return (
@@ -97,8 +72,6 @@ export default function Home() {
               >
                 Admisiones
               </Link>
-              {/* Admin link hidden */}
-              <Link href="/admin" className="hidden">Administración</Link>
               <Link 
                 href="/contacto"
                 className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer"
@@ -110,7 +83,7 @@ export default function Home() {
                   href="https://lms30.uno-internacional.com/login/access" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="px-3 py-1 bg-purple-600 text-white rounded-full text-sm hover:bg-purple-700 transition-colors whitespace-nowrap cursor-pointer"
+                  className="px-4 py-2 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition-colors whitespace-nowrap cursor-pointer"
                 >
                   UNOi Santillana
                 </a>
@@ -118,7 +91,7 @@ export default function Home() {
                   href="https://www.cibercolegios.com/" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="px-3 py-1 bg-yellow-400 text-black rounded-full text-sm hover:bg-yellow-500 transition-colors whitespace-nowrap cursor-pointer"
+                  className="px-4 py-2 bg-yellow-400 text-black rounded-full hover:bg-yellow-500 transition-colors whitespace-nowrap cursor-pointer"
                 >
                   Cibercolegios
                 </a>
@@ -126,9 +99,9 @@ export default function Home() {
                   href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=12695&searchedCategoryId=&searchedAgreementName=PEDAGOGICOS%20ASOCIADOS%20SAS" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="px-3 py-1 bg-blue-600 text-white rounded-full text-sm hover:bg-blue-700 transition-colors whitespace-nowrap cursor-pointer"
+                  className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors whitespace-nowrap cursor-pointer"
                 >
-                  Pagos PSE
+                  PSE - Pagos en Línea
                 </a>
               </div>
             </div>
@@ -168,13 +141,6 @@ export default function Home() {
                   Admisiones
                 </Link>
                 <Link 
-                  href="/admin"
-                  onClick={() => setIsMenuOpen(false)}
-                  className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer"
-                >
-                  Administración
-                </Link>
-                <Link 
                   href="/contacto"
                   onClick={() => setIsMenuOpen(false)}
                   className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer"
@@ -186,7 +152,7 @@ export default function Home() {
                     href="https://lms30.uno-internacional.com/login/access" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="px-3 py-1 bg-purple-600 text-white rounded-full text-sm hover:bg-purple-700 transition-colors text-center cursor-pointer"
+                    className="px-4 py-2 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition-colors text-center cursor-pointer"
                   >
                     UNOi Santillana
                   </a>
@@ -194,7 +160,7 @@ export default function Home() {
                     href="https://www.cibercolegios.com/" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="px-3 py-1 bg-yellow-400 text-black rounded-full text-sm hover:bg-yellow-500 transition-colors text-center cursor-pointer"
+                    className="px-4 py-2 bg-yellow-400 text-black rounded-full hover:bg-yellow-500 transition-colors text-center cursor-pointer"
                   >
                     Cibercolegios
                   </a>
@@ -202,9 +168,9 @@ export default function Home() {
                     href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=12695&searchedCategoryId=&searchedAgreementName=PEDAGOGICOS%20ASOCIADOS%20SAS" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="px-3 py-1 bg-blue-600 text-white rounded-full text-sm hover:bg-blue-700 transition-colors text-center cursor-pointer"
+                    className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors text-center cursor-pointer"
                   >
-                    Pagos PSE
+                    PSE - Pagos en Línea
                   </a>
                 </div>
               </div>
@@ -238,74 +204,31 @@ export default function Home() {
 
       {/* Banner Section */}
       <section className="pt-20 relative">
-        <div
-          className="relative h-96 md:h-[600px] overflow-hidden w-full md:w-[80%] mx-auto"
-          onMouseDown={handleMouseDown}
-          onMouseUp={handleMouseUp}
-        >
-          {bannerImages.length > 0 ? (
-            bannerImages.map((image, index) => (
-              <div key={index} className={`absolute inset-0 transition-opacity duration-600 ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'}`}>
-                <img src={image.url} alt={image.title || ''} className="w-full h-full object-cover object-center" />
-                {/* Botones especiales para imágenes específicas, si lo deseas */}
-                {index === 0 && currentImageIndex === 0 && (
-                  <div className="absolute top-8 left-1/2 transform -translate-x-1/2 z-20">
-                    <a
-                      href="https://docs.google.com/forms/d/e/1FAIpQLSeORCc-ICVrWFFREQ_THIBY5lPYKMXKB1WLAqobKrfWScRqSg/viewform?usp=sharing&ouid=114310616812674125470"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-8 py-4 bg-white/70 text-blue-900 rounded-full font-semibold text-lg hover:bg-white/80 transition-colors"
-                      onMouseEnter={() => setIsPaused(true)}
-                      onMouseLeave={() => setIsPaused(false)}
-                    >
-                      Agenda tu cupo
-                    </a>
-                  </div>
-                )}
-                {index === 2 && currentImageIndex === 2 && (
-                  <div className="absolute top-8 left-1/2 transform -translate-x-1/2 z-20">
-                    <Link
-                      href="/admisiones"
-                      className="px-8 py-4 bg-white/70 text-blue-900 rounded-full font-semibold text-lg hover:bg-white/80 transition-colors"
-                      onMouseEnter={() => setIsPaused(true)}
-                      onMouseLeave={() => setIsPaused(false)}
-                    >
-                      Agenda tu cupo
-                    </Link>
-                  </div>
-                )}
-              </div>
-            ))
-          ) : (
-            <div className="flex items-center justify-center h-full bg-gray-100 text-gray-400">
-              No hay imágenes de banner publicadas.
+        <div className="relative h-96 md:h-[650px] overflow-hidden w-full md:w-[80%] mx-auto">
+          {bannerImages.map((image, index) => (
+            <div key={index} className={`absolute inset-0 transition-opacity duration-600 ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'}`}>
+              <img src={image.url} alt={image.title} className="w-full h-full object-cover object-center" />
+              {/* <div className="absolute inset-0 bg-blue-900/40"></div> */} // Eliminar o comentar
+
             </div>
-          )}
+          ))}
           <div className="absolute inset-0 flex items-center justify-center text-center text-white z-10">
             <div className="max-w-4xl px-6">
-              <h1 className="text-3xl md:text-6xl font-bold mb-4">
-                {bannerImages[currentImageIndex]?.title || ''}
-              </h1>
-              <p className="text-lg md:text-2xl mb-8">
-                {bannerImages[currentImageIndex]?.description || ''}
-              </p>
+              <h1 className="text-3xl md:text-6xl font-bold mb-4">{bannerImages[currentImageIndex].title}</h1>
+              <p className="text-lg md:text-2xl mb-8">{bannerImages[currentImageIndex].description}</p>
             </div>
           </div>
-          {bannerImages.length > 0 && (
-            <>
-              <button onClick={prevImage} className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-colors z-20">
-                <i className="ri-arrow-left-line text-white text-xl"></i>
-              </button>
-              <button onClick={nextImage} className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-colors z-20">
-                <i className="ri-arrow-right-line text-white text-xl"></i>
-              </button>
-              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
-                {bannerImages.map((_, index) => (
-                  <button key={index} onClick={() => setCurrentImageIndex(index)} className={`w-3 h-3 rounded-full transition-colors ${index === currentImageIndex ? 'bg-white' : 'bg-white/50'}`} />
-                ))}
-              </div>
-            </>
-          )}
+          <button onClick={prevImage} className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-colors z-20">
+            <i className="ri-arrow-left-line text-white text-xl"></i>
+          </button>
+          <button onClick={nextImage} className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-colors z-20">
+            <i className="ri-arrow-right-line text-white text-xl"></i>
+          </button>
+          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
+            {bannerImages.map((_, index) => (
+              <button key={index} onClick={() => setCurrentImageIndex(index)} className={`w-3 h-3 rounded-full transition-colors ${index === currentImageIndex ? 'bg-white' : 'bg-white/50'}`} />
+            ))}
+          </div>
         </div>
       </section>
 
@@ -442,8 +365,6 @@ export default function Home() {
                 <li><Link href="/" className="hover:text-white transition-colors cursor-pointer">Inicio</Link></li>
                 <li><Link href="/admisiones" className="hover:text-white transition-colors cursor-pointer">Admisiones</Link></li>
                 <li><Link href="/nosotros" className="hover:text-white transition-colors cursor-pointer">Nosotros</Link></li>
-                {/* Admin link hidden */}
-                <li><Link href="/admin" className="hidden">Administración</Link></li>
                 <li><Link href="/contacto" className="hover:text-white transition-colors cursor-pointer">Contacto</Link></li>
               </ul>
             </div>
@@ -481,7 +402,7 @@ export default function Home() {
                   rel="noopener noreferrer"
                   className="block text-sm text-gray-400 hover:text-white transition-colors cursor-pointer"
                 >
-                  Pagos PSE
+                  PSE - Pagos en Línea
                 </a>
               </div>
             </div>
@@ -490,15 +411,6 @@ export default function Home() {
             <p className="text-gray-400 text-sm">
             © 2025 Colegio Nuevo San Luis Gonzaga. Todos los derechos reservados.
             </p>
-          </div>
-          {/* Botón de administración centrado debajo de los derechos reservados */}
-          <div className="flex justify-center mt-6">
-            <Link
-              href="/admin"
-              className="px-6 py-3 bg-blue-900 hover:bg-blue-800 text-white rounded-full font-semibold transition-colors text-center"
-            >
-              Ingreso como administrador
-            </Link>
           </div>
         </div>
       </footer>
