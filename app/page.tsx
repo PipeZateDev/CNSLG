@@ -2,25 +2,22 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { parse } from 'date-fns';
-import { isValid } from 'date-fns';
-import { compareDesc } from 'date-fns';
 
 export default function Home() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
 
-  // Banner images state: ya gestionado desde admin
+  // Banner images state: ahora se cargan desde localStorage (publicadas por el admin)
   const [bannerImages, setBannerImages] = useState<{ url: string; title?: string; description?: string }[]>([]);
-  // News state: ahora también gestionado desde admin
-  const [news, setNews] = useState<{ title: string; date: string; description: string; image: string }[]>([]);
 
   useEffect(() => {
     const storedBanner = localStorage.getItem('bannerImages');
-    const storedNews = localStorage.getItem('news');
-    if (storedBanner) setBannerImages(JSON.parse(storedBanner));
-    if (storedNews) setNews(JSON.parse(storedNews));
+    if (storedBanner) {
+      setBannerImages(JSON.parse(storedBanner));
+    } else {
+      setBannerImages([]); // Si no hay imágenes publicadas, muestra vacío
+    }
   }, []);
 
   useEffect(() => {
@@ -64,36 +61,6 @@ export default function Home() {
 
   const handleMouseUp = () => {
     setIsPaused(false);
-  };
-
-  // Carrusel de noticias
-  const [newsPage, setNewsPage] = useState(0);
-  const NEWS_PER_PAGE = 6;
-
-  // Ordenar noticias por fecha descendente (más reciente primero)
-  const sortedNews = [...news].sort((a, b) => {
-    // Intenta parsear la fecha en formato "dd MMM yyyy"
-    const dateA = parse(a.date, 'dd MMM yyyy', new Date());
-    const dateB = parse(b.date, 'dd MMM yyyy', new Date());
-    if (isValid(dateA) && isValid(dateB)) {
-      return compareDesc(dateA, dateB);
-    }
-    // Si alguna fecha no es válida, mantener el orden original
-    return 0;
-  });
-
-  const totalPages = Math.ceil(sortedNews.length / NEWS_PER_PAGE);
-
-  const pagedNews = sortedNews.slice(
-    newsPage * NEWS_PER_PAGE,
-    newsPage * NEWS_PER_PAGE + NEWS_PER_PAGE
-  );
-
-  const handlePrevNews = () => {
-    setNewsPage((prev) => (prev === 0 ? totalPages - 1 : prev - 1));
-  };
-  const handleNextNews = () => {
-    setNewsPage((prev) => (prev === totalPages - 1 ? 0 : prev + 1));
   };
 
   return (
@@ -272,7 +239,7 @@ export default function Home() {
       {/* Banner Section */}
       <section className="pt-20 relative">
         <div
-          className="relative h-96 md:h-[600px] overflow-hidden w-full md:w-[90%] mx-auto"
+          className="relative h-96 md:h-[600px] overflow-hidden w-full md:w-[80%] mx-auto"
           onMouseDown={handleMouseDown}
           onMouseUp={handleMouseUp}
         >
@@ -414,60 +381,44 @@ export default function Home() {
           <h2 className="text-3xl font-bold text-blue-900 text-center mb-12">
             Noticias y Eventos
           </h2>
-          <div className="relative">
-            {sortedNews.length > NEWS_PER_PAGE && (
-              <button
-                onClick={handlePrevNews}
-                className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-blue-900 text-white rounded-full w-10 h-10 flex items-center justify-center hover:bg-blue-800 transition-colors"
-                aria-label="Anterior"
-              >
-                <i className="ri-arrow-left-s-line text-2xl"></i>
-              </button>
-            )}
-            <div className="grid md:grid-cols-3 gap-8">
-              {pagedNews.length > 0 ? (
-                pagedNews.map((item, idx) => (
-                  <div key={idx} className="bg-white rounded-lg shadow-lg overflow-hidden">
-                    <img 
-                      src={item.image}
-                      alt={item.title}
-                      className="w-full h-48 object-cover object-top"
-                    />
-                    <div className="p-6">
-                      <span className="text-sm text-blue-600 font-semibold">{item.date}</span>
-                      <h3 className="text-lg font-bold text-blue-900 mb-2 mt-1">{item.title}</h3>
-                      <p className="text-gray-600 text-sm">{item.description}</p>
-                    </div>
-                  </div>
-                ))
-              ) : (
-                <div className="col-span-3 text-center text-gray-400 py-12">
-                  No hay noticias publicadas.
-                </div>
-              )}
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+              <img 
+                src="https://i.ibb.co/vCpGdgff/Open-House2025.png"
+                alt="Open House"
+                className="w-full h-48 object-cover object-top"
+              />
+              <div className="p-6">
+                <span className="text-sm text-blue-600 font-semibold">20 Jun 2025</span>
+                <h3 className="text-lg font-bold text-blue-900 mb-2 mt-1">Open House 2025</h3>
+                <p className="text-gray-600 text-sm">Conoce nuestras instalaciones y proceso de admisión para el próximo año escolar.</p>
+              </div>
             </div>
-            {sortedNews.length > NEWS_PER_PAGE && (
-              <button
-                onClick={handleNextNews}
-                className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-blue-900 text-white rounded-full w-10 h-10 flex items-center justify-center hover:bg-blue-800 transition-colors"
-                aria-label="Siguiente"
-              >
-                <i className="ri-arrow-right-s-line text-2xl"></i>
-              </button>
-            )}
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+              <img 
+                src="https://readdy.ai/api/search-image?query=School%20science%20fair%20with%20student%20projects%2C%20STEM%20exhibition%2C%20innovative%20experiments%2C%20proud%20students%20presenting%2C%20educational%20achievement%2C%20modern%20school%20facilities%2C%20scientific%20learning&width=400&height=250&seq=news2&orientation=landscape"
+                alt="Feria de Ciencias"
+                className="w-full h-48 object-cover object-top"
+              />
+              <div className="p-6">
+                <span className="text-sm text-blue-600 font-semibold">10 Oct 2024</span>
+                <h3 className="text-lg font-bold text-blue-900 mb-2 mt-1">Feria de Ciencias 2024</h3>
+                <p className="text-gray-600 text-sm">Nuestros estudiantes brillaron con proyectos innovadores en ciencia y tecnología.</p>
+              </div>
+            </div>
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+              <img 
+                src="https://readdy.ai/api/search-image?query=School%20sports%20championship%20celebration%2C%20students%20with%20trophies%20and%20medals%2C%20athletic%20achievement%2C%20team%20spirit%2C%20Colombian%20school%20sports%2C%20victory%20celebration%2C%20proud%20athletes&width=400&height=250&seq=news3&orientation=landscape"
+                alt="Olimpiadas Deportivas"
+                className="w-full h-48 object-cover object-top"
+              />
+              <div className="p-6">
+                <span className="text-sm text-blue-600 font-semibold">05 Nov 2023</span>
+                <h3 className="text-lg font-bold text-blue-900 mb-2 mt-1">Campeones Robótica</h3>
+                <p className="text-gray-600 text-sm">Nuestro equipo de robótica obtivo el 1er puesto en el campeonato mundial 2023.</p>
+              </div>
+            </div>
           </div>
-          {sortedNews.length > NEWS_PER_PAGE && (
-            <div className="flex justify-center mt-6 space-x-2">
-              {Array.from({ length: totalPages }).map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setNewsPage(idx)}
-                  className={`w-3 h-3 rounded-full ${newsPage === idx ? 'bg-blue-900' : 'bg-blue-200'} transition-colors`}
-                  aria-label={`Página ${idx + 1}`}
-                />
-              ))}
-            </div>
-          )}
         </div>
       </section>
 
