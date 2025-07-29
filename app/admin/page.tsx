@@ -44,32 +44,44 @@ export default function Admin() {
       .then(data => setGallery(Array.isArray(data) ? data : []));
   }, []);
 
-  // Guardar cambios en MongoDB Atlas usando endpoints internos (solo al hacer clic en el botón)
+  // Guardar cambios en MongoDB Atlas usando endpoints internos (PUT reemplaza todo el contenido)
   const saveBanner = async () => {
-    await fetch('/api/banner', {
+    const res = await fetch('/api/banner', {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ items: bannerImages })
     });
-    alert('Banner guardado.');
+    if (res.ok) {
+      alert('Banner guardado.');
+    } else {
+      alert('Error al guardar el banner.');
+    }
   };
 
   const saveNews = async () => {
-    await fetch('/api/news', {
+    const res = await fetch('/api/news', {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ items: news })
     });
-    alert('Noticias guardadas.');
+    if (res.ok) {
+      alert('Noticias guardadas.');
+    } else {
+      alert('Error al guardar las noticias.');
+    }
   };
 
   const saveGallery = async () => {
-    await fetch('/api/gallery', {
+    const res = await fetch('/api/gallery', {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ items: gallery })
     });
-    alert('Galería guardada.');
+    if (res.ok) {
+      alert('Galería guardada.');
+    } else {
+      alert('Error al guardar la galería.');
+    }
   };
 
   // Banner form handlers

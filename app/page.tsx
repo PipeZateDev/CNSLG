@@ -207,28 +207,38 @@ export default function Home() {
       {/* Banner Section */}
       <section className="pt-20 relative">
         <div className="relative h-96 md:h-[650px] overflow-hidden w-full md:w-[80%] mx-auto">
-          {bannerImages.map((image, index) => (
-            <div key={index} className={`absolute inset-0 transition-opacity duration-600 ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'}`}>
-              <img src={image.link} alt={image.Titulo} className="w-full h-full object-cover object-center" />
+          {bannerImages.length === 0 ? (
+            <div className="flex items-center justify-center h-full text-gray-400">
+              No hay imágenes de banner disponibles.
             </div>
-          ))}
+          ) : (
+            bannerImages.map((image, index) => (
+              <div key={index} className={`absolute inset-0 transition-opacity duration-600 ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'}`}>
+                <img src={image.link} alt={image.Titulo} className="w-full h-full object-cover object-center" />
+              </div>
+            ))
+          )}
           <div className="absolute inset-0 flex items-center justify-center text-center text-white z-10">
             <div className="max-w-4xl px-6">
               <h1 className="text-3xl md:text-6xl font-bold mb-4">{bannerImages[currentImageIndex]?.Titulo || ''}</h1>
               <p className="text-lg md:text-2xl mb-8">{bannerImages[currentImageIndex]?.Descripción || ''}</p>
             </div>
           </div>
-          <button onClick={prevImage} className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-colors z-20">
-            <i className="ri-arrow-left-line text-white text-xl"></i>
-          </button>
-          <button onClick={nextImage} className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-colors z-20">
-            <i className="ri-arrow-right-line text-white text-xl"></i>
-          </button>
-          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
-            {bannerImages.map((_, index) => (
-              <button key={index} onClick={() => setCurrentImageIndex(index)} className={`w-3 h-3 rounded-full transition-colors ${index === currentImageIndex ? 'bg-white' : 'bg-white/50'}`} />
-            ))}
-          </div>
+          {bannerImages.length > 0 && (
+            <>
+              <button onClick={prevImage} className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-colors z-20">
+                <i className="ri-arrow-left-line text-white text-xl"></i>
+              </button>
+              <button onClick={nextImage} className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-colors z-20">
+                <i className="ri-arrow-right-line text-white text-xl"></i>
+              </button>
+              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
+                {bannerImages.map((_, index) => (
+                  <button key={index} onClick={() => setCurrentImageIndex(index)} className={`w-3 h-3 rounded-full transition-colors ${index === currentImageIndex ? 'bg-white' : 'bg-white/50'}`} />
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </section>
 
