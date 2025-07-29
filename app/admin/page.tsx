@@ -1,29 +1,16 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
+// Agrega este import para usar la API de tu backend
+// (No puedes conectar directamente a MongoDB Atlas desde el frontend por seguridad.)
+// Debes crear una API en /api que maneje la conexión a MongoDB.
+// Aquí te muestro cómo hacerlo con fetch a endpoints internos de Next.js API routes.
+
 export default function Admin() {
   const router = useRouter();
-
-  // Banner state
-  const [bannerImages, setBannerImages] = useState<{ Titulo: string; Descripción: string; fecha: string; link: string }[]>([]);
-  const [bannerForm, setBannerForm] = useState({ Titulo: '', Descripción: '', fecha: '', link: '' });
-  const [editBannerIdx, setEditBannerIdx] = useState<number | null>(null);
-  const [draggedBannerIdx, setDraggedBannerIdx] = useState<number | null>(null);
-
-  // News state
-  const [news, setNews] = useState<{ Titulo: string; Descripción: string; fecha: string; link: string }[]>([]);
-  const [newsForm, setNewsForm] = useState({ Titulo: '', Descripción: '', fecha: '', link: '' });
-  const [editNewsIdx, setEditNewsIdx] = useState<number | null>(null);
-  const [draggedNewsIdx, setDraggedNewsIdx] = useState<number | null>(null);
-
-  // Gallery state
-  const [gallery, setGallery] = useState<{ Titulo: string; Descripción: string; fecha: string; link: string }[]>([]);
-  const [galleryForm, setGalleryForm] = useState({ Titulo: '', Descripción: '', fecha: '', link: '' });
-  const [editGalleryIdx, setEditGalleryIdx] = useState<number | null>(null);
-  const [draggedGalleryIdx, setDraggedGalleryIdx] = useState<number | null>(null);
 
   // Modal state
   const [isModalOpen, setIsModalOpen] = useState(true);
@@ -31,8 +18,34 @@ export default function Admin() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  // Cargar datos desde la base de datos al montar
+  // Banner images state
+  const [bannerImages, setBannerImages] = useState<{ url: string; title?: string; description?: string }[]>([]);
+  const [bannerForm, setBannerForm] = useState({ url: '', title: '', description: '' });
+  const [editBannerIdx, setEditBannerIdx] = useState<number | null>(null);
+  const [draggedBannerIdx, setDraggedBannerIdx] = useState<number | null>(null);
+
+  // News state
+  const [news, setNews] = useState<{ title: string; date: string; description: string; image: string }[]>([]);
+  const [newsForm, setNewsForm] = useState({ title: '', date: '', description: '', image: '' });
+  const [editNewsIdx, setEditNewsIdx] = useState<number | null>(null);
+  const [draggedNewsIdx, setDraggedNewsIdx] = useState<number | null>(null);
+
+  // Galería state y handlers (deben estar antes del return)
+  const [gallery, setGallery] = useState<{ url: string; title?: string }[]>([
+    { url: "https://readdy.ai/api/search-image?query=Modern%20school%20classroom%20with%20students%20studying%2C%20Colombian%20students%20in%20uniforms%2C%20contemporary%20educational%20environment%2C%20natural%20lighting%2C%20academic%20atmosphere%2C%20engaged%20learning%2C%20blue%20and%20white%20uniforms&width=400&height=300&seq=gallery1&orientation=landscape", title: "Estudiantes en clase" },
+    { url: "https://readdy.ai/api/search-image?query=School%20sports%20activities%2C%20students%20playing%20soccer%2C%20Colombian%20school%20sports%2C%20outdoor%20activities%2C%20teamwork%2C%20athletic%20field%2C%20healthy%20lifestyle%2C%20school%20sports%20uniform&width=400&height=300&seq=gallery2&orientation=landscape", title: "Actividades deportivas" },
+    { url: "https://readdy.ai/api/search-image?query=School%20science%20laboratory%2C%20students%20conducting%20experiments%2C%20modern%20lab%20equipment%2C%20STEM%20education%2C%20Colombian%20school%20facilities%2C%20laboratory%20safety%2C%20educational%20technology%2C%20scientific%20learning&width=400&height=300&seq=gallery3&orientation=landscape", title: "Laboratorio de ciencias" },
+    { url: "https://readdy.ai/api/search-image?query=School%20library%20with%20students%20reading%2C%20modern%20educational%20library%2C%20quiet%20study%20space%2C%20book%20shelves%2C%20academic%20research%2C%20Colombian%20school%20interior%2C%20reading%20culture%2C%20educational%20resources&width=400&height=300&seq=gallery4&orientation=landscape", title: "Biblioteca escolar" },
+    { url: "https://readdy.ai/api/search-image?query=School%20graduation%20ceremony%2C%20students%20in%20caps%20and%20gowns%2C%20proud%20families%2C%20academic%20achievement%2C%20Colombian%20graduation%20tradition%2C%20celebration%20of%20success%2C%20educational%20milestone&width=400&height=300&seq=gallery6&orientation=landscape", title: "Ceremonia de graduación" }
+  ]);
+  const [galleryForm, setGalleryForm] = useState({ url: '', title: '' });
+  const [editGalleryIdx, setEditGalleryIdx] = useState<number | null>(null);
+  const [draggedGalleryIdx, setDraggedGalleryIdx] = useState<number | null>(null);
+
+  // Cambia los efectos para cargar datos desde la API (MongoDB Atlas)
   useEffect(() => {
+    // Solo ejecuta en el cliente (Next.js App Router puede intentar SSR)
+    if (typeof window === "undefined") return;
     fetch('/api/banner')
       .then(res => res.json())
       .then(data => setBannerImages(Array.isArray(data) ? data : []));
@@ -44,63 +57,34 @@ export default function Admin() {
       .then(data => setGallery(Array.isArray(data) ? data : []));
   }, []);
 
-  // Guardar cambios en MongoDB Atlas usando endpoints internos (solo si hay datos)
-  const saveBanner = async () => {
-    if (bannerImages.length === 0) {
-      alert('No puedes guardar un banner vacío.');
-      return;
-    }
-    const res = await fetch('/api/banner', {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ items: bannerImages })
-    });
-    if (res.ok) {
-      const data = await fetch('/api/banner').then(r => r.json());
-      setBannerImages(Array.isArray(data) ? data : []);
-      alert('Banner guardado.');
-    } else {
-      alert('Error al guardar el banner.');
-    }
-  };
-
-  const saveNews = async () => {
-    if (news.length === 0) {
-      alert('No puedes guardar noticias vacías.');
-      return;
-    }
-    const res = await fetch('/api/news', {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ items: news })
-    });
-    if (res.ok) {
-      const data = await fetch('/api/news').then(r => r.json());
-      setNews(Array.isArray(data) ? data : []);
-      alert('Noticias guardadas.');
-    } else {
-      alert('Error al guardar las noticias.');
-    }
-  };
-
-  const saveGallery = async () => {
-    if (gallery.length === 0) {
-      alert('No puedes guardar una galería vacía.');
-      return;
-    }
-    const res = await fetch('/api/gallery', {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ items: gallery })
-    });
-    if (res.ok) {
-      const data = await fetch('/api/gallery').then(r => r.json());
-      setGallery(Array.isArray(data) ? data : []);
-      alert('Galería guardada.');
-    } else {
-      alert('Error al guardar la galería.');
-    }
-  };
+  // Guardar cambios en MongoDB Atlas usando endpoints internos
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (bannerImages.length > 0)
+      fetch('/api/banner', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(bannerImages)
+      });
+  }, [bannerImages]);
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (news.length > 0)
+      fetch('/api/news', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(news)
+      });
+  }, [news]);
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (gallery.length > 0)
+      fetch('/api/gallery', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(gallery)
+      });
+  }, [gallery]);
 
   // Banner form handlers
   const handleBannerChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -108,27 +92,34 @@ export default function Admin() {
   };
   const handleBannerSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!bannerForm.link) return;
+    if (!bannerForm.url) return;
     if (editBannerIdx !== null) {
       setBannerImages(bannerImages.map((img, idx) => idx === editBannerIdx ? { ...bannerForm } : img));
       setEditBannerIdx(null);
     } else {
       setBannerImages([...bannerImages, { ...bannerForm }]);
     }
-    setBannerForm({ Titulo: '', Descripción: '', fecha: '', link: '' });
+    setBannerForm({ url: '', title: '', description: '' });
   };
   const handleEditBanner = (idx: number) => {
-    setBannerForm(bannerImages[idx]);
+    const img = bannerImages[idx];
+    setBannerForm({
+      url: img?.url || '',
+      title: img?.title || '',
+      description: img?.description || ''
+    });
     setEditBannerIdx(idx);
   };
   const handleCancelEditBanner = () => {
-    setBannerForm({ Titulo: '', Descripción: '', fecha: '', link: '' });
+    setBannerForm({ url: '', title: '', description: '' });
     setEditBannerIdx(null);
   };
   const removeBannerImage = (idx: number) => {
     setBannerImages(bannerImages.filter((_, i) => i !== idx));
     if (editBannerIdx === idx) handleCancelEditBanner();
   };
+
+  // Drag and drop for banner
   const handleBannerDragStart = (idx: number) => setDraggedBannerIdx(idx);
   const handleBannerDragOver = (idx: number) => {
     if (draggedBannerIdx === null || draggedBannerIdx === idx) return;
@@ -146,27 +137,29 @@ export default function Admin() {
   };
   const handleNewsSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!newsForm.Titulo || !newsForm.fecha || !newsForm.Descripción || !newsForm.link) return;
+    if (!newsForm.title || !newsForm.date || !newsForm.description || !newsForm.image) return;
     if (editNewsIdx !== null) {
       setNews(news.map((item, idx) => idx === editNewsIdx ? { ...newsForm } : item));
       setEditNewsIdx(null);
     } else {
       setNews([{ ...newsForm }, ...news]);
     }
-    setNewsForm({ Titulo: '', Descripción: '', fecha: '', link: '' });
+    setNewsForm({ title: '', date: '', description: '', image: '' });
   };
   const handleEditNews = (idx: number) => {
     setNewsForm(news[idx]);
     setEditNewsIdx(idx);
   };
   const handleCancelEditNews = () => {
-    setNewsForm({ Titulo: '', Descripción: '', fecha: '', link: '' });
+    setNewsForm({ title: '', date: '', description: '', image: '' });
     setEditNewsIdx(null);
   };
   const removeNews = (idx: number) => {
     setNews(news.filter((_, i) => i !== idx));
     if (editNewsIdx === idx) handleCancelEditNews();
   };
+
+  // Drag and drop for news
   const handleNewsDragStart = (idx: number) => setDraggedNewsIdx(idx);
   const handleNewsDragOver = (idx: number) => {
     if (draggedNewsIdx === null || draggedNewsIdx === idx) return;
@@ -179,26 +172,30 @@ export default function Admin() {
   const handleNewsDragEnd = () => setDraggedNewsIdx(null);
 
   // Gallery form handlers
-  const handleGalleryChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleGalleryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setGalleryForm({ ...galleryForm, [e.target.name]: e.target.value });
   };
   const handleGallerySubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!galleryForm.link) return;
+    if (!galleryForm.url) return;
     if (editGalleryIdx !== null) {
       setGallery(gallery.map((img, idx) => idx === editGalleryIdx ? { ...galleryForm } : img));
       setEditGalleryIdx(null);
     } else {
       setGallery([{ ...galleryForm }, ...gallery]);
     }
-    setGalleryForm({ Titulo: '', Descripción: '', fecha: '', link: '' });
+    setGalleryForm({ url: '', title: '' });
   };
   const handleEditGallery = (idx: number) => {
-    setGalleryForm(gallery[idx]);
+    const img = gallery[idx];
+    setGalleryForm({
+      url: img?.url || '',
+      title: img?.title || ''
+    });
     setEditGalleryIdx(idx);
   };
   const handleCancelEditGallery = () => {
-    setGalleryForm({ Titulo: '', Descripción: '', fecha: '', link: '' });
+    setGalleryForm({ url: '', title: '' });
     setEditGalleryIdx(null);
   };
   const removeGalleryImage = (idx: number) => {
@@ -221,24 +218,17 @@ export default function Admin() {
     if (username === 'admin' && password === 'Admin.2024') {
       setIsModalOpen(false);
       setError('');
-      setUsername('');
-      setPassword('');
     } else {
       setError('Usuario o contraseña incorrectos.');
     }
   };
-
   const handleCancel = () => {
-    setIsModalOpen(false);
-    setUsername('');
-    setPassword('');
-    setError('');
     router.push('/');
   };
 
   // Instrucción para subir imágenes a imgbb
-  const imgbbUser = "Soporte";
-  const imgbbAlbum = "https://soporte-cnslg.imgbb.com/";
+  const imgbbUser = "PipeZate";
+  const imgbbAlbum = "https://ibb.co/album/hc2G29";
   const imgbbProfile = "https://PipeZate.imgbb.com/";
 
   return (
@@ -256,7 +246,6 @@ export default function Admin() {
                 onChange={(e) => setUsername(e.target.value)}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg"
                 placeholder="Ingrese su usuario"
-                autoFocus
               />
             </div>
             <div className="mb-4">
@@ -267,7 +256,6 @@ export default function Admin() {
                 onChange={(e) => setPassword(e.target.value)}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg"
                 placeholder="Ingrese su contraseña"
-                onKeyDown={e => { if (e.key === 'Enter') handleLogin(); }}
               />
             </div>
             {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
@@ -289,348 +277,299 @@ export default function Admin() {
         </div>
       )}
 
-      {!isModalOpen && (
-        <>
-          {/* Navigation */}
-          <nav className="fixed top-0 w-full bg-white shadow-lg z-50">
-            <div className="px-6 py-4">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center">
+      {/* Navigation */}
+      <nav className="fixed top-0 w-full bg-white shadow-lg z-50">
+        <div className="px-6 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center">
+              <img 
+                src="https://i.ibb.co/spn4L9WW/LOGO-NSLG-2-Mini.png" 
+                alt="Logo Colegio Nuevo San Luis Gonzaga"
+                className="h-12 w-auto"
+              />
+            </div>
+            <div className="hidden lg:flex items-center space-x-8">
+              <Link href="/" className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer">Inicio</Link>
+              <Link href="/nosotros" className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer">Nosotros</Link>
+              <Link href="/admisiones" className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer">Admisiones</Link>
+              {/* Admin link hidden */}
+              <Link href="/admin" className="hidden">Administración</Link>
+              <Link href="/contacto" className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer">Contacto</Link>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <section className="pt-24 pb-12 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <h2 className="text-3xl font-bold text-blue-900 text-center mb-8">
+            Panel de Administración
+          </h2>
+
+          {/* Sección para subir imágenes a imgbb */}
+          <div className="mb-10 bg-blue-50 rounded-lg p-6 shadow text-center">
+            <h3 className="text-lg font-semibold text-blue-900 mb-2">¿Cómo subir imágenes?</h3>
+            <p className="text-gray-700 mb-2">
+              Sube tus imágenes a <a href={imgbbProfile} target="_blank" rel="noopener noreferrer" className="text-blue-700 underline">imgbb.com</a> usando el usuario <span className="font-semibold">{imgbbUser}</span> y el álbum <a href={imgbbAlbum} target="_blank" rel="noopener noreferrer" className="text-blue-700 underline">CNSLG</a>.
+            </p>
+            <p className="text-gray-700 mb-2">
+              Luego, copia la URL directa de la imagen y pégala en el campo correspondiente de la sección que desees (Banner, Noticias o Galería).
+            </p>
+            <a
+              href="https://imgbb.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block mt-2 px-6 py-2 bg-blue-900 text-white rounded-full font-semibold hover:bg-blue-800 transition-colors"
+            >
+              Ir a imgbb.com
+            </a>
+          </div>
+
+          {/* Banner Images Management */}
+          <div className="mb-16">
+            <h3 className="text-xl font-semibold text-blue-900 mb-4">Gestionar Imágenes del Banner</h3>
+            <form onSubmit={handleBannerSubmit} className="bg-blue-50 p-6 rounded-lg shadow mb-6">
+              <div className="mb-4">
+                <input
+                  type="text"
+                  name="url"
+                  value={bannerForm.url}
+                  onChange={handleBannerChange}
+                  placeholder="URL de la imagen"
+                  className="w-full px-4 py-2 rounded border border-gray-300"
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <input
+                  type="text"
+                  name="title"
+                  value={bannerForm.title}
+                  onChange={handleBannerChange}
+                  placeholder="Título (opcional)"
+                  className="w-full px-4 py-2 rounded border border-gray-300"
+                />
+              </div>
+              <div className="mb-4">
+                <textarea
+                  name="description"
+                  value={bannerForm.description}
+                  onChange={handleBannerChange}
+                  placeholder="Descripción (opcional)"
+                  className="w-full px-4 py-2 rounded border border-gray-300"
+                />
+              </div>
+              <div className="flex gap-2">
+                <button type="submit" className="px-6 py-2 bg-blue-900 text-white rounded-full font-semibold hover:bg-blue-800 transition-colors">
+                  {editBannerIdx !== null ? 'Guardar Cambios' : 'Agregar Imagen'}
+                </button>
+                {editBannerIdx !== null && (
+                  <button type="button" onClick={handleCancelEditBanner} className="px-6 py-2 bg-gray-400 text-white rounded-full font-semibold hover:bg-gray-500 transition-colors">
+                    Cancelar
+                  </button>
+                )}
+              </div>
+            </form>
+            <div className="grid md:grid-cols-4 gap-4">
+              {bannerImages.map((img, idx) => (
+                <div
+                  key={idx}
+                  className={`bg-white rounded-lg shadow p-2 relative ${draggedBannerIdx === idx ? 'opacity-60' : ''}`}
+                  draggable
+                  onDragStart={() => handleBannerDragStart(idx)}
+                  onDragOver={(e) => { e.preventDefault(); handleBannerDragOver(idx); }}
+                  onDragEnd={handleBannerDragEnd}
+                  onDrop={handleBannerDragEnd}
+                  style={{ cursor: 'grab' }}
+                >
+                  <img src={img.url} alt={img.title} className="w-full h-32 object-cover rounded" />
+                  <button
+                    onClick={() => removeBannerImage(idx)}
+                    className="absolute top-2 right-2 bg-red-600 text-white rounded-full px-2 py-1 text-xs"
+                  >
+                    Eliminar
+                  </button>
+                  <button
+                    onClick={() => handleEditBanner(idx)}
+                    className="absolute top-2 left-2 bg-yellow-500 text-white rounded-full px-2 py-1 text-xs"
+                  >
+                    Editar
+                  </button>
+                  <div className="mt-2 text-sm">
+                    <strong>{img.title}</strong>
+                    <div>{img.description}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          {/* News Management */}
+          <div>
+            <h3 className="text-xl font-semibold text-blue-900 mb-4">Gestionar Noticias y Eventos</h3>
+            <form onSubmit={handleNewsSubmit} className="bg-blue-50 p-6 rounded-lg shadow mb-6">
+              <div className="mb-4">
+                <input
+                  type="text"
+                  name="title"
+                  value={newsForm.title}
+                  onChange={handleNewsChange}
+                  placeholder="Título"
+                  className="w-full px-4 py-2 rounded border border-gray-300"
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                {/* Campo de fecha tipo date */}
+                <input
+                  type="date"
+                  name="date"
+                  value={newsForm.date}
+                  onChange={handleNewsChange}
+                  className="w-full px-4 py-2 rounded border border-gray-300"
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <textarea
+                  name="description"
+                  value={newsForm.description}
+                  onChange={handleNewsChange}
+                  placeholder="Descripción"
+                  className="w-full px-4 py-2 rounded border border-gray-300"
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <input
+                  type="text"
+                  name="image"
+                  value={newsForm.image}
+                  onChange={handleNewsChange}
+                  placeholder="URL de la imagen"
+                  className="w-full px-4 py-2 rounded border border-gray-300"
+                  required
+                />
+              </div>
+              <div className="flex gap-2">
+                <button type="submit" className="px-6 py-2 bg-blue-900 text-white rounded-full font-semibold hover:bg-blue-800 transition-colors">
+                  {editNewsIdx !== null ? 'Guardar Cambios' : 'Agregar Noticia'}
+                </button>
+                {editNewsIdx !== null && (
+                  <button type="button" onClick={handleCancelEditNews} className="px-6 py-2 bg-gray-400 text-white rounded-full font-semibold hover:bg-gray-500 transition-colors">
+                    Cancelar
+                  </button>
+                )}
+              </div>
+            </form>
+            <div className="grid md:grid-cols-3 gap-8">
+              {news.map((item, idx) => (
+                <div
+                  key={idx}
+                  className={`bg-white rounded-lg shadow-lg overflow-hidden relative ${draggedNewsIdx === idx ? 'opacity-60' : ''}`}
+                  draggable
+                  onDragStart={() => handleNewsDragStart(idx)}
+                  onDragOver={(e) => { e.preventDefault(); handleNewsDragOver(idx); }}
+                  onDragEnd={handleNewsDragEnd}
+                  onDrop={handleNewsDragEnd}
+                  style={{ cursor: 'grab' }}
+                >
                   <img 
-                    src="https://i.ibb.co/spn4L9WW/LOGO-NSLG-2-Mini.png" 
-                    alt="Logo Colegio Nuevo San Luis Gonzaga"
-                    className="h-12 w-auto"
+                    src={item.image}
+                    alt={item.title}
+                    className="w-full h-48 object-cover object-top"
                   />
+                  <button
+                    onClick={() => removeNews(idx)}
+                    className="absolute top-2 right-2 bg-red-600 text-white rounded-full px-2 py-1 text-xs"
+                  >
+                    Eliminar
+                  </button>
+                  <button
+                    onClick={() => handleEditNews(idx)}
+                    className="absolute top-2 left-2 bg-yellow-500 text-white rounded-full px-2 py-1 text-xs"
+                  >
+                    Editar
+                  </button>
+                  <div className="p-6">
+                    <span className="text-sm text-blue-600 font-semibold">{item.date}</span>
+                    <h3 className="text-lg font-bold text-blue-900 mb-2 mt-1">{item.title}</h3>
+                    <p className="text-gray-600 text-sm">{item.description}</p>
+                  </div>
                 </div>
-                <div className="hidden lg:flex items-center space-x-8">
-                  <Link href="/" className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer">Inicio</Link>
-                  <Link href="/nosotros" className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer">Nosotros</Link>
-                  <Link href="/admisiones" className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer">Admisiones</Link>
-                  {/* Admin link hidden */}
-                  <Link href="/admin" className="hidden">Administración</Link>
-                  <Link href="/contacto" className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer">Contacto</Link>
-                </div>
-              </div>
+              ))}
             </div>
-          </nav>
-
-          <section className="pt-24 pb-12 bg-white">
-            <div className="max-w-7xl mx-auto px-6">
-              <h2 className="text-3xl font-bold text-blue-900 text-center mb-8">
-                Panel de Administración
-              </h2>
-
-              {/* Sección para subir imágenes a imgbb */}
-              <div className="mb-10 bg-blue-50 rounded-lg p-6 shadow text-center">
-                <h3 className="text-lg font-semibold text-blue-900 mb-2">¿Cómo subir imágenes?</h3>
-                <p className="text-gray-700 mb-2">
-                  Sube tus imágenes a <a href={imgbbProfile} target="_blank" rel="noopener noreferrer" className="text-blue-700 underline">imgbb.com</a> usando el usuario <span className="font-semibold">{imgbbUser}</span> y el álbum <a href={imgbbAlbum} target="_blank" rel="noopener noreferrer" className="text-blue-700 underline">CNSLG</a>.
-                </p>
-                <p className="text-gray-700 mb-2">
-                  Luego, copia la URL directa de la imagen y pégala en el campo correspondiente de la sección que desees (Banner, Noticias o Galería).
-                </p>
-                <a
-                  href="https://soporte-cnslg.imgbb.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block mt-2 px-6 py-2 bg-blue-900 text-white rounded-full font-semibold hover:bg-blue-800 transition-colors"
-                >
-                  Sube tus imágenes
-                </a>
+          </div>
+          {/* Gallery Management */}
+          <div className="mt-16">
+            <h3 className="text-xl font-semibold text-blue-900 mb-4">Gestionar imágenes de la galería</h3>
+            <form onSubmit={handleGallerySubmit} className="bg-blue-50 p-6 rounded-lg shadow mb-6">
+              <div className="mb-4">
+                <input
+                  type="text"
+                  name="url"
+                  value={galleryForm.url}
+                  onChange={handleGalleryChange}
+                  placeholder="URL de la imagen"
+                  className="w-full px-4 py-2 rounded border border-gray-300"
+                  required
+                />
               </div>
-
-              {/* Banner Images Management */}
-              <div className="mb-16">
-                <h3 className="text-xl font-semibold text-blue-900 mb-4">Gestionar Imágenes del Banner</h3>
-                <form onSubmit={handleBannerSubmit} className="bg-blue-50 p-6 rounded-lg shadow mb-6">
-                  <div className="mb-4">
-                    <input
-                      type="text"
-                      name="link"
-                      value={bannerForm.link}
-                      onChange={handleBannerChange}
-                      placeholder="URL de la imagen"
-                      className="w-full px-4 py-2 rounded border border-gray-300"
-                      required
-                    />
-                  </div>
-                  <div className="mb-4">
-                    <input
-                      type="text"
-                      name="Titulo"
-                      value={bannerForm.Titulo}
-                      onChange={handleBannerChange}
-                      placeholder="Título (opcional)"
-                      className="w-full px-4 py-2 rounded border border-gray-300"
-                    />
-                  </div>
-                  <div className="mb-4">
-                    <textarea
-                      name="Descripción"
-                      value={bannerForm.Descripción}
-                      onChange={handleBannerChange}
-                      placeholder="Descripción (opcional)"
-                      className="w-full px-4 py-2 rounded border border-gray-300"
-                    />
-                  </div>
-                  <div className="mb-4">
-                    <input
-                      type="date"
-                      name="fecha"
-                      value={bannerForm.fecha}
-                      onChange={handleBannerChange}
-                      className="w-full px-4 py-2 rounded border border-gray-300"
-                    />
-                  </div>
-                  <div className="flex gap-2">
-                    <button type="submit" className="px-6 py-2 bg-blue-900 text-white rounded-full font-semibold hover:bg-blue-800 transition-colors">
-                      {editBannerIdx !== null ? 'Guardar Cambios' : 'Agregar Imagen'}
-                    </button>
-                    {editBannerIdx !== null && (
-                      <button type="button" onClick={handleCancelEditBanner} className="px-6 py-2 bg-gray-400 text-white rounded-full font-semibold hover:bg-gray-500 transition-colors">
-                        Cancelar
-                      </button>
-                    )}
-                  </div>
-                </form>
-                <button
-                  onClick={saveBanner}
-                  className="mt-4 px-6 py-2 bg-green-700 text-white rounded-full font-semibold hover:bg-green-800 transition-colors"
-                >
-                  Guardar cambios
+              <div className="mb-4">
+                <input
+                  type="text"
+                  name="title"
+                  value={galleryForm.title}
+                  onChange={handleGalleryChange}
+                  placeholder="Título (opcional)"
+                  className="w-full px-4 py-2 rounded border border-gray-300"
+                />
+              </div>
+              <div className="flex gap-2">
+                <button type="submit" className="px-6 py-2 bg-blue-900 text-white rounded-full font-semibold hover:bg-blue-800 transition-colors">
+                  {editGalleryIdx !== null ? 'Guardar Cambios' : 'Agregar Imagen'}
                 </button>
-                <div className="grid md:grid-cols-4 gap-4">
-                  {bannerImages.map((img, idx) => (
-                    <div
-                      key={idx}
-                      className={`bg-white rounded-lg shadow p-2 relative ${draggedBannerIdx === idx ? 'opacity-60' : ''}`}
-                      draggable
-                      onDragStart={() => handleBannerDragStart(idx)}
-                      onDragOver={(e) => { e.preventDefault(); handleBannerDragOver(idx); }}
-                      onDragEnd={handleBannerDragEnd}
-                      onDrop={handleBannerDragEnd}
-                      style={{ cursor: 'grab' }}
-                    >
-                      <img src={img.link} alt={img.Titulo} className="w-full h-32 object-cover rounded" />
-                      <button
-                        onClick={() => removeBannerImage(idx)}
-                        className="absolute top-2 right-2 bg-red-600 text-white rounded-full px-2 py-1 text-xs"
-                      >
-                        Eliminar
-                      </button>
-                      <button
-                        onClick={() => handleEditBanner(idx)}
-                        className="absolute top-2 left-2 bg-yellow-500 text-white rounded-full px-2 py-1 text-xs"
-                      >
-                        Editar
-                      </button>
-                      <div className="mt-2 text-sm">
-                        <strong>{img.Titulo}</strong>
-                        <div>{img.Descripción}</div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                {editGalleryIdx !== null && (
+                  <button type="button" onClick={handleCancelEditGallery} className="px-6 py-2 bg-gray-400 text-white rounded-full font-semibold hover:bg-gray-500 transition-colors">
+                    Cancelar
+                  </button>
+                )}
               </div>
-              {/* News Management */}
-              <div>
-                <h3 className="text-xl font-semibold text-blue-900 mb-4">Gestionar Noticias y Eventos</h3>
-                <form onSubmit={handleNewsSubmit} className="bg-blue-50 p-6 rounded-lg shadow mb-6">
-                  <div className="mb-4">
-                    <input
-                      type="text"
-                      name="Titulo"
-                      value={newsForm.Titulo}
-                      onChange={handleNewsChange}
-                      placeholder="Título"
-                      className="w-full px-4 py-2 rounded border border-gray-300"
-                      required
-                    />
-                  </div>
-                  <div className="mb-4">
-                    {/* Campo de fecha tipo date */}
-                    <input
-                      type="date"
-                      name="fecha"
-                      value={newsForm.fecha}
-                      onChange={handleNewsChange}
-                      className="w-full px-4 py-2 rounded border border-gray-300"
-                      required
-                    />
-                  </div>
-                  <div className="mb-4">
-                    <textarea
-                      name="Descripción"
-                      value={newsForm.Descripción}
-                      onChange={handleNewsChange}
-                      placeholder="Descripción"
-                      className="w-full px-4 py-2 rounded border border-gray-300"
-                      required
-                    />
-                  </div>
-                  <div className="mb-4">
-                    <input
-                      type="text"
-                      name="link"
-                      value={newsForm.link}
-                      onChange={handleNewsChange}
-                      placeholder="URL de la imagen"
-                      className="w-full px-4 py-2 rounded border border-gray-300"
-                      required
-                    />
-                  </div>
-                  <div className="flex gap-2">
-                    <button type="submit" className="px-6 py-2 bg-blue-900 text-white rounded-full font-semibold hover:bg-blue-800 transition-colors">
-                      {editNewsIdx !== null ? 'Guardar Cambios' : 'Agregar Noticia'}
-                    </button>
-                    {editNewsIdx !== null && (
-                      <button type="button" onClick={handleCancelEditNews} className="px-6 py-2 bg-gray-400 text-white rounded-full font-semibold hover:bg-gray-500 transition-colors">
-                        Cancelar
-                      </button>
-                    )}
-                  </div>
-                </form>
-                <button
-                  onClick={saveNews}
-                  className="mt-4 px-6 py-2 bg-green-700 text-white rounded-full font-semibold hover:bg-green-800 transition-colors"
+            </form>
+            <div className="grid md:grid-cols-5 gap-4">
+              {gallery.map((img, idx) => (
+                <div
+                  key={idx}
+                  className={`bg-white rounded-lg shadow p-2 relative ${draggedGalleryIdx === idx ? 'opacity-60' : ''}`}
+                  draggable
+                  onDragStart={() => handleGalleryDragStart(idx)}
+                  onDragOver={(e) => { e.preventDefault(); handleGalleryDragOver(idx); }}
+                  onDragEnd={handleGalleryDragEnd}
+                  onDrop={handleGalleryDragEnd}
+                  style={{ cursor: 'grab' }}
                 >
-                  Guardar cambios
-                </button>
-                <div className="grid md:grid-cols-3 gap-8">
-                  {news.map((item, idx) => (
-                    <div
-                      key={idx}
-                      className={`bg-white rounded-lg shadow-lg overflow-hidden relative ${draggedNewsIdx === idx ? 'opacity-60' : ''}`}
-                      draggable
-                      onDragStart={() => handleNewsDragStart(idx)}
-                      onDragOver={(e) => { e.preventDefault(); handleNewsDragOver(idx); }}
-                      onDragEnd={handleNewsDragEnd}
-                      onDrop={handleNewsDragEnd}
-                      style={{ cursor: 'grab' }}
-                    >
-                      <img 
-                        src={item.link}
-                        alt={item.Titulo}
-                        className="w-full h-48 object-cover object-top"
-                      />
-                      <button
-                        onClick={() => removeNews(idx)}
-                        className="absolute top-2 right-2 bg-red-600 text-white rounded-full px-2 py-1 text-xs"
-                      >
-                        Eliminar
-                      </button>
-                      <button
-                        onClick={() => handleEditNews(idx)}
-                        className="absolute top-2 left-2 bg-yellow-500 text-white rounded-full px-2 py-1 text-xs"
-                      >
-                        Editar
-                      </button>
-                      <div className="p-6">
-                        <span className="text-sm text-blue-600 font-semibold">{item.fecha}</span>
-                        <h3 className="text-lg font-bold text-blue-900 mb-2 mt-1">{item.Titulo}</h3>
-                        <p className="text-gray-600 text-sm">{item.Descripción}</p>
-                      </div>
-                    </div>
-                  ))}
+                  <img src={img.url} alt={img.title} className="w-full h-32 object-cover rounded" />
+                  <button
+                    onClick={() => removeGalleryImage(idx)}
+                    className="absolute top-2 right-2 bg-red-600 text-white rounded-full px-2 py-1 text-xs"
+                  >
+                    Eliminar
+                  </button>
+                  <button
+                    onClick={() => handleEditGallery(idx)}
+                    className="absolute top-2 left-2 bg-yellow-500 text-white rounded-full px-2 py-1 text-xs"
+                  >
+                    Editar
+                  </button>
+                  <div className="mt-2 text-sm text-center">
+                    <strong>{img.title}</strong>
+                  </div>
                 </div>
-              </div>
-              {/* Gallery Management */}
-              <div className="mt-16">
-                <h3 className="text-xl font-semibold text-blue-900 mb-4">Gestionar imágenes de la galería</h3>
-                <form onSubmit={handleGallerySubmit} className="bg-blue-50 p-6 rounded-lg shadow mb-6">
-                  <div className="mb-4">
-                    <input
-                      type="text"
-                      name="link"
-                      value={galleryForm.link}
-                      onChange={handleGalleryChange}
-                      placeholder="URL de la imagen"
-                      className="w-full px-4 py-2 rounded border border-gray-300"
-                      required
-                    />
-                  </div>
-                  <div className="mb-4">
-                    <input
-                      type="text"
-                      name="Titulo"
-                      value={galleryForm.Titulo}
-                      onChange={handleGalleryChange}
-                      placeholder="Título (opcional)"
-                      className="w-full px-4 py-2 rounded border border-gray-300"
-                    />
-                  </div>
-                  <div className="mb-4">
-                    <textarea
-                      name="Descripción"
-                      value={galleryForm.Descripción}
-                      onChange={handleGalleryChange}
-                      placeholder="Descripción (opcional)"
-                      className="w-full px-4 py-2 rounded border border-gray-300"
-                    />
-                  </div>
-                  <div className="mb-4">
-                    <input
-                      type="date"
-                      name="fecha"
-                      value={galleryForm.fecha}
-                      onChange={handleGalleryChange}
-                      className="w-full px-4 py-2 rounded border border-gray-300"
-                    />
-                  </div>
-                  <div className="flex gap-2">
-                    <button type="submit" className="px-6 py-2 bg-blue-900 text-white rounded-full font-semibold hover:bg-blue-800 transition-colors">
-                      {editGalleryIdx !== null ? 'Guardar Cambios' : 'Agregar Imagen'}
-                    </button>
-                    {editGalleryIdx !== null && (
-                      <button type="button" onClick={handleCancelEditGallery} className="px-6 py-2 bg-gray-400 text-white rounded-full font-semibold hover:bg-gray-500 transition-colors">
-                        Cancelar
-                      </button>
-                    )}
-                  </div>
-                </form>
-                <button
-                  onClick={saveGallery}
-                  className="mt-4 px-6 py-2 bg-green-700 text-white rounded-full font-semibold hover:bg-green-800 transition-colors"
-                >
-                  Guardar cambios
-                </button>
-                <div className="grid md:grid-cols-5 gap-4">
-                  {gallery.map((img, idx) => (
-                    <div
-                      key={idx}
-                      className={`bg-white rounded-lg shadow p-2 relative ${draggedGalleryIdx === idx ? 'opacity-60' : ''}`}
-                      draggable
-                      onDragStart={() => handleGalleryDragStart(idx)}
-                      onDragOver={(e) => { e.preventDefault(); handleGalleryDragOver(idx); }}
-                      onDragEnd={handleGalleryDragEnd}
-                      onDrop={handleGalleryDragEnd}
-                      style={{ cursor: 'grab' }}
-                    >
-                      <img src={img.link} alt={img.Titulo} className="w-full h-32 object-cover rounded" />
-                      <button
-                        onClick={() => removeGalleryImage(idx)}
-                        className="absolute top-2 right-2 bg-red-600 text-white rounded-full px-2 py-1 text-xs"
-                      >
-                        Eliminar
-                      </button>
-                      <button
-                        onClick={() => handleEditGallery(idx)}
-                        className="absolute top-2 left-2 bg-yellow-500 text-white rounded-full px-2 py-1 text-xs"
-                      >
-                        Editar
-                      </button>
-                      <div className="mt-2 text-sm text-center">
-                        <strong>{img.Titulo}</strong>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
+              ))}
             </div>
-          </section>
-          {/* ...existing footer... */}
-        </>
-      )}
+          </div>
+        </div>
+      </section>
+      {/* ...existing footer... */}
     </div>
   );
 }
@@ -640,10 +579,6 @@ export default function Admin() {
 // 2. Los endpoints de API deben estar en /app/api/ y usar 'export async function GET/PUT'.
 // 3. El código de conexión a MongoDB debe estar SOLO en los archivos de API (no en este archivo).
 // 4. Si tienes errores de "Cannot find module 'mongodb'" instala la dependencia en tu proyecto:
-//    npm install mongodb
-// 5. Si tienes errores de "Dynamic server usage" o "Edge runtime", asegúrate de que tus endpoints API usen runtime: 'nodejs' en el export (no edge).
-// 6. Si tienes errores de serialización, asegúrate de no retornar el campo _id de MongoDB en el JSON (usa .map(({_id, ...rest}) => rest)).
-// 7. Si tienes errores de fetch, revisa los logs de Vercel y que los endpoints estén correctamente implementados en /app/api/banner, /app/api/news, /app/api/gallery.
 //    npm install mongodb
 // 5. Si tienes errores de "Dynamic server usage" o "Edge runtime", asegúrate de que tus endpoints API usen runtime: 'nodejs' en el export (no edge).
 // 6. Si tienes errores de serialización, asegúrate de no retornar el campo _id de MongoDB en el JSON (usa .map(({_id, ...rest}) => rest)).

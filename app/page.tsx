@@ -189,15 +189,6 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* Letrero informativo debajo de la barra de navegación */}
-      <div
-        className="w-full text-white text-center py-3 px-2 font-bold text-base md:text-xl lg:text-2xl shadow z-40 relative"
-        style={{ background: '#123788ff' }}
-      >
-        <span className="block whitespace-nowrap">
-          ¿Qué esperas para ser parte de la familia Gonzaguista en sus 100 años? - Matricúlate ahora
-        </span>
-      </div>
 
       {/* Floating Social Media Buttons */}
 <div className="fixed right-6 bottom-6 z-40 space-y-3">
