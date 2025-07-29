@@ -254,8 +254,7 @@ export default function Home() {
                         boxShadow: '0 4px 24px rgba(30,58,138,0.18)',
                       }}
                     >
-                      <span>Aparta tu cupo</span>
-                      <span className="text-base md:text-lg font-bold animate-bounce text-blue-700 bg-white/80 rounded-full px-3 py-1 ml-2 border border-blue-300 shadow">¡Haz clic aquí!</span>
+                      ¡Haz clic aquí!
                     </span>
                   </a>
                 )}
