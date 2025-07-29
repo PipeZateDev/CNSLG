@@ -5,7 +5,11 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 // Helper para guardar datos en Google Sheets vía Apps Script WebApp
-const SHEETS_WEBAPP_URL = 'https://script.google.com/macros/library/d/1Y2e50R3pGUPxKcZLdP4-gXS0oJ0FRqRoq79syQfSTiwDXvg8tNhlPk4O/1';
+// ATENCIÓN: El endpoint que usas ("/library/d/...") NO es un WebApp, es solo para librerías y NO acepta peticiones POST externas.
+// Debes usar la URL de despliegue de tu WebApp, que debe verse así:
+// https://script.google.com/macros/s/AKfycb.../exec
+
+const SHEETS_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbwqxnP4uVQfvJhlcnqhnx-x0g_yMwt_BhK3I1GM8RHf-wkMqPvoAay_2xDS8N5FaS9Z/exec';
 
 async function saveSheet(tab: string, data: any[]) {
   // Solución CORS: No es posible desde el navegador si el WebApp no tiene CORS habilitado.
@@ -553,10 +557,6 @@ export default function Admin() {
               <div className="mb-4">
                 <input
                   type="text"
-                  name="url"
-                  value={galleryForm.url}
-                  onChange={handleGalleryChange}
-                  placeholder="URL de la imagen"
                   className="w-full px-4 py-2 rounded border border-gray-300"
                   required
                 />
