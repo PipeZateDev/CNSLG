@@ -1,8 +1,7 @@
 export const dynamic = "force-dynamic";
+export const runtime = 'nodejs';
 import { NextRequest, NextResponse } from 'next/server';
 import { MongoClient } from 'mongodb';
-
-export const runtime = 'nodejs'; // Asegura que se use Node.js runtime en Vercel
 
 const uri = process.env.MONGODB_URI as string;
 const client = new MongoClient(uri);

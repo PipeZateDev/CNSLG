@@ -1,8 +1,8 @@
+export const dynamic = "force-dynamic";
+export const runtime = 'nodejs';
+
 import { NextRequest, NextResponse } from 'next/server';
 import { MongoClient } from 'mongodb';
-
-export const runtime = 'nodejs';
-export const dynamic = 'force-dynamic';
 
 const uri = process.env.MONGODB_URI as string;
 const client = new MongoClient(uri);

@@ -1,0 +1,1 @@
+// output: 'export', // ❌ Elimina o comenta esta línea si existe
