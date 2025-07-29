@@ -44,14 +44,20 @@ export default function Admin() {
       .then(data => setGallery(Array.isArray(data) ? data : []));
   }, []);
 
-  // Guardar cambios en MongoDB Atlas usando endpoints internos (PUT reemplaza todo el contenido)
+  // Guardar cambios en MongoDB Atlas usando endpoints internos (solo si hay datos)
   const saveBanner = async () => {
+    if (bannerImages.length === 0) {
+      alert('No puedes guardar un banner vacío.');
+      return;
+    }
     const res = await fetch('/api/banner', {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ items: bannerImages })
     });
     if (res.ok) {
+      const data = await fetch('/api/banner').then(r => r.json());
+      setBannerImages(Array.isArray(data) ? data : []);
       alert('Banner guardado.');
     } else {
       alert('Error al guardar el banner.');
@@ -59,12 +65,18 @@ export default function Admin() {
   };
 
   const saveNews = async () => {
+    if (news.length === 0) {
+      alert('No puedes guardar noticias vacías.');
+      return;
+    }
     const res = await fetch('/api/news', {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ items: news })
     });
     if (res.ok) {
+      const data = await fetch('/api/news').then(r => r.json());
+      setNews(Array.isArray(data) ? data : []);
       alert('Noticias guardadas.');
     } else {
       alert('Error al guardar las noticias.');
@@ -72,12 +84,18 @@ export default function Admin() {
   };
 
   const saveGallery = async () => {
+    if (gallery.length === 0) {
+      alert('No puedes guardar una galería vacía.');
+      return;
+    }
     const res = await fetch('/api/gallery', {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ items: gallery })
     });
     if (res.ok) {
+      const data = await fetch('/api/gallery').then(r => r.json());
+      setGallery(Array.isArray(data) ? data : []);
       alert('Galería guardada.');
     } else {
       alert('Error al guardar la galería.');
