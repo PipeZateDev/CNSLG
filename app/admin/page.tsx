@@ -4,47 +4,6 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-// Helper para guardar datos en Google Sheets vía Apps Script WebApp
-// ATENCIÓN: El endpoint que usas ("/library/d/...") NO es un WebApp, es solo para librerías y NO acepta peticiones POST externas.
-// Debes usar la URL de despliegue de tu WebApp, que debe verse así:
-// https://script.google.com/macros/s/AKfycb.../exec
-
-const SHEETS_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbwqxnP4uVQfvJhlcnqhnx-x0g_yMwt_BhK3I1GM8RHf-wkMqPvoAay_2xDS8N5FaS9Z/exec';
-
-async function saveSheet(tab: string, data: any[]) {
-  // Solución CORS: No es posible desde el navegador si el WebApp no tiene CORS habilitado.
-  // Si ves el error "blocked by CORS policy", el problema está en la configuración del WebApp de Google Apps Script.
-  // Debes modificar el Apps Script para permitir CORS:
-
-  // 1. Abre tu Apps Script y reemplaza tu función doPost por esto:
-  // function doPost(e) {
-  //   // ...tu lógica...
-  //   return ContentService
-  //     .createTextOutput(JSON.stringify({ success: true }))
-  //     .setMimeType(ContentService.MimeType.JSON)
-  //     .setHeader("Access-Control-Allow-Origin", "*");
-  // }
-  //
-  // 2. Si usas doGet, igual:
-  // function doGet(e) {
-  //   // ...tu lógica...
-  //   return ContentService
-  //     .createTextOutput("OK")
-  //     .setMimeType(ContentService.MimeType.TEXT)
-  //     .setHeader("Access-Control-Allow-Origin", "*");
-  // }
-  //
-  // 3. Vuelve a desplegar el WebApp.
-  //
-  // Si no puedes modificar el WebApp, deberás hacer la petición desde un backend propio (Node.js API) y no desde el navegador.
-
-  await fetch(SHEETS_WEBAPP_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ tab, data }),
-  });
-}
-
 export default function Admin() {
   const router = useRouter();
 
@@ -244,26 +203,6 @@ export default function Admin() {
   const imgbbAlbum = "https://ibb.co/album/hc2G29";
   const imgbbProfile = "https://PipeZate.imgbb.com/";
 
-  // Estado para mostrar guardado
-  const [saving, setSaving] = useState(false);
-  const [saveMsg, setSaveMsg] = useState('');
-
-  // Guardar todos los datos manualmente
-  const handleSaveAll = async () => {
-    setSaving(true);
-    setSaveMsg('');
-    try {
-      await saveSheet('BANNER', bannerImages);
-      await saveSheet('NEWS', news);
-      await saveSheet('GALERY', gallery);
-      setSaveMsg('¡Cambios guardados en Google Sheets!');
-    } catch {
-      setSaveMsg('Error al guardar en Google Sheets.');
-    }
-    setSaving(false);
-    setTimeout(() => setSaveMsg(''), 3000);
-  };
-
   return (
     <div className="min-h-screen bg-white">
       {/* Modal de validación */}
@@ -339,40 +278,20 @@ export default function Admin() {
             Panel de Administración
           </h2>
 
-          {/* Botón de guardar cambios manual */}
-          <div className="flex justify-center mb-8">
-            <button
-              onClick={handleSaveAll}
-              disabled={saving}
-              className={`px-8 py-3 rounded-full font-semibold transition-colors ${
-                saving
-                  ? 'bg-gray-400 text-white cursor-not-allowed'
-                  : 'bg-blue-900 text-white hover:bg-blue-800'
-              }`}
-            >
-              {saving ? 'Guardando...' : 'Guardar cambios en Google Sheets'}
-            </button>
-          </div>
-          {saveMsg && (
-            <div className="text-center mb-4 text-blue-700 font-semibold">{saveMsg}</div>
-          )}
-
           {/* Sección para subir imágenes a imgbb */}
           <div className="mb-10 bg-blue-50 rounded-lg p-6 shadow text-center">
-            <h3 className="text-lg font-semibold text-blue-900 mb-2">¿Cómo subir imágenes?</h3>
+            <h3 className="text-lg font-semibold text-blue-900 mb-2">Sube tus imágenes a imgbb</h3>
             <p className="text-gray-700 mb-2">
-              Sube tus imágenes a <a href={imgbbProfile} target="_blank" rel="noopener noreferrer" className="text-blue-700 underline">imgbb.com</a> usando el usuario <span className="font-semibold">{imgbbUser}</span> y el álbum <a href={imgbbAlbum} target="_blank" rel="noopener noreferrer" className="text-blue-700 underline">CNSLG</a>.
-            </p>
-            <p className="text-gray-700 mb-2">
-              Luego, copia la URL directa de la imagen y pégala en el campo correspondiente de la sección que desees (Banner, Noticias o Galería).
+              1. Sube la imagen al <a href={imgbbAlbum} target="_blank" rel="noopener noreferrer" className="text-blue-700 underline">álbum CNSLG</a> de imgbb.<br />
+              2. Copia la URL directa y pégala en el campo correspondiente de Banner, Noticias o Galería.
             </p>
             <a
-              href="https://imgbb.com/"
+              href={imgbbAlbum}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block mt-2 px-6 py-2 bg-blue-900 text-white rounded-full font-semibold hover:bg-blue-800 transition-colors"
             >
-              Ir a imgbb.com
+              Ir al álbum CNSLG en imgbb
             </a>
           </div>
 
@@ -557,6 +476,10 @@ export default function Admin() {
               <div className="mb-4">
                 <input
                   type="text"
+                  name="url"
+                  value={galleryForm.url}
+                  onChange={handleGalleryChange}
+                  placeholder="URL de la imagen"
                   className="w-full px-4 py-2 rounded border border-gray-300"
                   required
                 />
