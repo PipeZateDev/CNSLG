@@ -129,8 +129,9 @@ export default function Admin() {
     setBannerImages(bannerImages.filter((_, i) => i !== idx));
     if (editBannerIdx === idx) handleCancelEditBanner();
   };
+  // Banner drag and drop handlers
   const handleBannerDragStart = (idx: number) => setDraggedBannerIdx(idx);
-  const handleBannerDragOver = (idx: number) => {
+  const handleBannerDragEnter = (idx: number) => {
     if (draggedBannerIdx === null || draggedBannerIdx === idx) return;
     const updated = [...bannerImages];
     const [removed] = updated.splice(draggedBannerIdx, 1);
@@ -167,8 +168,9 @@ export default function Admin() {
     setNews(news.filter((_, i) => i !== idx));
     if (editNewsIdx === idx) handleCancelEditNews();
   };
+  // News drag and drop handlers
   const handleNewsDragStart = (idx: number) => setDraggedNewsIdx(idx);
-  const handleNewsDragOver = (idx: number) => {
+  const handleNewsDragEnter = (idx: number) => {
     if (draggedNewsIdx === null || draggedNewsIdx === idx) return;
     const updated = [...news];
     const [removed] = updated.splice(draggedNewsIdx, 1);
@@ -205,8 +207,9 @@ export default function Admin() {
     setGallery(gallery.filter((_, i) => i !== idx));
     if (editGalleryIdx === idx) handleCancelEditGallery();
   };
+  // Gallery drag and drop handlers
   const handleGalleryDragStart = (idx: number) => setDraggedGalleryIdx(idx);
-  const handleGalleryDragOver = (idx: number) => {
+  const handleGalleryDragEnter = (idx: number) => {
     if (draggedGalleryIdx === null || draggedGalleryIdx === idx) return;
     const updated = [...gallery];
     const [removed] = updated.splice(draggedGalleryIdx, 1);
@@ -406,9 +409,10 @@ export default function Admin() {
                       className={`bg-white rounded-lg shadow p-2 relative ${draggedBannerIdx === idx ? 'opacity-60' : ''}`}
                       draggable
                       onDragStart={() => handleBannerDragStart(idx)}
-                      onDragOver={(e) => { e.preventDefault(); handleBannerDragOver(idx); }}
+                      onDragEnter={() => handleBannerDragEnter(idx)}
                       onDragEnd={handleBannerDragEnd}
                       onDrop={handleBannerDragEnd}
+                      onDragOver={e => e.preventDefault()}
                       style={{ cursor: 'grab' }}
                     >
                       <img src={img.link} alt={img.Titulo} className="w-full h-32 object-cover rounded" />
@@ -503,9 +507,10 @@ export default function Admin() {
                       className={`bg-white rounded-lg shadow-lg overflow-hidden relative ${draggedNewsIdx === idx ? 'opacity-60' : ''}`}
                       draggable
                       onDragStart={() => handleNewsDragStart(idx)}
-                      onDragOver={(e) => { e.preventDefault(); handleNewsDragOver(idx); }}
+                      onDragEnter={() => handleNewsDragEnter(idx)}
                       onDragEnd={handleNewsDragEnd}
                       onDrop={handleNewsDragEnd}
+                      onDragOver={e => e.preventDefault()}
                       style={{ cursor: 'grab' }}
                     >
                       <img 
@@ -601,9 +606,10 @@ export default function Admin() {
                       className={`bg-white rounded-lg shadow p-2 relative ${draggedGalleryIdx === idx ? 'opacity-60' : ''}`}
                       draggable
                       onDragStart={() => handleGalleryDragStart(idx)}
-                      onDragOver={(e) => { e.preventDefault(); handleGalleryDragOver(idx); }}
+                      onDragEnter={() => handleGalleryDragEnter(idx)}
                       onDragEnd={handleGalleryDragEnd}
                       onDrop={handleGalleryDragEnd}
+                      onDragOver={e => e.preventDefault()}
                       style={{ cursor: 'grab' }}
                     >
                       <img src={img.link} alt={img.Titulo} className="w-full h-32 object-cover rounded" />
