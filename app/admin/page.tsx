@@ -198,6 +198,11 @@ export default function Admin() {
     router.push('/');
   };
 
+  // Instrucción para subir imágenes a imgbb
+  const imgbbUser = "PipeZate";
+  const imgbbAlbum = "https://ibb.co/album/hc2G29";
+  const imgbbProfile = "https://PipeZate.imgbb.com/";
+
   return (
     <div className="min-h-screen bg-white">
       {/* Modal de validación */}
@@ -272,6 +277,26 @@ export default function Admin() {
           <h2 className="text-3xl font-bold text-blue-900 text-center mb-8">
             Panel de Administración
           </h2>
+
+          {/* Sección para subir imágenes a imgbb */}
+          <div className="mb-10 bg-blue-50 rounded-lg p-6 shadow text-center">
+            <h3 className="text-lg font-semibold text-blue-900 mb-2">¿Cómo subir imágenes?</h3>
+            <p className="text-gray-700 mb-2">
+              Sube tus imágenes a <a href={imgbbProfile} target="_blank" rel="noopener noreferrer" className="text-blue-700 underline">imgbb.com</a> usando el usuario <span className="font-semibold">{imgbbUser}</span> y el álbum <a href={imgbbAlbum} target="_blank" rel="noopener noreferrer" className="text-blue-700 underline">CNSLG</a>.
+            </p>
+            <p className="text-gray-700 mb-2">
+              Luego, copia la URL directa de la imagen y pégala en el campo correspondiente de la sección que desees (Banner, Noticias o Galería).
+            </p>
+            <a
+              href="https://imgbb.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block mt-2 px-6 py-2 bg-blue-900 text-white rounded-full font-semibold hover:bg-blue-800 transition-colors"
+            >
+              Ir a imgbb.com
+            </a>
+          </div>
+
           {/* Banner Images Management */}
           <div className="mb-16">
             <h3 className="text-xl font-semibold text-blue-900 mb-4">Gestionar Imágenes del Banner</h3>
