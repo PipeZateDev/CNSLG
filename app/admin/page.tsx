@@ -4,32 +4,10 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-// Utilidades para Google Sheets
-const SHEET_ID = '2PACX-1vSantrG3KyxrpRWutuIkoLZpr2MJXcmHbvfPsMP6eOYcuTnXS38V_gstOvk8TdyHWIOZW6OXuBdqPLm';
-const SHEET_BASE = 'https://docs.google.com/spreadsheets/d/e/' + SHEET_ID + '/gviz/tq?tqx=out:json&sheet=';
-
-// Helper para leer datos de Google Sheets
-async function fetchSheet(tab: string) {
-  const res = await fetch(SHEET_BASE + tab);
-  const text = await res.text();
-  // Elimina el "google.visualization.Query.setResponse(" y el paréntesis final
-  const json = JSON.parse(text.substring(47, text.length - 2));
-  const cols = json.table.cols.map((c: any) => c.label);
-  return json.table.rows.map((row: any) => {
-    const obj: any = {};
-    row.c.forEach((cell: any, idx: number) => {
-      obj[cols[idx]] = cell ? cell.v : '';
-    });
-    return obj;
-  });
-}
-
 // Helper para guardar datos en Google Sheets vía Apps Script WebApp
-// Debes crear un WebApp en tu Google Sheets y poner la URL aquí
-const SHEETS_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbwqxnP4uVQfvJhlcnqhnx-x0g_yMwt_BhK3I1GM8RHf-wkMqPvoAay_2xDS8N5FaS9Z/exec'; // <-- Debes crear y poner tu URL
+const SHEETS_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbwqxnP4uVQfvJhlcnqhnx-x0g_yMwt_BhK3I1GM8RHf-wkMqPvoAay_2xDS8N5FaS9Z/exec';
 
 async function saveSheet(tab: string, data: any[]) {
-  // El WebApp debe aceptar POST { tab, data }
   await fetch(SHEETS_WEBAPP_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -46,42 +24,49 @@ export default function Admin() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  // Cambia los estados iniciales a vacíos, se llenarán desde Google Sheets
+  // Banner images state
   const [bannerImages, setBannerImages] = useState<{ url: string; title?: string; description?: string }[]>([]);
-  const [news, setNews] = useState<{ title: string; date: string; description: string; image: string }[]>([]);
-  const [gallery, setGallery] = useState<{ url: string; title?: string }[]>([]);
-
-  // Banner form state
   const [bannerForm, setBannerForm] = useState({ url: '', title: '', description: '' });
   const [editBannerIdx, setEditBannerIdx] = useState<number | null>(null);
   const [draggedBannerIdx, setDraggedBannerIdx] = useState<number | null>(null);
 
-  // News form state
+  // News state
+  const [news, setNews] = useState<{ title: string; date: string; description: string; image: string }[]>([]);
   const [newsForm, setNewsForm] = useState({ title: '', date: '', description: '', image: '' });
   const [editNewsIdx, setEditNewsIdx] = useState<number | null>(null);
   const [draggedNewsIdx, setDraggedNewsIdx] = useState<number | null>(null);
 
   // Galería state y handlers (deben estar antes del return)
+  const [gallery, setGallery] = useState<{ url: string; title?: string }[]>([
+    { url: "https://readdy.ai/api/search-image?query=Modern%20school%20classroom%20with%20students%20studying%2C%20Colombian%20students%20in%20uniforms%2C%20contemporary%20educational%20environment%2C%20natural%20lighting%2C%20academic%20atmosphere%2C%20engaged%20learning%2C%20blue%20and%20white%20uniforms&width=400&height=300&seq=gallery1&orientation=landscape", title: "Estudiantes en clase" },
+    { url: "https://readdy.ai/api/search-image?query=School%20sports%20activities%2C%20students%20playing%20soccer%2C%20Colombian%20school%20sports%2C%20outdoor%20activities%2C%20teamwork%2C%20athletic%20field%2C%20healthy%20lifestyle%2C%20school%20sports%20uniform&width=400&height=300&seq=gallery2&orientation=landscape", title: "Actividades deportivas" },
+    { url: "https://readdy.ai/api/search-image?query=School%20science%20laboratory%2C%20students%20conducting%20experiments%2C%20modern%20lab%20equipment%2C%20STEM%20education%2C%20Colombian%20school%20facilities%2C%20laboratory%20safety%2C%20educational%20technology%2C%20scientific%20learning&width=400&height=300&seq=gallery3&orientation=landscape", title: "Laboratorio de ciencias" },
+    { url: "https://readdy.ai/api/search-image?query=School%20library%20with%20students%20reading%2C%20modern%20educational%20library%2C%20quiet%20study%20space%2C%20book%20shelves%2C%20academic%20research%2C%20Colombian%20school%20interior%2C%20reading%20culture%2C%20educational%20resources&width=400&height=300&seq=gallery4&orientation=landscape", title: "Biblioteca escolar" },
+    { url: "https://readdy.ai/api/search-image?query=School%20graduation%20ceremony%2C%20students%20in%20caps%20and%20gowns%2C%20proud%20families%2C%20academic%20achievement%2C%20Colombian%20graduation%20tradition%2C%20celebration%20of%20success%2C%20educational%20milestone&width=400&height=300&seq=gallery6&orientation=landscape", title: "Ceremonia de graduación" }
+  ]);
   const [galleryForm, setGalleryForm] = useState({ url: '', title: '' });
   const [editGalleryIdx, setEditGalleryIdx] = useState<number | null>(null);
   const [draggedGalleryIdx, setDraggedGalleryIdx] = useState<number | null>(null);
 
-  // Cargar datos desde Google Sheets al iniciar
+  // Cargar datos publicados al iniciar
   useEffect(() => {
-    fetchSheet('BANNER').then(rows => setBannerImages(rows));
-    fetchSheet('NEWS').then(rows => setNews(rows));
-    fetchSheet('GALERY').then(rows => setGallery(rows));
+    const storedBanner = localStorage.getItem('bannerImages');
+    const storedNews = localStorage.getItem('news');
+    const storedGallery = localStorage.getItem('gallery');
+    if (storedBanner) setBannerImages(JSON.parse(storedBanner));
+    if (storedNews) setNews(JSON.parse(storedNews));
+    if (storedGallery) setGallery(JSON.parse(storedGallery));
   }, []);
 
-  // Guardar cambios en Google Sheets cuando cambian los datos
+  // Guardar cambios automáticamente en localStorage (publicados)
   useEffect(() => {
-    if (bannerImages.length > 0) saveSheet('BANNER', bannerImages);
+    localStorage.setItem('bannerImages', JSON.stringify(bannerImages));
   }, [bannerImages]);
   useEffect(() => {
-    if (news.length > 0) saveSheet('NEWS', news);
+    localStorage.setItem('news', JSON.stringify(news));
   }, [news]);
   useEffect(() => {
-    if (gallery.length > 0) saveSheet('GALERY', gallery);
+    localStorage.setItem('gallery', JSON.stringify(gallery));
   }, [gallery]);
 
   // Banner form handlers
@@ -229,6 +214,26 @@ export default function Admin() {
   const imgbbAlbum = "https://ibb.co/album/hc2G29";
   const imgbbProfile = "https://PipeZate.imgbb.com/";
 
+  // Estado para mostrar guardado
+  const [saving, setSaving] = useState(false);
+  const [saveMsg, setSaveMsg] = useState('');
+
+  // Guardar todos los datos manualmente
+  const handleSaveAll = async () => {
+    setSaving(true);
+    setSaveMsg('');
+    try {
+      await saveSheet('BANNER', bannerImages);
+      await saveSheet('NEWS', news);
+      await saveSheet('GALERY', gallery);
+      setSaveMsg('¡Cambios guardados en Google Sheets!');
+    } catch {
+      setSaveMsg('Error al guardar en Google Sheets.');
+    }
+    setSaving(false);
+    setTimeout(() => setSaveMsg(''), 3000);
+  };
+
   return (
     <div className="min-h-screen bg-white">
       {/* Modal de validación */}
@@ -303,6 +308,24 @@ export default function Admin() {
           <h2 className="text-3xl font-bold text-blue-900 text-center mb-8">
             Panel de Administración
           </h2>
+
+          {/* Botón de guardar cambios manual */}
+          <div className="flex justify-center mb-8">
+            <button
+              onClick={handleSaveAll}
+              disabled={saving}
+              className={`px-8 py-3 rounded-full font-semibold transition-colors ${
+                saving
+                  ? 'bg-gray-400 text-white cursor-not-allowed'
+                  : 'bg-blue-900 text-white hover:bg-blue-800'
+              }`}
+            >
+              {saving ? 'Guardando...' : 'Guardar cambios en Google Sheets'}
+            </button>
+          </div>
+          {saveMsg && (
+            <div className="text-center mb-4 text-blue-700 font-semibold">{saveMsg}</div>
+          )}
 
           {/* Sección para subir imágenes a imgbb */}
           <div className="mb-10 bg-blue-50 rounded-lg p-6 shadow text-center">
