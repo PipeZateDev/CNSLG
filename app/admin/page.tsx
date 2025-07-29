@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 
 export default function Admin() {
   const router = useRouter();
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // <-- Faltaba este estado
 
   // Banner state
   const [bannerImages, setBannerImages] = useState<{ Titulo: string; Descripción: string; fecha: string; link: string }[]>([]);
@@ -305,15 +306,149 @@ export default function Admin() {
                     className="h-12 w-auto"
                   />
                 </div>
-                <div className="hidden lg:flex items-center space-x-8">
-                  <Link href="/" className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer">Inicio</Link>
-                  <Link href="/nosotros" className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer">Nosotros</Link>
-                  <Link href="/admisiones" className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer">Admisiones</Link>
-                  {/* Admin link hidden */}
-                  <Link href="/admin" className="hidden">Administración</Link>
-                  <Link href="/contacto" className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer">Contacto</Link>
+                {/* Centrado de pestañas */}
+                <div className="flex-1 flex justify-center">
+                  <div className="flex items-center space-x-8">
+                    <Link 
+                      href="/"
+                      className="px-4 py-2 bg-blue-900 text-white rounded-full transition-colors whitespace-nowrap cursor-pointer"
+                    >
+                      Inicio
+                    </Link>
+                    <Link 
+                      href="/nosotros"
+                      className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer"
+                    >
+                      Nosotros
+                    </Link>
+                    <Link 
+                      href="/admisiones"
+                      className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer"
+                    >
+                      Admisiones
+                    </Link>
+                    <Link 
+                      href="/contacto"
+                      className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer"
+                    >
+                      Contacto
+                    </Link>
+                    {/* Admin tab hidden but present for accessibility */}
+                    <Link
+                      href="/admin"
+                      className="hidden"
+                      tabIndex={-1}
+                      aria-hidden="true"
+                    >
+                      Admin
+                    </Link>
+                  </div>
                 </div>
+                {/* Botones pequeños a la derecha */}
+                <div className="hidden lg:flex items-center space-x-2 ml-8">
+                  <a 
+                    href="https://lms30.uno-internacional.com/login/access" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="px-3 py-1 bg-purple-600 text-white rounded-full text-xs font-semibold hover:bg-purple-700 transition-colors whitespace-nowrap cursor-pointer"
+                  >
+                    UNOi Santillana
+                  </a>
+                  <a 
+                    href="https://www.cibercolegios.com/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="px-3 py-1 bg-yellow-400 text-black rounded-full text-xs font-semibold hover:bg-yellow-500 transition-colors whitespace-nowrap cursor-pointer"
+                  >
+                    Cibercolegios
+                  </a>
+                  <a 
+                    href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=12695&searchedCategoryId=&searchedAgreementName=PEDAGOGICOS%20ASOCIADOS%20SAS" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="px-3 py-1 bg-blue-600 text-white rounded-full text-xs font-semibold hover:bg-blue-700 transition-colors whitespace-nowrap cursor-pointer"
+                  >
+                    Pagos PSE
+                  </a>
+                </div>
+                {/* Mobile Menu Button */}
+                <button 
+                  onClick={() => setIsMenuOpen(!isMenuOpen)}
+                  className="lg:hidden w-10 h-10 flex items-center justify-center text-blue-900 cursor-pointer"
+                >
+                  <i className={`ri-${isMenuOpen ? 'close' : 'menu'}-line text-2xl`}></i>
+                </button>
               </div>
+              {/* Mobile Navigation Menu */}
+              {isMenuOpen && (
+                <div className="lg:hidden mt-4 py-4 border-t border-gray-200">
+                  <div className="flex flex-col space-y-3">
+                    <Link 
+                      href="/"
+                      onClick={() => setIsMenuOpen(false)}
+                      className="px-4 py-2 bg-blue-900 text-white rounded-full transition-colors text-center cursor-pointer"
+                    >
+                      Inicio
+                    </Link>
+                    <Link 
+                      href="/nosotros"
+                      onClick={() => setIsMenuOpen(false)}
+                      className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer"
+                    >
+                      Nosotros
+                    </Link>
+                    <Link 
+                      href="/admisiones"
+                      onClick={() => setIsMenuOpen(false)}
+                      className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer"
+                    >
+                      Admisiones
+                    </Link>
+                    <Link 
+                      href="/contacto"
+                      onClick={() => setIsMenuOpen(false)}
+                      className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer"
+                    >
+                      Contacto
+                    </Link>
+                    {/* Admin tab hidden in mobile menu */}
+                    <Link
+                      href="/admin"
+                      className="hidden"
+                      tabIndex={-1}
+                      aria-hidden="true"
+                    >
+                      Admin
+                    </Link>
+                    <div className="flex flex-col space-y-2 pt-2">
+                      <a 
+                        href="https://lms30.uno-internacional.com/login/access" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="px-4 py-2 bg-purple-600 text-white rounded-full text-sm font-semibold hover:bg-purple-700 transition-colors text-center cursor-pointer"
+                      >
+                        UNOi Santillana
+                      </a>
+                      <a 
+                        href="https://www.cibercolegios.com/" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="px-4 py-2 bg-yellow-400 text-black rounded-full text-sm font-semibold hover:bg-yellow-500 transition-colors text-center cursor-pointer"
+                      >
+                        Cibercolegios
+                      </a>
+                      <a 
+                        href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=12695&searchedCategoryId=&searchedAgreementName=PEDAGOGICOS%20ASOCIADOS%20SAS" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="px-4 py-2 bg-blue-600 text-white rounded-full text-sm font-semibold hover:bg-blue-700 transition-colors text-center cursor-pointer"
+                      >
+                        Pagos PSE
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </nav>
 

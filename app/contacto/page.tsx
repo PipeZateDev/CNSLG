@@ -20,67 +20,68 @@ export default function Contacto() {
           <div className="flex items-center justify-between">
             <div className="flex items-center">
               <img 
-                src="https://static.readdy.ai/image/b422d9997318ba9404c133396eb0082a/f0b6df53262c2786638b3d4d8768e052.png" 
-                alt="Logo Colegio Nuevo San Luis Gonzaga" 
+                src="https://i.ibb.co/spn4L9WW/LOGO-NSLG-2-Mini.png" 
+                alt="Logo Colegio Nuevo San Luis Gonzaga"
                 className="h-12 w-auto"
               />
             </div>
-            
-            {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center space-x-8">
-              <Link 
-                href="/"
-                className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer"
-              >
-                Inicio
-              </Link>
-              <Link 
-                href="/nosotros"
-                className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer"
-              >
-                Nosotros
-              </Link>
-              <Link 
-                href="/admisiones"
-                className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer"
-              >
-                Admisiones
-              </Link>
-              <Link 
-                href="/contacto"
-                className="px-4 py-2 bg-blue-900 text-white rounded-full transition-colors whitespace-nowrap cursor-pointer"
-              >
-                Contacto
-              </Link>
-              <div className="flex space-x-2 ml-8">
-                <a 
-                  href="https://lms30.uno-internacional.com/login/access" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="px-4 py-2 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition-colors whitespace-nowrap cursor-pointer"
+            {/* Centrado de pestañas */}
+            <div className="flex-1 flex justify-center">
+              <div className="flex items-center space-x-8">
+                <Link 
+                  href="/"
+                  className="px-4 py-2 bg-blue-900 text-white rounded-full transition-colors whitespace-nowrap cursor-pointer"
                 >
-                  UNOi Santillana
-                </a>
-                <a 
-                  href="https://www.cibercolegios.com/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="px-4 py-2 bg-yellow-400 text-black rounded-full hover:bg-yellow-500 transition-colors whitespace-nowrap cursor-pointer"
+                  Inicio
+                </Link>
+                <Link 
+                  href="/nosotros"
+                  className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer"
                 >
-                  Cibercolegios
-                </a>
-                <a 
-                  href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=12695&searchedCategoryId=&searchedAgreementName=PEDAGOGICOS%20ASOCIADOS%20SAS" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors whitespace-nowrap cursor-pointer"
+                  Nosotros
+                </Link>
+                <Link 
+                  href="/admisiones"
+                  className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer"
                 >
-                  PSE - Pagos en Línea
-                </a>
+                  Admisiones
+                </Link>
+                <Link 
+                  href="/contacto"
+                  className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer"
+                >
+                  Contacto
+                </Link>
               </div>
             </div>
-
-           {/* Mobile Menu Button */}
+            {/* Botones pequeños a la derecha */}
+            <div className="hidden lg:flex items-center space-x-2 ml-8">
+              <a 
+                href="https://lms30.uno-internacional.com/login/access" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="px-3 py-1 bg-purple-600 text-white rounded-full text-xs font-semibold hover:bg-purple-700 transition-colors whitespace-nowrap cursor-pointer"
+              >
+                UNOi Santillana
+              </a>
+              <a 
+                href="https://www.cibercolegios.com/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="px-3 py-1 bg-yellow-400 text-black rounded-full text-xs font-semibold hover:bg-yellow-500 transition-colors whitespace-nowrap cursor-pointer"
+              >
+                Cibercolegios
+              </a>
+              <a 
+                href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=12695&searchedCategoryId=&searchedAgreementName=PEDAGOGICOS%20ASOCIADOS%20SAS" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="px-3 py-1 bg-blue-600 text-white rounded-full text-xs font-semibold hover:bg-blue-700 transition-colors whitespace-nowrap cursor-pointer"
+              >
+                Pagos PSE
+              </a>
+            </div>
+            {/* ...existing mobile menu button... */}
             <button 
               onClick={toggleMenu}
               className="lg:hidden w-10 h-10 flex items-center justify-center text-blue-900 cursor-pointer"
@@ -88,8 +89,7 @@ export default function Contacto() {
               <i className={`ri-${isMenuOpen ? 'close' : 'menu'}-line text-2xl`}></i>
             </button>
           </div>
-
-          {/* Mobile Navigation Menu */}
+          {/* ...existing mobile navigation menu... */}
           {isMenuOpen && (
             <div className="lg:hidden mt-4 py-4 border-t border-gray-200">
               <div className="flex flex-col space-y-3">
@@ -117,7 +117,7 @@ export default function Contacto() {
                 <Link 
                   href="/contacto"
                   onClick={() => setIsMenuOpen(false)}
-                  className="px-4 py-2 bg-blue-900 text-white rounded-full transition-colors text-center cursor-pointer"
+                  className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer"
                 >
                   Contacto
                 </Link>
@@ -126,7 +126,7 @@ export default function Contacto() {
                     href="https://lms30.uno-internacional.com/login/access" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="px-4 py-2 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition-colors text-center cursor-pointer"
+                    className="px-4 py-2 bg-purple-600 text-white rounded-full text-sm font-semibold hover:bg-purple-700 transition-colors text-center cursor-pointer"
                   >
                     UNOi Santillana
                   </a>
@@ -134,7 +134,7 @@ export default function Contacto() {
                     href="https://www.cibercolegios.com/" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="px-4 py-2 bg-yellow-400 text-black rounded-full hover:bg-yellow-500 transition-colors text-center cursor-pointer"
+                    className="px-4 py-2 bg-yellow-400 text-black rounded-full text-sm font-semibold hover:bg-yellow-500 transition-colors text-center cursor-pointer"
                   >
                     Cibercolegios
                   </a>
@@ -142,9 +142,9 @@ export default function Contacto() {
                     href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=12695&searchedCategoryId=&searchedAgreementName=PEDAGOGICOS%20ASOCIADOS%20SAS" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors text-center cursor-pointer"
+                    className="px-4 py-2 bg-blue-600 text-white rounded-full text-sm font-semibold hover:bg-blue-700 transition-colors text-center cursor-pointer"
                   >
-                    PSE - Pagos en Línea
+                    Pagos PSE
                   </a>
                 </div>
               </div>
