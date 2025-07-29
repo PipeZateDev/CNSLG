@@ -7,19 +7,21 @@ export default function Home() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const bannerImages = [
-    { url: "https://i.ibb.co/mCG7xd6C/1.jpg", title: "", description: "" },  //OpenHouse
-    { url: "https://i.ibb.co/4n2KgQTP/9.jpg", title: "", description: "" },  //DíaFamilia
-    { url: "https://i.ibb.co/Wp5W862T/2.jpg", title: "", description: "" },  //Admisiones
-    { url: "https://i.ibb.co/1fwdk3FQ/3.jpg", title: "", description: "" },        //Lema
-    { url: "https://i.ibb.co/VpghYymD/6.jpg", title: "", description: "" },    //Educacion con amor
-    { url: "https://i.ibb.co/WWFpKXmM/4.jpg", title: "", description: "" },      //Ingles 
-    //{ url: "https://i.ibb.co/1gsPzf4/8.jpg", title: "", description: "" }, //Prom
-    { url: "https://i.ibb.co/N2jyWxS1/7.jpg", title: "", description: "" }, //Deportes
-    //{ url: "https://i.ibb.co/fYvVNbMk/8-instalaciones.png", title: "", description: "" } 
-    ];
+  // Banner y noticias desde la API
+  const [bannerImages, setBannerImages] = useState<{ link: string; Titulo?: string; Descripción?: string }[]>([]);
+  const [news, setNews] = useState<{ link: string; Titulo: string; Descripción: string; fecha: string }[]>([]);
 
   useEffect(() => {
+    fetch('/api/banner')
+      .then(res => res.json())
+      .then(data => setBannerImages(Array.isArray(data) ? data : []));
+    fetch('/api/news')
+      .then(res => res.json())
+      .then(data => setNews(Array.isArray(data) ? data : []));
+  }, []);
+
+  useEffect(() => {
+    if (bannerImages.length === 0) return;
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => prevIndex === bannerImages.length - 1 ? 0 : prevIndex + 1);
     }, 6000);
@@ -207,15 +209,13 @@ export default function Home() {
         <div className="relative h-96 md:h-[650px] overflow-hidden w-full md:w-[80%] mx-auto">
           {bannerImages.map((image, index) => (
             <div key={index} className={`absolute inset-0 transition-opacity duration-600 ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'}`}>
-              <img src={image.url} alt={image.title} className="w-full h-full object-cover object-center" />
-              {/* <div className="absolute inset-0 bg-blue-900/40"></div> */} // Eliminar o comentar
-
+              <img src={image.link} alt={image.Titulo} className="w-full h-full object-cover object-center" />
             </div>
           ))}
           <div className="absolute inset-0 flex items-center justify-center text-center text-white z-10">
             <div className="max-w-4xl px-6">
-              <h1 className="text-3xl md:text-6xl font-bold mb-4">{bannerImages[currentImageIndex].title}</h1>
-              <p className="text-lg md:text-2xl mb-8">{bannerImages[currentImageIndex].description}</p>
+              <h1 className="text-3xl md:text-6xl font-bold mb-4">{bannerImages[currentImageIndex]?.Titulo || ''}</h1>
+              <p className="text-lg md:text-2xl mb-8">{bannerImages[currentImageIndex]?.Descripción || ''}</p>
             </div>
           </div>
           <button onClick={prevImage} className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-colors z-20">
@@ -305,42 +305,20 @@ export default function Home() {
             Noticias y Eventos
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-              <img 
-                src="https://i.ibb.co/vCpGdgff/Open-House2025.png"
-                alt="Open House"
-                className="w-full h-48 object-cover object-top"
-              />
-              <div className="p-6">
-                <span className="text-sm text-blue-600 font-semibold">20 Jun 2025</span>
-                <h3 className="text-lg font-bold text-blue-900 mb-2 mt-1">Open House 2025</h3>
-                <p className="text-gray-600 text-sm">Conoce nuestras instalaciones y proceso de admisión para el próximo año escolar.</p>
+            {news.map((item, idx) => (
+              <div key={idx} className="bg-white rounded-lg shadow-lg overflow-hidden">
+                <img 
+                  src={item.link}
+                  alt={item.Titulo}
+                  className="w-full h-48 object-cover object-top"
+                />
+                <div className="p-6">
+                  <span className="text-sm text-blue-600 font-semibold">{item.fecha}</span>
+                  <h3 className="text-lg font-bold text-blue-900 mb-2 mt-1">{item.Titulo}</h3>
+                  <p className="text-gray-600 text-sm">{item.Descripción}</p>
+                </div>
               </div>
-            </div>
-            <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-              <img 
-                src="https://readdy.ai/api/search-image?query=School%20science%20fair%20with%20student%20projects%2C%20STEM%20exhibition%2C%20innovative%20experiments%2C%20proud%20students%20presenting%2C%20educational%20achievement%2C%20modern%20school%20facilities%2C%20scientific%20learning&width=400&height=250&seq=news2&orientation=landscape"
-                alt="Feria de Ciencias"
-                className="w-full h-48 object-cover object-top"
-              />
-              <div className="p-6">
-                <span className="text-sm text-blue-600 font-semibold">10 Oct 2024</span>
-                <h3 className="text-lg font-bold text-blue-900 mb-2 mt-1">Feria de Ciencias 2024</h3>
-                <p className="text-gray-600 text-sm">Nuestros estudiantes brillaron con proyectos innovadores en ciencia y tecnología.</p>
-              </div>
-            </div>
-            <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-              <img 
-                src="https://readdy.ai/api/search-image?query=School%20sports%20championship%20celebration%2C%20students%20with%20trophies%20and%20medals%2C%20athletic%20achievement%2C%20team%20spirit%2C%20Colombian%20school%20sports%2C%20victory%20celebration%2C%20proud%20athletes&width=400&height=250&seq=news3&orientation=landscape"
-                alt="Olimpiadas Deportivas"
-                className="w-full h-48 object-cover object-top"
-              />
-              <div className="p-6">
-                <span className="text-sm text-blue-600 font-semibold">05 Nov 2023</span>
-                <h3 className="text-lg font-bold text-blue-900 mb-2 mt-1">Campeones Robótica</h3>
-                <p className="text-gray-600 text-sm">Nuestro equipo de robótica obtivo el 1er puesto en el campeonato mundial 2023.</p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>

@@ -1,11 +1,19 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Nosotros() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
+  // Cargar galería desde la API de MongoDB
+  const [gallery, setGallery] = useState<{ link: string; Titulo?: string }[]>([]);
+  useEffect(() => {
+    fetch('/api/gallery')
+      .then(res => res.json())
+      .then(data => setGallery(Array.isArray(data) ? data : []));
+  }, []);
 
   return (
     <div className="min-h-screen bg-white">
@@ -209,54 +217,16 @@ export default function Nosotros() {
         <div className="max-w-7xl mx-auto px-6">
           <h2 className="text-3xl font-bold text-blue-900 mb-8 text-center">Galería de Imágenes</h2>
           <div className="grid md:grid-cols-3 gap-6">
-            <div className="group relative overflow-hidden rounded-lg shadow-lg">
-              <img 
-                src="https://readdy.ai/api/search-image?query=Modern%20school%20classroom%20with%20students%20studying%2C%20Colombian%20students%20in%20uniforms%2C%20contemporary%20educational%20environment%2C%20natural%20lighting%2C%20academic%20atmosphere%2C%20engaged%20learning%2C%20blue%20and%20white%20uniforms&width=400&height=300&seq=gallery1&orientation=landscape"
-                alt="Estudiantes en clase"
-                className="w-full h-64 object-cover object-top group-hover:scale-105 transition-transform duration-300"
-              />
-              <div className="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/20 transition-colors duration-300"></div>
-            </div>
-            <div className="group relative overflow-hidden rounded-lg shadow-lg">
-              <img 
-                src="https://readdy.ai/api/search-image?query=School%20sports%20activities%2C%20students%20playing%20soccer%2C%20Colombian%20school%20sports%2C%20outdoor%20activities%2C%20teamwork%2C%20athletic%20field%2C%20healthy%20lifestyle%2C%20school%20sports%20uniform&width=400&height=300&seq=gallery2&orientation=landscape"
-                alt="Actividades deportivas"
-                className="w-full h-64 object-cover object-top group-hover:scale-105 transition-transform duration-300"
-              />
-              <div className="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/20 transition-colors duration-300"></div>
-            </div>
-            <div className="group relative overflow-hidden rounded-lg shadow-lg">
-              <img 
-                src="https://readdy.ai/api/search-image?query=School%20science%20laboratory%2C%20students%20conducting%20experiments%2C%20modern%20lab%20equipment%2C%20STEM%20education%2C%20Colombian%20school%20facilities%2C%20laboratory%20safety%2C%20educational%20technology%2C%20scientific%20learning&width=400&height=300&seq=gallery3&orientation=landscape"
-                alt="Laboratorio de ciencias"
-                className="w-full h-64 object-cover object-top group-hover:scale-105 transition-transform duration-300"
-              />
-              <div className="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/20 transition-colors duration-300"></div>
-            </div>
-            <div className="group relative overflow-hidden rounded-lg shadow-lg">
-              <img 
-                src="https://readdy.ai/api/search-image?query=School%20library%20with%20students%20reading%2C%20modern%20educational%20library%2C%20quiet%20study%20space%2C%20book%20shelves%2C%20academic%20research%2C%20Colombian%20school%20interior%2C%20reading%20culture%2C%20educational%20resources&width=400&height=300&seq=gallery4&orientation=landscape"
-                alt="Biblioteca escolar"
-                className="w-full h-64 object-cover object-top group-hover:scale-105 transition-transform duration-300"
-              />
-              <div className="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/20 transition-colors duration-300"></div>
-            </div>
-            <div className="group relative overflow-hidden rounded-lg shadow-lg">
-              <img 
-                src="https://readdy.ai/api/search-image?query=School%20cultural%20activities%2C%20students%20performing%20arts%2C%20music%20and%20theater%2C%20school%20auditorium%2C%20cultural%20expression%2C%20artistic%20education%2C%20Colombian%20school%20events%2C%20creative%20learning&width=400&height=300&seq=gallery5&orientation=landscape"
-                alt="Actividades culturales"
-                className="w-full h-64 object-cover object-top group-hover:scale-105 transition-transform duration-300"
-              />
-              <div className="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/20 transition-colors duration-300"></div>
-            </div>
-            <div className="group relative overflow-hidden rounded-lg shadow-lg">
-              <img 
-                src="https://readdy.ai/api/search-image?query=School%20graduation%20ceremony%2C%20students%20in%20caps%20and%20gowns%2C%20proud%20families%2C%20academic%20achievement%2C%20Colombian%20graduation%20tradition%2C%20celebration%20of%20success%2C%20educational%20milestone&width=400&height=300&seq=gallery6&orientation=landscape"
-                alt="Ceremonia de graduación"
-                className="w-full h-64 object-cover object-top group-hover:scale-105 transition-transform duration-300"
-              />
-              <div className="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/20 transition-colors duration-300"></div>
-            </div>
+            {gallery.map((img, idx) => (
+              <div key={idx} className="group relative overflow-hidden rounded-lg shadow-lg">
+                <img 
+                  src={img.link}
+                  alt={img.Titulo || `Imagen ${idx + 1}`}
+                  className="w-full h-64 object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/20 transition-colors duration-300"></div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
