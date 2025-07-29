@@ -247,19 +247,15 @@ export default function Home() {
                     onMouseLeave={() => setIsPaused(false)}
                   >
                     <span
-                      className="px-14 py-6 rounded-full font-extrabold text-blue-900 text-2xl md:text-4xl shadow-xl transition-all duration-200"
+                      className="px-10 py-4 rounded-full font-extrabold text-blue-900 text-xl md:text-3xl shadow-xl transition-all duration-200 border-4 border-blue-900 bg-white/70 hover:bg-blue-900 hover:text-white cursor-pointer flex items-center gap-3"
                       style={{
-                        background: 'rgba(255,255,255,0.55)',
-                        backdropFilter: 'blur(4px)',
-                        border: '3px solid #1e3a8a',
-                        boxShadow: '0 4px 24px rgba(30,58,138,0.18)',
-                        display: 'inline-block',
-                        cursor: 'pointer',
                         letterSpacing: '0.04em',
                         textShadow: '0 2px 8px rgba(30,58,138,0.10), 0 0px 1px #fff',
+                        boxShadow: '0 4px 24px rgba(30,58,138,0.18)',
                       }}
                     >
-                      Aparta tu cupo
+                      <span>Aparta tu cupo</span>
+                      <span className="text-base md:text-lg font-bold animate-bounce text-blue-700 bg-white/80 rounded-full px-3 py-1 ml-2 border border-blue-300 shadow">¡Haz clic aquí!</span>
                     </span>
                   </a>
                 )}
