@@ -254,7 +254,7 @@ export default function Home() {
                         boxShadow: '0 4px 24px rgba(30,58,138,0.18)',
                       }}
                     >
-                      ¡Haz clic aquí!
+                      <span className="animate-bounce">¡Haz clic aquí!</span>
                     </span>
                   </a>
                 )}
