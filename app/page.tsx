@@ -237,20 +237,28 @@ export default function Home() {
                     rel="noopener noreferrer"
                     className="absolute left-1/2 transform -translate-x-1/2"
                     style={{
-                      top: '10%',
+                      top: '5%',
                       zIndex: 30,
+                      width: '100%',
+                      display: 'flex',
+                      justifyContent: 'center'
                     }}
+                    onMouseEnter={() => setIsPaused(true)}
+                    onMouseLeave={() => setIsPaused(false)}
                   >
-                    <span className="px-8 py-4 rounded-full font-bold text-blue-900 text-lg"
+                    <span
+                      className="px-10 py-5 rounded-full font-bold text-blue-900 text-xl md:text-2xl"
                       style={{
                         background: 'rgba(255,255,255,0.3)',
                         backdropFilter: 'blur(2px)',
-                        border: '2px solid #1e3a8a',
-                        boxShadow: '0 2px 8px rgba(30,58,138,0.10)',
+                        border: '2.5px solid #1e3a8a',
+                        boxShadow: '0 2px 12px rgba(30,58,138,0.13)',
                         display: 'inline-block',
+                        cursor: 'pointer',
+                        transition: 'background 0.2s'
                       }}
                     >
-                      Aparta tu cupo ahora
+                      Aparta tu cupo
                     </span>
                   </a>
                 )}
