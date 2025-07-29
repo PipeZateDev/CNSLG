@@ -330,12 +330,12 @@ export default function Admin() {
                   Luego, copia la URL directa de la imagen y pégala en el campo correspondiente de la sección que desees (Banner, Noticias o Galería).
                 </p>
                 <a
-                  href="https://imgbb.com/"
+                  href="https://soporte-cnslg.imgbb.com/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-block mt-2 px-6 py-2 bg-blue-900 text-white rounded-full font-semibold hover:bg-blue-800 transition-colors"
                 >
-                  Ir a imgbb.com
+                  Sube tus imágenes
                 </a>
               </div>
 
