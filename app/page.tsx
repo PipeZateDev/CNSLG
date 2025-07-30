@@ -215,7 +215,7 @@ export default function Home() {
       {/* Banner Section */}
       <section className="pt-20 relative">
         <div
-          className="relative w-full mx-auto"
+          className="relative w-full mx-auto md:w-4/5"
           style={{
             height: 'min(600px, 70vw)',
             maxHeight: 600,
