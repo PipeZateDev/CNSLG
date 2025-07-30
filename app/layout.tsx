@@ -32,7 +32,7 @@ export default function RootLayout({
   return (
     <html lang="es" suppressHydrationWarning={true}>
       <head>
-        <link rel="icon" href="https://i.ibb.co/F4DnK3Rj/Logo-Solo-Isotipo-comprimido.jpg" type="image/jpeg" />
+        <link rel="icon" href="https://i.ibb.co/HmCd5Ws/Logo-Solo-Isotipo-comprimido.png" type="image/png" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${pacifico.variable} antialiased`}
