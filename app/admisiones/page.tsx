@@ -25,40 +25,39 @@ export default function Admisiones() {
             </div>
             {/* Centrado de pestañas */}
             <div className="flex-1 flex justify-center">
-              <div className="flex items-center space-x-8">
+              <div className="flex items-center space-x-10">
                 <Link 
                   href="/"
-                  className="px-6 py-2 bg-blue-900 text-white rounded-full transition-colors whitespace-nowrap cursor-pointer text-[130%]"
+                  className="px-5 py-2 bg-blue-900 text-white rounded-full transition-colors whitespace-nowrap cursor-pointer text-[1.25rem] md:text-[1.25rem] font-semibold"
                 >
                   Inicio
                 </Link>
                 <Link 
                   href="/nosotros"
-                  className="px-6 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer text-[130%]"
+                  className="px-5 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer text-[1.25rem] md:text-[1.25rem] font-semibold"
                 >
                   Nosotros
                 </Link>
                 <Link 
                   href="/admisiones"
-                  className="px-6 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer text-[130%]"
+                  className="px-5 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer text-[1.25rem] md:text-[1.25rem] font-semibold"
                 >
                   Admisiones
                 </Link>
                 <Link 
                   href="/contacto"
-                  className="px-6 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer text-[130%]"
+                  className="px-5 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer text-[1.25rem] md:text-[1.25rem] font-semibold"
                 >
                   Contacto
                 </Link>
               </div>
             </div>
-            {/* Botones pequeños a la derecha */}
-            <div className="hidden lg:flex items-center space-x-2 ml-8">
+            <div className="hidden lg:flex items-center space-x-3 ml-8">
               <a 
                 href="https://lms30.uno-internacional.com/login/access" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="px-4 py-1 bg-purple-600 text-white rounded-full text-[120%] font-semibold hover:bg-purple-700 transition-colors whitespace-nowrap cursor-pointer"
+                className="px-4 py-1.5 bg-purple-600 text-white rounded-full text-sm font-semibold hover:bg-purple-700 transition-colors whitespace-nowrap cursor-pointer"
               >
                 UNOi Santillana
               </a>
@@ -66,7 +65,7 @@ export default function Admisiones() {
                 href="https://www.cibercolegios.com/" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="px-4 py-1 bg-yellow-400 text-black rounded-full text-[120%] font-semibold hover:bg-yellow-500 transition-colors whitespace-nowrap cursor-pointer"
+                className="px-4 py-1.5 bg-yellow-400 text-black rounded-full text-sm font-semibold hover:bg-yellow-500 transition-colors whitespace-nowrap cursor-pointer"
               >
                 Cibercolegios
               </a>
@@ -74,7 +73,7 @@ export default function Admisiones() {
                 href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=12695&searchedCategoryId=&searchedAgreementName=PEDAGOGICOS%20ASOCIADOS%20SAS" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="px-4 py-1 bg-blue-600 text-white rounded-full text-[120%] font-semibold hover:bg-blue-700 transition-colors whitespace-nowrap cursor-pointer"
+                className="px-4 py-1.5 bg-blue-600 text-white rounded-full text-sm font-semibold hover:bg-blue-700 transition-colors whitespace-nowrap cursor-pointer"
               >
                 Pagos PSE
               </a>
