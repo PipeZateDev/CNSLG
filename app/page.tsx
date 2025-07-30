@@ -250,7 +250,7 @@ export default function Home() {
                     onMouseLeave={() => setIsPaused(false)}
                   >
                     <span
-                      className="px-10 py-4 rounded-full font-extrabold text-blue-900 text-xl md:text-3xl shadow-xl transition-all duration-200 border-4 border-blue-900 bg-white/70 hover:bg-blue-900 hover:text-white cursor-pointer flex items-center gap-3"
+                      className="px-8 py-3 rounded-full font-extrabold text-blue-900 text-lg md:text-2xl shadow-xl transition-all duration-200 border-4 border-blue-900 bg-white/70 hover:bg-blue-900 hover:text-white cursor-pointer flex items-center gap-3"
                       style={{
                         letterSpacing: '0.04em',
                         textShadow: '0 2px 8px rgba(30,58,138,0.10), 0 0px 1px #fff',
@@ -278,7 +278,7 @@ export default function Home() {
                     onMouseLeave={() => setIsPaused(false)}
                   >
                     <span
-                      className="px-10 py-4 rounded-full font-extrabold text-blue-900 text-xl md:text-3xl shadow-xl transition-all duration-200 border-4 border-blue-900 bg-white/70 hover:bg-blue-900 hover:text-white cursor-pointer flex items-center gap-3"
+                      className="px-8 py-3 rounded-full font-extrabold text-blue-900 text-lg md:text-2xl shadow-xl transition-all duration-200 border-4 border-blue-900 bg-white/70 hover:bg-blue-900 hover:text-white cursor-pointer flex items-center gap-3"
                       style={{
                         letterSpacing: '0.04em',
                         textShadow: '0 2px 8px rgba(30,58,138,0.10), 0 0px 1px #fff',
