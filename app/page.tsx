@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import React from 'react';
 
 export default function Home() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -12,6 +13,7 @@ export default function Home() {
   // Banner y noticias desde la API
   const [bannerImages, setBannerImages] = useState<{ link: string; Titulo?: string; Descripción?: string }[]>([]);
   const [news, setNews] = useState<{ link: string; Titulo: string; Descripción: string; fecha: string }[]>([]);
+  const [modalNews, setModalNews] = useState<null | { link: string; Titulo: string; Descripción: string; fecha: string }>(null);
 
   useEffect(() => {
     fetch('/api/banner')
@@ -371,7 +373,11 @@ export default function Home() {
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
             {news.map((item, idx) => (
-              <div key={idx} className="bg-white rounded-lg shadow-lg overflow-hidden">
+              <div
+                key={idx}
+                className="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer hover:scale-[1.03] transition-transform"
+                onClick={() => setModalNews(item)}
+              >
                 <img 
                   src={item.link}
                   alt={item.Titulo}
@@ -387,6 +393,31 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Modal para noticia */}
+      {modalNews && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm">
+          <div className="bg-white rounded-lg shadow-xl max-w-lg w-full mx-4 relative">
+            <button
+              className="absolute top-3 right-3 text-gray-600 hover:text-red-600 text-2xl font-bold"
+              onClick={() => setModalNews(null)}
+              aria-label="Cerrar"
+            >
+              &times;
+            </button>
+            <img
+              src={modalNews.link}
+              alt={modalNews.Titulo}
+              className="w-full h-80 object-cover rounded-t-lg"
+            />
+            <div className="p-6">
+              <span className="text-sm text-blue-600 font-semibold">{modalNews.fecha}</span>
+              <h3 className="text-2xl font-bold text-blue-900 mb-2 mt-1">{modalNews.Titulo}</h3>
+              <p className="text-gray-700 text-base">{modalNews.Descripción}</p>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-12">
