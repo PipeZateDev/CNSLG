@@ -401,7 +401,7 @@ export default function Home() {
           onClick={() => setModalNews(null)}
         >
           <div
-            className="bg-white rounded-lg shadow-xl w-[80vw] max-w-6xl max-h-[90vh] mx-2 relative flex flex-col"
+            className="bg-white rounded-lg shadow-xl w-[90vw] max-w-6xl max-h-[90vh] mx-2 relative flex flex-col"
             style={{ minHeight: '60vh' }}
             onClick={e => e.stopPropagation()}
           >
@@ -422,7 +422,7 @@ export default function Home() {
                   style={{ width: '80%', maxHeight: '60vh', objectFit: 'cover', margin: '0 auto' }}
                 />
               </div>
-              <div className="p-8 flex flex-col justify-center">
+              <div className="p-8 flex flex-col justify-center items-center text-center">
                 <span className="text-sm text-blue-600 font-semibold">{modalNews.fecha}</span>
                 <h3 className="text-2xl font-bold text-blue-900 mb-2 mt-1">{modalNews.Titulo}</h3>
                 <p className="text-gray-700 text-base">{modalNews.Descripción}</p>
