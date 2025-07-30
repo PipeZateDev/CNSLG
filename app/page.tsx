@@ -413,16 +413,16 @@ export default function Home() {
             >
               &times;
             </button>
-            <div className="flex flex-col md:flex-row h-full">
+            <div className="flex flex-col h-full">
               <div className="flex-1 flex items-center justify-center">
                 <img
                   src={modalNews.link}
                   alt={modalNews.Titulo}
-                  className="w-full h-64 md:h-[80vh] object-cover rounded-t-lg md:rounded-l-lg md:rounded-tr-none"
-                  style={{ width: '80%', maxHeight: '80vh', objectFit: 'cover', margin: '0 auto' }}
+                  className="w-full h-64 md:h-[60vh] object-cover rounded-t-lg"
+                  style={{ width: '80%', maxHeight: '60vh', objectFit: 'cover', margin: '0 auto' }}
                 />
               </div>
-              <div className="p-8 flex-1 flex flex-col justify-center">
+              <div className="p-8 flex flex-col justify-center">
                 <span className="text-sm text-blue-600 font-semibold">{modalNews.fecha}</span>
                 <h3 className="text-2xl font-bold text-blue-900 mb-2 mt-1">{modalNews.Titulo}</h3>
                 <p className="text-gray-700 text-base">{modalNews.Descripción}</p>
