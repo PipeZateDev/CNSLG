@@ -61,9 +61,9 @@ export default function Home() {
                 className="h-12 w-auto"
               />
             </div>
-            {/* Centrado de pestañas */}
+            {/* Centrado de pestañas solo en escritorio */}
             <div className="flex-1 flex justify-center">
-              <div className="flex items-center space-x-10">
+              <div className="hidden lg:flex items-center space-x-10">
                 <Link 
                   href="/"
                   className="px-5 py-2 bg-blue-900 text-white rounded-full transition-colors whitespace-nowrap cursor-pointer text-[1.25rem] md:text-[1.25rem] font-semibold"
@@ -124,7 +124,6 @@ export default function Home() {
               <i className={`ri-${isMenuOpen ? 'close' : 'menu'}-line text-2xl`}></i>
             </button>
           </div>
-
           {/* Mobile Navigation Menu */}
           {isMenuOpen && (
             <div className="lg:hidden mt-4 py-4 border-t border-gray-200">

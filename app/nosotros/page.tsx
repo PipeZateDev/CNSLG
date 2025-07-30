@@ -28,33 +28,13 @@ export default function Nosotros() {
                 className="h-12 w-auto"
               />
             </div>
-            {/* Centrado de pestañas */}
+            {/* Centrado de pestañas solo en escritorio */}
             <div className="flex-1 flex justify-center">
-              <div className="flex items-center space-x-10">
-                <Link 
-                  href="/"
-                  className="px-5 py-2 bg-blue-900 text-white rounded-full transition-colors whitespace-nowrap cursor-pointer text-[1.25rem] md:text-[1.25rem] font-semibold"
-                >
-                  Inicio
-                </Link>
-                <Link 
-                  href="/nosotros"
-                  className="px-5 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer text-[1.25rem] md:text-[1.25rem] font-semibold"
-                >
-                  Nosotros
-                </Link>
-                <Link 
-                  href="/admisiones"
-                  className="px-5 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer text-[1.25rem] md:text-[1.25rem] font-semibold"
-                >
-                  Admisiones
-                </Link>
-                <Link 
-                  href="/contacto"
-                  className="px-5 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer text-[1.25rem] md:text-[1.25rem] font-semibold"
-                >
-                  Contacto
-                </Link>
+              <div className="hidden lg:flex items-center space-x-10">
+                <Link href="/" className="px-5 py-2 bg-blue-900 text-white rounded-full transition-colors whitespace-nowrap cursor-pointer text-[1.25rem] font-semibold">Inicio</Link>
+                <Link href="/nosotros" className="px-5 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer text-[1.25rem] font-semibold">Nosotros</Link>
+                <Link href="/admisiones" className="px-5 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer text-[1.25rem] font-semibold">Admisiones</Link>
+                <Link href="/contacto" className="px-5 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer text-[1.25rem] font-semibold">Contacto</Link>
               </div>
             </div>
             <div className="hidden lg:flex items-center space-x-3 ml-8">
@@ -83,7 +63,7 @@ export default function Nosotros() {
                 Pagos PSE
               </a>
             </div>
-            {/* Botón del menú móvil */}
+            {/* Mobile Menu Button */}
             <button 
               onClick={toggleMenu}
               className="lg:hidden w-10 h-10 flex items-center justify-center text-blue-900 cursor-pointer"
@@ -91,38 +71,14 @@ export default function Nosotros() {
               <i className={`ri-${isMenuOpen ? 'close' : 'menu'}-line text-2xl`}></i>
             </button>
           </div>
-          {/* Menú de navegación móvil */}
+          {/* Mobile Navigation Menu */}
           {isMenuOpen && (
             <div className="lg:hidden mt-4 py-4 border-t border-gray-200">
               <div className="flex flex-col space-y-3">
-                <Link 
-                  href="/" 
-                  onClick={() => setIsMenuOpen(false)} 
-                  className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer"
-                >
-                  Inicio
-                </Link>
-                <Link 
-                  href="/nosotros" 
-                  onClick={() => setIsMenuOpen(false)} 
-                  className="px-4 py-2 bg-blue-900 text-white rounded-full transition-colors text-center cursor-pointer"
-                >
-                  Nosotros
-                </Link>
-                <Link 
-                  href="/admisiones" 
-                  onClick={() => setIsMenuOpen(false)} 
-                  className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer"
-                >
-                  Admisiones
-                </Link>
-                <Link 
-                  href="/contacto" 
-                  onClick={() => setIsMenuOpen(false)} 
-                  className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer"
-                >
-                  Contacto
-                </Link>
+                <Link href="/" onClick={() => setIsMenuOpen(false)} className="px-4 py-2 bg-blue-900 text-white rounded-full transition-colors text-center cursor-pointer">Inicio</Link>
+                <Link href="/nosotros" onClick={() => setIsMenuOpen(false)} className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer">Nosotros</Link>
+                <Link href="/admisiones" onClick={() => setIsMenuOpen(false)} className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer">Admisiones</Link>
+                <Link href="/contacto" onClick={() => setIsMenuOpen(false)} className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer">Contacto</Link>
                 <div className="flex flex-col space-y-2 pt-2">
                   <a 
                     href="https://lms30.uno-internacional.com/login/access" 

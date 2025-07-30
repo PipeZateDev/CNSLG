@@ -306,45 +306,17 @@ export default function Admin() {
                     className="h-12 w-auto"
                   />
                 </div>
-                {/* Centrado de pestañas */}
+                {/* Centrado de pestañas solo en escritorio */}
                 <div className="flex-1 flex justify-center">
-                  <div className="flex items-center space-x-10">
-                    <Link 
-                      href="/"
-                      className="px-5 py-2 bg-blue-900 text-white rounded-full transition-colors whitespace-nowrap cursor-pointer text-[1.25rem] md:text-[1.25rem] font-semibold"
-                    >
-                      Inicio
-                    </Link>
-                    <Link 
-                      href="/nosotros"
-                      className="px-5 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer text-[1.25rem] md:text-[1.25rem] font-semibold"
-                    >
-                      Nosotros
-                    </Link>
-                    <Link 
-                      href="/admisiones"
-                      className="px-5 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer text-[1.25rem] md:text-[1.25rem] font-semibold"
-                    >
-                      Admisiones
-                    </Link>
-                    <Link 
-                      href="/contacto"
-                      className="px-5 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer text-[1.25rem] md:text-[1.25rem] font-semibold"
-                    >
-                      Contacto
-                    </Link>
+                  <div className="hidden lg:flex items-center space-x-10">
+                    <Link href="/" className="px-5 py-2 bg-blue-900 text-white rounded-full transition-colors whitespace-nowrap cursor-pointer text-[1.25rem] font-semibold">Inicio</Link>
+                    <Link href="/nosotros" className="px-5 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer text-[1.25rem] font-semibold">Nosotros</Link>
+                    <Link href="/admisiones" className="px-5 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer text-[1.25rem] font-semibold">Admisiones</Link>
+                    <Link href="/contacto" className="px-5 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer text-[1.25rem] font-semibold">Contacto</Link>
                     {/* Admin tab hidden but present for accessibility */}
-                    <Link
-                      href="/admin"
-                      className="hidden"
-                      tabIndex={-1}
-                      aria-hidden="true"
-                    >
-                      Admin
-                    </Link>
+                    <Link href="/admin" className="hidden" tabIndex={-1} aria-hidden="true">Admin</Link>
                   </div>
                 </div>
-                {/* Botones pequeños a la derecha */}
                 <div className="hidden lg:flex items-center space-x-3 ml-8">
                   <a 
                     href="https://lms30.uno-internacional.com/login/access" 
@@ -383,43 +355,12 @@ export default function Admin() {
               {isMenuOpen && (
                 <div className="lg:hidden mt-4 py-4 border-t border-gray-200">
                   <div className="flex flex-col space-y-3">
-                    <Link 
-                      href="/"
-                      onClick={() => setIsMenuOpen(false)}
-                      className="px-4 py-2 bg-blue-900 text-white rounded-full transition-colors text-center cursor-pointer"
-                    >
-                      Inicio
-                    </Link>
-                    <Link 
-                      href="/nosotros"
-                      onClick={() => setIsMenuOpen(false)}
-                      className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer"
-                    >
-                      Nosotros
-                    </Link>
-                    <Link 
-                      href="/admisiones"
-                      onClick={() => setIsMenuOpen(false)}
-                      className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer"
-                    >
-                      Admisiones
-                    </Link>
-                    <Link 
-                      href="/contacto"
-                      onClick={() => setIsMenuOpen(false)}
-                      className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer"
-                    >
-                      Contacto
-                    </Link>
+                    <Link href="/" onClick={() => setIsMenuOpen(false)} className="px-4 py-2 bg-blue-900 text-white rounded-full transition-colors text-center cursor-pointer">Inicio</Link>
+                    <Link href="/nosotros" onClick={() => setIsMenuOpen(false)} className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer">Nosotros</Link>
+                    <Link href="/admisiones" onClick={() => setIsMenuOpen(false)} className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer">Admisiones</Link>
+                    <Link href="/contacto" onClick={() => setIsMenuOpen(false)} className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer">Contacto</Link>
                     {/* Admin tab hidden in mobile menu */}
-                    <Link
-                      href="/admin"
-                      className="hidden"
-                      tabIndex={-1}
-                      aria-hidden="true"
-                    >
-                      Admin
-                    </Link>
+                    <Link href="/admin" className="hidden" tabIndex={-1} aria-hidden="true">Admin</Link>
                     <div className="flex flex-col space-y-2 pt-2">
                       <a 
                         href="https://lms30.uno-internacional.com/login/access" 
@@ -730,6 +671,65 @@ export default function Admin() {
                 </form>
                 <button
                   onClick={saveGallery}
+                  className="mt-4 px-6 py-2 bg-green-700 text-white rounded-full font-semibold hover:bg-green-800 transition-colors"
+                >
+                  Guardar cambios
+                </button>
+                <div className="grid md:grid-cols-5 gap-4">
+                  {gallery.map((img, idx) => (
+                    <div
+                      key={idx}
+                      className={`bg-white rounded-lg shadow p-2 relative ${draggedGalleryIdx === idx ? 'opacity-60' : ''}`}
+                      draggable
+                      onDragStart={() => handleGalleryDragStart(idx)}
+                      onDragEnter={() => handleGalleryDragEnter(idx)}
+                      onDragEnd={handleGalleryDragEnd}
+                      onDrop={handleGalleryDragEnd}
+                      onDragOver={e => e.preventDefault()}
+                      style={{ cursor: 'grab' }}
+                    >
+                      <img src={img.link} alt={img.Titulo} className="w-full h-32 object-cover rounded" />
+                      <button
+                        onClick={() => removeGalleryImage(idx)}
+                        className="absolute top-2 right-2 bg-red-600 text-white rounded-full px-2 py-1 text-xs"
+                      >
+                        Eliminar
+                      </button>
+                      <button
+                        onClick={() => handleEditGallery(idx)}
+                        className="absolute top-2 left-2 bg-yellow-500 text-white rounded-full px-2 py-1 text-xs"
+                      >
+                        Editar
+                      </button>
+                      <div className="mt-2 text-sm text-center">
+                        <strong>{img.Titulo}</strong>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+          {/* ...existing footer... */}
+        </>
+      )}
+    </div>
+  );
+}
+
+// NOTAS PARA PUBLICACIÓN EN VERCEL:
+// 1. No puedes usar variables de entorno sensibles (como el URI de MongoDB) directamente en el frontend.
+// 2. Los endpoints de API deben estar en /app/api/ y usar 'export async function GET/PUT'.
+// 3. El código de conexión a MongoDB debe estar SOLO en los archivos de API (no en este archivo).
+// 4. Si tienes errores de "Cannot find module 'mongodb'" instala la dependencia en tu proyecto:
+//    npm install mongodb
+// 5. Si tienes errores de "Dynamic server usage" o "Edge runtime", asegúrate de que tus endpoints API usen runtime: 'nodejs' en el export (no edge).
+// 6. Si tienes errores de serialización, asegúrate de no retornar el campo _id de MongoDB en el JSON (usa .map(({_id, ...rest}) => rest)).
+// 7. Si tienes errores de fetch, revisa los logs de Vercel y que los endpoints estén correctamente implementados en /app/api/banner, /app/api/news, /app/api/gallery.
+//    npm install mongodb
+// 5. Si tienes errores de "Dynamic server usage" o "Edge runtime", asegúrate de que tus endpoints API usen runtime: 'nodejs' en el export (no edge).
+// 6. Si tienes errores de serialización, asegúrate de no retornar el campo _id de MongoDB en el JSON (usa .map(({_id, ...rest}) => rest)).
+// 7. Si tienes errores de fetch, revisa los logs de Vercel y que los endpoints estén correctamente implementados en /app/api/banner, /app/api/news, /app/api/gallery.
                   className="mt-4 px-6 py-2 bg-green-700 text-white rounded-full font-semibold hover:bg-green-800 transition-colors"
                 >
                   Guardar cambios
