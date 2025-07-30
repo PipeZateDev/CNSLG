@@ -262,6 +262,34 @@ export default function Home() {
                     </span>
                   </a>
                 )}
+                {/* Botón solo en la tercera imagen */}
+                {index === 2 && (
+                  <a
+                    href="/admisiones"
+                    className="absolute left-1/2 transform -translate-x-1/2"
+                    style={{
+                      bottom: '5%',
+                      top: 'auto',
+                      zIndex: 30,
+                      width: '100%',
+                      display: 'flex',
+                      justifyContent: 'center'
+                    }}
+                    onMouseEnter={() => setIsPaused(true)}
+                    onMouseLeave={() => setIsPaused(false)}
+                  >
+                    <span
+                      className="px-10 py-4 rounded-full font-extrabold text-blue-900 text-xl md:text-3xl shadow-xl transition-all duration-200 border-4 border-blue-900 bg-white/70 hover:bg-blue-900 hover:text-white cursor-pointer flex items-center gap-3"
+                      style={{
+                        letterSpacing: '0.04em',
+                        textShadow: '0 2px 8px rgba(30,58,138,0.10), 0 0px 1px #fff',
+                        boxShadow: '0 4px 24px rgba(30,58,138,0.18)',
+                      }}
+                    >
+                      <span className="animate-bounce">¡Inscríbete ahora!</span>
+                    </span>
+                  </a>
+                )}
               </div>
             ))
           )}
