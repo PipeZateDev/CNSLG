@@ -401,39 +401,37 @@ export default function Home() {
           onClick={() => setModalNews(null)}
         >
           <div
-            className="bg-white rounded-lg shadow-xl w-[90vw] max-w-5xl max-h-[90vh] mx-2 relative flex flex-col"
+            className="bg-white rounded-lg shadow-xl w-[80vw] max-w-6xl max-h-[90vh] mx-2 relative flex flex-col"
             style={{ minHeight: '60vh' }}
             onClick={e => e.stopPropagation()}
           >
             <button
-              className="absolute top-3 right-3 text-gray-600 hover:text-red-600 text-2xl font-bold z-10"
+              className="absolute top-4 right-4 text-gray-600 hover:text-red-600 text-3xl font-bold z-10"
               onClick={() => setModalNews(null)}
               aria-label="Cerrar"
+              type="button"
             >
               &times;
             </button>
             <div className="flex flex-col md:flex-row h-full">
-              <img
-                src={modalNews.link}
-                alt={modalNews.Titulo}
-                className="w-full md:w-1/2 h-64 md:h-auto object-cover rounded-t-lg md:rounded-l-lg md:rounded-tr-none"
-                style={{ maxHeight: '70vh' }}
-              />
-              <div className="p-6 flex-1 flex flex-col justify-center">
+              <div className="flex-1 flex items-center justify-center">
+                <img
+                  src={modalNews.link}
+                  alt={modalNews.Titulo}
+                  className="w-full h-64 md:h-[80vh] object-cover rounded-t-lg md:rounded-l-lg md:rounded-tr-none"
+                  style={{ width: '80%', maxHeight: '80vh', objectFit: 'cover', margin: '0 auto' }}
+                />
+              </div>
+              <div className="p-8 flex-1 flex flex-col justify-center">
                 <span className="text-sm text-blue-600 font-semibold">{modalNews.fecha}</span>
                 <h3 className="text-2xl font-bold text-blue-900 mb-2 mt-1">{modalNews.Titulo}</h3>
                 <p className="text-gray-700 text-base">{modalNews.Descripción}</p>
-                <button
-                  className="mt-8 px-6 py-2 bg-blue-900 text-white rounded-full font-semibold hover:bg-blue-800 transition-colors w-max mx-auto md:mx-0"
-                  onClick={() => setModalNews(null)}
-                >
-                  Salir
-                </button>
               </div>
             </div>
           </div>
         </div>
       )}
+
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-12">
         <div className="max-w-7xl mx-auto px-6">
