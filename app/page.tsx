@@ -16,10 +16,10 @@ export default function Home() {
   useEffect(() => {
     fetch('/api/banner')
       .then(res => res.json())
-      .then(data => setBannerImages(Array.isArray(data) ? data : []));
+      .then(data => setBannerImages(Array.isArray(data) ? [...data].sort((a, b) => (a.orden ?? 0) - (b.orden ?? 0)) : []));
     fetch('/api/news')
       .then(res => res.json())
-      .then(data => setNews(Array.isArray(data) ? data : []));
+      .then(data => setNews(Array.isArray(data) ? [...data].sort((a, b) => (a.orden ?? 0) - (b.orden ?? 0)) : []));
   }, []);
 
   useEffect(() => {
