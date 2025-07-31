@@ -2,10 +2,12 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import { usePathname } from 'next/navigation';
 
 export default function Contacto() {
   const [menuAbierto, setMenuAbierto] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   const toggleMenu = () => {
     setMenuAbierto(!menuAbierto);
@@ -29,10 +31,10 @@ export default function Contacto() {
             {/* Centrado absoluto de pestañas */}
             <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full flex justify-center pointer-events-none">
               <div className="hidden lg:flex items-center space-x-10 pointer-events-auto">
-                <Link href="/" className="px-5 py-2 bg-blue-900 text-white rounded-full transition-colors whitespace-nowrap cursor-pointer text-[1.25rem] font-semibold">Inicio</Link>
-                <Link href="/nosotros" className="px-5 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer text-[1.25rem] font-semibold">Nosotros</Link>
-                <Link href="/admisiones" className="px-5 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer text-[1.25rem] font-semibold">Admisiones</Link>
-                <Link href="/contacto" className="px-5 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer text-[1.25rem] font-semibold">Contacto</Link>
+                <Link href="/" className={`px-5 py-2 rounded-full transition-colors whitespace-nowrap cursor-pointer text-[1.25rem] font-semibold ${pathname === '/' ? 'bg-blue-900 text-white' : 'text-blue-900 hover:bg-blue-50'}`}>Inicio</Link>
+                <Link href="/nosotros" className={`px-5 py-2 rounded-full transition-colors whitespace-nowrap cursor-pointer text-[1.25rem] font-semibold ${pathname === '/nosotros' ? 'bg-blue-900 text-white' : 'text-blue-900 hover:bg-blue-50'}`}>Nosotros</Link>
+                <Link href="/admisiones" className={`px-5 py-2 rounded-full transition-colors whitespace-nowrap cursor-pointer text-[1.25rem] font-semibold ${pathname === '/admisiones' ? 'bg-blue-900 text-white' : 'text-blue-900 hover:bg-blue-50'}`}>Admisiones</Link>
+                <Link href="/contacto" className={`px-5 py-2 rounded-full transition-colors whitespace-nowrap cursor-pointer text-[1.25rem] font-semibold ${pathname === '/contacto' ? 'bg-blue-900 text-white' : 'text-blue-900 hover:bg-blue-50'}`}>Contacto</Link>
               </div>
             </div>
             <div className="hidden lg:flex items-center space-x-3 ml-8">
