@@ -158,45 +158,6 @@ export default function Nosotros() {
 
 
 
-{/* Sección Misión, Visión, Valores */}
-<section className="py-20 bg-blue-50">
-  <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-12">
-    {/* Misión */}
-    <div className="bg-white rounded-lg shadow-lg p-8 flex flex-col items-center text-center">
-      <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mb-4">
-        {/* Cambia el icono por uno visible, por ejemplo: */}
-        <i className="ri-flag-2-line text-4xl text-blue-600"></i>
-      </div>
-      <h3 className="text-2xl font-bold text-blue-900 mb-2">Misión</h3>
-      <p className="text-gray-700">
-        Nuestra misión es formar personas íntegras, líderes en valores y excelencia académica, comprometidas con la transformación social y el desarrollo sostenible.
-      </p>
-    </div>
-    {/* Visión */}
-    <div className="bg-white rounded-lg shadow-lg p-8 flex flex-col items-center text-center">
-      <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-4">
-        <i className="ri-eye-line text-4xl text-green-600"></i>
-      </div>
-      <h3 className="text-2xl font-bold text-blue-900 mb-2">Visión</h3>
-      <p className="text-gray-700">
-        Ser reconocidos como una institución educativa líder, innovadora y referente en la formación de ciudadanos globales y solidarios.
-      </p>
-    </div>
-    {/* Valores */}
-    <div className="bg-white rounded-lg shadow-lg p-8 flex flex-col items-center text-center">
-      <div className="w-20 h-20 bg-yellow-100 rounded-full flex items-center justify-center mb-4">
-        <i className="ri-heart-3-line text-4xl text-yellow-600"></i>
-      </div>
-      <h3 className="text-2xl font-bold text-blue-900 mb-2">Valores</h3>
-      <p className="text-gray-700">
-        Respeto, responsabilidad, honestidad, solidaridad y compromiso con la excelencia.
-      </p>
-    </div>
-  </div>
-</section>
-
-
-
 {/* Sección: Valores + Decálogo */}
 <section className="py-20 bg-gray-50">
   <div className="max-w-7xl mx-auto px-6">
