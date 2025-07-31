@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import React from 'react';
 
 export default function Home() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -13,7 +12,6 @@ export default function Home() {
   // Banner y noticias desde la API
   const [bannerImages, setBannerImages] = useState<{ link: string; Titulo?: string; Descripción?: string }[]>([]);
   const [news, setNews] = useState<{ link: string; Titulo: string; Descripción: string; fecha: string }[]>([]);
-  const [modalNews, setModalNews] = useState<null | { link: string; Titulo: string; Descripción: string; fecha: string }>(null);
 
   useEffect(() => {
     fetch('/api/banner')
@@ -373,11 +371,7 @@ export default function Home() {
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
             {news.map((item, idx) => (
-              <div
-                key={idx}
-                className="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer hover:scale-[1.03] transition-transform"
-                onClick={() => setModalNews(item)}
-              >
+              <div key={idx} className="bg-white rounded-lg shadow-lg overflow-hidden">
                 <img 
                   src={item.link}
                   alt={item.Titulo}
@@ -393,44 +387,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* Modal para noticia */}
-      {modalNews && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm"
-          onClick={() => setModalNews(null)}
-        >
-          <div
-            className="bg-white rounded-lg shadow-xl w-[90vw] max-w-6xl max-h-[90vh] mx-2 relative flex flex-col"
-            style={{ minHeight: '60vh' }}
-            onClick={e => e.stopPropagation()}
-          >
-            <button
-              className="absolute top-4 right-4 text-gray-600 hover:text-red-600 text-3xl font-bold z-10"
-              onClick={() => setModalNews(null)}
-              aria-label="Cerrar"
-              type="button"
-            >
-              &times;
-            </button>
-            <div className="flex flex-col h-full">
-              <div className="flex-1 flex items-center justify-center">
-                <img
-                  src={modalNews.link}
-                  alt={modalNews.Titulo}
-                  className="w-full h-64 md:h-[60vh] object-cover rounded-t-lg"
-                  style={{ width: '80%', maxHeight: '60vh', objectFit: 'cover', margin: '0 auto' }}
-                />
-              </div>
-              <div className="p-8 flex flex-col justify-center items-center text-center">
-                <span className="text-sm text-blue-600 font-semibold">{modalNews.fecha}</span>
-                <h3 className="text-2xl font-bold text-blue-900 mb-2 mt-1">{modalNews.Titulo}</h3>
-                <p className="text-gray-700 text-base">{modalNews.Descripción}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-12">

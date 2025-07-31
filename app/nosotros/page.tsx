@@ -1,11 +1,19 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Nosotros() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
+  // Cargar galería desde la API de MongoDB
+  const [gallery, setGallery] = useState<{ link: string; Titulo?: string }[]>([]);
+  useEffect(() => {
+    fetch('/api/gallery')
+      .then(res => res.json())
+      .then(data => setGallery(Array.isArray(data) ? data : []));
+  }, []);
 
   return (
     <div className="min-h-screen bg-white">
@@ -13,42 +21,90 @@ export default function Nosotros() {
       <nav className="fixed top-0 w-full bg-white shadow-lg z-50">
         <div className="px-6 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center">
+            {/* Logo siempre tamaño fijo */}
+            <div className="flex-shrink-0 flex items-center">
               <img 
-                src="https://static.readdy.ai/image/b422d9997318ba9404c133396eb0082a/f0b6df53262c2786638b3d4d8768e052.png" 
-                alt="Logo Colegio Nuevo San Luis Gonzaga" 
-                className="h-12 w-auto"
+                src="https://i.ibb.co/spn4L9WW/LOGO-NSLG-2-Mini.png" 
+                alt="Logo Colegio Nuevo San Luis Gonzaga"
+                className="h-12 w-auto min-w-[48px] max-w-[120px]"
               />
             </div>
-
-            <div className="hidden lg:flex items-center space-x-8">
-              <Link href="/" className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer">Inicio</Link>
-              <Link href="/nosotros" className="px-4 py-2 bg-blue-900 text-white rounded-full transition-colors whitespace-nowrap cursor-pointer">Nosotros</Link>
-              <Link href="/admisiones" className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer">Admisiones</Link>
-              <Link href="/contacto" className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer">Contacto</Link>
-              <div className="flex space-x-2 ml-8">
-                <a href="https://lms30.uno-internacional.com/login/access" target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition-colors whitespace-nowrap cursor-pointer">UNOi Santillana</a>
-                <a href="https://www.cibercolegios.com/" target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-yellow-400 text-black rounded-full hover:bg-yellow-500 transition-colors whitespace-nowrap cursor-pointer">Cibercolegios</a>
-                <a href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=12695&searchedCategoryId=&searchedAgreementName=PEDAGOGICOS%20ASOCIADOS%20SAS" target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors whitespace-nowrap cursor-pointer">PSE - Pagos en Línea</a>
+            {/* Centrado absoluto de pestañas */}
+            <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full flex justify-center pointer-events-none">
+              <div className="hidden lg:flex items-center space-x-10 pointer-events-auto">
+                <Link href="/" className="px-5 py-2 bg-blue-900 text-white rounded-full transition-colors whitespace-nowrap cursor-pointer text-[1.25rem] font-semibold">Inicio</Link>
+                <Link href="/nosotros" className="px-5 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer text-[1.25rem] font-semibold">Nosotros</Link>
+                <Link href="/admisiones" className="px-5 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer text-[1.25rem] font-semibold">Admisiones</Link>
+                <Link href="/contacto" className="px-5 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors whitespace-nowrap cursor-pointer text-[1.25rem] font-semibold">Contacto</Link>
               </div>
             </div>
-
-            <button onClick={toggleMenu} className="lg:hidden w-10 h-10 flex items-center justify-center text-blue-900 cursor-pointer">
+            <div className="hidden lg:flex items-center space-x-3 ml-8">
+              <a 
+                href="https://lms30.uno-internacional.com/login/access" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="px-4 py-1.5 bg-purple-600 text-white rounded-full text-sm font-semibold hover:bg-purple-700 transition-colors whitespace-nowrap cursor-pointer"
+              >
+                UNOi Santillana
+              </a>
+              <a 
+                href="https://www.cibercolegios.com/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="px-4 py-1.5 bg-yellow-400 text-black rounded-full text-sm font-semibold hover:bg-yellow-500 transition-colors whitespace-nowrap cursor-pointer"
+              >
+                Cibercolegios
+              </a>
+              <a 
+                href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=12695&searchedCategoryId=&searchedAgreementName=PEDAGOGICOS%20ASOCIADOS%20SAS" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="px-4 py-1.5 bg-blue-600 text-white rounded-full text-sm font-semibold hover:bg-blue-700 transition-colors whitespace-nowrap cursor-pointer"
+              >
+                Pagos PSE
+              </a>
+            </div>
+            {/* Mobile Menu Button */}
+            <button 
+              onClick={toggleMenu}
+              className="lg:hidden w-10 h-10 flex items-center justify-center text-blue-900 cursor-pointer"
+            >
               <i className={`ri-${isMenuOpen ? 'close' : 'menu'}-line text-2xl`}></i>
             </button>
           </div>
-
+          {/* Mobile Navigation Menu */}
           {isMenuOpen && (
             <div className="lg:hidden mt-4 py-4 border-t border-gray-200">
               <div className="flex flex-col space-y-3">
-                <Link href="/" onClick={() => setIsMenuOpen(false)} className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer">Inicio</Link>
-                <Link href="/nosotros" onClick={() => setIsMenuOpen(false)} className="px-4 py-2 bg-blue-900 text-white rounded-full transition-colors text-center cursor-pointer">Nosotros</Link>
+                <Link href="/" onClick={() => setIsMenuOpen(false)} className="px-4 py-2 bg-blue-900 text-white rounded-full transition-colors text-center cursor-pointer">Inicio</Link>
+                <Link href="/nosotros" onClick={() => setIsMenuOpen(false)} className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer">Nosotros</Link>
                 <Link href="/admisiones" onClick={() => setIsMenuOpen(false)} className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer">Admisiones</Link>
                 <Link href="/contacto" onClick={() => setIsMenuOpen(false)} className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer">Contacto</Link>
                 <div className="flex flex-col space-y-2 pt-2">
-                  <a href="https://lms30.uno-internacional.com/login/access" target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition-colors text-center cursor-pointer">UNOi Santillana</a>
-                  <a href="https://www.cibercolegios.com/" target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-yellow-400 text-black rounded-full hover:bg-yellow-500 transition-colors text-center cursor-pointer">Cibercolegios</a>
-                  <a href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=12695&searchedCategoryId=&searchedAgreementName=PEDAGOGICOS%20ASOCIADOS%20SAS" target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors text-center cursor-pointer">PSE - Pagos en Línea</a>
+                  <a 
+                    href="https://lms30.uno-internacional.com/login/access" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="px-4 py-2 bg-purple-600 text-white rounded-full text-sm font-semibold hover:bg-purple-700 transition-colors text-center cursor-pointer"
+                  >
+                    UNOi Santillana
+                  </a>
+                  <a 
+                    href="https://www.cibercolegios.com/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="px-4 py-2 bg-yellow-400 text-black rounded-full text-sm font-semibold hover:bg-yellow-500 transition-colors text-center cursor-pointer"
+                  >
+                    Cibercolegios
+                  </a>
+                  <a 
+                    href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=12695&searchedCategoryId=&searchedAgreementName=PEDAGOGICOS%20ASOCIADOS%20SAS" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="px-4 py-2 bg-blue-600 text-white rounded-full text-sm font-semibold hover:bg-blue-700 transition-colors text-center cursor-pointer"
+                  >
+                    Pagos PSE
+                  </a>
                 </div>
               </div>
             </div>
@@ -209,54 +265,16 @@ export default function Nosotros() {
         <div className="max-w-7xl mx-auto px-6">
           <h2 className="text-3xl font-bold text-blue-900 mb-8 text-center">Galería de Imágenes</h2>
           <div className="grid md:grid-cols-3 gap-6">
-            <div className="group relative overflow-hidden rounded-lg shadow-lg">
-              <img 
-                src="https://readdy.ai/api/search-image?query=Modern%20school%20classroom%20with%20students%20studying%2C%20Colombian%20students%20in%20uniforms%2C%20contemporary%20educational%20environment%2C%20natural%20lighting%2C%20academic%20atmosphere%2C%20engaged%20learning%2C%20blue%20and%20white%20uniforms&width=400&height=300&seq=gallery1&orientation=landscape"
-                alt="Estudiantes en clase"
-                className="w-full h-64 object-cover object-top group-hover:scale-105 transition-transform duration-300"
-              />
-              <div className="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/20 transition-colors duration-300"></div>
-            </div>
-            <div className="group relative overflow-hidden rounded-lg shadow-lg">
-              <img 
-                src="https://readdy.ai/api/search-image?query=School%20sports%20activities%2C%20students%20playing%20soccer%2C%20Colombian%20school%20sports%2C%20outdoor%20activities%2C%20teamwork%2C%20athletic%20field%2C%20healthy%20lifestyle%2C%20school%20sports%20uniform&width=400&height=300&seq=gallery2&orientation=landscape"
-                alt="Actividades deportivas"
-                className="w-full h-64 object-cover object-top group-hover:scale-105 transition-transform duration-300"
-              />
-              <div className="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/20 transition-colors duration-300"></div>
-            </div>
-            <div className="group relative overflow-hidden rounded-lg shadow-lg">
-              <img 
-                src="https://readdy.ai/api/search-image?query=School%20science%20laboratory%2C%20students%20conducting%20experiments%2C%20modern%20lab%20equipment%2C%20STEM%20education%2C%20Colombian%20school%20facilities%2C%20laboratory%20safety%2C%20educational%20technology%2C%20scientific%20learning&width=400&height=300&seq=gallery3&orientation=landscape"
-                alt="Laboratorio de ciencias"
-                className="w-full h-64 object-cover object-top group-hover:scale-105 transition-transform duration-300"
-              />
-              <div className="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/20 transition-colors duration-300"></div>
-            </div>
-            <div className="group relative overflow-hidden rounded-lg shadow-lg">
-              <img 
-                src="https://readdy.ai/api/search-image?query=School%20library%20with%20students%20reading%2C%20modern%20educational%20library%2C%20quiet%20study%20space%2C%20book%20shelves%2C%20academic%20research%2C%20Colombian%20school%20interior%2C%20reading%20culture%2C%20educational%20resources&width=400&height=300&seq=gallery4&orientation=landscape"
-                alt="Biblioteca escolar"
-                className="w-full h-64 object-cover object-top group-hover:scale-105 transition-transform duration-300"
-              />
-              <div className="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/20 transition-colors duration-300"></div>
-            </div>
-            <div className="group relative overflow-hidden rounded-lg shadow-lg">
-              <img 
-                src="https://readdy.ai/api/search-image?query=School%20cultural%20activities%2C%20students%20performing%20arts%2C%20music%20and%20theater%2C%20school%20auditorium%2C%20cultural%20expression%2C%20artistic%20education%2C%20Colombian%20school%20events%2C%20creative%20learning&width=400&height=300&seq=gallery5&orientation=landscape"
-                alt="Actividades culturales"
-                className="w-full h-64 object-cover object-top group-hover:scale-105 transition-transform duration-300"
-              />
-              <div className="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/20 transition-colors duration-300"></div>
-            </div>
-            <div className="group relative overflow-hidden rounded-lg shadow-lg">
-              <img 
-                src="https://readdy.ai/api/search-image?query=School%20graduation%20ceremony%2C%20students%20in%20caps%20and%20gowns%2C%20proud%20families%2C%20academic%20achievement%2C%20Colombian%20graduation%20tradition%2C%20celebration%20of%20success%2C%20educational%20milestone&width=400&height=300&seq=gallery6&orientation=landscape"
-                alt="Ceremonia de graduación"
-                className="w-full h-64 object-cover object-top group-hover:scale-105 transition-transform duration-300"
-              />
-              <div className="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/20 transition-colors duration-300"></div>
-            </div>
+            {gallery.map((img, idx) => (
+              <div key={idx} className="group relative overflow-hidden rounded-lg shadow-lg">
+                <img 
+                  src={img.link}
+                  alt={img.Titulo || `Imagen ${idx + 1}`}
+                  className="w-full h-64 object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/20 transition-colors duration-300"></div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
