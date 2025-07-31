@@ -7,12 +7,18 @@ export default function Nosotros() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
-  // Cargar galería desde la API de MongoDB
-  const [gallery, setGallery] = useState<{ link: string; Titulo?: string }[]>([]);
+  // Cargar galería desde la API de MongoDB y ordenar por 'orden'
+  const [gallery, setGallery] = useState<{ link: string; Titulo?: string; orden?: number }[]>([]);
   useEffect(() => {
     fetch('/api/gallery')
       .then(res => res.json())
-      .then(data => setGallery(Array.isArray(data) ? data : []));
+      .then(data => {
+        if (Array.isArray(data)) {
+          setGallery([...data].sort((a, b) => (a.orden ?? 0) - (b.orden ?? 0)));
+        } else {
+          setGallery([]);
+        }
+      });
   }, []);
 
   return (
@@ -267,9 +273,13 @@ export default function Nosotros() {
           <div className="grid md:grid-cols-3 gap-6">
             {gallery.map((img, idx) => (
               <div key={idx} className="group relative overflow-hidden rounded-lg shadow-lg">
+                {/* Mostrar el número de orden si se desea */}
+                {/* <div className="absolute top-2 left-2 bg-blue-900 text-white rounded-full px-3 py-1 text-xs font-bold z-10 shadow">
+                  {typeof img.orden === 'number' ? img.orden + 1 : idx + 1}
+                </div> */}
                 <img 
                   src={img.link}
-                  alt={img.Titulo || `Imagen ${idx + 1}`}
+                  alt={img.Titulo || `Imagen ${typeof img.orden === 'number' ? img.orden + 1 : idx + 1}`}
                   className="w-full h-64 object-cover object-top group-hover:scale-105 transition-transform duration-300"
                 />
                 <div className="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/20 transition-colors duration-300"></div>
