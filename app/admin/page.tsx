@@ -500,6 +500,10 @@ export default function Admin() {
                       onDragOver={e => e.preventDefault()}
                       style={{ cursor: 'grab' }}
                     >
+                      {/* Número de orden */}
+                      <div className="absolute top-2 left-1/2 -translate-x-1/2 bg-blue-900 text-white rounded-full px-3 py-1 text-xs font-bold z-10 shadow">
+                        {idx + 1}
+                      </div>
                       <img src={img.link} alt={img.Titulo} className="w-full h-32 object-cover rounded" />
                       <button
                         onClick={() => removeBannerImage(idx)}
@@ -598,6 +602,10 @@ export default function Admin() {
                       onDragOver={e => e.preventDefault()}
                       style={{ cursor: 'grab' }}
                     >
+                      {/* Número de orden */}
+                      <div className="absolute top-2 left-1/2 -translate-x-1/2 bg-blue-900 text-white rounded-full px-3 py-1 text-xs font-bold z-10 shadow">
+                        {idx + 1}
+                      </div>
                       <img 
                         src={item.link}
                         alt={item.Titulo}
@@ -697,6 +705,10 @@ export default function Admin() {
                       onDragOver={e => e.preventDefault()}
                       style={{ cursor: 'grab' }}
                     >
+                      {/* Número de orden */}
+                      <div className="absolute top-2 left-1/2 -translate-x-1/2 bg-blue-900 text-white rounded-full px-3 py-1 text-xs font-bold z-10 shadow">
+                        {idx + 1}
+                      </div>
                       <img src={img.link} alt={img.Titulo} className="w-full h-32 object-cover rounded" />
                       <button
                         onClick={() => removeGalleryImage(idx)}
