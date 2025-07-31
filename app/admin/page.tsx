@@ -9,19 +9,22 @@ export default function Admin() {
   const [isMenuOpen, setIsMenuOpen] = useState(false); // <-- Faltaba este estado
 
   // Banner state
-  const [bannerImages, setBannerImages] = useState<{ Titulo: string; Descripción: string; fecha: string; link: string }[]>([]);
+  type BannerItem = { Titulo: string; Descripción: string; fecha: string; link: string; orden?: number };
+  const [bannerImages, setBannerImages] = useState<BannerItem[]>([]);
   const [bannerForm, setBannerForm] = useState({ Titulo: '', Descripción: '', fecha: '', link: '' });
   const [editBannerIdx, setEditBannerIdx] = useState<number | null>(null);
   const [draggedBannerIdx, setDraggedBannerIdx] = useState<number | null>(null);
 
   // News state
-  const [news, setNews] = useState<{ Titulo: string; Descripción: string; fecha: string; link: string }[]>([]);
+  type NewsItem = { Titulo: string; Descripción: string; fecha: string; link: string; orden?: number };
+  const [news, setNews] = useState<NewsItem[]>([]);
   const [newsForm, setNewsForm] = useState({ Titulo: '', Descripción: '', fecha: '', link: '' });
   const [editNewsIdx, setEditNewsIdx] = useState<number | null>(null);
   const [draggedNewsIdx, setDraggedNewsIdx] = useState<number | null>(null);
 
   // Gallery state
-  const [gallery, setGallery] = useState<{ Titulo: string; Descripción: string; fecha: string; link: string }[]>([]);
+  type GalleryItem = { Titulo: string; Descripción: string; fecha: string; link: string; orden?: number };
+  const [gallery, setGallery] = useState<GalleryItem[]>([]);
   const [galleryForm, setGalleryForm] = useState({ Titulo: '', Descripción: '', fecha: '', link: '' });
   const [editGalleryIdx, setEditGalleryIdx] = useState<number | null>(null);
   const [draggedGalleryIdx, setDraggedGalleryIdx] = useState<number | null>(null);
@@ -36,29 +39,31 @@ export default function Admin() {
   useEffect(() => {
     fetch('/api/banner')
       .then(res => res.json())
-      .then(data => setBannerImages(Array.isArray(data) ? data : []));
+      .then(data => setBannerImages(Array.isArray(data) ? [...data].sort((a, b) => (a.orden ?? 0) - (b.orden ?? 0)) : []));
     fetch('/api/news')
       .then(res => res.json())
-      .then(data => setNews(Array.isArray(data) ? data : []));
+      .then(data => setNews(Array.isArray(data) ? [...data].sort((a, b) => (a.orden ?? 0) - (b.orden ?? 0)) : []));
     fetch('/api/gallery')
       .then(res => res.json())
-      .then(data => setGallery(Array.isArray(data) ? data : []));
+      .then(data => setGallery(Array.isArray(data) ? [...data].sort((a, b) => (a.orden ?? 0) - (b.orden ?? 0)) : []));
   }, []);
 
   // Guardar cambios en MongoDB Atlas usando endpoints internos (solo si hay datos)
+  // Al guardar, asigna el campo 'orden' según el índice actual
   const saveBanner = async () => {
     if (bannerImages.length === 0) {
       alert('No puedes guardar un banner vacío.');
       return;
     }
+    const items = bannerImages.map((item, idx) => ({ ...item, orden: idx }));
     const res = await fetch('/api/banner', {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ items: bannerImages })
+      body: JSON.stringify({ items })
     });
     if (res.ok) {
       const data = await fetch('/api/banner').then(r => r.json());
-      setBannerImages(Array.isArray(data) ? data : []);
+      setBannerImages(Array.isArray(data) ? [...data].sort((a, b) => (a.orden ?? 0) - (b.orden ?? 0)) : []);
       alert('Banner guardado.');
     } else {
       alert('Error al guardar el banner.');
@@ -70,14 +75,15 @@ export default function Admin() {
       alert('No puedes guardar noticias vacías.');
       return;
     }
+    const items = news.map((item, idx) => ({ ...item, orden: idx }));
     const res = await fetch('/api/news', {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ items: news })
+      body: JSON.stringify({ items })
     });
     if (res.ok) {
       const data = await fetch('/api/news').then(r => r.json());
-      setNews(Array.isArray(data) ? data : []);
+      setNews(Array.isArray(data) ? [...data].sort((a, b) => (a.orden ?? 0) - (b.orden ?? 0)) : []);
       alert('Noticias guardadas.');
     } else {
       alert('Error al guardar las noticias.');
@@ -89,14 +95,15 @@ export default function Admin() {
       alert('No puedes guardar una galería vacía.');
       return;
     }
+    const items = gallery.map((item, idx) => ({ ...item, orden: idx }));
     const res = await fetch('/api/gallery', {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ items: gallery })
+      body: JSON.stringify({ items })
     });
     if (res.ok) {
       const data = await fetch('/api/gallery').then(r => r.json());
-      setGallery(Array.isArray(data) ? data : []);
+      setGallery(Array.isArray(data) ? [...data].sort((a, b) => (a.orden ?? 0) - (b.orden ?? 0)) : []);
       alert('Galería guardada.');
     } else {
       alert('Error al guardar la galería.');
@@ -484,7 +491,7 @@ export default function Admin() {
                   {bannerImages.map((img, idx) => (
                     <div
                       key={idx}
-                      className={`bg-white rounded-lg shadow p-2 relative ${draggedBannerIdx === idx ? 'opacity-60' : ''}`}
+                      className={`bg-white rounded-lg shadow p-2 relative ${draggedBannerIdx === idx ? 'opacity-60' : ''} cursor-move`}
                       draggable
                       onDragStart={() => handleBannerDragStart(idx)}
                       onDragEnter={() => handleBannerDragEnter(idx)}
@@ -582,7 +589,7 @@ export default function Admin() {
                   {news.map((item, idx) => (
                     <div
                       key={idx}
-                      className={`bg-white rounded-lg shadow-lg overflow-hidden relative ${draggedNewsIdx === idx ? 'opacity-60' : ''}`}
+                      className={`bg-white rounded-lg shadow-lg overflow-hidden relative ${draggedNewsIdx === idx ? 'opacity-60' : ''} cursor-move`}
                       draggable
                       onDragStart={() => handleNewsDragStart(idx)}
                       onDragEnter={() => handleNewsDragEnter(idx)}
@@ -681,7 +688,7 @@ export default function Admin() {
                   {gallery.map((img, idx) => (
                     <div
                       key={idx}
-                      className={`bg-white rounded-lg shadow p-2 relative ${draggedGalleryIdx === idx ? 'opacity-60' : ''}`}
+                      className={`bg-white rounded-lg shadow p-2 relative ${draggedGalleryIdx === idx ? 'opacity-60' : ''} cursor-move`}
                       draggable
                       onDragStart={() => handleGalleryDragStart(idx)}
                       onDragEnter={() => handleGalleryDragEnter(idx)}
