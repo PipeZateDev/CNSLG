@@ -1,9 +1,7 @@
-export const dynamic = "force-dynamic";
-export const runtime = 'nodejs';
 import { NextRequest, NextResponse } from 'next/server';
 import { MongoClient } from 'mongodb';
 
-const uri = process.env.MONGODB_URI as string;
+const uri = "mongodb+srv://admin:sandekrfsc.1@clusterpaginacnslg.2aoh0q7.mongodb.net/?retryWrites=true&w=majority&appName=ClusterPaginaCNSLG";
 const client = new MongoClient(uri);
 
 export async function GET() {
@@ -14,23 +12,10 @@ export async function GET() {
 }
 
 export async function PUT(req: NextRequest) {
-  const { items } = await req.json();
+  const items = await req.json();
   await client.connect();
   const db = client.db('imagenes');
-  const collection = db.collection('Gallery');
-
-  const currentDocs = await collection.find({}).toArray();
-  const itemsLinks = items.map((item: any) => item.link);
-  const toDelete = currentDocs.filter(doc => !itemsLinks.includes(doc.link));
-  if (toDelete.length > 0) {
-    await collection.deleteMany({ link: { $in: toDelete.map(doc => doc.link) } });
-  }
-  for (const item of items) {
-    await collection.updateOne(
-      { link: item.link },
-      { $set: item },
-      { upsert: true }
-    );
-  }
+  await db.collection('Gallery').deleteMany({});
+  if (items.length > 0) await db.collection('Gallery').insertMany(items);
   return NextResponse.json({ ok: true });
 }
