@@ -26,7 +26,7 @@ export default function Admin() {
   // Gallery state
   type GalleryItem = { Titulo: string; Descripción: string; fecha: string; link: string; orden?: number; grupo?: string };
   const [gallery, setGallery] = useState<GalleryItem[]>([]);
-  const [galleryForm, setGalleryForm] = useState({ Titulo: '', Descripción: '', fecha: '', link: '', grupo: '' });
+  const [galleryForm, setGalleryForm] = useState<{ Titulo: string; Descripción: string; fecha: string; link: string; grupo?: string }>({ Titulo: '', Descripción: '', fecha: '', link: '', grupo: '' });
   const [editGalleryIdx, setEditGalleryIdx] = useState<number | null>(null);
   const [draggedGalleryIdx, setDraggedGalleryIdx] = useState<number | null>(null);
 
@@ -234,7 +234,15 @@ export default function Admin() {
     setGalleryForm({ Titulo: '', Descripción: '', fecha: '', link: '', grupo: '' });
   };
   const handleEditGallery = (idx: number) => {
-    setGalleryForm(gallery[idx]);
+    // Asegura que el objeto tenga todas las claves necesarias
+    const item = gallery[idx];
+    setGalleryForm({
+      Titulo: item.Titulo || '',
+      Descripción: item.Descripción || '',
+      fecha: item.fecha || '',
+      link: item.link || '',
+      grupo: item.grupo || ''
+    });
     setEditGalleryIdx(idx);
   };
   const handleCancelEditGallery = () => {
