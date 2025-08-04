@@ -764,44 +764,56 @@ export default function Admin() {
                 </button>
                 {/* Mostrar imágenes agrupadas por grupo */}
                 <div className="space-y-8">
-                  {Object.entries(groupedGallery).map(([groupKey, imgs], idx) => (
-                    groupKey.startsWith('__single_') ? (
-                      <div key={groupKey} className="grid md:grid-cols-5 gap-4">
-                        {imgs.map((img, i) => (
-                          <div
-                            key={i}
-                            className={`bg-white rounded-lg shadow p-2 relative cursor-move`}
-                            draggable
-                            onDragStart={() => handleGalleryDragStart(gallery.indexOf(img))}
-                            onDragEnter={() => handleGalleryDragEnter(gallery.indexOf(img))}
-                            onDragEnd={handleGalleryDragEnd}
-                            onDrop={handleGalleryDragEnd}
-                            onDragOver={e => e.preventDefault()}
-                            style={{ cursor: 'grab' }}
-                          >
-                            <div className="absolute top-2 left-1/2 -translate-x-1/2 bg-blue-900 text-white rounded-full px-3 py-1 text-xs font-bold z-10 shadow">
-                              {gallery.indexOf(img) + 1}
-                            </div>
-                            <img src={img.link} alt={img.Titulo} className="w-full h-32 object-cover rounded" />
-                            <button
-                              onClick={() => removeGalleryImage(gallery.indexOf(img))}
-                              className="absolute top-2 right-2 bg-red-600 text-white rounded-full px-2 py-1 text-xs"
+                  {/* Sección para imágenes individuales (sin grupo) */}
+                  {Object.entries(groupedGallery)
+                    .filter(([groupKey]) => groupKey.startsWith('__single_'))
+                    .length > 0 && (
+                    <div>
+                      <div className="mb-2 text-blue-900 font-bold text-center">Imágenes individuales</div>
+                      <div className="grid md:grid-cols-5 gap-4">
+                        {Object.entries(groupedGallery)
+                          .filter(([groupKey]) => groupKey.startsWith('__single_'))
+                          .flatMap(([_, imgs]) => imgs)
+                          .map((img, i) => (
+                            <div
+                              key={i}
+                              className={`bg-white rounded-lg shadow p-2 relative cursor-move`}
+                              draggable
+                              onDragStart={() => handleGalleryDragStart(gallery.indexOf(img))}
+                              onDragEnter={() => handleGalleryDragEnter(gallery.indexOf(img))}
+                              onDragEnd={handleGalleryDragEnd}
+                              onDrop={handleGalleryDragEnd}
+                              onDragOver={e => e.preventDefault()}
+                              style={{ cursor: 'grab' }}
                             >
-                              Eliminar
-                            </button>
-                            <button
-                              onClick={() => handleEditGallery(gallery.indexOf(img))}
-                              className="absolute top-2 left-2 bg-yellow-500 text-white rounded-full px-2 py-1 text-xs"
-                            >
-                              Editar
-                            </button>
-                            <div className="mt-2 text-sm text-center">
-                              <strong>{img.Titulo}</strong>
+                              <div className="absolute top-2 left-1/2 -translate-x-1/2 bg-blue-900 text-white rounded-full px-3 py-1 text-xs font-bold z-10 shadow">
+                                {gallery.indexOf(img) + 1}
+                              </div>
+                              <img src={img.link} alt={img.Titulo} className="w-full h-32 object-cover rounded" />
+                              <button
+                                onClick={() => removeGalleryImage(gallery.indexOf(img))}
+                                className="absolute top-2 right-2 bg-red-600 text-white rounded-full px-2 py-1 text-xs"
+                              >
+                                Eliminar
+                              </button>
+                              <button
+                                onClick={() => handleEditGallery(gallery.indexOf(img))}
+                                className="absolute top-2 left-2 bg-yellow-500 text-white rounded-full px-2 py-1 text-xs"
+                              >
+                                Editar
+                              </button>
+                              <div className="mt-2 text-sm text-center">
+                                <strong>{img.Titulo}</strong>
+                              </div>
                             </div>
-                          </div>
-                        ))}
+                          ))}
                       </div>
-                    ) : (
+                    </div>
+                  )}
+                  {/* Sección para grupos */}
+                  {Object.entries(groupedGallery)
+                    .filter(([groupKey]) => !groupKey.startsWith('__single_'))
+                    .map(([groupKey, imgs], idx) => (
                       <div key={groupKey}>
                         <div className="mb-2 text-blue-900 font-bold text-center">{groupKey}</div>
                         <div className="flex overflow-x-auto gap-4 pb-2">
@@ -840,8 +852,7 @@ export default function Admin() {
                           ))}
                         </div>
                       </div>
-                    )
-                  ))}
+                    ))}
                 </div>
               </div>
             </div>
