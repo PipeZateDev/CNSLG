@@ -9,7 +9,7 @@ export default function Nosotros() {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   // Cargar galería desde la API de MongoDB y ordenar por 'orden'
-  const [gallery, setGallery] = useState<{ link: string; Titulo?: string; orden?: number }[]>([]);
+  const [gallery, setGallery] = useState<{ link: string; Titulo?: string; orden?: number; grupo?: string }[]>([]);
   useEffect(() => {
     fetch('/api/gallery')
       .then(res => res.json())
@@ -21,6 +21,18 @@ export default function Nosotros() {
         }
       });
   }, []);
+
+  // Agrupar por grupo si existe
+  const groupedGallery = gallery.reduce<{ [key: string]: typeof gallery }>((acc, img) => {
+    const group = img.grupo || '';
+    if (!group) {
+      acc[`__single_${img.orden ?? 0}_${img.link}`] = [img];
+    } else {
+      if (!acc[group]) acc[group] = [];
+      acc[group].push(img);
+    }
+    return acc;
+  }, {});
 
   const pathname = usePathname();
 
@@ -273,19 +285,37 @@ export default function Nosotros() {
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <h2 className="text-3xl font-bold text-blue-900 mb-8 text-center">Galería de Imágenes</h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            {gallery.map((img, idx) => (
-              <div key={idx} className="group relative overflow-hidden rounded-lg shadow-lg">
-                {/* Mostrar el número de orden si se desea */}
-                {/* <div className="absolute top-2 left-2 bg-blue-900 text-white rounded-full px-3 py-1 text-xs font-bold z-10 shadow">
-                  {typeof img.orden === 'number' ? img.orden + 1 : idx + 1}
-                </div> */}
-                <img 
-                  src={img.link}
-                  alt={img.Titulo || `Imagen ${typeof img.orden === 'number' ? img.orden + 1 : idx + 1}`}
-                  className="w-full h-64 object-cover object-top group-hover:scale-105 transition-transform duration-300"
-                />
-                <div className="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/20 transition-colors duration-300"></div>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            {Object.entries(groupedGallery).map(([groupKey, imgs], idx) => (
+              <div key={groupKey} className="col-span-1 md:col-span-1">
+                {groupKey.startsWith('__single_') ? (
+                  // Imagen individual
+                  <div className="group relative overflow-hidden rounded-lg shadow-lg">
+                    <img 
+                      src={imgs[0].link}
+                      alt={imgs[0].Titulo || `Imagen ${typeof imgs[0].orden === 'number' ? imgs[0].orden + 1 : idx + 1}`}
+                      className="w-full h-64 object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <div className="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/20 transition-colors duration-300"></div>
+                  </div>
+                ) : (
+                  // Grupo de imágenes
+                  <div className="rounded-lg shadow-lg bg-gray-50 p-2">
+                    <div className="text-center font-bold text-blue-900 mb-2">{groupKey}</div>
+                    <div className="grid grid-cols-1 gap-4">
+                      {imgs.map((img, i) => (
+                        <div key={img.link + i} className="group relative overflow-hidden rounded-lg">
+                          <img 
+                            src={img.link}
+                            alt={img.Titulo || `Imagen ${typeof img.orden === 'number' ? img.orden + 1 : i + 1}`}
+                            className="w-full h-48 object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                          />
+                          <div className="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/20 transition-colors duration-300"></div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             ))}
           </div>
