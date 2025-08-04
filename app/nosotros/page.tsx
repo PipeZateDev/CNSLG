@@ -358,11 +358,16 @@ export default function Nosotros() {
             <div
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
               className="relative w-[90vw] max-w-[90vw] mx-4 bg-white rounded-lg shadow-lg flex flex-col items-center"
 =======
               className="relative max-w-3xl w-full mx-4 bg-white rounded-lg shadow-lg flex flex-col items-center"
 >>>>>>> parent of 4241aef (modalGaleriaTamaño)
               style={{ maxHeight: '90vh' }}
+=======
+              className="relative w-[80vw] max-w-[80vw] mx-4 bg-white rounded-lg shadow-lg flex flex-col items-center"
+              style={{ maxHeight: '80vh' }}
+>>>>>>> parent of a4aa0f3 (modalGaleria90%)
 =======
               className="relative w-[80vw] max-w-[80vw] mx-4 bg-white rounded-lg shadow-lg flex flex-col items-center"
               style={{ maxHeight: '80vh' }}
