@@ -362,21 +362,22 @@ export default function Nosotros() {
         tabIndex={-1}
       >
         <div
-          className="relative max-w-4xl w-full mx-4 bg-white rounded-lg shadow-lg flex flex-col items-center"
-          style={{ maxHeight: '95vh' }}
+          className="relative max-w-6xl w-full mx-4 bg-white rounded-lg shadow-lg flex flex-col items-center"
+          style={{ maxHeight: '98vh' }}
           onClick={e => e.stopPropagation()}
         >
           <button
-            className="absolute top-2 right-2 text-2xl text-blue-900 bg-white rounded-full px-2 py-1 shadow hover:bg-blue-100"
+            className="absolute top-2 right-2 text-3xl text-blue-900 bg-white rounded-full px-3 py-2 shadow hover:bg-blue-100"
             onClick={closeModal}
             aria-label="Cerrar"
           >
             &times;
           </button>
+          {/* Carrusel de imágenes en el modal */}
           <div className="flex items-center justify-between w-full mt-8 mb-4 px-4">
             {modalImages.length > 1 && (
               <button
-                className="text-2xl text-blue-900 bg-white rounded-full px-2 py-1 shadow hover:bg-blue-100"
+                className="text-3xl text-blue-900 bg-white rounded-full px-3 py-2 shadow hover:bg-blue-100"
                 onClick={prevModalImage}
                 aria-label="Anterior"
               >
@@ -387,13 +388,13 @@ export default function Nosotros() {
               <img
                 src={modalImages[modalIndex].link}
                 alt={modalImages[modalIndex].Titulo || ''}
-                className="max-h-[80vh] w-auto rounded-lg"
+                className="max-h-[90vh] w-auto rounded-lg"
                 style={{ objectFit: 'contain', maxWidth: '100%' }}
               />
             </div>
             {modalImages.length > 1 && (
               <button
-                className="text-2xl text-blue-900 bg-white rounded-full px-2 py-1 shadow hover:bg-blue-100"
+                className="text-3xl text-blue-900 bg-white rounded-full px-3 py-2 shadow hover:bg-blue-100"
                 onClick={nextModalImage}
                 aria-label="Siguiente"
               >
@@ -401,12 +402,12 @@ export default function Nosotros() {
               </button>
             )}
           </div>
-          <div className="text-center font-semibold text-blue-900 mb-2 px-4 text-xl">
+          <div className="text-center font-semibold text-blue-900 mb-2 px-4 text-2xl">
             {modalImages[modalIndex].Titulo}
           </div>
           {/* Descripción del grupo si existe */}
           {modalImages[0]?.grupo && (
-            <div className="text-center text-gray-700 mb-6 px-4 text-base">
+            <div className="text-center text-gray-700 mb-6 px-4 text-lg">
               {modalImages[0].grupo}
             </div>
           )}
