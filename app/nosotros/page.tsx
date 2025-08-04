@@ -356,8 +356,8 @@ export default function Nosotros() {
             tabIndex={-1}
           >
             <div
-              className="relative max-w-3xl w-full mx-4 bg-white rounded-lg shadow-lg flex flex-col items-center"
-              style={{ maxHeight: '90vh' }}
+              className="relative w-[80vw] max-w-[80vw] mx-4 bg-white rounded-lg shadow-lg flex flex-col items-center"
+              style={{ maxHeight: '80vh' }}
               onClick={e => e.stopPropagation()}
             >
               <button
@@ -381,7 +381,7 @@ export default function Nosotros() {
                   <img
                     src={modalImages[modalIndex].link}
                     alt={modalImages[modalIndex].Titulo || ''}
-                    className="max-h-[70vh] w-auto rounded-lg"
+                    className="max-h-[65vh] w-auto rounded-lg"
                     style={{ objectFit: 'contain', maxWidth: '100%' }}
                   />
                 </div>
