@@ -363,46 +363,72 @@ export default function Nosotros() {
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <h2 className="text-3xl font-bold text-blue-900 mb-8 text-center">Galería de Imágenes</h2>
+          {/* Agrupa por título */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            {gallery.map((img, idx) => (
-              <div key={img.link + idx} className="col-span-1 md:col-span-1 flex flex-col h-full cursor-pointer"
-                onClick={() => openGalleryModal(
-                  gallery.filter(g => g.grupo === img.grupo && img.grupo) || [img],
-                  img.grupo ? gallery.filter(g => g.grupo === img.grupo).indexOf(img) : 0
-                )}>
-                <div className="rounded-lg shadow-lg bg-gray-50 p-2 flex flex-col h-full">
-                  {img.grupo && (
-                    <div className="text-center font-bold text-blue-900 mb-2">{img.grupo}</div>
-                  )}
-                  <div className="group relative overflow-hidden rounded-lg flex flex-col h-full">
-                    <img 
-                      src={img.link}
-                      alt={img.Titulo || ''}
-                      className="w-full h-64 object-cover object-top group-hover:scale-105 transition-transform duration-300"
-                      style={{ minHeight: 256, maxHeight: 256 }}
-                    />
-                    <div className="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/20 transition-colors duration-300"></div>
-                    <div className="text-center py-2 font-semibold text-blue-900 bg-white/80">{img.Titulo}</div>
-                    {img.grupo && gallery.filter(g => g.grupo === img.grupo).length > 1 && (
-                      <div className="absolute" style={{ bottom: '38%', left: '50%', transform: 'translateX(-50%)' }}>
-                        <button
-                          className="px-4 py-1 bg-blue-900 text-white rounded-full text-xs font-semibold shadow hover:bg-blue-800 transition"
-                          onClick={e => {
-                            e.stopPropagation();
-                            openGalleryModal(
-                              gallery.filter(g => g.grupo === img.grupo),
-                              gallery.filter(g => g.grupo === img.grupo).indexOf(img)
-                            );
-                          }}
-                        >
-                          Ver más ({gallery.filter(g => g.grupo === img.grupo).length})
-                        </button>
+            {(() => {
+              // Agrupa por título
+              const groupedByTitle = gallery.reduce<{ [key: string]: typeof gallery }>((acc, img) => {
+                const key = img.Titulo || '';
+                if (!key || gallery.filter(g => g.Titulo === key).length === 1) {
+                  acc[`__single_${img.link}`] = [img];
+                } else {
+                  if (!acc[key]) acc[key] = [];
+                  acc[key].push(img);
+                }
+                return acc;
+              }, {});
+              return Object.entries(groupedByTitle).map(([groupKey, imgs], idx) => (
+                groupKey.startsWith('__single_') ? (
+                  imgs.map((img, i) => (
+                    <div key={img.link + i} className="col-span-1 md:col-span-1 flex flex-col h-full cursor-pointer"
+                      onClick={() => openGalleryModal([img], 0)}>
+                      <div className="rounded-lg shadow-lg bg-gray-50 p-2 flex flex-col h-full">
+                        <div className="group relative overflow-hidden rounded-lg flex flex-col h-full">
+                          <img 
+                            src={img.link}
+                            alt={img.Titulo || ''}
+                            className="w-full h-64 object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                            style={{ minHeight: 256, maxHeight: 256 }}
+                          />
+                          <div className="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/20 transition-colors duration-300"></div>
+                          <div className="text-center py-2 font-semibold text-blue-900 bg-white/80" style={{ minHeight: 32 }}>
+                            {img.Titulo ? img.Titulo : <span>&nbsp;</span>}
+                          </div>
+                        </div>
                       </div>
-                    )}
+                    </div>
+                  ))
+                ) : (
+                  <div key={groupKey} className="col-span-1 md:col-span-1 flex flex-col h-full cursor-pointer"
+                    onClick={() => openGalleryModal(imgs, 0)}>
+                    <div className="rounded-lg shadow-lg bg-gray-50 p-2 flex flex-col h-full">
+                      <div className="group relative overflow-hidden rounded-lg flex flex-col h-full">
+                        <img 
+                          src={imgs[0].link}
+                          alt={imgs[0].Titulo || ''}
+                          className="w-full h-64 object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                          style={{ minHeight: 256, maxHeight: 256 }}
+                        />
+                        <div className="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/20 transition-colors duration-300"></div>
+                        <div className="text-center py-2 font-semibold text-blue-900 bg-white/80" style={{ minHeight: 32 }}>
+                          {imgs[0].Titulo ? imgs[0].Titulo : <span>&nbsp;</span>}
+                        </div>
+                        {imgs.length > 1 && (
+                          <div className="absolute" style={{ bottom: '38%', left: '50%', transform: 'translateX(-50%)' }}>
+                            <button
+                              className="px-4 py-1 bg-blue-900 text-white rounded-full text-xs font-semibold shadow hover:bg-blue-800 transition"
+                              onClick={e => { e.stopPropagation(); openGalleryModal(imgs, 0); }}
+                            >
+                              Ver más ({imgs.length})
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-            ))}
+                )
+              ));
+            })()}
           </div>
         </div>
         {/* Modal para visualizar imagen */}
@@ -452,8 +478,8 @@ export default function Nosotros() {
                   </button>
                 )}
               </div>
-              <div className="text-center font-semibold text-blue-900 mb-6 px-4">
-                {galleryModalImages[galleryModalIndex].Titulo}
+              <div className="text-center font-semibold text-blue-900 mb-6 px-4" style={{ minHeight: 32 }}>
+                {galleryModalImages[galleryModalIndex].Titulo ? galleryModalImages[galleryModalIndex].Titulo : <span>&nbsp;</span>}
               </div>
             </div>
           </div>
