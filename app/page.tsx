@@ -63,6 +63,31 @@ export default function Home() {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  // Agrupa las noticias por título
+  const groupedNews = news.reduce<{ [key: string]: typeof news }>((acc, item) => {
+    const key = item.Titulo || '';
+    if (!key || news.filter(n => n.Titulo === key).length === 1) {
+      acc[`__single_${item.link}`] = [item]; // <-- corregido: item.orden puede ser undefined, solo usa link para clave única
+    } else {
+      if (!acc[key]) acc[key] = [];
+      acc[key].push(item);
+    }
+    return acc;
+  }, {});
+
+  const [newsModalOpen, setNewsModalOpen] = useState(false);
+  const [newsModalImages, setNewsModalImages] = useState<{ link: string; Titulo: string; Descripción: string; fecha: string }[]>([]);
+  const [newsModalIndex, setNewsModalIndex] = useState(0);
+
+  const openNewsModal = (imgs: typeof news, idx: number = 0) => {
+    setNewsModalImages(imgs);
+    setNewsModalIndex(idx);
+    setNewsModalOpen(true);
+  };
+  const closeNewsModal = () => setNewsModalOpen(false);
+  const nextNewsModalImage = () => setNewsModalIndex((prev) => (prev + 1) % newsModalImages.length);
+  const prevNewsModalImage = () => setNewsModalIndex((prev) => (prev - 1 + newsModalImages.length) % newsModalImages.length);
+
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
@@ -413,22 +438,102 @@ export default function Home() {
             Noticias y Eventos
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
-            {news.map((item, idx) => (
-              <div key={idx} className="bg-white rounded-lg shadow-lg overflow-hidden">
-                <img 
-                  src={item.link}
-                  alt={item.Titulo}
-                  className="w-full h-48 object-cover object-top"
-                />
-                <div className="p-6">
-                  <span className="text-sm text-blue-600 font-semibold">{item.fecha}</span>
-                  <h3 className="text-lg font-bold text-blue-900 mb-2 mt-1">{item.Titulo}</h3>
-                  <p className="text-gray-600 text-sm">{item.Descripción}</p>
+            {Object.entries(groupedNews).map(([groupKey, items], idx) => (
+              groupKey.startsWith('__single_') ? (
+                items.map((item, i) => (
+                  <div key={item.link + i} className="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer"
+                    onClick={() => openNewsModal([item], 0)}>
+                    <img 
+                      src={item.link}
+                      alt={item.Titulo}
+                      className="w-full h-48 object-cover object-top"
+                    />
+                    <div className="p-6">
+                      <span className="text-sm text-blue-600 font-semibold">{item.fecha}</span>
+                      <h3 className="text-lg font-bold text-blue-900 mb-2 mt-1">{item.Titulo}</h3>
+                      <p className="text-gray-600 text-sm">{item.Descripción}</p>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <div key={groupKey} className="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer"
+                  onClick={() => openNewsModal(items, 0)}>
+                  <img 
+                    src={items[0].link}
+                    alt={items[0].Titulo}
+                    className="w-full h-48 object-cover object-top"
+                  />
+                  <div className="p-6">
+                    <span className="text-sm text-blue-600 font-semibold">{items[0].fecha}</span>
+                    <h3 className="text-lg font-bold text-blue-900 mb-2 mt-1">{items[0].Titulo}</h3>
+                    <p className="text-gray-600 text-sm">{items[0].Descripción}</p>
+                    {items.length > 1 && (
+                      <div className="mt-2 text-blue-900 text-xs font-semibold">
+                        {items.length} imágenes
+                      </div>
+                    )}
+                  </div>
                 </div>
-              </div>
+              )
             ))}
           </div>
         </div>
+        {/* Modal para visualizar imágenes de noticia */}
+        {newsModalOpen && (
+          <div
+            className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center"
+            onClick={closeNewsModal}
+            tabIndex={-1}
+          >
+            <div
+              className="relative w-[80vw] max-w-[80vw] mx-4 bg-white rounded-lg shadow-lg flex flex-col items-center"
+              style={{ maxHeight: '80vh' }}
+              onClick={e => e.stopPropagation()}
+            >
+              <button
+                className="absolute top-2 right-2 text-2xl text-blue-900 bg-white rounded-full px-2 py-1 shadow hover:bg-blue-100"
+                onClick={closeNewsModal}
+                aria-label="Cerrar"
+              >
+                &times;
+              </button>
+              <div className="flex items-center justify-between w-full mt-8 mb-4 px-4">
+                {newsModalImages.length > 1 && (
+                  <button
+                    className="text-2xl text-blue-900 bg-white rounded-full px-2 py-1 shadow hover:bg-blue-100"
+                    onClick={prevNewsModalImage}
+                    aria-label="Anterior"
+                  >
+                    &#8592;
+                  </button>
+                )}
+                <div className="flex-1 flex justify-center">
+                  <img
+                    src={newsModalImages[newsModalIndex].link}
+                    alt={newsModalImages[newsModalIndex].Titulo || ''}
+                    className="max-h-[65vh] w-auto rounded-lg"
+                    style={{ objectFit: 'contain', maxWidth: '100%' }}
+                  />
+                </div>
+                {newsModalImages.length > 1 && (
+                  <button
+                    className="text-2xl text-blue-900 bg-white rounded-full px-2 py-1 shadow hover:bg-blue-100"
+                    onClick={nextNewsModalImage}
+                    aria-label="Siguiente"
+                  >
+                    &#8594;
+                  </button>
+                )}
+              </div>
+              <div className="text-center font-semibold text-blue-900 mb-2 px-4">
+                {newsModalImages[newsModalIndex].Titulo}
+              </div>
+              <div className="text-center text-gray-600 mb-6 px-4">
+                {newsModalImages[newsModalIndex].Descripción}
+              </div>
+            </div>
+          </div>
+        )}
       </section>
 
       {/* Footer */}
