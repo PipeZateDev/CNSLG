@@ -303,11 +303,11 @@ export default function Nosotros() {
           <h2 className="text-3xl font-bold text-blue-900 mb-8 text-center">Galería de Imágenes</h2>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             {Object.entries(groupedGallery).map(([groupKey, imgs], idx) => (
-              <div key={groupKey} className="col-span-1 md:col-span-1">
+              <div key={groupKey} className="flex flex-col items-center justify-start col-span-1 md:col-span-1 h-full">
                 {groupKey.startsWith('__single_') ? (
                   // Imagen individual
                   <div
-                    className="group relative overflow-hidden rounded-lg shadow-lg cursor-pointer"
+                    className="group relative overflow-hidden rounded-lg shadow-lg cursor-pointer flex flex-col items-center"
                     onClick={() => openModal(imgs, 0)}
                   >
                     <img 
@@ -317,17 +317,16 @@ export default function Nosotros() {
                       onClick={e => { e.stopPropagation(); openModal(imgs, 0); }}
                     />
                     <div className="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/20 transition-colors duration-300"></div>
-                    <div className="text-center py-2 font-semibold text-blue-900 bg-white/80">{imgs[0].Titulo}</div>
+                    <div className="w-full text-center py-2 font-semibold text-blue-900 bg-white/80">{imgs[0].Titulo}</div>
                   </div>
                 ) : (
                   // Grupo de imágenes: solo muestra la primera y "ver más"
-                  <div className="rounded-lg shadow-lg bg-gray-50 p-2">
-                    {/* Elimina el nombre del grupo si es 'PruebaGrupo' */}
+                  <div className="rounded-lg shadow-lg bg-gray-50 p-2 w-full flex flex-col items-center">
                     {groupKey !== 'PruebaGrupo' && (
-                      <div className="text-center font-bold text-blue-900 mb-2">{groupKey}</div>
+                      <div className="text-center font-bold text-blue-900 mb-2 w-full">{groupKey}</div>
                     )}
                     <div
-                      className="group relative overflow-hidden rounded-lg cursor-pointer"
+                      className="group relative overflow-hidden rounded-lg cursor-pointer w-full flex flex-col items-center"
                       onClick={() => openModal(imgs, 0)}
                     >
                       <img 
@@ -337,8 +336,7 @@ export default function Nosotros() {
                         onClick={e => { e.stopPropagation(); openModal(imgs, 0); }}
                       />
                       <div className="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/20 transition-colors duration-300"></div>
-                      <div className="text-center py-2 font-semibold text-blue-900 bg-white/80">{imgs[0].Titulo}</div>
-                      {/* Botón ver más subido un 30% */}
+                      <div className="w-full text-center py-2 font-semibold text-blue-900 bg-white/80">{imgs[0].Titulo}</div>
                       <div className="absolute" style={{ bottom: '38%', left: '50%', transform: 'translateX(-50%)' }}>
                         <button
                           className="px-4 py-1 bg-blue-900 text-white rounded-full text-xs font-semibold shadow hover:bg-blue-800 transition"
