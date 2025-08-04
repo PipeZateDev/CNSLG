@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useState, useEffect, useMemo } from 'react';
 import { usePathname } from 'next/navigation';
+import React from 'react';
 
 export default function Nosotros() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
