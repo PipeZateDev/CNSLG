@@ -34,6 +34,9 @@ export default function Admin() {
   const [multiLinks, setMultiLinks] = useState<string>('');
   const [multiGroup, setMultiGroup] = useState('');
 
+  // Nuevo estado para subir múltiples links en noticias
+  const [multiNewsLinks, setMultiNewsLinks] = useState<string>('');
+
   // Modal state
   const [isModalOpen, setIsModalOpen] = useState(true);
   const [username, setUsername] = useState('');
@@ -47,7 +50,7 @@ export default function Admin() {
       .then(data => setBannerImages(Array.isArray(data) ? [...data].sort((a, b) => (a.orden ?? 0) - (b.orden ?? 0)) : []));
     fetch('/api/news')
       .then(res => res.json())
-      .then(data => setNews(Array.isArray(data) ? [...data].sort((a, b) => (a.orden ?? 0) - (b.orden ?? 0)) : []));
+      .then(data => setNews(Array.isArray(data) ? [...data].sort((a, b) => (a.orden ?? 0) - (b.orden ?? 0)) : [])); // <-- corregido: faltaba 'data =>'
     fetch('/api/gallery')
       .then(res => res.json())
       .then(data => setGallery(Array.isArray(data) ? [...data].sort((a, b) => (a.orden ?? 0) - (b.orden ?? 0)) : []));
@@ -158,8 +161,28 @@ export default function Admin() {
   const handleNewsChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setNewsForm({ ...newsForm, [e.target.name]: e.target.value });
   };
+  const handleMultiNewsLinksChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setMultiNewsLinks(e.target.value);
+  };
   const handleNewsSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    // Si hay links múltiples, procesar como grupo de imágenes en la noticia
+    if (multiNewsLinks.trim()) {
+      const linksArr = multiNewsLinks.split('\n').map(l => l.trim()).filter(Boolean);
+      if (linksArr.length === 0) return;
+      const newItems = linksArr.map(link => ({
+        Titulo: newsForm.Titulo,
+        Descripción: newsForm.Descripción,
+        fecha: newsForm.fecha,
+        link
+      }));
+      setNews([...newItems, ...news]);
+      setMultiNewsLinks('');
+      setNewsForm({ Titulo: '', Descripción: '', fecha: '', link: '' });
+      setEditNewsIdx(null);
+      return;
+    }
+    // Individual
     if (!newsForm.Titulo || !newsForm.fecha || !newsForm.Descripción || !newsForm.link) return;
     if (editNewsIdx !== null) {
       setNews(news.map((item, idx) => idx === editNewsIdx ? { ...newsForm } : item));
@@ -612,19 +635,29 @@ export default function Admin() {
                     />
                   </div>
                   <div className="mb-4">
+                    <textarea
+                      name="multiNewsLinks"
+                      value={multiNewsLinks}
+                      onChange={handleMultiNewsLinksChange}
+                      placeholder="Pega aquí varios links de imágenes (uno por línea) para agregar varias fotos a la noticia"
+                      className="w-full px-4 py-2 rounded border border-gray-300"
+                      rows={3}
+                    />
+                    <div className="text-xs text-gray-500 mt-1">Si usas este campo, se ignorará el campo de link individual.</div>
+                  </div>
+                  <div className="mb-4">
                     <input
                       type="text"
                       name="link"
                       value={newsForm.link}
                       onChange={handleNewsChange}
-                      placeholder="URL de la imagen"
+                      placeholder="URL de la imagen (individual)"
                       className="w-full px-4 py-2 rounded border border-gray-300"
-                      required
                     />
                   </div>
                   <div className="flex gap-2">
                     <button type="submit" className="px-6 py-2 bg-blue-900 text-white rounded-full font-semibold hover:bg-blue-800 transition-colors">
-                      {editNewsIdx !== null ? 'Guardar Cambios' : 'Agregar Noticia'}
+                      {editNewsIdx !== null ? 'Guardar Cambios' : 'Agregar Noticia(s)'}
                     </button>
                     {editNewsIdx !== null && (
                       <button type="button" onClick={handleCancelEditNews} className="px-6 py-2 bg-gray-400 text-white rounded-full font-semibold hover:bg-gray-500 transition-colors">
