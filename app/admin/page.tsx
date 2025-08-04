@@ -973,15 +973,28 @@ export default function Admin() {
             <div>
               {/* ...existing enlaces rápidos... */}
             </div>
-            {/* Sección eliminada: Servicios */}
+            {/* Columna de dirección, teléfono y horarios */}
+            <div>
+              <h4 className="font-semibold mb-4">Contacto</h4>
+              <div className="space-y-2 text-sm text-gray-400">
+                <div>
+                  <span className="font-bold text-white">Dirección:</span><br />
+                  Carrera 92 #151b 61
+                </div>
+                <div>
+                  <span className="font-bold text-white">Teléfonos:</span><br />
+                  Línea Principal: (601) 7447473<br />
+                  WhatsApp: +57 318 336 5700
+                </div>
+                <div>
+                  <span className="font-bold text-white">Horarios de Atención:</span><br />
+                  Lunes a Viernes: 7:00 AM - 5:00 PM<br />
+                  Sábados: Cerrado
+                </div>
+              </div>
+            </div>
             <div>
               {/* ...existing plataformas... */}
-            </div>
-            {/* Nueva sección: Ingresa como Administrador */}
-            <div className="flex flex-col justify-center items-center">
-              <Link href="/admin" className="text-blue-400 hover:text-white font-semibold underline text-sm transition-colors cursor-pointer">
-                Ingresa como Administrador
-              </Link>
             </div>
           </div>
           <div className="border-t border-gray-800 mt-8 pt-8 text-center">
