@@ -314,6 +314,7 @@ export default function Nosotros() {
                       src={imgs[0].link}
                       alt={imgs[0].Titulo || `Imagen ${typeof imgs[0].orden === 'number' ? imgs[0].orden + 1 : idx + 1}`}
                       className="w-full h-64 object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                      onClick={e => { e.stopPropagation(); openModal(imgs, 0); }}
                     />
                     <div className="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/20 transition-colors duration-300"></div>
                     <div className="text-center py-2 font-semibold text-blue-900 bg-white/80">{imgs[0].Titulo}</div>
@@ -321,7 +322,10 @@ export default function Nosotros() {
                 ) : (
                   // Grupo de imágenes: solo muestra la primera y "ver más"
                   <div className="rounded-lg shadow-lg bg-gray-50 p-2">
-                    <div className="text-center font-bold text-blue-900 mb-2">{groupKey}</div>
+                    {/* Elimina el nombre del grupo si es 'PruebaGrupo' */}
+                    {groupKey !== 'PruebaGrupo' && (
+                      <div className="text-center font-bold text-blue-900 mb-2">{groupKey}</div>
+                    )}
                     <div
                       className="group relative overflow-hidden rounded-lg cursor-pointer"
                       onClick={() => openModal(imgs, 0)}
@@ -330,10 +334,12 @@ export default function Nosotros() {
                         src={imgs[0].link}
                         alt={imgs[0].Titulo || `Imagen ${typeof imgs[0].orden === 'number' ? imgs[0].orden + 1 : idx + 1}`}
                         className="w-full h-64 object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                        onClick={e => { e.stopPropagation(); openModal(imgs, 0); }}
                       />
                       <div className="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/20 transition-colors duration-300"></div>
                       <div className="text-center py-2 font-semibold text-blue-900 bg-white/80">{imgs[0].Titulo}</div>
-                      <div className="absolute bottom-6 left-1/2 -translate-x-1/2">
+                      {/* Botón ver más subido un 30% */}
+                      <div className="absolute" style={{ bottom: '38%', left: '50%', transform: 'translateX(-50%)' }}>
                         <button
                           className="px-4 py-1 bg-blue-900 text-white rounded-full text-xs font-semibold shadow hover:bg-blue-800 transition"
                           onClick={(e) => { e.stopPropagation(); openModal(imgs, 0); }}
