@@ -356,8 +356,8 @@ export default function Nosotros() {
             tabIndex={-1}
           >
             <div
-              className="relative w-[80vw] max-w-[80vw] mx-4 bg-white rounded-lg shadow-lg flex flex-col items-center"
-              style={{ maxHeight: '80vh' }}
+              className="relative w-[90vw] max-w-[90vw] mx-4 bg-white rounded-lg shadow-lg flex flex-col items-center"
+              style={{ maxHeight: '90vh' }}
               onClick={e => e.stopPropagation()}
             >
               <button
