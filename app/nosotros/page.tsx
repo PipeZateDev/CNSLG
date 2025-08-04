@@ -16,7 +16,7 @@ export default function Nosotros() {
       .then(res => res.json())
       .then(data => {
         if (Array.isArray(data)) {
-          setGallery([...data].sort((a, b) => (a.orden ?? 0) - (b.orden ?? 0)));
+          setGallery([...data].sort((a, b) => (a.orden ?? 0) - (b.orden ?? 0)));                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
         } else {
           setGallery([]);
         }
