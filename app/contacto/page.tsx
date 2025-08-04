@@ -466,17 +466,16 @@ export default function Contacto() {
                 </li>
               </ul>
             </div>
-            <div className="flex flex-col justify-center items-center">
-              {/* Nueva sección: Ingresa como Administrador */}
-              <Link href="/admin" className="text-blue-400 hover:text-white font-semibold underline text-sm transition-colors cursor-pointer">
-                Ingresa como Administrador
-              </Link>
-            </div>
           </div>
           <div className="border-t border-gray-800 mt-8 pt-8 text-center">
             <p className="text-gray-400 text-sm">
               © 2025 Colegio Nuevo San Luis Gonzaga. Todos los derechos reservados.
             </p>
+            <div className="mt-2">
+              <Link href="/admin" className="text-blue-400 hover:text-white font-semibold underline text-sm transition-colors cursor-pointer">
+                Ingresa como Administrador
+              </Link>
+            </div>
           </div>
         </div>
       </footer>
