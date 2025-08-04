@@ -405,26 +405,6 @@ export default function Admisiones() {
                 <li><Link href="/contacto" className="hover:text-white">Contacto</Link></li>
               </ul>
             </div>
-            {/* Columna de dirección, teléfono y horarios */}
-            <div>
-              <h4 className="font-semibold mb-4">Contacto</h4>
-              <div className="space-y-2 text-sm text-gray-400">
-                <div>
-                  <span className="font-bold text-white">Dirección:</span><br />
-                  Carrera 92 #151b 61
-                </div>
-                <div>
-                  <span className="font-bold text-white">Teléfonos:</span><br />
-                  Línea Principal: (601) 7447473<br />
-                  WhatsApp: +57 318 336 5700
-                </div>
-                <div>
-                  <span className="font-bold text-white">Horarios de Atención:</span><br />
-                  Lunes a Viernes: 7:00 AM - 5:00 PM<br />
-                  Sábados: Cerrado
-                </div>
-              </div>
-            </div>
             <div>
               <h4 className="font-semibold mb-4">Plataformas</h4>
               <div className="space-y-2">
@@ -437,6 +417,23 @@ export default function Admisiones() {
                 <a href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=12695&searchedCategoryId=&searchedAgreementName=PEDAGOGICOS%20ASOCIADOS%20SAS" target="_blank" rel="noopener noreferrer" className="block text-sm text-gray-400 hover:text-white">
                   PSE - Pagos en Línea
                 </a>
+              </div>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-4">Contacto</h4>
+              <div className="space-y-2 text-sm text-gray-400">
+                <div>
+                  <span className="font-bold text-white">Dirección:</span><br />
+                  Carrera 92 #151b 61
+                </div>
+                <div>
+                  <span className="font-bold text-white">WhatsApp:</span><br />
+                  +57 318 336 5700
+                </div>
+                <div>
+                  <span className="font-bold text-white">Horarios de Atención:</span><br />
+                  Lunes a Viernes: 7:00 AM - 5:00 PM
+                </div>
               </div>
             </div>
           </div>

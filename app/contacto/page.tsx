@@ -430,7 +430,35 @@ export default function Contacto() {
                 </li>
               </ul>
             </div>
-            {/* Columna de dirección, teléfono y horarios */}
+            <div>
+              <h4 className="font-semibold mb-4">Plataformas</h4>
+              <div className="space-y-2">
+                <a 
+                  href="https://lms30.uno-internacional.com/login/access" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-gray-300 hover:text-white transition-colors"
+                >
+                  UNOi Santillana
+                </a>
+                <a 
+                  href="https://www.cibercolegios.com/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-gray-300 hover:text-white transition-colors"
+                >
+                  Cibercolegios
+                </a>
+                <a 
+                  href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=12695&searchedCategoryId=&searchedAgreementName=PEDAGOGICOS%20ASOCIADOS%20SAS" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-gray-300 hover:text-white transition-colors"
+                >
+                  Pagos PSE
+                </a>
+              </div>
+            </div>
             <div>
               <h4 className="font-semibold mb-4">Contacto</h4>
               <div className="space-y-2 text-sm text-gray-400">
@@ -439,52 +467,14 @@ export default function Contacto() {
                   Carrera 92 #151b 61
                 </div>
                 <div>
-                  <span className="font-bold text-white">Teléfonos:</span><br />
-                  Línea Principal: (601) 7447473<br />
-                  WhatsApp: +57 318 336 5700
+                  <span className="font-bold text-white">WhatsApp:</span><br />
+                  +57 318 336 5700
                 </div>
                 <div>
                   <span className="font-bold text-white">Horarios de Atención:</span><br />
-                  Lunes a Viernes: 7:00 AM - 5:00 PM<br />
-                  Sábados: Cerrado
+                  Lunes a Viernes: 7:00 AM - 5:00 PM
                 </div>
               </div>
-            </div>
-            <div>
-              {/* Plataformas educativas */}
-              <h4 className="font-semibold text-blue-400 mb-4">Plataformas Educativas</h4>
-              <ul className="space-y-2 text-sm">
-                <li>
-                  <a 
-                    href="https://lms30.uno-internacional.com/login/access" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-gray-300 hover:text-white transition-colors"
-                  >
-                    UNOi Santillana
-                  </a>
-                </li>
-                <li>
-                  <a 
-                    href="https://www.cibercolegios.com/" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-gray-300 hover:text-white transition-colors"
-                  >
-                    Cibercolegios
-                  </a>
-                </li>
-                <li>
-                  <a 
-                    href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=12695&searchedCategoryId=&searchedAgreementName=PEDAGOGICOS%20ASOCIADOS%20SAS" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-gray-300 hover:text-white transition-colors"
-                  >
-                    Pagos PSE
-                  </a>
-                </li>
-              </ul>
             </div>
           </div>
           <div className="border-t border-gray-800 mt-8 pt-8 text-center">
