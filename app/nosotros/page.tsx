@@ -333,7 +333,7 @@ export default function Nosotros() {
                       />
                       <div className="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/20 transition-colors duration-300"></div>
                       <div className="text-center py-2 font-semibold text-blue-900 bg-white/80">{imgs[0].Titulo}</div>
-                      <div className="absolute bottom-2 right-2">
+                      <div className="absolute bottom-6 left-1/2 -translate-x-1/2">
                         <button
                           className="px-4 py-1 bg-blue-900 text-white rounded-full text-xs font-semibold shadow hover:bg-blue-800 transition"
                           onClick={(e) => { e.stopPropagation(); openModal(imgs, 0); }}
