@@ -301,107 +301,114 @@ export default function Nosotros() {
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <h2 className="text-3xl font-bold text-blue-900 mb-8 text-center">Galería de Imágenes</h2>
-          <div className="flex flex-col items-center">
-            <div className="w-full bg-gray-100 rounded-xl shadow-lg p-8" style={{ minHeight: 400 }}>
-              {/* Galería principal tipo "visor" */}
-              <div className="w-full h-[400px] bg-white rounded-lg flex items-center justify-center mb-8" style={{ minHeight: 320 }}>
-                {/* Imagen principal (la primera del grupo o individual) */}
-                {gallery.length > 0 && (
-                  <img
-                    src={gallery[0].link}
-                    alt={gallery[0].Titulo || ''}
-                    className="object-contain h-full w-full rounded-lg"
-                    style={{ maxHeight: 380, maxWidth: '100%' }}
-                    onClick={() => openModal([gallery[0]], 0)}
-                  />
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            {Object.entries(groupedGallery).map(([groupKey, imgs], idx) => (
+              <div key={groupKey} className="col-span-1 md:col-span-1 flex flex-col h-full">
+                {groupKey.startsWith('__single_') ? (
+                  // Imagen individual
+                  <div
+                    className="group relative overflow-hidden rounded-lg shadow-lg cursor-pointer flex flex-col h-full"
+                    style={{ minHeight: 320, height: '100%' }}
+                    onClick={() => openModal(imgs, 0)}
+                  >
+                    <img 
+                      src={imgs[0].link}
+                      alt={imgs[0].Titulo || `Imagen ${typeof imgs[0].orden === 'number' ? imgs[0].orden + 1 : idx + 1}`}
+                      className="w-full h-64 object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                      style={{ minHeight: 256, maxHeight: 256 }}
+                      onClick={e => { e.stopPropagation(); openModal(imgs, 0); }}
+                    />
+                    <div className="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/20 transition-colors duration-300"></div>
+                    <div className="text-center py-2 font-semibold text-blue-900 bg-white/80">{imgs[0].Titulo}</div>
+                  </div>
+                ) : (
+                  // Grupo de imágenes: solo muestra la primera y "ver más"
+                  <div className="rounded-lg shadow-lg bg-gray-50 p-2 flex flex-col h-full">
+                    {groupKey !== 'PruebaGrupo' && (
+                      <div className="text-center font-bold text-blue-900 mb-2">{groupKey}</div>
+                    )}
+                    <div
+                      className="group relative overflow-hidden rounded-lg cursor-pointer flex flex-col h-full"
+                      style={{ minHeight: 320, height: '100%' }}
+                      onClick={() => openModal(imgs, 0)}
+                    >
+                      <img 
+                        src={imgs[0].link}
+                        alt={imgs[0].Titulo || `Imagen ${typeof imgs[0].orden === 'number' ? imgs[0].orden + 1 : idx + 1}`}
+                        className="w-full h-64 object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                        style={{ minHeight: 256, maxHeight: 256 }}
+                        onClick={e => { e.stopPropagation(); openModal(imgs, 0); }}
+                      />
+                      <div className="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/20 transition-colors duration-300"></div>
+                      <div className="text-center py-2 font-semibold text-blue-900 bg-white/80">{imgs[0].Titulo}</div>
+                      <div className="absolute" style={{ bottom: '38%', left: '50%', transform: 'translateX(-50%)' }}>
+                        <button
+                          className="px-4 py-1 bg-blue-900 text-white rounded-full text-xs font-semibold shadow hover:bg-blue-800 transition"
+                          onClick={(e) => { e.stopPropagation(); openModal(imgs, 0); }}
+                        >
+                          Ver más
+                        </button>
+                      </div>
+                    </div>
+                  </div>
                 )}
               </div>
-              {/* Miniaturas abajo, alineadas y con paginación si hay más de 4 */}
-              <div className="flex gap-4 justify-center">
-                {gallery.slice(0, 5).map((img, idx) => (
-                  <div
-                    key={img.link + idx}
-                    className="w-24 h-20 bg-white rounded-lg shadow cursor-pointer flex flex-col items-center justify-center border border-gray-200 hover:border-blue-900 transition"
-                    style={{ minWidth: 80, minHeight: 60 }}
-                    onClick={() => openModal([img], 0)}
+            ))}
+          </div>
+        </div>
+        {/* Modal para visualizar imagen */}
+        {modalOpen && (
+          <div
+            className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center"
+            onClick={closeModal}
+            tabIndex={-1}
+          >
+            <div
+              className="relative w-[80vw] max-w-[80vw] mx-4 bg-white rounded-lg shadow-lg flex flex-col items-center"
+              style={{ maxHeight: '80vh' }}
+              onClick={e => e.stopPropagation()}
+            >
+              <button
+                className="absolute top-2 right-2 text-2xl text-blue-900 bg-white rounded-full px-2 py-1 shadow hover:bg-blue-100"
+                onClick={closeModal}
+                aria-label="Cerrar"
+              >
+                &times;
+              </button>
+              <div className="flex items-center justify-between w-full mt-8 mb-4 px-4">
+                {modalImages.length > 1 && (
+                  <button
+                    className="text-2xl text-blue-900 bg-white rounded-full px-2 py-1 shadow hover:bg-blue-100"
+                    onClick={prevModalImage}
+                    aria-label="Anterior"
                   >
-                    <img
-                      src={img.link}
-                      alt={img.Titulo || ''}
-                      className="object-cover w-full h-full rounded"
-                      style={{ maxHeight: 60, maxWidth: 80 }}
-                    />
-                    <div className="text-xs text-blue-900 mt-1 truncate w-full text-center">{img.Titulo}</div>
-                  </div>
-                ))}
-                {/* Si hay más imágenes, muestra un botón "+" */}
-                {gallery.length > 5 && (
-                  <div className="w-24 h-20 flex items-center justify-center">
-                    <button
-                      className="w-12 h-12 rounded-lg bg-blue-900 text-white text-2xl font-bold shadow hover:bg-blue-800 transition"
-                      onClick={() => openModal(gallery, 0)}
-                    >
-                      +
-                    </button>
-                  </div>
+                    &#8592;
+                  </button>
                 )}
+                <div className="flex-1 flex justify-center">
+                  <img
+                    src={modalImages[modalIndex].link}
+                    alt={modalImages[modalIndex].Titulo || ''}
+                    className="max-h-[65vh] w-auto rounded-lg"
+                    style={{ objectFit: 'contain', maxWidth: '100%' }}
+                  />
+                </div>
+                {modalImages.length > 1 && (
+                  <button
+                    className="text-2xl text-blue-900 bg-white rounded-full px-2 py-1 shadow hover:bg-blue-100"
+                    onClick={nextModalImage}
+                    aria-label="Siguiente"
+                  >
+                    &#8594;
+                  </button>
+                )}
+              </div>
+              <div className="text-center font-semibold text-blue-900 mb-6 px-4">
+                {modalImages[modalIndex].Titulo}
               </div>
             </div>
           </div>
-          {/* Modal para visualizar imagen */}
-          {modalOpen && (
-            <div
-              className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center"
-              onClick={closeModal}
-              tabIndex={-1}
-            >
-              <div
-                className="relative w-[80vw] max-w-[80vw] mx-4 bg-white rounded-lg shadow-lg flex flex-col items-center"
-                style={{ maxHeight: '80vh' }}
-                onClick={e => e.stopPropagation()}
-              >
-                <button
-                  className="absolute top-2 right-2 text-2xl text-blue-900 bg-white rounded-full px-2 py-1 shadow hover:bg-blue-100"
-                  onClick={closeModal}
-                  aria-label="Cerrar"
-                >
-                  &times;
-                </button>
-                <div className="flex items-center justify-between w-full mt-8 mb-4 px-4">
-                  {modalImages.length > 1 && (
-                    <button
-                      className="text-2xl text-blue-900 bg-white rounded-full px-2 py-1 shadow hover:bg-blue-100"
-                      onClick={prevModalImage}
-                      aria-label="Anterior"
-                    >
-                      &#8592;
-                    </button>
-                  )}
-                  <div className="flex-1 flex justify-center">
-                    <img
-                      src={modalImages[modalIndex].link}
-                      alt={modalImages[modalIndex].Titulo || ''}
-                      className="max-h-[65vh] w-auto rounded-lg"
-                      style={{ objectFit: 'contain', maxWidth: '100%' }}
-                    />
-                  </div>
-                  {modalImages.length > 1 && (
-                    <button
-                      className="text-2xl text-blue-900 bg-white rounded-full px-2 py-1 shadow hover:bg-blue-100"
-                      onClick={nextModalImage}
-                      aria-label="Siguiente"
-                    >
-                      &#8594;
-                    </button>
-                  )}
-                </div>
-                <div className="text-center font-semibold text-blue-900 mb-6 px-4">
-                  {modalImages[modalIndex].Titulo}
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
+        )}
       </section>
 
       {/* Floating Social Media Buttons */}
