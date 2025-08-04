@@ -325,6 +325,18 @@ export default function Admin() {
     return acc;
   }, {});
 
+  // Agrupa las noticias por título
+  const groupedNews = news.reduce<{ [key: string]: NewsItem[] }>((acc, item) => {
+    const key = item.Titulo || '';
+    if (!key || news.filter(n => n.Titulo === key).length === 1) {
+      acc[`__single_${item.orden ?? 0}_${item.link}`] = [item];
+    } else {
+      if (!acc[key]) acc[key] = [];
+      acc[key].push(item);
+    }
+    return acc;
+  }, {});
+
   return (
     <div className="min-h-screen bg-white">
       {/* Modal de validación */}
@@ -672,47 +684,109 @@ export default function Admin() {
                 >
                   Guardar cambios
                 </button>
-                <div className="grid md:grid-cols-3 gap-8">
-                  {news.map((item, idx) => (
-                    <div
-                      key={idx}
-                      className={`bg-white rounded-lg shadow-lg overflow-hidden relative ${draggedNewsIdx === idx ? 'opacity-60' : ''} cursor-move`}
-                      draggable
-                      onDragStart={() => handleNewsDragStart(idx)}
-                      onDragEnter={() => handleNewsDragEnter(idx)}
-                      onDragEnd={handleNewsDragEnd}
-                      onDrop={handleNewsDragEnd}
-                      onDragOver={e => e.preventDefault()}
-                      style={{ cursor: 'grab' }}
-                    >
-                      {/* Número de orden */}
-                      <div className="absolute top-2 left-1/2 -translate-x-1/2 bg-blue-900 text-white rounded-full px-3 py-1 text-xs font-bold z-10 shadow">
-                        {idx + 1}
-                      </div>
-                      <img 
-                        src={item.link}
-                        alt={item.Titulo}
-                        className="w-full h-48 object-cover object-top"
-                      />
-                      <button
-                        onClick={() => removeNews(idx)}
-                        className="absolute top-2 right-2 bg-red-600 text-white rounded-full px-2 py-1 text-xs"
-                      >
-                        Eliminar
-                      </button>
-                      <button
-                        onClick={() => handleEditNews(idx)}
-                        className="absolute top-2 left-2 bg-yellow-500 text-white rounded-full px-2 py-1 text-xs"
-                      >
-                        Editar
-                      </button>
-                      <div className="p-6">
-                        <span className="text-sm text-blue-600 font-semibold">{item.fecha}</span>
-                        <h3 className="text-lg font-bold text-blue-900 mb-2 mt-1">{item.Titulo}</h3>
-                        <p className="text-gray-600 text-sm">{item.Descripción}</p>
+                {/* Mostrar noticias agrupadas por título */}
+                <div className="space-y-8">
+                  {/* Sección para noticias individuales (sin grupo) */}
+                  {Object.entries(groupedNews)
+                    .filter(([groupKey]) => groupKey.startsWith('__single_'))
+                    .length > 0 && (
+                    <div>
+                      <div className="mb-2 text-blue-900 font-bold text-center">Noticias individuales</div>
+                      <div className="grid md:grid-cols-3 gap-8">
+                        {Object.entries(groupedNews)
+                          .filter(([groupKey]) => groupKey.startsWith('__single_'))
+                          .flatMap(([_, items]) => items)
+                          .map((item, idx) => (
+                            <div
+                              key={idx}
+                              className={`bg-white rounded-lg shadow-lg overflow-hidden relative cursor-move`}
+                              draggable
+                              onDragStart={() => handleNewsDragStart(news.indexOf(item))}
+                              onDragEnter={() => handleNewsDragEnter(news.indexOf(item))}
+                              onDragEnd={handleNewsDragEnd}
+                              onDrop={handleNewsDragEnd}
+                              onDragOver={e => e.preventDefault()}
+                              style={{ cursor: 'grab' }}
+                            >
+                              <div className="absolute top-2 left-1/2 -translate-x-1/2 bg-blue-900 text-white rounded-full px-3 py-1 text-xs font-bold z-10 shadow">
+                                {news.indexOf(item) + 1}
+                              </div>
+                              <img 
+                                src={item.link}
+                                alt={item.Titulo}
+                                className="w-full h-48 object-cover object-top"
+                              />
+                              <button
+                                onClick={() => removeNews(news.indexOf(item))}
+                                className="absolute top-2 right-2 bg-red-600 text-white rounded-full px-2 py-1 text-xs"
+                              >
+                                Eliminar
+                              </button>
+                              <button
+                                onClick={() => handleEditNews(news.indexOf(item))}
+                                className="absolute top-2 left-2 bg-yellow-500 text-white rounded-full px-2 py-1 text-xs"
+                              >
+                                Editar
+                              </button>
+                              <div className="p-6">
+                                <span className="text-sm text-blue-600 font-semibold">{item.fecha}</span>
+                                <h3 className="text-lg font-bold text-blue-900 mb-2 mt-1">{item.Titulo}</h3>
+                                <p className="text-gray-600 text-sm">{item.Descripción}</p>
+                              </div>
+                            </div>
+                          ))}
                       </div>
                     </div>
-                  ))}
+                  )}
+                  {/* Sección para grupos de noticias con el mismo título */}
+                  {Object.entries(groupedNews)
+                    .filter(([groupKey]) => !groupKey.startsWith('__single_'))
+                    .map(([groupKey, items], idx) => (
+                      <div key={groupKey}>
+                        <div className="mb-2 text-blue-900 font-bold text-center">{groupKey}</div>
+                        <div className="flex overflow-x-auto gap-4 pb-2">
+                          {items.map((item, i) => (
+                            <div
+                              key={i}
+                              className={`bg-white rounded-lg shadow-lg overflow-hidden relative min-w-[220px] max-w-[260px] cursor-move`}
+                              draggable
+                              onDragStart={() => handleNewsDragStart(news.indexOf(item))}
+                              onDragEnter={() => handleNewsDragEnter(news.indexOf(item))}
+                              onDragEnd={handleNewsDragEnd}
+                              onDrop={handleNewsDragEnd}
+                              onDragOver={e => e.preventDefault()}
+                              style={{ cursor: 'grab' }}
+                            >
+                              <div className="absolute top-2 left-1/2 -translate-x-1/2 bg-blue-900 text-white rounded-full px-3 py-1 text-xs font-bold z-10 shadow">
+                                {news.indexOf(item) + 1}
+                              </div>
+                              <img 
+                                src={item.link}
+                                alt={item.Titulo}
+                                className="w-full h-48 object-cover object-top"
+                              />
+                              <button
+                                onClick={() => removeNews(news.indexOf(item))}
+                                className="absolute top-2 right-2 bg-red-600 text-white rounded-full px-2 py-1 text-xs"
+                              >
+                                Eliminar
+                              </button>
+                              <button
+                                onClick={() => handleEditNews(news.indexOf(item))}
+                                className="absolute top-2 left-2 bg-yellow-500 text-white rounded-full px-2 py-1 text-xs"
+                              >
+                                Editar
+                              </button>
+                              <div className="p-6">
+                                <span className="text-sm text-blue-600 font-semibold">{item.fecha}</span>
+                                <h3 className="text-lg font-bold text-blue-900 mb-2 mt-1">{item.Titulo}</h3>
+                                <p className="text-gray-600 text-sm">{item.Descripción}</p>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
                 </div>
               </div>
               {/* Gallery Management */}
