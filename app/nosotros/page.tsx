@@ -356,7 +356,11 @@ export default function Nosotros() {
             tabIndex={-1}
           >
             <div
+<<<<<<< HEAD
               className="relative w-[90vw] max-w-[90vw] mx-4 bg-white rounded-lg shadow-lg flex flex-col items-center"
+=======
+              className="relative max-w-3xl w-full mx-4 bg-white rounded-lg shadow-lg flex flex-col items-center"
+>>>>>>> parent of 4241aef (modalGaleriaTamaño)
               style={{ maxHeight: '90vh' }}
               onClick={e => e.stopPropagation()}
             >
@@ -382,7 +386,7 @@ export default function Nosotros() {
                   <img
                     src={modalImages[modalIndex].link}
                     alt={modalImages[modalIndex].Titulo || ''}
-                    className="max-h-[65vh] w-auto rounded-lg"
+                    className="max-h-[70vh] w-auto rounded-lg"
                     style={{ objectFit: 'contain', maxWidth: '100%' }}
                   />
                 </div>
