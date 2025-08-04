@@ -24,11 +24,15 @@ export default function Admin() {
   const [draggedNewsIdx, setDraggedNewsIdx] = useState<number | null>(null);
 
   // Gallery state
-  type GalleryItem = { Titulo: string; Descripción: string; fecha: string; link: string; orden?: number };
+  type GalleryItem = { Titulo: string; Descripción: string; fecha: string; link: string; orden?: number; grupo?: string };
   const [gallery, setGallery] = useState<GalleryItem[]>([]);
-  const [galleryForm, setGalleryForm] = useState({ Titulo: '', Descripción: '', fecha: '', link: '' });
+  const [galleryForm, setGalleryForm] = useState({ Titulo: '', Descripción: '', fecha: '', link: '', grupo: '' });
   const [editGalleryIdx, setEditGalleryIdx] = useState<number | null>(null);
   const [draggedGalleryIdx, setDraggedGalleryIdx] = useState<number | null>(null);
+
+  // Nuevo estado para subir múltiples links y grupo
+  const [multiLinks, setMultiLinks] = useState<string>('');
+  const [multiGroup, setMultiGroup] = useState('');
 
   // Modal state
   const [isModalOpen, setIsModalOpen] = useState(true);
@@ -193,8 +197,33 @@ export default function Admin() {
   const handleGalleryChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setGalleryForm({ ...galleryForm, [e.target.name]: e.target.value });
   };
+  const handleMultiLinksChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setMultiLinks(e.target.value);
+  };
+  const handleMultiGroupChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setMultiGroup(e.target.value);
+  };
   const handleGallerySubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    // Si hay links múltiples, procesar como grupo
+    if (multiLinks.trim()) {
+      const linksArr = multiLinks.split('\n').map(l => l.trim()).filter(Boolean);
+      if (linksArr.length === 0) return;
+      const newItems = linksArr.map(link => ({
+        Titulo: galleryForm.Titulo,
+        Descripción: galleryForm.Descripción,
+        fecha: galleryForm.fecha,
+        link,
+        grupo: multiGroup || galleryForm.grupo
+      }));
+      setGallery([...newItems, ...gallery]);
+      setMultiLinks('');
+      setMultiGroup('');
+      setGalleryForm({ Titulo: '', Descripción: '', fecha: '', link: '', grupo: '' });
+      setEditGalleryIdx(null);
+      return;
+    }
+    // Individual
     if (!galleryForm.link) return;
     if (editGalleryIdx !== null) {
       setGallery(gallery.map((img, idx) => idx === editGalleryIdx ? { ...galleryForm } : img));
@@ -202,14 +231,14 @@ export default function Admin() {
     } else {
       setGallery([{ ...galleryForm }, ...gallery]);
     }
-    setGalleryForm({ Titulo: '', Descripción: '', fecha: '', link: '' });
+    setGalleryForm({ Titulo: '', Descripción: '', fecha: '', link: '', grupo: '' });
   };
   const handleEditGallery = (idx: number) => {
     setGalleryForm(gallery[idx]);
     setEditGalleryIdx(idx);
   };
   const handleCancelEditGallery = () => {
-    setGalleryForm({ Titulo: '', Descripción: '', fecha: '', link: '' });
+    setGalleryForm({ Titulo: '', Descripción: '', fecha: '', link: '', grupo: '' });
     setEditGalleryIdx(null);
   };
   const removeGalleryImage = (idx: number) => {
@@ -640,12 +669,32 @@ export default function Admin() {
                   <div className="mb-4">
                     <input
                       type="text"
+                      name="grupo"
+                      value={multiGroup || galleryForm.grupo}
+                      onChange={handleMultiGroupChange}
+                      placeholder="Nombre del grupo (opcional)"
+                      className="w-full px-4 py-2 rounded border border-gray-300"
+                    />
+                  </div>
+                  <div className="mb-4">
+                    <textarea
+                      name="multiLinks"
+                      value={multiLinks}
+                      onChange={handleMultiLinksChange}
+                      placeholder="Pega aquí varios links de imágenes (uno por línea) para subir en grupo"
+                      className="w-full px-4 py-2 rounded border border-gray-300"
+                      rows={4}
+                    />
+                    <div className="text-xs text-gray-500 mt-1">Si usas este campo, se ignorará el campo de link individual.</div>
+                  </div>
+                  <div className="mb-4">
+                    <input
+                      type="text"
                       name="link"
                       value={galleryForm.link}
                       onChange={handleGalleryChange}
-                      placeholder="URL de la imagen"
+                      placeholder="URL de la imagen (individual)"
                       className="w-full px-4 py-2 rounded border border-gray-300"
-                      required
                     />
                   </div>
                   <div className="mb-4">
@@ -678,7 +727,7 @@ export default function Admin() {
                   </div>
                   <div className="flex gap-2">
                     <button type="submit" className="px-6 py-2 bg-blue-900 text-white rounded-full font-semibold hover:bg-blue-800 transition-colors">
-                      {editGalleryIdx !== null ? 'Guardar Cambios' : 'Agregar Imagen'}
+                      {editGalleryIdx !== null ? 'Guardar Cambios' : 'Agregar Imagen(es)'}
                     </button>
                     {editGalleryIdx !== null && (
                       <button type="button" onClick={handleCancelEditGallery} className="px-6 py-2 bg-gray-400 text-white rounded-full font-semibold hover:bg-gray-500 transition-colors">
@@ -710,6 +759,12 @@ export default function Admin() {
                       <div className="absolute top-2 left-1/2 -translate-x-1/2 bg-blue-900 text-white rounded-full px-3 py-1 text-xs font-bold z-10 shadow">
                         {idx + 1}
                       </div>
+                      {/* Grupo */}
+                      {img.grupo && (
+                        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-yellow-400 text-blue-900 rounded-full px-3 py-1 text-xs font-bold z-10 shadow">
+                          {img.grupo}
+                        </div>
+                      )}
                       <img src={img.link} alt={img.Titulo} className="w-full h-32 object-cover rounded" />
                       <button
                         onClick={() => removeGalleryImage(idx)}
