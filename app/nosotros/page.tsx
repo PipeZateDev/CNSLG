@@ -356,22 +356,8 @@ export default function Nosotros() {
             tabIndex={-1}
           >
             <div
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
               className="relative w-[90vw] max-w-[90vw] mx-4 bg-white rounded-lg shadow-lg flex flex-col items-center"
-=======
-              className="relative max-w-3xl w-full mx-4 bg-white rounded-lg shadow-lg flex flex-col items-center"
->>>>>>> parent of 4241aef (modalGaleriaTamaño)
               style={{ maxHeight: '90vh' }}
-=======
-              className="relative w-[80vw] max-w-[80vw] mx-4 bg-white rounded-lg shadow-lg flex flex-col items-center"
-              style={{ maxHeight: '80vh' }}
->>>>>>> parent of a4aa0f3 (modalGaleria90%)
-=======
-              className="relative w-[80vw] max-w-[80vw] mx-4 bg-white rounded-lg shadow-lg flex flex-col items-center"
-              style={{ maxHeight: '80vh' }}
->>>>>>> parent of a4aa0f3 (modalGaleria90%)
               onClick={e => e.stopPropagation()}
             >
               <button
@@ -381,11 +367,10 @@ export default function Nosotros() {
               >
                 &times;
               </button>
-              {/* Carrusel de imágenes */}
-              <div className="relative w-full flex items-center justify-center mt-8 mb-4 px-4">
+              <div className="flex items-center justify-between w-full mt-8 mb-4 px-4">
                 {modalImages.length > 1 && (
                   <button
-                    className="absolute left-0 top-1/2 -translate-y-1/2 text-3xl text-blue-900 bg-white rounded-full px-3 py-2 shadow hover:bg-blue-100 z-10"
+                    className="text-2xl text-blue-900 bg-white rounded-full px-2 py-1 shadow hover:bg-blue-100"
                     onClick={prevModalImage}
                     aria-label="Anterior"
                   >
@@ -396,31 +381,18 @@ export default function Nosotros() {
                   <img
                     src={modalImages[modalIndex].link}
                     alt={modalImages[modalIndex].Titulo || ''}
-                    className="max-h-[70vh] w-auto rounded-lg"
+                    className="max-h-[65vh] w-auto rounded-lg"
                     style={{ objectFit: 'contain', maxWidth: '100%' }}
                   />
                 </div>
                 {modalImages.length > 1 && (
                   <button
-                    className="absolute right-0 top-1/2 -translate-y-1/2 text-3xl text-blue-900 bg-white rounded-full px-3 py-2 shadow hover:bg-blue-100 z-10"
+                    className="text-2xl text-blue-900 bg-white rounded-full px-2 py-1 shadow hover:bg-blue-100"
                     onClick={nextModalImage}
                     aria-label="Siguiente"
                   >
                     &#8594;
                   </button>
-                )}
-                {/* Indicadores tipo carrusel */}
-                {modalImages.length > 1 && (
-                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2 z-20">
-                    {modalImages.map((_, i) => (
-                      <button
-                        key={i}
-                        onClick={() => setModalIndex(i)}
-                        className={`w-3 h-3 rounded-full transition-colors ${i === modalIndex ? 'bg-blue-900' : 'bg-blue-300'}`}
-                        aria-label={`Imagen ${i + 1}`}
-                      />
-                    ))}
-                  </div>
                 )}
               </div>
               <div className="text-center font-semibold text-blue-900 mb-6 px-4">
