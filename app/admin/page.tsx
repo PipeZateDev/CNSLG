@@ -290,6 +290,18 @@ export default function Admin() {
   const imgbbAlbum = "https://soporte-cnslg.imgbb.com/";
   const imgbbProfile = "https://PipeZate.imgbb.com/";
 
+  // Agrupa las imágenes por grupo
+  const groupedGallery = gallery.reduce<{ [key: string]: GalleryItem[] }>((acc, img) => {
+    const group = img.grupo || '';
+    if (!group) {
+      acc[`__single_${img.orden ?? 0}_${img.link}`] = [img];
+    } else {
+      if (!acc[group]) acc[group] = [];
+      acc[group].push(img);
+    }
+    return acc;
+  }, {});
+
   return (
     <div className="min-h-screen bg-white">
       {/* Modal de validación */}
@@ -750,46 +762,85 @@ export default function Admin() {
                 >
                   Guardar cambios
                 </button>
-                <div className="grid md:grid-cols-5 gap-4">
-                  {gallery.map((img, idx) => (
-                    <div
-                      key={idx}
-                      className={`bg-white rounded-lg shadow p-2 relative ${draggedGalleryIdx === idx ? 'opacity-60' : ''} cursor-move`}
-                      draggable
-                      onDragStart={() => handleGalleryDragStart(idx)}
-                      onDragEnter={() => handleGalleryDragEnter(idx)}
-                      onDragEnd={handleGalleryDragEnd}
-                      onDrop={handleGalleryDragEnd}
-                      onDragOver={e => e.preventDefault()}
-                      style={{ cursor: 'grab' }}
-                    >
-                      {/* Número de orden */}
-                      <div className="absolute top-2 left-1/2 -translate-x-1/2 bg-blue-900 text-white rounded-full px-3 py-1 text-xs font-bold z-10 shadow">
-                        {idx + 1}
+                {/* Mostrar imágenes agrupadas por grupo */}
+                <div className="space-y-8">
+                  {Object.entries(groupedGallery).map(([groupKey, imgs], idx) => (
+                    groupKey.startsWith('__single_') ? (
+                      <div key={groupKey} className="grid md:grid-cols-5 gap-4">
+                        {imgs.map((img, i) => (
+                          <div
+                            key={i}
+                            className={`bg-white rounded-lg shadow p-2 relative cursor-move`}
+                            draggable
+                            onDragStart={() => handleGalleryDragStart(gallery.indexOf(img))}
+                            onDragEnter={() => handleGalleryDragEnter(gallery.indexOf(img))}
+                            onDragEnd={handleGalleryDragEnd}
+                            onDrop={handleGalleryDragEnd}
+                            onDragOver={e => e.preventDefault()}
+                            style={{ cursor: 'grab' }}
+                          >
+                            <div className="absolute top-2 left-1/2 -translate-x-1/2 bg-blue-900 text-white rounded-full px-3 py-1 text-xs font-bold z-10 shadow">
+                              {gallery.indexOf(img) + 1}
+                            </div>
+                            <img src={img.link} alt={img.Titulo} className="w-full h-32 object-cover rounded" />
+                            <button
+                              onClick={() => removeGalleryImage(gallery.indexOf(img))}
+                              className="absolute top-2 right-2 bg-red-600 text-white rounded-full px-2 py-1 text-xs"
+                            >
+                              Eliminar
+                            </button>
+                            <button
+                              onClick={() => handleEditGallery(gallery.indexOf(img))}
+                              className="absolute top-2 left-2 bg-yellow-500 text-white rounded-full px-2 py-1 text-xs"
+                            >
+                              Editar
+                            </button>
+                            <div className="mt-2 text-sm text-center">
+                              <strong>{img.Titulo}</strong>
+                            </div>
+                          </div>
+                        ))}
                       </div>
-                      {/* Grupo */}
-                      {img.grupo && (
-                        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-yellow-400 text-blue-900 rounded-full px-3 py-1 text-xs font-bold z-10 shadow">
-                          {img.grupo}
+                    ) : (
+                      <div key={groupKey}>
+                        <div className="mb-2 text-blue-900 font-bold text-center">{groupKey}</div>
+                        <div className="flex overflow-x-auto gap-4 pb-2">
+                          {imgs.map((img, i) => (
+                            <div
+                              key={i}
+                              className={`bg-white rounded-lg shadow p-2 relative min-w-[180px] max-w-[220px] cursor-move`}
+                              draggable
+                              onDragStart={() => handleGalleryDragStart(gallery.indexOf(img))}
+                              onDragEnter={() => handleGalleryDragEnter(gallery.indexOf(img))}
+                              onDragEnd={handleGalleryDragEnd}
+                              onDrop={handleGalleryDragEnd}
+                              onDragOver={e => e.preventDefault()}
+                              style={{ cursor: 'grab' }}
+                            >
+                              <div className="absolute top-2 left-1/2 -translate-x-1/2 bg-blue-900 text-white rounded-full px-3 py-1 text-xs font-bold z-10 shadow">
+                                {gallery.indexOf(img) + 1}
+                              </div>
+                              <img src={img.link} alt={img.Titulo} className="w-full h-32 object-cover rounded" />
+                              <button
+                                onClick={() => removeGalleryImage(gallery.indexOf(img))}
+                                className="absolute top-2 right-2 bg-red-600 text-white rounded-full px-2 py-1 text-xs"
+                              >
+                                Eliminar
+                              </button>
+                              <button
+                                onClick={() => handleEditGallery(gallery.indexOf(img))}
+                                className="absolute top-2 left-2 bg-yellow-500 text-white rounded-full px-2 py-1 text-xs"
+                              >
+                                Editar
+                              </button>
+                              <div className="mt-2 text-sm text-center">
+                                <strong>{img.Titulo}</strong>
+                              </div>
+                            </div>
+                          ))}
                         </div>
-                      )}
-                      <img src={img.link} alt={img.Titulo} className="w-full h-32 object-cover rounded" />
-                      <button
-                        onClick={() => removeGalleryImage(idx)}
-                        className="absolute top-2 right-2 bg-red-600 text-white rounded-full px-2 py-1 text-xs"
-                      >
-                        Eliminar
-                      </button>
-                      <button
-                        onClick={() => handleEditGallery(idx)}
-                        className="absolute top-2 left-2 bg-yellow-500 text-white rounded-full px-2 py-1 text-xs"
-                      >
-                        Editar
-                      </button>
-                      <div className="mt-2 text-sm text-center">
-                        <strong>{img.Titulo}</strong>
                       </div>
-                    </div>
+                    )
                   ))}
                 </div>
               </div>
