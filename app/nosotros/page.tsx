@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { usePathname } from 'next/navigation';
 
 export default function Nosotros() {
@@ -51,6 +51,27 @@ export default function Nosotros() {
 
   const nextModalImage = () => setModalIndex((prev) => (prev + 1) % modalImages.length);
   const prevModalImage = () => setModalIndex((prev) => (prev - 1 + modalImages.length) % modalImages.length);
+
+  // Galería con paginación horizontal (escritorio: 5 columnas x 2 filas, 10 imágenes por página)
+  const IMAGES_PER_PAGE = 10;
+  const [galleryPage, setGalleryPage] = useState(0);
+
+  const flatGallery = useMemo(() => {
+    // Para paginación, solo mostrar la primera imagen de cada grupo y todas las individuales
+    return Object.entries(groupedGallery).map(([groupKey, imgs]) => ({
+      img: imgs[0],
+      isGroup: !groupKey.startsWith('__single_'),
+      groupKey,
+      groupImgs: imgs,
+    }));
+  }, [groupedGallery]);
+
+  const totalPages = Math.ceil(flatGallery.length / IMAGES_PER_PAGE);
+
+  const pagedGallery = flatGallery.slice(
+    galleryPage * IMAGES_PER_PAGE,
+    galleryPage * IMAGES_PER_PAGE + IMAGES_PER_PAGE
+  );
 
   return (
     <div className="min-h-screen bg-white">
@@ -301,114 +322,132 @@ export default function Nosotros() {
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <h2 className="text-3xl font-bold text-blue-900 mb-8 text-center">Galería de Imágenes</h2>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            {Object.entries(groupedGallery).map(([groupKey, imgs], idx) => (
-              <div key={groupKey} className="col-span-1 md:col-span-1 flex flex-col h-full">
-                {groupKey.startsWith('__single_') ? (
-                  // Imagen individual
-                  <div
-                    className="group relative overflow-hidden rounded-lg shadow-lg cursor-pointer flex flex-col h-full"
-                    style={{ minHeight: 320, height: '100%' }}
-                    onClick={() => openModal(imgs, 0)}
-                  >
-                    <img 
-                      src={imgs[0].link}
-                      alt={imgs[0].Titulo || `Imagen ${typeof imgs[0].orden === 'number' ? imgs[0].orden + 1 : idx + 1}`}
-                      className="w-full h-64 object-cover object-top group-hover:scale-105 transition-transform duration-300"
-                      style={{ minHeight: 256, maxHeight: 256 }}
-                      onClick={e => { e.stopPropagation(); openModal(imgs, 0); }}
-                    />
-                    <div className="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/20 transition-colors duration-300"></div>
-                    <div className="text-center py-2 font-semibold text-blue-900 bg-white/80">{imgs[0].Titulo}</div>
-                  </div>
-                ) : (
-                  // Grupo de imágenes: solo muestra la primera y "ver más"
-                  <div className="rounded-lg shadow-lg bg-gray-50 p-2 flex flex-col h-full">
-                    {groupKey !== 'PruebaGrupo' && (
-                      <div className="text-center font-bold text-blue-900 mb-2">{groupKey}</div>
-                    )}
-                    <div
-                      className="group relative overflow-hidden rounded-lg cursor-pointer flex flex-col h-full"
-                      style={{ minHeight: 320, height: '100%' }}
-                      onClick={() => openModal(imgs, 0)}
-                    >
-                      <img 
-                        src={imgs[0].link}
-                        alt={imgs[0].Titulo || `Imagen ${typeof imgs[0].orden === 'number' ? imgs[0].orden + 1 : idx + 1}`}
-                        className="w-full h-64 object-cover object-top group-hover:scale-105 transition-transform duration-300"
-                        style={{ minHeight: 256, maxHeight: 256 }}
-                        onClick={e => { e.stopPropagation(); openModal(imgs, 0); }}
-                      />
-                      <div className="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/20 transition-colors duration-300"></div>
-                      <div className="text-center py-2 font-semibold text-blue-900 bg-white/80">{imgs[0].Titulo}</div>
-                      <div className="absolute" style={{ bottom: '38%', left: '50%', transform: 'translateX(-50%)' }}>
-                        <button
-                          className="px-4 py-1 bg-blue-900 text-white rounded-full text-xs font-semibold shadow hover:bg-blue-800 transition"
-                          onClick={(e) => { e.stopPropagation(); openModal(imgs, 0); }}
-                        >
-                          Ver más
-                        </button>
-                      </div>
-                    </div>
-                  </div>
+          <div className="relative">
+      {/* Botones de navegación */}
+      {totalPages > 1 && (
+        <div className="flex justify-between mb-4">
+          <button
+            className="px-4 py-2 bg-blue-900 text-white rounded-full font-semibold hover:bg-blue-800 transition disabled:opacity-40"
+            onClick={() => setGalleryPage(p => Math.max(0, p - 1))}
+            disabled={galleryPage === 0}
+          >
+            &#8592; Anterior
+          </button>
+          <button
+            className="px-4 py-2 bg-blue-900 text-white rounded-full font-semibold hover:bg-blue-800 transition disabled:opacity-40"
+            onClick={() => setGalleryPage(p => Math.min(totalPages - 1, p + 1))}
+            disabled={galleryPage === totalPages - 1}
+          >
+            Siguiente &#8594;
+          </button>
+        </div>
+      )}
+      <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
+        {pagedGallery.map(({ img, isGroup, groupKey, groupImgs }, idx) => (
+          <div key={groupKey} className="col-span-1 md:col-span-1 flex flex-col h-full">
+            {isGroup ? (
+              <div className="rounded-lg shadow-lg bg-gray-50 p-2 flex flex-col h-full">
+                {groupKey !== 'PruebaGrupo' && (
+                  <div className="text-center font-bold text-blue-900 mb-2">{groupKey}</div>
                 )}
+                <div
+                  className="group relative overflow-hidden rounded-lg cursor-pointer flex flex-col h-full"
+                  style={{ minHeight: 320, height: '100%' }}
+                  onClick={() => openModal(groupImgs, 0)}
+                >
+                  <img 
+                    src={img.link}
+                    alt={img.Titulo || `Imagen`}
+                    className="w-full h-64 object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                    style={{ minHeight: 256, maxHeight: 256 }}
+                    onClick={e => { e.stopPropagation(); openModal(groupImgs, 0); }}
+                  />
+                  <div className="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/20 transition-colors duration-300"></div>
+                  <div className="text-center py-2 font-semibold text-blue-900 bg-white/80">{img.Titulo}</div>
+                  <div className="absolute" style={{ bottom: '38%', left: '50%', transform: 'translateX(-50%)' }}>
+                    <button
+                      className="px-4 py-1 bg-blue-900 text-white rounded-full text-xs font-semibold shadow hover:bg-blue-800 transition"
+                      onClick={(e) => { e.stopPropagation(); openModal(groupImgs, 0); }}
+                    >
+                      Ver más
+                    </button>
+                  </div>
+                </div>
               </div>
-            ))}
+            ) : (
+              <div
+                className="group relative overflow-hidden rounded-lg shadow-lg cursor-pointer flex flex-col h-full"
+                style={{ minHeight: 320, height: '100%' }}
+                onClick={() => openModal([img], 0)}
+              >
+                <img 
+                  src={img.link}
+                  alt={img.Titulo || `Imagen`}
+                  className="w-full h-64 object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                  style={{ minHeight: 256, maxHeight: 256 }}
+                  onClick={e => { e.stopPropagation(); openModal([img], 0); }}
+                />
+                <div className="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/20 transition-colors duration-300"></div>
+                <div className="text-center py-2 font-semibold text-blue-900 bg-white/80">{img.Titulo}</div>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+    {/* Modal para visualizar imagen */}
+    {modalOpen && (
+      <div
+        className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center"
+        onClick={closeModal}
+        tabIndex={-1}
+      >
+        <div
+          className="relative w-[80vw] max-w-[80vw] mx-4 bg-white rounded-lg shadow-lg flex flex-col items-center"
+          style={{ maxHeight: '80vh' }}
+          onClick={e => e.stopPropagation()}
+        >
+          <button
+            className="absolute top-2 right-2 text-2xl text-blue-900 bg-white rounded-full px-2 py-1 shadow hover:bg-blue-100"
+            onClick={closeModal}
+            aria-label="Cerrar"
+          >
+            &times;
+          </button>
+          <div className="flex items-center justify-between w-full mt-8 mb-4 px-4">
+            {modalImages.length > 1 && (
+              <button
+                className="text-2xl text-blue-900 bg-white rounded-full px-2 py-1 shadow hover:bg-blue-100"
+                onClick={prevModalImage}
+                aria-label="Anterior"
+              >
+                &#8592;
+              </button>
+            )}
+            <div className="flex-1 flex justify-center">
+              <img
+                src={modalImages[modalIndex].link}
+                alt={modalImages[modalIndex].Titulo || ''}
+                className="max-h-[65vh] w-auto rounded-lg"
+                style={{ objectFit: 'contain', maxWidth: '100%' }}
+              />
+            </div>
+            {modalImages.length > 1 && (
+              <button
+                className="text-2xl text-blue-900 bg-white rounded-full px-2 py-1 shadow hover:bg-blue-100"
+                onClick={nextModalImage}
+                aria-label="Siguiente"
+              >
+                &#8594;
+              </button>
+            )}
+          </div>
+          <div className="text-center font-semibold text-blue-900 mb-6 px-4">
+            {modalImages[modalIndex].Titulo}
           </div>
         </div>
-        {/* Modal para visualizar imagen */}
-        {modalOpen && (
-          <div
-            className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center"
-            onClick={closeModal}
-            tabIndex={-1}
-          >
-            <div
-              className="relative w-[80vw] max-w-[80vw] mx-4 bg-white rounded-lg shadow-lg flex flex-col items-center"
-              style={{ maxHeight: '80vh' }}
-              onClick={e => e.stopPropagation()}
-            >
-              <button
-                className="absolute top-2 right-2 text-2xl text-blue-900 bg-white rounded-full px-2 py-1 shadow hover:bg-blue-100"
-                onClick={closeModal}
-                aria-label="Cerrar"
-              >
-                &times;
-              </button>
-              <div className="flex items-center justify-between w-full mt-8 mb-4 px-4">
-                {modalImages.length > 1 && (
-                  <button
-                    className="text-2xl text-blue-900 bg-white rounded-full px-2 py-1 shadow hover:bg-blue-100"
-                    onClick={prevModalImage}
-                    aria-label="Anterior"
-                  >
-                    &#8592;
-                  </button>
-                )}
-                <div className="flex-1 flex justify-center">
-                  <img
-                    src={modalImages[modalIndex].link}
-                    alt={modalImages[modalIndex].Titulo || ''}
-                    className="max-h-[65vh] w-auto rounded-lg"
-                    style={{ objectFit: 'contain', maxWidth: '100%' }}
-                  />
-                </div>
-                {modalImages.length > 1 && (
-                  <button
-                    className="text-2xl text-blue-900 bg-white rounded-full px-2 py-1 shadow hover:bg-blue-100"
-                    onClick={nextModalImage}
-                    aria-label="Siguiente"
-                  >
-                    &#8594;
-                  </button>
-                )}
-              </div>
-              <div className="text-center font-semibold text-blue-900 mb-6 px-4">
-                {modalImages[modalIndex].Titulo}
-              </div>
-            </div>
-          </div>
-        )}
+      </div>
+    )}
       </section>
 
       {/* Floating Social Media Buttons */}
