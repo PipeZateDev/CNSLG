@@ -388,15 +388,95 @@ export default function Contacto() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-blue-900 text-white py-6 mt-12">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <div className="text-sm">
-            © {new Date().getFullYear()} Colegio Nuevo San Luis Gonzaga. Todos los derechos reservados.
+      <footer className="bg-gray-900 text-white py-12">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid md:grid-cols-4 gap-8 text-center">
+            <div>
+              {/* Logo y descripción del colegio */}
+              <Link href="/" className="flex justify-center">
+                <img 
+                  src="https://i.ibb.co/spn4L9WW/LOGO-NSLG-2-Mini.png" 
+                  alt="Logo Colegio Nuevo San Luis Gonzaga"
+                  className="h-10 w-auto"
+                />
+              </Link>
+              <p className="text-gray-400 text-sm mt-2">
+                Educando con excelencia desde 1995. Nuestro compromiso es formar integralmente a nuestros estudiantes.
+              </p>
+            </div>
+            <div>
+              {/* Enlaces rápidos */}
+              <h4 className="font-semibold text-blue-400 mb-4">Enlaces Rápidos</h4>
+              <ul className="space-y-2 text-sm">
+                <li>
+                  <Link href="/" className="text-gray-300 hover:text-white transition-colors">
+                    Inicio
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/nosotros" className="text-gray-300 hover:text-white transition-colors">
+                    Nosotros
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/admisiones" className="text-gray-300 hover:text-white transition-colors">
+                    Admisiones
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/contacto" className="text-gray-300 hover:text-white transition-colors">
+                    Contacto
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <div>
+              {/* Plataformas educativas */}
+              <h4 className="font-semibold text-blue-400 mb-4">Plataformas Educativas</h4>
+              <ul className="space-y-2 text-sm">
+                <li>
+                  <a 
+                    href="https://lms30.uno-internacional.com/login/access" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-gray-300 hover:text-white transition-colors"
+                  >
+                    UNOi Santillana
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="https://www.cibercolegios.com/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-gray-300 hover:text-white transition-colors"
+                  >
+                    Cibercolegios
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=12695&searchedCategoryId=&searchedAgreementName=PEDAGOGICOS%20ASOCIADOS%20SAS" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-gray-300 hover:text-white transition-colors"
+                  >
+                    Pagos PSE
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div className="flex flex-col justify-center items-center">
+              {/* Nueva sección: Ingresa como Administrador */}
+              <Link href="/admin" className="text-blue-400 hover:text-white font-semibold underline text-sm transition-colors cursor-pointer">
+                Ingresa como Administrador
+              </Link>
+            </div>
           </div>
-          <div className="mt-2">
-            <Link href="/admin" className="underline hover:text-blue-300">
-              Ingresar al panel de administración
-            </Link>
+          <div className="border-t border-gray-800 mt-8 pt-8 text-center">
+            <p className="text-gray-400 text-sm">
+              © 2025 Colegio Nuevo San Luis Gonzaga. Todos los derechos reservados.
+            </p>
           </div>
         </div>
       </footer>

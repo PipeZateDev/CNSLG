@@ -964,7 +964,33 @@ export default function Admin() {
               </div>
             </div>
           </section>
-          {/* ...existing footer... */}
+          <footer className="bg-gray-900 text-white py-12">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid md:grid-cols-4 gap-8 text-center">
+            <div>
+              {/* ...existing logo and description... */}
+            </div>
+            <div>
+              {/* ...existing enlaces rápidos... */}
+            </div>
+            {/* Sección eliminada: Servicios */}
+            <div>
+              {/* ...existing plataformas... */}
+            </div>
+            {/* Nueva sección: Ingresa como Administrador */}
+            <div className="flex flex-col justify-center items-center">
+              <Link href="/admin" className="text-blue-400 hover:text-white font-semibold underline text-sm transition-colors cursor-pointer">
+                Ingresa como Administrador
+              </Link>
+            </div>
+          </div>
+          <div className="border-t border-gray-800 mt-8 pt-8 text-center">
+            <p className="text-gray-400 text-sm">
+              © 2025 Colegio Nuevo San Luis Gonzaga. Todos los derechos reservados.
+            </p>
+          </div>
+        </div>
+      </footer>
         </>
       )}
     </div>

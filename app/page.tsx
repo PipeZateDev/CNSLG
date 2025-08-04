@@ -539,7 +539,7 @@ export default function Home() {
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-12">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-4 gap-8 text-center">
             <div>
               <img 
                 src="https://static.readdy.ai/image/b422d9997318ba9404c133396eb0082a/f0b6df53262c2786638b3d4d8768e052.png" 
@@ -557,15 +557,6 @@ export default function Home() {
                 <li><Link href="/admisiones" className="hover:text-white transition-colors cursor-pointer">Admisiones</Link></li>
                 <li><Link href="/nosotros" className="hover:text-white transition-colors cursor-pointer">Nosotros</Link></li>
                 <li><Link href="/contacto" className="hover:text-white transition-colors cursor-pointer">Contacto</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Servicios</h4>
-              <ul className="space-y-2 text-sm text-gray-400">
-                <li>Preescolar</li>
-                <li>Educación Primaria</li>
-                <li>Educación Secundaria</li>
-                <li>Educación Bilingüe</li>
               </ul>
             </div>
             <div>
@@ -597,10 +588,16 @@ export default function Home() {
                 </a>
               </div>
             </div>
+            {/* Nueva sección: Ingresa como Administrador */}
+            <div className="flex flex-col justify-center items-center">
+              <Link href="/admin" className="text-blue-400 hover:text-white font-semibold underline text-sm transition-colors cursor-pointer">
+                Ingresa como Administrador
+              </Link>
+            </div>
           </div>
           <div className="border-t border-gray-800 mt-8 pt-8 text-center">
             <p className="text-gray-400 text-sm">
-            © 2025 Colegio Nuevo San Luis Gonzaga. Todos los derechos reservados.
+              © 2025 Colegio Nuevo San Luis Gonzaga. Todos los derechos reservados.
             </p>
           </div>
         </div>
