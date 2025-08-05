@@ -371,10 +371,11 @@ export default function Contacto() {
               <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <i className="ri-coins-line text-2xl text-red-600"></i>
               </div>
-              <h3 className="text-xl font-bold text-blue-900 mb-2">Tesorería</h3>
+              <h3 className="text-xl font-bold text-blue-900 mb-2">Tesorería / Cartera</h3>
               <p className="text-gray-600 mb-4">Pagos, facturación y asuntos financieros</p>
               <div className="space-y-2 text-sm text-gray-600">
                 <p><i className="ri-mail-line mr-2"></i>tesoreria@slgonzaga.edu.co</p>
+                <p><i className="ri-mail-line mr-2"></i>cartera@slgonzaga.edu.co</p>
               </div>
             </div>
 
@@ -400,24 +401,33 @@ export default function Contacto() {
           <div className="space-y-6">
             <div className="border border-gray-200 rounded-lg p-6">
               <h4 className="font-semibold text-blue-900 mb-2">¿Cuáles son los horarios de clases?</h4>
-              <p className="text-gray-600">Las clases inician a las 7:20 AM y finalizan a las 3:30 PM de lunes a viernes. Los horarios pueden variar según el nivel educativo.</p>
+              <p className="text-gray-600">Las clases inician a las 7:20 AM y finalizan a las 3:30 PM de lunes a viernes, los días jueves tenemos Clubes escolares hasta las 4:30 PM.</p>
             </div>
             
             <div className="border border-gray-200 rounded-lg p-6">
               <h4 className="font-semibold text-blue-900 mb-2">¿Ofrecen transporte escolar?</h4>
-              <p className="text-gray-600">Sí, contamos con servicio de transporte escolar que cubre diferentes rutas de la ciudad. Puedes consultar disponibilidad y tarifas en secretaría.</p>
+              <p className="text-gray-600">Sí, contamos con servicio de transporte escolar que cubre diferentes rutas de la localidad de Suba. Puedes consultar disponibilidad y tarifas directamente con la empresa Natural Tour LTDA +57 321 111 1111.</p>
             </div>
             
             <div className="border border-gray-200 rounded-lg p-6">
               <h4 className="font-semibold text-blue-900 mb-2">¿Cuándo inician las inscripciones para el próximo año?</h4>
-              <p className="text-gray-600">Las inscripciones para el año 2026 están abiertas desde octubre de 2025. Te recomendamos inscribirte pronto para asegurar tu cupo.</p>
+              <p className="text-gray-600">Las inscripciones para el año 2026 están abiertas desde agosto de 2025. Te recomendamos inscribirte pronto para asegurar tu cupo.</p>
             </div>
-            
+            {/* Nueva pregunta: visita guiada */}
             <div className="border border-gray-200 rounded-lg p-6">
-              <h4 className="font-semibold text-blue-900 mb-2">¿Qué actividades extracurriculares ofrecen?</h4>
-              <p className="text-gray-600">Ofrecemos deportes (fútbol, baloncesto, voleibol), artes (música, teatro, danza), robótica, inglés avanzado y grupos pastorales.</p>
+              <h4 className="font-semibold text-blue-900 mb-2">¿Cuándo puedo solicitar una visita guiada?</h4>
+              <p className="text-gray-600">
+                Puedes solicitar tu visita los días martes y jueves a las 2:30 PM y debes agendar en el siguiente link:{" "}
+                <a
+                  href="https://calendar.app.google/q6zmdDiNuVtkx92X7"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-700 underline"
+                >
+                  https://calendar.app.google/q6zmdDiNuVtkx92X7
+                </a>
+              </p>
             </div>
-            
             <div className="border border-gray-200 rounded-lg p-6">
               <h4 className="font-semibold text-blue-900 mb-2">¿Cómo puedo acceder a las plataformas virtuales?</h4>
               <p className="text-gray-600">Los estudiantes y padres reciben credenciales de acceso a Cibercolegios y otras plataformas al momento de la matrícula. Para soporte técnico, contacta al área de sistemas.</p>
@@ -431,42 +441,22 @@ export default function Contacto() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-4 gap-8 text-center">
             <div>
-              {/* Logo y descripción del colegio */}
-              <Link href="/" className="flex justify-center">
-                <img 
-                  src="https://i.ibb.co/spn4L9WW/LOGO-NSLG-2-Mini.png" 
-                  alt="Logo Colegio Nuevo San Luis Gonzaga"
-                  className="h-10 w-auto"
-                />
-              </Link>
-              <p className="text-gray-400 text-sm mt-2">
-                Educando con excelencia desde 1995. Nuestro compromiso es formar integralmente a nuestros estudiantes.
+              <img 
+                src="https://static.readdy.ai/image/b422d9997318ba9404c133396eb0082a/f0b6df53262c2786638b3d4d8768e052.png" 
+                alt="Logo Colegio Nuevo San Luis Gonzaga" 
+                className="h-16 w-auto mb-4 mx-auto"
+              />
+              <p className="text-gray-400 text-sm">
+                Formando líderes del futuro desde 1926 con excelencia académica y valores católicos.
               </p>
             </div>
             <div>
-              {/* Enlaces rápidos */}
-              <h4 className="font-semibold text-blue-400 mb-4">Enlaces Rápidos</h4>
-              <ul className="space-y-2 text-sm">
-                <li>
-                  <Link href="/" className="text-gray-300 hover:text-white transition-colors">
-                    Inicio
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/nosotros" className="text-gray-300 hover:text-white transition-colors">
-                    Nosotros
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/admisiones" className="text-gray-300 hover:text-white transition-colors">
-                    Admisiones
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/contacto" className="text-gray-300 hover:text-white transition-colors">
-                    Contacto
-                  </Link>
-                </li>
+              <h4 className="font-semibold mb-4">Enlaces Rápidos</h4>
+              <ul className="space-y-2 text-sm text-gray-400">
+                <li><Link href="/" className="hover:text-white transition-colors cursor-pointer">Inicio</Link></li>
+                <li><Link href="/admisiones" className="hover:text-white transition-colors cursor-pointer">Admisiones</Link></li>
+                <li><Link href="/nosotros" className="hover:text-white transition-colors cursor-pointer">Nosotros</Link></li>
+                <li><Link href="/contacto" className="hover:text-white transition-colors cursor-pointer">Contacto</Link></li>
               </ul>
             </div>
             <div>
@@ -476,7 +466,7 @@ export default function Contacto() {
                   href="https://lms30.uno-internacional.com/login/access" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="text-gray-300 hover:text-white transition-colors"
+                  className="block text-sm text-gray-400 hover:text-white transition-colors cursor-pointer"
                 >
                   UNOi Santillana
                 </a>
@@ -484,7 +474,7 @@ export default function Contacto() {
                   href="https://www.cibercolegios.com/" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="text-gray-300 hover:text-white transition-colors"
+                  className="block text-sm text-gray-400 hover:text-white transition-colors cursor-pointer"
                 >
                   Cibercolegios
                 </a>
@@ -492,9 +482,9 @@ export default function Contacto() {
                   href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=12695&searchedCategoryId=&searchedAgreementName=PEDAGOGICOS%20ASOCIADOS%20SAS" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="text-gray-300 hover:text-white transition-colors"
+                  className="block text-sm text-gray-400 hover:text-white transition-colors cursor-pointer"
                 >
-                  Pagos PSE
+                  PSE - Pagos en Línea
                 </a>
               </div>
             </div>
