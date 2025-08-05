@@ -613,6 +613,3 @@ export default function Nosotros() {
     </div>
   );
 }
-
-// Add this to your _app.tsx or _document.tsx (or in the <head> of your main layout file):
-// <link rel="icon" href="https://i.ibb.co/HmCd5Ws/Logo-Solo-Isotipo-comprimido.png" type="image/png" />
