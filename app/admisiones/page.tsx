@@ -226,7 +226,6 @@ export default function Admisiones() {
           </div>
         </div>
       </section>
-
       {/* Niveles Educativos */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-6">
@@ -279,102 +278,41 @@ export default function Admisiones() {
         </div>
       </section>
 
-      {/* Servicios Académicos */}
-      <section className="py-20 bg-white">
-  <div className="max-w-7xl mx-auto px-6">
-    <h2 className="text-3xl font-bold text-blue-900 mb-8 text-center">Servicios Académicos</h2>
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div className="bg-blue-50 rounded-lg p-6 flex flex-col items-center text-center">
-        <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-2">
-          <i className="ri-book-open-line text-xl text-blue-600"></i>
-        </div>
-        <h3 className="text-lg font-bold text-blue-900 mb-2">Preescolar</h3>
-        <p className="text-gray-700 text-sm">
-          Educación inicial con enfoque en el desarrollo integral, valores y creatividad.
-        </p>
-      </div>
-      <div className="bg-green-50 rounded-lg p-6 flex flex-col items-center text-center">
-        <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-2">
-          <i className="ri-pencil-ruler-2-line text-xl text-green-600"></i>
-        </div>
-        <h3 className="text-lg font-bold text-blue-900 mb-2">Primaria</h3>
-        <p className="text-gray-700 text-sm">
-          Formación académica sólida in ciencias, matemáticas, humanidades y bilingüismo.
-        </p>
-      </div>
-      <div className="bg-yellow-50 rounded-lg p-6 flex flex-col items-center text-center">
-        <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mb-2">
-          <i className="ri-graduation-cap-line text-xl text-yellow-600"></i>
-        </div>
-        <h3 className="text-lg font-bold text-blue-900 mb-2">Secundaria</h3>
-        <p className="text-gray-700 text-sm">
-          Educación avanzada, investigación, tecnología y preparación para la vida universitaria.
-        </p>
-      </div>
-      <div className="bg-purple-50 rounded-lg p-6 flex flex-col items-center text-center">
-        <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-2">
-          <i className="ri-global-line text-xl text-purple-600"></i>
-        </div>
-        <h3 className="text-lg font-bold text-blue-900 mb-2">Bilingüismo</h3>
-        <p className="text-gray-700 text-sm">
-          Programa de inglés intensivo y certificación internacional.
-        </p>
-      </div>
-      <div className="bg-pink-50 rounded-lg p-6 flex flex-col items-center text-center">
-        <div className="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center mb-2">
-          <i className="ri-heart-pulse-line text-xl text-pink-600"></i>
-        </div>
-        <h3 className="text-lg font-bold text-blue-900 mb-2">Deporte y Cultura</h3>
-        <p className="text-gray-700 text-sm">
-          Actividades deportivas, artísticas y culturales para el desarrollo integral.
-        </p>
-      </div>
-      <div className="bg-orange-50 rounded-lg p-6 flex flex-col items-center text-center">
-        <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mb-2">
-          <i className="ri-lightbulb-flash-line text-xl text-orange-600"></i>
-        </div>
-        <h3 className="text-lg font-bold text-blue-900 mb-2">Tecnología e Investigación</h3>
-        <p className="text-gray-700 text-sm">
-          Fomento de la innovación, pensamiento crítico y uso de herramientas tecnológicas.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-      {/* Proceso de Admisión */}
-      <section className="py-20 bg-gray-50">
+      {/* Proceso de Admisión - Nuevo diseño */}
+      <section className="py-20 bg-gradient-to-r from-blue-50 to-blue-100">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-3xl font-bold text-blue-900 text-center mb-12">Proceso de Admisión</h2>
-          
-          <div className="grid md:grid-cols-4 gap-6">
-            <div className="bg-white rounded-lg p-6 text-center shadow-lg">
-              <div className="w-12 h-12 bg-blue-500 text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold">
+          <h2 className="text-4xl font-bold text-blue-900 text-center mb-12">Tu Proceso de Admisión</h2>
+          <div className="flex flex-col md:flex-row items-center justify-center gap-8">
+            <div className="flex flex-col items-center text-center">
+              <div className="w-20 h-20 rounded-full bg-blue-900 text-white flex items-center justify-center text-3xl font-bold shadow-lg mb-4 border-4 border-blue-300 animate-bounce">
                 1
               </div>
-              <h4 className="font-semibold text-blue-900 mb-2">Solicitud</h4>
-              <p className="text-sm text-gray-600">Completa el formulario de inscripción con todos los datos solicitados</p>
+              <h4 className="font-semibold text-blue-900 mb-2 text-xl">Solicitud</h4>
+              <p className="text-base text-gray-700 max-w-xs">Completa el formulario de inscripción con tus datos.</p>
             </div>
-            <div className="bg-white rounded-lg p-6 text-center shadow-lg">
-              <div className="w-12 h-12 bg-green-500 text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold">
+            <span className="text-blue-400 text-4xl font-bold mx-2 md:mx-6">→</span>
+            <div className="flex flex-col items-center text-center">
+              <div className="w-20 h-20 rounded-full bg-green-600 text-white flex items-center justify-center text-3xl font-bold shadow-lg mb-4 border-4 border-green-300 animate-bounce">
                 2
               </div>
-              <h4 className="font-semibold text-blue-900 mb-2">Documentos</h4>
-              <p className="text-sm text-gray-600">Entrega los documentos requeridos según el nivel educativo</p>
+              <h4 className="font-semibold text-green-700 mb-2 text-xl">Documentos</h4>
+              <p className="text-base text-gray-700 max-w-xs">Entrega los documentos requeridos según el nivel.</p>
             </div>
-            <div className="bg-white rounded-lg p-6 text-center shadow-lg">
-              <div className="w-12 h-12 bg-purple-500 text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold">
+            <span className="text-blue-400 text-4xl font-bold mx-2 md:mx-6">→</span>
+            <div className="flex flex-col items-center text-center">
+              <div className="w-20 h-20 rounded-full bg-purple-700 text-white flex items-center justify-center text-3xl font-bold shadow-lg mb-4 border-4 border-purple-300 animate-bounce">
                 3
               </div>
-              <h4 className="font-semibold text-blue-900 mb-2">Entrevista</h4>
-              <p className="text-sm text-gray-600">Entrevista con el estudiante y los padres de familia</p>
+              <h4 className="font-semibold text-purple-700 mb-2 text-xl">Entrevista</h4>
+              <p className="text-base text-gray-700 max-w-xs">Reunión con el estudiante y padres de familia.</p>
             </div>
-            <div className="bg-white rounded-lg p-6 text-center shadow-lg">
-              <div className="w-12 h-12 bg-orange-500 text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold">
+            <span className="text-blue-400 text-4xl font-bold mx-2 md:mx-6">→</span>
+            <div className="flex flex-col items-center text-center">
+              <div className="w-20 h-20 rounded-full bg-orange-500 text-white flex items-center justify-center text-3xl font-bold shadow-lg mb-4 border-4 border-orange-300 animate-bounce">
                 4
               </div>
-              <h4 className="font-semibold text-blue-900 mb-2">Matrícula</h4>
-              <p className="text-sm text-gray-600">Formaliza la matrícula y bienvenida a la familia gonzaguista</p>
+              <h4 className="font-semibold text-orange-700 mb-2 text-xl">Matrícula</h4>
+              <p className="text-base text-gray-700 max-w-xs">Formaliza tu matrícula y únete a la familia CNSLG.</p>
             </div>
           </div>
         </div>
