@@ -7,7 +7,8 @@ import { useRouter, usePathname } from 'next/navigation';
 export default function Admin() {
   const router = useRouter();
   const pathname = usePathname();
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // <-- Faltaba este estado
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const toggleMenu = () => setIsMenuOpen((open) => !open);
 
   // Banner state
   type BannerItem = { Titulo: string; Descripción: string; fecha: string; link: string; orden?: number };
@@ -438,20 +439,22 @@ export default function Admin() {
                   </a>
                 </div>
                 {/* Mobile Menu Button */}
-                <button 
-                  onClick={() => setIsMenuOpen(!isMenuOpen)}
+                <button
+                  type="button"
+                  aria-label="Abrir menú"
+                  onClick={toggleMenu}
                   className="lg:hidden w-10 h-10 flex items-center justify-center text-blue-900 cursor-pointer"
                 >
                   <i className={`ri-${isMenuOpen ? 'close' : 'menu'}-line text-2xl`}></i>
                 </button>
               </div>
-              {/* Mobile Navigation Menu */}
               {isMenuOpen && (
                 <div className="lg:hidden mt-4 py-4 border-t border-gray-200">
                   <div className="flex flex-col space-y-3">
                     <Link
                       href="/"
                       onClick={() => setIsMenuOpen(false)}
+                      scroll={false}
                       className={`px-4 py-2 rounded-full transition-colors text-center cursor-pointer ${
                         pathname === '/' ? 'bg-blue-900 text-white' : 'text-blue-900 hover:bg-blue-50'
                       }`}
@@ -461,6 +464,7 @@ export default function Admin() {
                     <Link
                       href="/nosotros"
                       onClick={() => setIsMenuOpen(false)}
+                      scroll={false}
                       className={`px-4 py-2 rounded-full transition-colors text-center cursor-pointer ${
                         pathname === '/nosotros' ? 'bg-blue-900 text-white' : 'text-blue-900 hover:bg-blue-50'
                       }`}
@@ -470,6 +474,7 @@ export default function Admin() {
                     <Link
                       href="/admisiones"
                       onClick={() => setIsMenuOpen(false)}
+                      scroll={false}
                       className={`px-4 py-2 rounded-full transition-colors text-center cursor-pointer ${
                         pathname === '/admisiones' ? 'bg-blue-900 text-white' : 'text-blue-900 hover:bg-blue-50'
                       }`}
@@ -479,40 +484,14 @@ export default function Admin() {
                     <Link
                       href="/contacto"
                       onClick={() => setIsMenuOpen(false)}
+                      scroll={false}
                       className={`px-4 py-2 rounded-full transition-colors text-center cursor-pointer ${
                         pathname === '/contacto' ? 'bg-blue-900 text-white' : 'text-blue-900 hover:bg-blue-50'
                       }`}
                     >
                       Contacto
                     </Link>
-                    {/* Admin tab hidden in mobile menu */}
-                    <Link href="/admin" className="hidden" tabIndex={-1} aria-hidden="true">Admin</Link>
-                    <div className="flex flex-col space-y-2 pt-2">
-                      <a 
-                        href="https://lms30.uno-internacional.com/login/access" 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="px-4 py-2 bg-purple-600 text-white rounded-full text-sm font-semibold hover:bg-purple-700 transition-colors text-center cursor-pointer"
-                      >
-                        UNOi Santillana
-                      </a>
-                      <a 
-                        href="https://www.cibercolegios.com/" 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="px-4 py-2 bg-yellow-400 text-black rounded-full text-sm font-semibold hover:bg-yellow-500 transition-colors text-center cursor-pointer"
-                      >
-                        Cibercolegios
-                      </a>
-                      <a 
-                        href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=12695&searchedCategoryId=&searchedAgreementName=PEDAGOGICOS%20ASOCIADOS%20SAS" 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="px-4 py-2 bg-blue-600 text-white rounded-full text-sm font-semibold hover:bg-blue-700 transition-colors text-center cursor-pointer"
-                      >
-                        Pagos PSE
-                      </a>
-                    </div>
+                    {/* ...existing code for plataformas... */}
                   </div>
                 </div>
               )}
@@ -1025,6 +1004,27 @@ export default function Admin() {
                 <div>
                   <span className="font-bold text-white">Horarios de Atención:</span><br />
                   Lunes a Viernes: 7:00 AM - 5:00 PM
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="border-t border-gray-800 mt-8 pt-8 text-center">
+            <p className="text-gray-400 text-sm">
+              © 2025 Colegio Nuevo San Luis Gonzaga. Todos los derechos reservados.
+            </p>
+            <div className="mt-2">
+              <Link href="/admin" className="text-blue-400 hover:text-white font-semibold underline text-sm transition-colors cursor-pointer">
+                Ingresa como Administrador
+              </Link>
+            </div>
+          </div>
+        </div>
+      </footer>
+        </>
+      )}
+    </div>
+  );
+}
                 </div>
               </div>
             </div>

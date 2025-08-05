@@ -6,11 +6,9 @@ import Link from 'next/link';
 
 export default function Admisiones() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const pathname = usePathname();
+  const toggleMenu = () => setIsMenuOpen((open) => !open);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  const pathname = usePathname();
 
   return (
     <div className="min-h-screen bg-white">
@@ -62,20 +60,22 @@ export default function Admisiones() {
               </a>
             </div>
             {/* Mobile Menu Button */}
-            <button 
+            <button
+              type="button"
+              aria-label="Abrir menú"
               onClick={toggleMenu}
               className="lg:hidden w-10 h-10 flex items-center justify-center text-blue-900 cursor-pointer"
             >
               <i className={`ri-${isMenuOpen ? 'close' : 'menu'}-line text-2xl`}></i>
             </button>
           </div>
-          {/* Mobile Navigation Menu */}
           {isMenuOpen && (
             <div className="lg:hidden mt-4 py-4 border-t border-gray-200">
               <div className="flex flex-col space-y-3">
                 <Link
                   href="/"
                   onClick={() => setIsMenuOpen(false)}
+                  scroll={false}
                   className={`px-4 py-2 rounded-full transition-colors text-center cursor-pointer ${
                     pathname === '/' ? 'bg-blue-900 text-white' : 'text-blue-900 hover:bg-blue-50'
                   }`}
@@ -85,6 +85,7 @@ export default function Admisiones() {
                 <Link
                   href="/nosotros"
                   onClick={() => setIsMenuOpen(false)}
+                  scroll={false}
                   className={`px-4 py-2 rounded-full transition-colors text-center cursor-pointer ${
                     pathname === '/nosotros' ? 'bg-blue-900 text-white' : 'text-blue-900 hover:bg-blue-50'
                   }`}
@@ -94,6 +95,7 @@ export default function Admisiones() {
                 <Link
                   href="/admisiones"
                   onClick={() => setIsMenuOpen(false)}
+                  scroll={false}
                   className={`px-4 py-2 rounded-full transition-colors text-center cursor-pointer ${
                     pathname === '/admisiones' ? 'bg-blue-900 text-white' : 'text-blue-900 hover:bg-blue-50'
                   }`}
@@ -103,6 +105,7 @@ export default function Admisiones() {
                 <Link
                   href="/contacto"
                   onClick={() => setIsMenuOpen(false)}
+                  scroll={false}
                   className={`px-4 py-2 rounded-full transition-colors text-center cursor-pointer ${
                     pathname === '/contacto' ? 'bg-blue-900 text-white' : 'text-blue-900 hover:bg-blue-50'
                   }`}

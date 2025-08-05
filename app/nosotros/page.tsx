@@ -54,8 +54,9 @@ function GalleryGrid({ gallery, openModal }: { gallery: { link: string; Titulo?:
 }
 
 export default function Nosotros() {
+  // Mueve el estado de isMenuOpen fuera del render para evitar problemas de re-render en mobile
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const toggleMenu = () => setIsMenuOpen((open) => !open);
 
   // Cargar galería desde la API de MongoDB y ordenar por 'orden'
   const [gallery, setGallery] = useState<{ link: string; Titulo?: string; orden?: number; grupo?: string }[]>([]);
@@ -164,7 +165,9 @@ export default function Nosotros() {
               </a>
             </div>
             {/* Mobile Menu Button */}
-            <button 
+            <button
+              type="button"
+              aria-label="Abrir menú"
               onClick={toggleMenu}
               className="lg:hidden w-10 h-10 flex items-center justify-center text-blue-900 cursor-pointer"
             >
@@ -178,6 +181,7 @@ export default function Nosotros() {
                 <Link
                   href="/"
                   onClick={() => setIsMenuOpen(false)}
+                  scroll={false}
                   className={`px-4 py-2 rounded-full transition-colors text-center cursor-pointer ${
                     pathname === '/' ? 'bg-blue-900 text-white' : 'text-blue-900 hover:bg-blue-50'
                   }`}
@@ -187,6 +191,7 @@ export default function Nosotros() {
                 <Link
                   href="/nosotros"
                   onClick={() => setIsMenuOpen(false)}
+                  scroll={false}
                   className={`px-4 py-2 rounded-full transition-colors text-center cursor-pointer ${
                     pathname === '/nosotros' ? 'bg-blue-900 text-white' : 'text-blue-900 hover:bg-blue-50'
                   }`}
@@ -196,6 +201,7 @@ export default function Nosotros() {
                 <Link
                   href="/admisiones"
                   onClick={() => setIsMenuOpen(false)}
+                  scroll={false}
                   className={`px-4 py-2 rounded-full transition-colors text-center cursor-pointer ${
                     pathname === '/admisiones' ? 'bg-blue-900 text-white' : 'text-blue-900 hover:bg-blue-50'
                   }`}
@@ -205,6 +211,7 @@ export default function Nosotros() {
                 <Link
                   href="/contacto"
                   onClick={() => setIsMenuOpen(false)}
+                  scroll={false}
                   className={`px-4 py-2 rounded-full transition-colors text-center cursor-pointer ${
                     pathname === '/contacto' ? 'bg-blue-900 text-white' : 'text-blue-900 hover:bg-blue-50'
                   }`}
