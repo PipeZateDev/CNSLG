@@ -253,150 +253,120 @@ export default function Nosotros() {
 
 
 {/* Sección: Historia + Misión/Visión + Canva */}
+<section className="pt-24 pb-12 bg-gradient-to-r from-blue-900 to-blue-700 text-white">
+  <div className="max-w-7xl mx-auto px-6 text-center">
+    <h1 className="text-5xl md:text-6xl font-extrabold mb-6 tracking-tight drop-shadow-lg">
+      Sobre Nosotros
+    </h1>
+    <p className="text-xl md:text-2xl text-blue-200 max-w-3xl mx-auto mb-8 font-medium">
+      Colegio Nuevo San Luis Gonzaga: 99 años formando líderes con excelencia académica y valores.
+    </p>
+    <div className="flex flex-col md:flex-row items-center justify-center gap-8 mt-8">
+      <img 
+        src="https://i.ibb.co/spn4L9WW/LOGO-NSLG-2-Mini.png"
+        alt="Logo Colegio Nuevo San Luis Gonzaga"
+        className="h-32 w-auto mx-auto rounded-xl shadow-xl border-4 border-white"
+      />
+      <div className="text-left md:text-center flex-1">
+        <h2 className="text-3xl font-bold text-yellow-300 mb-2">Nuestra Misión</h2>
+        <p className="text-lg text-blue-100 mb-4">
+          Formar estudiantes íntegros, críticos y creativos, con sólidos valores humanos y cristianos, capaces de transformar la sociedad.
+        </p>
+        <h2 className="text-3xl font-bold text-yellow-300 mb-2">Nuestra Visión</h2>
+        <p className="text-lg text-blue-100">
+          Ser reconocidos como un colegio líder en innovación educativa, excelencia académica y formación en valores.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section className="py-20 bg-white">
   <div className="max-w-7xl mx-auto px-6">
-    <div className="grid md:grid-cols-2 gap-12 items-start">
-      {/* Columna izquierda: Historia + Misión + Visión */}
+    <div className="grid md:grid-cols-2 gap-12 items-center">
       <div>
-        {/* Historia */}
-        <h2> </h2>
-        <h2 className="text-3xl font-bold text-blue-900 mb-6">Nuestra Historia Centenaria</h2>
-        <p className="text-gray-600 mb-4">
-          Fundado en 1926, el Colegio Nuevo San Luis Gonzaga ha sido un pilar fundamental 
-          en la educación colombiana durante casi un siglo...
+        <h2 className="text-3xl font-bold text-blue-900 mb-6">Historia</h2>
+        <p className="text-lg text-gray-700 mb-4 leading-relaxed">
+          Fundado en 1926, el Colegio Nuevo San Luis Gonzaga ha sido pionero en la educación integral en Bogotá. Nuestra trayectoria se destaca por la excelencia académica, el compromiso social y la formación en valores católicos.
         </p>
-        <p className="text-gray-600 mb-4">
-          A lo largo de estos 99 años, hemos mantenido nuestro compromiso con la excelencia académica...
-        </p>
-        <p className="text-gray-600 mb-8">
-          Hoy, nos enorgullecemos de ser una institución reconocida por su calidad educativa...
-        </p>
-
-        {/* Misión */}
-        <div className="bg-blue-50 rounded-lg p-6 mb-6">
-          <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-2">
-            <i className="ri-target-line text-xl text-blue-600"></i>
-          </div>
-          <h3 className="text-xl font-bold text-blue-900 mb-2">Misión</h3>
-          <p className="text-gray-700 text-sm">
-            El COLEGIO NUEVO SAN LUIS GONZAGA tiene el propósito de formar integralmente a nuestros estudiantes desde los valores 
-            Gonzaguistas, potenciando sus dimensiones de aprendizaje, profundizando en las áreas de humanidades, ciencias, matemáticas 
-            e inglés, Todo ello, con un enfoque investigativo y tecnológico.
-          </p>
-        </div>
-
-        {/* Visión */}
-        <div className="bg-green-50 rounded-lg p-6">
-          <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-2">
-            <i className="ri-eye-line text-xl text-green-600"></i>
-          </div>
-          <h3 className="text-xl font-bold text-blue-900 mb-2">Visión</h3>
-          <p className="text-gray-700 text-sm">
-            Evolucionar y crecer como una Institución de educación formal de calidad 
-            dedicada a la formación y desarrollo de seres humanos integrales, con un currículo avanzado y 
-            proyectado hacia el bilingüismo, la investigación, la tecnología y el deporte. Asimismo, proyectamos 
-            alcanzar altos estándares B2 en el nivel de inglés de acuerdo con el Marco Común Europeo.  
-          </p>
-        </div>
+        <ul className="space-y-3 text-blue-900 font-semibold">
+          <li className="flex items-center">
+            <i className="ri-check-line text-green-600 mr-2"></i>
+            Más de 2850 graduados exitosos.
+          </li>
+          <li className="flex items-center">
+            <i className="ri-check-line text-green-600 mr-2"></i>
+            Certificación ICFES Muy Superior A+.
+          </li>
+          <li className="flex items-center">
+            <i className="ri-check-line text-green-600 mr-2"></i>
+            Programas de robótica, inglés intensivo y emprendimiento.
+          </li>
+          <li className="flex items-center">
+            <i className="ri-check-line text-green-600 mr-2"></i>
+            Clubes deportivos y artísticos de alto rendimiento.
+          </li>
+        </ul>
       </div>
-
-      {/* Columna derecha: Canva embed */}
-      <div>
-        <div style={{ width: '100%', margin: '0 auto' }}>
-          <div style={{
-            position: 'relative',
-            width: '100%',
-            height: 0,
-            paddingTop: '125.0000%',
-            paddingBottom: 0,
-            boxShadow: '0 2px 8px 0 rgba(63,69,81,0.16)',
-            marginTop: '1.6em',
-            marginBottom: '0.9em',
-            overflow: 'hidden',
-            borderRadius: '8px',
-            willChange: 'transform'
-          }}>
-            <iframe
-              loading="lazy"
-              style={{
-                position: 'absolute',
-                width: '100%',
-                height: '100%',
-                top: 0,
-                left: 0,
-                border: 'none',
-                padding: 0,
-                margin: 0
-              }}
-              src="https://www.canva.com/design/DAGt7hE4YGs/bhZrgMbKfPaECdSdwufBPw/view?embed"
-              allowFullScreen
-              allow="fullscreen"
-              title="TimeLine-CNSLG"
-            ></iframe>
-          </div>
-          <div className="text-center mt-4">
-            <a
-              href="https://www.canva.com/design/DAGt7hE4YGs/bhZrgMbKfPaECdSdwufBPw/view?utm_content=DAGt7hE4YGs&utm_campaign=designshare&utm_medium=embeds&utm_source=link"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              TimeLine - 
-            </a>{' '}
-            de Soporte CNSLG
-          </div>
-        </div>
+      <div className="flex justify-center">
+        <img 
+          src="https://images.unsplash.com/photo-1503676382389-4809596d5290?auto=format&fit=crop&w=600&q=80"
+          alt="Estudiantes Colegio"
+          className="rounded-2xl shadow-2xl border-4 border-blue-900 w-full max-w-md object-cover"
+        />
       </div>
     </div>
   </div>
 </section>
 
-
-
-{/* Sección: Valores + Decálogo */}
-<section className="py-20 bg-gray-50">
+<section className="py-20 bg-blue-50">
   <div className="max-w-7xl mx-auto px-6">
-    <div className="flex flex-col md:flex-row md:space-x-6 space-y-6 md:space-y-0">
-      
-      {/* Valores Institucionales */}
-      <div className="bg-yellow-50 rounded-lg p-6 flex-1">
-        <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mb-2">
-          <i className="ri-hand-heart-line text-xl text-yellow-600"></i>
-        </div>
-        <h3 className="text-xl font-bold text-blue-900 mb-2">Valores Institucionales</h3>
-        <ul className="list-disc pl-5 text-gray-700 text-sm space-y-2">
-          <li><strong>Principio de Identidad:</strong> sentimiento de pertenencia y rasgos distintivos de la comunidad Gonzaguista.</li>
-          <li><strong>Principio de Responsabilidad:</strong> conciencia de las consecuencias y capacidad para asumir compromisos.</li>
-          <li><strong>Principio de Justicia:</strong> respeto y defensa de los derechos de las personas, actuando con equidad.</li>
-          <li><strong>Principio de Trascendencia:</strong> vivir con sentido de misión, responsabilidad, armonía y entusiasmo.</li>
-          <li><strong>Principio de Tolerancia:</strong> respeto por los demás, aceptación de la individualidad y la diferencia.</li>
-        </ul>
+    <h2 className="text-3xl font-bold text-blue-900 text-center mb-12">Valores Institucionales</h2>
+    <div className="grid md:grid-cols-3 gap-8">
+      <div className="bg-white rounded-xl shadow-lg p-8 flex flex-col items-center text-center border-t-4 border-blue-900 hover:scale-105 transition-transform duration-300">
+        <i className="ri-heart-2-line text-4xl text-pink-600 mb-4 animate-bounce"></i>
+        <h3 className="text-xl font-bold text-blue-900 mb-2">Respeto</h3>
+        <p className="text-gray-700 text-base">Valoramos la diversidad y promovemos la convivencia armónica.</p>
       </div>
-
-      {/* Decálogo */}
-      <div className="bg-purple-50 rounded-lg p-6 flex-1">
-        <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-2">
-          <i className="ri-list-check text-xl text-purple-600"></i>
-        </div>
-        <h3 className="text-xl font-bold text-blue-900 mb-2">Decálogo del Nuevo San Luis Gonzaga</h3>
-        <ul className="list-disc pl-5 text-gray-700 text-sm space-y-1">
-          <li>1. Dios siempre presente en nuestras labores educativas.</li>
-          <li>2. Educamos con justicia y amor.</li>
-          <li>3. Actuamos con responsabilidad y decisión.</li>
-          <li>4. Prestamos un servicio de calidad con amabilidad.</li>
-          <li>5. Fomentamos el espíritu investigativo y deportivo.</li>
-          <li>6. Somos diligentes y creativos.</li>
-          <li>7. Estamos a la vanguardia de los conocimientos científicos y tecnológicos.</li>
-          <li>8. Reconocemos los derechos fundamentales de las personas.</li>
-          <li>9. Somos exitosos por nuestra organización.</li>
-          <li>10. Planeamos, hacemos, verificamos y actuamos.</li>
-        </ul>
+      <div className="bg-white rounded-xl shadow-lg p-8 flex flex-col items-center text-center border-t-4 border-blue-900 hover:scale-105 transition-transform duration-300">
+        <i className="ri-lightbulb-flash-line text-4xl text-yellow-500 mb-4 animate-bounce"></i>
+        <h3 className="text-xl font-bold text-blue-900 mb-2">Innovación</h3>
+        <p className="text-gray-700 text-base">Fomentamos la creatividad y el pensamiento crítico en cada estudiante.</p>
       </div>
-
+      <div className="bg-white rounded-xl shadow-lg p-8 flex flex-col items-center text-center border-t-4 border-blue-900 hover:scale-105 transition-transform duration-300">
+        <i className="ri-team-line text-4xl text-green-600 mb-4 animate-bounce"></i>
+        <h3 className="text-xl font-bold text-blue-900 mb-2">Solidaridad</h3>
+        <p className="text-gray-700 text-base">Impulsamos el trabajo en equipo y el compromiso social.</p>
+      </div>
     </div>
   </div>
 </section>
 
-
+<section className="py-20 bg-white">
+  <div className="max-w-7xl mx-auto px-6">
+    <h2 className="text-3xl font-bold text-blue-900 text-center mb-12">Equipo Directivo</h2>
+    <div className="grid md:grid-cols-3 gap-8">
+      <div className="bg-blue-50 rounded-xl shadow-lg p-8 flex flex-col items-center text-center border-t-4 border-blue-900">
+        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Rector" className="w-24 h-24 rounded-full mb-4 border-4 border-blue-900 object-cover shadow-lg" />
+        <h3 className="text-xl font-bold text-blue-900 mb-1">Juan Pérez</h3>
+        <span className="text-blue-600 font-semibold mb-2">Rector</span>
+        <p className="text-gray-700 text-base">Líder académico con más de 20 años de experiencia en educación.</p>
+      </div>
+      <div className="bg-blue-50 rounded-xl shadow-lg p-8 flex flex-col items-center text-center border-t-4 border-blue-900">
+        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Coordinadora Académica" className="w-24 h-24 rounded-full mb-4 border-4 border-blue-900 object-cover shadow-lg" />
+        <h3 className="text-xl font-bold text-blue-900 mb-1">María Gómez</h3>
+        <span className="text-blue-600 font-semibold mb-2">Coordinadora Académica</span>
+        <p className="text-gray-700 text-base">Especialista en innovación pedagógica y formación docente.</p>
+      </div>
+      <div className="bg-blue-50 rounded-xl shadow-lg p-8 flex flex-col items-center text-center border-t-4 border-blue-900">
+        <img src="https://randomuser.me/api/portraits/men/65.jpg" alt="Coordinador de Bienestar" className="w-24 h-24 rounded-full mb-4 border-4 border-blue-900 object-cover shadow-lg" />
+        <h3 className="text-xl font-bold text-blue-900 mb-1">Carlos Ruiz</h3>
+        <span className="text-blue-600 font-semibold mb-2">Coordinador de Bienestar</span>
+        <p className="text-gray-700 text-base">Promotor de actividades deportivas, culturales y de salud estudiantil.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
       {/* Galería de Imágenes */}
       <section className="py-20 bg-white">
