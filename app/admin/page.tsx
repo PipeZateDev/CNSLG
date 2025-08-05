@@ -976,71 +976,73 @@ export default function Admin() {
             </div>
           </section>
           <footer className="bg-gray-900 text-white py-12">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-4 gap-8 text-center">
-            <div>
-              {/* ...logo y descripción... */}
-            </div>
-            <div>
-              {/* ...enlaces rápidos... */}
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Plataformas</h4>
-              <div className="space-y-2">
-                {/* ...plataformas... */}
-              </div>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Contacto</h4>
-              <div className="space-y-2 text-sm text-gray-400">
+            <div className="max-w-7xl mx-auto px-6">
+              <div className="grid md:grid-cols-4 gap-8 text-center">
                 <div>
-                  <span className="font-bold text-white">Dirección:</span><br />
-                  Carrera 92 #151b 61
+                  {/* ...logo y descripción... */}
                 </div>
                 <div>
-                  <span className="font-bold text-white">WhatsApp:</span><br />
-                  +57 318 336 5700
+                  {/* ...enlaces rápidos... */}
                 </div>
                 <div>
-                  <span className="font-bold text-white">Horarios de Atención:</span><br />
-                  Lunes a Viernes: 7:00 AM - 5:00 PM
+                  <h4 className="font-semibold mb-4">Plataformas</h4>
+                  <div className="space-y-2">
+                    <a 
+                      href="https://lms30.uno-internacional.com/login/access" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="block text-sm text-gray-400 hover:text-white transition-colors cursor-pointer"
+                    >
+                      UNOi Santillana
+                    </a>
+                    <a 
+                      href="https://www.cibercolegios.com/" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="block text-sm text-gray-400 hover:text-white transition-colors cursor-pointer"
+                    >
+                      Cibercolegios
+                    </a>
+                    <a 
+                      href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=12695&searchedCategoryId=&searchedAgreementName=PEDAGOGICOS%20ASOCIADOS%20SAS" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="block text-sm text-gray-400 hover:text-white transition-colors cursor-pointer"
+                    >
+                      PSE - Pagos en Línea
+                    </a>
+                  </div>
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-4">Contacto</h4>
+                  <div className="space-y-2 text-sm text-gray-400">
+                    <div>
+                      <span className="font-bold text-white">Dirección:</span><br />
+                      Carrera 92 #151b 61
+                    </div>
+                    <div>
+                      <span className="font-bold text-white">WhatsApp:</span><br />
+                      +57 318 336 5700
+                    </div>
+                    <div>
+                      <span className="font-bold text-white">Horarios de Atención:</span><br />
+                      Lunes a Viernes: 7:00 AM - 5:00 PM
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="border-t border-gray-800 mt-8 pt-8 text-center">
+                <p className="text-gray-400 text-sm">
+                  © 2025 Colegio Nuevo San Luis Gonzaga. Todos los derechos reservados.
+                </p>
+                <div className="mt-2">
+                  <Link href="/admin" className="text-blue-400 hover:text-white font-semibold underline text-sm transition-colors cursor-pointer">
+                    Ingresa como Administrador
+                  </Link>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center">
-            <p className="text-gray-400 text-sm">
-              © 2025 Colegio Nuevo San Luis Gonzaga. Todos los derechos reservados.
-            </p>
-            <div className="mt-2">
-              <Link href="/admin" className="text-blue-400 hover:text-white font-semibold underline text-sm transition-colors cursor-pointer">
-                Ingresa como Administrador
-              </Link>
-            </div>
-          </div>
-        </div>
-      </footer>
-        </>
-      )}
-    </div>
-  );
-}
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center">
-            <p className="text-gray-400 text-sm">
-              © 2025 Colegio Nuevo San Luis Gonzaga. Todos los derechos reservados.
-            </p>
-            <div className="mt-2">
-              <Link href="/admin" className="text-blue-400 hover:text-white font-semibold underline text-sm transition-colors cursor-pointer">
-                Ingresa como Administrador
-              </Link>
-            </div>
-          </div>
-        </div>
-      </footer>
+          </footer>
         </>
       )}
     </div>
