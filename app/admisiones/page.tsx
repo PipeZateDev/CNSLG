@@ -352,10 +352,6 @@ export default function Admisiones() {
                   <i className="ri-check-line text-green-600 mr-2 mt-1"></i>
                   Certificado de comportamiento del colegio anterior
                 </li>
-                <li className="flex items-start">
-                  <i className="ri-check-line text-green-600 mr-2 mt-1"></i>
-                  3 fotos tamaño 3x4 fondo blanco
-                </li>
               </ul>
             </div>
             
