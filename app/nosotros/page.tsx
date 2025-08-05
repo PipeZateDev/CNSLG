@@ -271,7 +271,9 @@ export default function Nosotros() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Misión */}
           <div className="bg-blue-50 rounded-xl shadow-lg p-6 text-center border-t-8 border-blue-900">
-            <i className="ri-target-line text-3xl text-blue-900 mb-2 animate-bounce"></i>
+            <div className="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
+              <i className="ri-road-map-line text-3xl text-blue-900 animate-bounce"></i>
+            </div>
             <h3 className="text-xl font-bold text-blue-900 mb-2">Misión</h3>
             <p className="text-gray-700 text-sm">
               El COLEGIO NUEVO SAN LUIS GONZAGA tiene el propósito de formar integralmente a nuestros estudiantes desde los valores Gonzaguistas, potenciando sus dimensiones de aprendizaje, profundizando en las áreas de humanidades, ciencias, matemáticas e inglés, Todo ello, con un enfoque investigativo y tecnológico.
