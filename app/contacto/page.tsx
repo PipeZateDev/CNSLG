@@ -314,7 +314,8 @@ export default function Contacto() {
         <div className="max-w-7xl mx-auto px-6">
           <h2 className="text-3xl font-bold text-blue-900 text-center mb-12">Departamentos de Contacto</h2>
           
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Fila 1 */}
             <div className="bg-white rounded-lg shadow-lg p-6 text-center">
               <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <i className="ri-user-add-line text-2xl text-blue-600"></i>
@@ -323,18 +324,8 @@ export default function Contacto() {
               <p className="text-gray-600 mb-4">Información sobre inscripciones y proceso de admisión</p>
               <div className="space-y-2 text-sm text-gray-600">
                 <p><i className="ri-phone-line mr-2"></i>(601) 7447473</p>
+                <p><i className="ri-smartphone-line mr-2"></i>+57 318 336 5700</p>
                 <p><i className="ri-mail-line mr-2"></i>admisiones@slgonzaga.edu.co</p>
-              </div>
-            </div>
-
-            <div className="bg-white rounded-lg shadow-lg p-6 text-center">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <i className="ri-graduation-cap-line text-2xl text-green-600"></i>
-              </div>
-              <h3 className="text-xl font-bold text-blue-900 mb-2">Vicerrectoria</h3>
-              <p className="text-gray-600 mb-4">Dirección académica y administrativa del colegio</p>
-              <div className="space-y-2 text-sm text-gray-600">
-                <p><i className="ri-mail-line mr-2"></i>vicerrectoria@slgonzaga.edu.co</p>
               </div>
             </div>
 
@@ -346,18 +337,33 @@ export default function Contacto() {
               <p className="text-gray-600 mb-4">Certificados, constancias y documentos académicos</p>
               <div className="space-y-2 text-sm text-gray-600">
                 <p><i className="ri-phone-line mr-2"></i>(601) 7447473</p>
+                <p><i className="ri-smartphone-line mr-2"></i>+57 318 336 5700</p>
                 <p><i className="ri-mail-line mr-2"></i>secretaria@slgonzaga.edu.co</p>
               </div>
             </div>
 
             <div className="bg-white rounded-lg shadow-lg p-6 text-center">
+              <div className="w-16 h-16 bg-cyan-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i className="ri-shopping-cart-2-line text-2xl text-cyan-600"></i>
+              </div>
+              <h3 className="text-xl font-bold text-blue-900 mb-2">Compras</h3>
+              <p className="text-gray-600 mb-4">Compras y soporte a proveedores</p>
+              <div className="space-y-2 text-sm text-gray-600">
+                <p><i className="ri-mail-line mr-2"></i>compras@slgonzaga.edu.co</p>
+              </div>
+            </div>
+
+            {/* Fila 2 */}
+            <div className="bg-white rounded-lg shadow-lg p-6 text-center">
               <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <i className="ri-heart-pulse-line text-2xl text-orange-600"></i>
               </div>
-              <h3 className="text-xl font-bold text-blue-900 mb-2">Psicología</h3>
-              <p className="text-gray-600 mb-4">Acompañamiento psicopedagógico y bienestar estudiantil</p>
+              <h3 className="text-xl font-bold text-blue-900 mb-2">Psicología / Enfermería</h3>
+              <p className="text-gray-600 mb-4">Bienestar estudiantil, acompañamiento emocional y atención de salud escolar</p>
               <div className="space-y-2 text-sm text-gray-600">
                 <p><i className="ri-mail-line mr-2"></i>psicologia@slgonzaga.edu.co</p>
+                <p><i className="ri-mail-line mr-2"></i>enfermeria@slgonzaga.edu.co</p>
+                <p><i className="ri-smartphone-line mr-2"></i>+57 318 7080239</p>
               </div>
             </div>
 
@@ -379,7 +385,7 @@ export default function Contacto() {
               <h3 className="text-xl font-bold text-blue-900 mb-2">Sistemas</h3>
               <p className="text-gray-600 mb-4">Soporte técnico y plataformas virtuales</p>
               <div className="space-y-2 text-sm text-gray-600">
-                <p><i className="ri-mail-line mr-2"></i>soportes@slgonzaga.edu.co</p>
+                <p><i className="ri-mail-line mr-2"></i>soporte@slgonzaga.edu.co</p>
               </div>
             </div>
           </div>
