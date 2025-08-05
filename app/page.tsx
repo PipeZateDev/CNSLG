@@ -177,31 +177,39 @@ export default function Home() {
           {isMenuOpen && (
             <div className="lg:hidden mt-4 py-4 border-t border-gray-200">
               <div className="flex flex-col space-y-3">
-                <Link 
+                <Link
                   href="/"
                   onClick={() => setIsMenuOpen(false)}
-                  className="px-4 py-2 bg-blue-900 text-white rounded-full transition-colors text-center cursor-pointer"
+                  className={`px-4 py-2 rounded-full transition-colors text-center cursor-pointer ${
+                    pathname === '/' ? 'bg-blue-900 text-white' : 'text-blue-900 hover:bg-blue-50'
+                  }`}
                 >
                   Inicio
                 </Link>
-                <Link 
+                <Link
                   href="/nosotros"
                   onClick={() => setIsMenuOpen(false)}
-                  className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer"
+                  className={`px-4 py-2 rounded-full transition-colors text-center cursor-pointer ${
+                    pathname === '/nosotros' ? 'bg-blue-900 text-white' : 'text-blue-900 hover:bg-blue-50'
+                  }`}
                 >
                   Nosotros
                 </Link>
-                <Link 
+                <Link
                   href="/admisiones"
                   onClick={() => setIsMenuOpen(false)}
-                  className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer"
+                  className={`px-4 py-2 rounded-full transition-colors text-center cursor-pointer ${
+                    pathname === '/admisiones' ? 'bg-blue-900 text-white' : 'text-blue-900 hover:bg-blue-50'
+                  }`}
                 >
                   Admisiones
                 </Link>
-                <Link 
+                <Link
                   href="/contacto"
                   onClick={() => setIsMenuOpen(false)}
-                  className="px-4 py-2 text-blue-900 hover:bg-blue-50 rounded-full transition-colors text-center cursor-pointer"
+                  className={`px-4 py-2 rounded-full transition-colors text-center cursor-pointer ${
+                    pathname === '/contacto' ? 'bg-blue-900 text-white' : 'text-blue-900 hover:bg-blue-50'
+                  }`}
                 >
                   Contacto
                 </Link>
