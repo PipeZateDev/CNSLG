@@ -451,31 +451,47 @@ export default function Home() {
             {Object.entries(groupedNews).map(([groupKey, items], idx) => (
               groupKey.startsWith('__single_') ? (
                 items.map((item, i) => (
-                  <div key={item.link + i} className="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer"
-                    onClick={() => openNewsModal([item], 0)}>
-                    <img 
-                      src={item.link}
-                      alt={item.Titulo}
-                      className="w-full h-48 object-cover object-top"
-                    />
-                    <div className="p-6">
+                  <div 
+                    key={item.link + i} 
+                    className="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer group transition-transform duration-300 hover:scale-105 hover:shadow-xl"
+                    onClick={() => openNewsModal([item], 0)}
+                  >
+                    <div className="relative">
+                      <img 
+                        src={item.link}
+                        alt={item.Titulo}
+                        className="w-full h-48 object-cover object-top transition-transform duration-300 group-hover:scale-110 group-hover:brightness-95"
+                      />
+                      <div className="absolute top-2 right-2 bg-blue-900 text-white px-2 py-1 rounded-full text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        ¡Ver más!
+                      </div>
+                    </div>
+                    <div className="p-6 transition-colors duration-300 group-hover:bg-blue-50">
                       <span className="text-sm text-blue-600 font-semibold">{item.fecha}</span>
-                      <h3 className="text-lg font-bold text-blue-900 mb-2 mt-1">{item.Titulo}</h3>
+                      <h3 className="text-lg font-bold text-blue-900 mb-2 mt-1 group-hover:text-blue-700 transition-colors">{item.Titulo}</h3>
                       <p className="text-gray-600 text-sm">{item.Descripción}</p>
                     </div>
                   </div>
                 ))
               ) : (
-                <div key={groupKey} className="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer"
-                  onClick={() => openNewsModal(items, 0)}>
-                  <img 
-                    src={items[0].link}
-                    alt={items[0].Titulo}
-                    className="w-full h-48 object-cover object-top"
-                  />
-                  <div className="p-6">
+                <div 
+                  key={groupKey} 
+                  className="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer group transition-transform duration-300 hover:scale-105 hover:shadow-xl"
+                  onClick={() => openNewsModal(items, 0)}
+                >
+                  <div className="relative">
+                    <img 
+                      src={items[0].link}
+                      alt={items[0].Titulo}
+                      className="w-full h-48 object-cover object-top transition-transform duration-300 group-hover:scale-110 group-hover:brightness-95"
+                    />
+                    <div className="absolute top-2 right-2 bg-blue-900 text-white px-2 py-1 rounded-full text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      ¡Ver galería!
+                    </div>
+                  </div>
+                  <div className="p-6 transition-colors duration-300 group-hover:bg-blue-50">
                     <span className="text-sm text-blue-600 font-semibold">{items[0].fecha}</span>
-                    <h3 className="text-lg font-bold text-blue-900 mb-2 mt-1">{items[0].Titulo}</h3>
+                    <h3 className="text-lg font-bold text-blue-900 mb-2 mt-1 group-hover:text-blue-700 transition-colors">{items[0].Titulo}</h3>
                     <p className="text-gray-600 text-sm">{items[0].Descripción}</p>
                     {items.length > 1 && (
                       <div className="mt-2 text-blue-900 text-xs font-semibold">
