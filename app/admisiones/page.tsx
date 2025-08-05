@@ -176,6 +176,56 @@ export default function Admisiones() {
         </div>
       </section>
 
+      {/* Por qué elegirnos - Sección destacada */}
+      <section className="pt-24 pb-12 bg-gradient-to-r from-blue-900 to-blue-700 text-white text-center">
+        <div className="max-w-5xl mx-auto px-6">
+          <h2 className="text-4xl font-bold mb-6">¿Por qué elegirnos?</h2>
+          <div className="grid md:grid-cols-2 gap-8 text-left">
+            <ul className="space-y-4 text-lg">
+              <li>
+                <span className="font-bold text-yellow-300">Trayectoria y excelencia:</span> Colegio de amplia trayectoria en Bogotá, ambiente académico, deportivo y cultural reconocido.
+              </li>
+              <li>
+                <span className="font-bold text-yellow-300">Cursos pequeños:</span> Atención personalizada y acompañamiento cercano.
+              </li>
+              <li>
+                <span className="font-bold text-yellow-300">Nivel Muy Superior A+ ICFES:</span> Máxima categoría en pruebas nacionales.
+              </li>
+              <li>
+                <span className="font-bold text-yellow-300">Robótica y emprendimiento:</span> Programa WRO, clubes y proyectos creativos todos los lunes y jueves.
+              </li>
+              <li>
+                <span className="font-bold text-yellow-300">Plataformas educativas:</span> Convenio Santillana, UNO i, Richmond, Loqueleo, Coach Virtual y Cibercolegios.
+              </li>
+              <li>
+                <span className="font-bold text-yellow-300">Inglés avanzado:</span> Certificación TOEFL en grado 5° y 11°, nivel B2 europeo.
+              </li>
+            </ul>
+            <ul className="space-y-4 text-lg">
+              <li>
+                <span className="font-bold text-yellow-300">Arte y deporte:</span> Música, danza, artes plásticas y clubes deportivos de alto rendimiento.
+              </li>
+              <li>
+                <span className="font-bold text-yellow-300">Zonas verdes y laboratorios:</span> Campos deportivos, laboratorios de ciencias, matemáticas e inglés.
+              </li>
+              <li>
+                <span className="font-bold text-yellow-300">Tecnología en aulas:</span> Videobeam, TV, Apple TV en cada salón.
+              </li>
+              <li>
+                <span className="font-bold text-yellow-300">Bienestar estudiantil:</span> Restaurante, cafetería, enfermería, transporte y psicología.
+              </li>
+              <li>
+                <span className="font-bold text-yellow-300">Costos asequibles:</span> Descuentos para hermanos y pronto pago.
+              </li>
+            </ul>
+          </div>
+          <div className="mt-8">
+            <span className="inline-block px-6 py-3 bg-yellow-400 text-blue-900 font-bold rounded-full shadow-lg text-xl">
+              ¡Elige CNSLG y vive la mejor experiencia educativa!
+            </span>
+          </div>
+        </div>
+      </section>
 
       {/* Niveles Educativos */}
       <section className="py-20 bg-gray-50">
@@ -249,7 +299,7 @@ export default function Admisiones() {
         </div>
         <h3 className="text-lg font-bold text-blue-900 mb-2">Primaria</h3>
         <p className="text-gray-700 text-sm">
-          Formación académica sólida en ciencias, matemáticas, humanidades y bilingüismo.
+          Formación académica sólida in ciencias, matemáticas, humanidades y bilingüismo.
         </p>
       </div>
       <div className="bg-yellow-50 rounded-lg p-6 flex flex-col items-center text-center">
