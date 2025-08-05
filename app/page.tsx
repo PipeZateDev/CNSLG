@@ -388,35 +388,35 @@ export default function Home() {
     </p>
     <div className="grid md:grid-cols-5 gap-8 mb-16">
       <div className="text-center">
-        <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+        <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 animate-bounce-slow">
           <i className="ri-graduation-cap-line text-3xl text-blue-600"></i>
         </div>
         <h3 className="text-2xl font-bold text-blue-900 mb-2">+2850</h3>
         <p className="text-gray-600">Graduados Exitosos</p>
       </div>
       <div className="text-center">
-        <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+        <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 animate-bounce-slow delay-100">
           <i className="ri-award-line text-3xl text-green-600"></i>
         </div>
         <h3 className="text-2xl font-bold text-blue-900 mb-2">99</h3>
         <p className="text-gray-600">Años de Tradición</p>
       </div>
       <div className="text-center">
-        <div className="w-20 h-20 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+        <div className="w-20 h-20 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4 animate-bounce-slow delay-200">
           <i className="ri-english-input text-3xl text-yellow-600"></i>
         </div>
         <h3 className="text-2xl font-bold text-blue-900 mb-2">Inglés Intensivo</h3>
         <p className="text-gray-600">con certificación TOEFL</p>
       </div>
       <div className="text-center">
-        <div className="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+        <div className="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4 animate-bounce-slow delay-300">
           <i className="ri-star-line text-3xl text-purple-600"></i>
         </div>
         <h3 className="text-2xl font-bold text-blue-900 mb-2">100%</h3>
         <p className="text-gray-600">Compromiso con la Calidad</p>
       </div>
       <div className="text-center">
-        <div className="w-20 h-20 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
+        <div className="w-20 h-20 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4 animate-bounce-slow delay-400">
           <i className="ri-group-line text-3xl text-pink-600"></i>
         </div>
         <h3 className="text-2xl font-bold text-blue-900 mb-2">99%</h3>
