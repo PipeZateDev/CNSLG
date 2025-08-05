@@ -281,7 +281,9 @@ export default function Nosotros() {
           </div>
           {/* Visión */}
           <div className="bg-green-50 rounded-xl shadow-lg p-6 text-center border-t-8 border-yellow-400">
-            <i className="ri-eye-line text-3xl text-yellow-400 mb-2 animate-bounce"></i>
+            <div className="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-2">
+              <i className="ri-eye-line text-3xl text-yellow-400 animate-bounce"></i>
+            </div>
             <h3 className="text-xl font-bold text-blue-900 mb-2">Visión</h3>
             <p className="text-gray-700 text-sm">
               Evolucionar y crecer como una Institución de educación formal de calidad dedicada a la formación y desarrollo de seres humanos integrales, con un currículo avanzado y proyectado hacia el bilingüismo, la investigación, la tecnología y el deporte. Asimismo, proyectamos alcanzar altos estándares B2 en el nivel de inglés de acuerdo con el Marco Común Europeo.
