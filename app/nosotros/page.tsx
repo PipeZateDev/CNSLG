@@ -126,7 +126,15 @@ export default function Nosotros() {
               <img 
                 src="https://i.ibb.co/spn4L9WW/LOGO-NSLG-2-Mini.png" 
                 alt="Logo Colegio Nuevo San Luis Gonzaga"
-                className="h-12 w-auto min-w-[48px] max-w-[120px]"
+                className="transition-all duration-300"
+                style={{
+                  height: '64px',
+                  width: 'auto',
+                  maxWidth: '180px',
+                  minWidth: '48px',
+                  aspectRatio: 'auto 180 / 64',
+                  objectFit: 'contain'
+                }}
               />
             </div>
             {/* Centrado absoluto de pestañas */}
