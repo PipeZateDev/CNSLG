@@ -231,58 +231,66 @@ export default function Admisiones() {
 
       {/* Servicios Académicos */}
       <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-3xl font-bold text-blue-900 text-center mb-12">Servicios Académicos</h2>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-gray-50 rounded-lg p-6 text-center">
-              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                <i className="ri-global-line text-blue-600"></i>
-              </div>
-              <h4 className="font-semibold text-blue-900 mb-2">Ingles Intensivo</h4>
-              <p className="text-sm text-gray-600">Inglés intensivo desde preescolar con certificaciones internacionales</p>
-            </div>
-            <div className="bg-gray-50 rounded-lg p-6 text-center">
-              <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                <i className="ri-computer-line text-green-600"></i>
-              </div>
-              <h4 className="font-semibold text-blue-900 mb-2">Tecnología</h4>
-              <p className="text-sm text-gray-600">Laboratorios modernos, aulas digitales y plataformas virtuales</p>
-            </div>
-            <div className="bg-gray-50 rounded-lg p-6 text-center">
-              <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                <i className="ri-football-line text-purple-600"></i>
-              </div>
-              <h4 className="font-semibold text-blue-900 mb-2">Deportes</h4>
-              <p className="text-sm text-gray-600">Fútbol, voleibol, baloncesto y atletismo</p>
-            </div>
-            <div className="bg-gray-50 rounded-lg p-6 text-center">
-              <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                <i className="ri-music-line text-orange-600"></i>
-              </div>
-              <h4 className="font-semibold text-blue-900 mb-2">Artes</h4>
-              <p className="text-sm text-gray-600">Música, teatro, danza y artes plásticas</p>
-            </div>
-            <div className="bg-gray-50 rounded-lg p-6 text-center">
-              <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                <i className="ri-microscope-line text-red-600"></i>
-              </div>
-              <h4 className="font-semibold text-blue-900 mb-2">Laboratorios</h4>
-              <p className="text-sm text-gray-600">Ciencias naturales, física, química, biología y matemáticas</p>
-            </div>
-            
-            <div className="bg-gray-50 rounded-lg p-6 text-center">
-              <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                <i className="ri-user-heart-line text-yellow-600"></i>
-              </div>
-              <h4 className="font-semibold text-blue-900 mb-2">Psicología</h4>
-              <p className="text-sm text-gray-600">Acompañamiento psicopedagógico integral</p>
-            
-              
-            </div>
-          </div>
+  <div className="max-w-7xl mx-auto px-6">
+    <h2 className="text-3xl font-bold text-blue-900 mb-8 text-center">Servicios Académicos</h2>
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="bg-blue-50 rounded-lg p-6 flex flex-col items-center text-center">
+        <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-2">
+          <i className="ri-book-open-line text-xl text-blue-600"></i>
         </div>
-      </section>
+        <h3 className="text-lg font-bold text-blue-900 mb-2">Preescolar</h3>
+        <p className="text-gray-700 text-sm">
+          Educación inicial con enfoque en el desarrollo integral, valores y creatividad.
+        </p>
+      </div>
+      <div className="bg-green-50 rounded-lg p-6 flex flex-col items-center text-center">
+        <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-2">
+          <i className="ri-pencil-ruler-2-line text-xl text-green-600"></i>
+        </div>
+        <h3 className="text-lg font-bold text-blue-900 mb-2">Primaria</h3>
+        <p className="text-gray-700 text-sm">
+          Formación académica sólida en ciencias, matemáticas, humanidades y bilingüismo.
+        </p>
+      </div>
+      <div className="bg-yellow-50 rounded-lg p-6 flex flex-col items-center text-center">
+        <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mb-2">
+          <i className="ri-graduation-cap-line text-xl text-yellow-600"></i>
+        </div>
+        <h3 className="text-lg font-bold text-blue-900 mb-2">Secundaria</h3>
+        <p className="text-gray-700 text-sm">
+          Educación avanzada, investigación, tecnología y preparación para la vida universitaria.
+        </p>
+      </div>
+      <div className="bg-purple-50 rounded-lg p-6 flex flex-col items-center text-center">
+        <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-2">
+          <i className="ri-global-line text-xl text-purple-600"></i>
+        </div>
+        <h3 className="text-lg font-bold text-blue-900 mb-2">Bilingüismo</h3>
+        <p className="text-gray-700 text-sm">
+          Programa de inglés intensivo y certificación internacional.
+        </p>
+      </div>
+      <div className="bg-pink-50 rounded-lg p-6 flex flex-col items-center text-center">
+        <div className="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center mb-2">
+          <i className="ri-heart-pulse-line text-xl text-pink-600"></i>
+        </div>
+        <h3 className="text-lg font-bold text-blue-900 mb-2">Deporte y Cultura</h3>
+        <p className="text-gray-700 text-sm">
+          Actividades deportivas, artísticas y culturales para el desarrollo integral.
+        </p>
+      </div>
+      <div className="bg-orange-50 rounded-lg p-6 flex flex-col items-center text-center">
+        <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mb-2">
+          <i className="ri-lightbulb-flash-line text-xl text-orange-600"></i>
+        </div>
+        <h3 className="text-lg font-bold text-blue-900 mb-2">Tecnología e Investigación</h3>
+        <p className="text-gray-700 text-sm">
+          Fomento de la innovación, pensamiento crítico y uso de herramientas tecnológicas.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
 
       {/* Proceso de Admisión */}
       <section className="py-20 bg-gray-50">
