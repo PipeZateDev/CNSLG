@@ -253,198 +253,275 @@ export default function Nosotros() {
 
 
 {/* Sección: Historia + Misión/Visión + Canva */}
-<section className="pt-24 pb-12 bg-gradient-to-r from-blue-900 to-blue-700 text-white">
-  <div className="max-w-7xl mx-auto px-6 text-center">
-    <h1 className="text-5xl md:text-6xl font-extrabold mb-6 tracking-tight drop-shadow-lg">
-      Nosotros
-    </h1>
-    <p className="text-xl md:text-2xl text-blue-100 mb-8 max-w-3xl mx-auto font-medium">
-      Colegio Nuevo San Luis Gonzaga: 99 años formando líderes con excelencia académica y valores.
-    </p>
+<section className="pt-24 pb-12 bg-gradient-to-r from-blue-900 to-blue-700 text-white shadow-lg">
+  <div className="max-w-7xl mx-auto px-6">
+    <div className="grid md:grid-cols-2 gap-12 items-start">
+      {/* Columna izquierda: Historia + Misión + Visión */}
+      <div>
+        <h2 className="text-4xl font-extrabold mb-6 tracking-tight drop-shadow-lg">Nuestra Historia Centenaria</h2>
+        <p className="text-lg text-blue-100 mb-4 leading-relaxed">
+          Fundado en 1926, el Colegio Nuevo San Luis Gonzaga ha sido un pilar fundamental en la educación colombiana durante casi un siglo...
+        </p>
+        <p className="text-lg text-blue-100 mb-4">
+          A lo largo de estos 99 años, hemos mantenido nuestro compromiso con la excelencia académica...
+        </p>
+        <p className="text-lg text-blue-100 mb-8">
+          Hoy, nos enorgullecemos de ser una institución reconocida por su calidad educativa...
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Misión */}
+          <div className="bg-blue-50 rounded-xl shadow-lg p-6 text-center border-t-8 border-blue-900">
+            <i className="ri-target-line text-3xl text-blue-900 mb-2 animate-bounce"></i>
+            <h3 className="text-xl font-bold text-blue-900 mb-2">Misión</h3>
+            <p className="text-gray-700 text-sm">
+              El COLEGIO NUEVO SAN LUIS GONZAGA tiene el propósito de formar integralmente a nuestros estudiantes desde los valores Gonzaguistas, potenciando sus dimensiones de aprendizaje, profundizando en las áreas de humanidades, ciencias, matemáticas e inglés, Todo ello, con un enfoque investigativo y tecnológico.
+            </p>
+          </div>
+          {/* Visión */}
+          <div className="bg-green-50 rounded-xl shadow-lg p-6 text-center border-t-8 border-yellow-400">
+            <i className="ri-eye-line text-3xl text-yellow-400 mb-2 animate-bounce"></i>
+            <h3 className="text-xl font-bold text-blue-900 mb-2">Visión</h3>
+            <p className="text-gray-700 text-sm">
+              Evolucionar y crecer como una Institución de educación formal de calidad dedicada a la formación y desarrollo de seres humanos integrales, con un currículo avanzado y proyectado hacia el bilingüismo, la investigación, la tecnología y el deporte. Asimismo, proyectamos alcanzar altos estándares B2 en el nivel de inglés de acuerdo con el Marco Común Europeo.
+            </p>
+          </div>
+        </div>
+      </div>
+      {/* Columna derecha: Canva embed */}
+      <div>
+        <div className="rounded-xl overflow-hidden shadow-xl border-4 border-blue-900 bg-white">
+          <div style={{
+            position: 'relative',
+            width: '100%',
+            height: 0,
+            paddingTop: '125.0000%',
+            paddingBottom: 0,
+            overflow: 'hidden',
+            borderRadius: '8px',
+            willChange: 'transform'
+          }}>
+            <iframe
+              loading="lazy"
+              style={{
+                position: 'absolute',
+                width: '100%',
+                height: '100%',
+                top: 0,
+                left: 0,
+                border: 'none',
+                padding: 0,
+                margin: 0
+              }}
+              src="https://www.canva.com/design/DAGt7hE4YGs/bhZrgMbKfPaECdSdwufBPw/view?embed"
+              allowFullScreen
+              allow="fullscreen"
+              title="TimeLine-CNSLG"
+            ></iframe>
+          </div>
+          <div className="text-center mt-4 text-blue-900 font-bold">
+            <a
+              href="https://www.canva.com/design/DAGt7hE4YGs/bhZrgMbKfPaECdSdwufBPw/view?utm_content=DAGt7hE4YGs&utm_campaign=designshare&utm_medium=embeds&utm_source=link"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline"
+            >
+              TimeLine
+            </a>{' '}
+            de Soporte CNSLG
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
-<section className="py-20 bg-white">
-  <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-    <div className="flex flex-col items-center md:items-start">
-      <img 
-        src="https://i.ibb.co/spn4L9WW/LOGO-NSLG-2-Mini.png"
-        alt="Logo Colegio Nuevo San Luis Gonzaga"
-        className="h-32 w-auto mb-6 drop-shadow-xl"
-      />
-      <h2 className="text-3xl font-bold text-blue-900 mb-4">Nuestra Historia</h2>
-      <p className="text-lg text-gray-700 mb-6 leading-relaxed">
-        Fundado en 1926, el Colegio Nuevo San Luis Gonzaga ha sido pionero en educación integral, promoviendo el desarrollo académico, deportivo y cultural de nuestros estudiantes. Nos destacamos por nuestra atención personalizada, innovación educativa y compromiso con la formación en valores.
-      </p>
-      <div className="flex flex-wrap gap-4">
-        <span className="px-4 py-2 bg-blue-900 text-white rounded-full font-semibold shadow hover:bg-blue-800 transition-colors">Excelencia Académica</span>
-        <span className="px-4 py-2 bg-green-600 text-white rounded-full font-semibold shadow hover:bg-green-700 transition-colors">Bilingüismo</span>
-        <span className="px-4 py-2 bg-yellow-400 text-blue-900 rounded-full font-semibold shadow hover:bg-yellow-500 transition-colors">Innovación</span>
-        <span className="px-4 py-2 bg-pink-500 text-white rounded-full font-semibold shadow hover:bg-pink-600 transition-colors">Arte y Deporte</span>
+{/* Sección: Valores + Decálogo */}
+<section className="py-20 bg-blue-50">
+  <div className="max-w-7xl mx-auto px-6">
+    <div className="flex flex-col md:flex-row md:space-x-8 space-y-8 md:space-y-0">
+      {/* Valores Institucionales */}
+      <div className="bg-yellow-50 rounded-xl shadow-lg p-8 flex-1 border-t-8 border-yellow-400">
+        <div className="w-14 h-14 bg-yellow-100 rounded-full flex items-center justify-center mb-3">
+          <i className="ri-hand-heart-line text-2xl text-yellow-600 animate-bounce"></i>
+        </div>
+        <h3 className="text-2xl font-bold text-blue-900 mb-3">Valores Institucionales</h3>
+        <ul className="list-disc pl-5 text-gray-700 text-base space-y-2">
+          <li><strong>Identidad:</strong> Pertenencia y rasgos distintivos Gonzaguistas.</li>
+          <li><strong>Responsabilidad:</strong> Compromiso y conciencia de consecuencias.</li>
+          <li><strong>Justicia:</strong> Respeto y defensa de derechos, equidad.</li>
+          <li><strong>Trascendencia:</strong> Misión, armonía y entusiasmo.</li>
+          <li><strong>Tolerancia:</strong> Respeto y aceptación de la diferencia.</li>
+        </ul>
       </div>
-    </div>
-    <div className="flex flex-col items-center md:items-end">
-      <div className="w-full bg-blue-50 rounded-xl shadow-lg p-8 mb-6">
-        <h3 className="text-2xl font-bold text-blue-900 mb-2">Misión</h3>
-        <p className="text-gray-700 text-base mb-4">
-          Formar estudiantes íntegros, críticos y creativos, capaces de transformar la sociedad con valores humanos y excelencia académica.
-        </p>
-        <h3 className="text-2xl font-bold text-blue-900 mb-2">Visión</h3>
-        <p className="text-gray-700 text-base">
-          Ser reconocidos como líderes en educación integral, innovación y formación en valores, contribuyendo al desarrollo de Colombia y el mundo.
-        </p>
-      </div>
-      <div className="w-full bg-white rounded-xl shadow-lg p-8">
-        <h3 className="text-2xl font-bold text-blue-900 mb-4">Valores</h3>
-        <ul className="grid grid-cols-2 gap-4 text-gray-700 text-base">
-          <li className="flex items-center gap-2"><i className="ri-heart-line text-pink-500"></i> Respeto</li>
-          <li className="flex items-center gap-2"><i className="ri-lightbulb-flash-line text-yellow-400"></i> Honestidad</li>
-          <li className="flex items-center gap-2"><i className="ri-star-line text-purple-600"></i> Responsabilidad</li>
-          <li className="flex items-center gap-2"><i className="ri-global-line text-green-600"></i> Solidaridad</li>
+      {/* Decálogo */}
+      <div className="bg-purple-50 rounded-xl shadow-lg p-8 flex-1 border-t-8 border-purple-400">
+        <div className="w-14 h-14 bg-purple-100 rounded-full flex items-center justify-center mb-3">
+          <i className="ri-list-check text-2xl text-purple-600 animate-bounce"></i>
+        </div>
+        <h3 className="text-2xl font-bold text-blue-900 mb-3">Decálogo CNSLG</h3>
+        <ul className="list-decimal pl-5 text-gray-700 text-base space-y-1">
+          <li>Dios siempre presente en nuestras labores educativas.</li>
+          <li>Educamos con justicia y amor.</li>
+          <li>Actuamos con responsabilidad y decisión.</li>
+          <li>Prestamos un servicio de calidad con amabilidad.</li>
+          <li>Fomentamos el espíritu investigativo y deportivo.</li>
+          <li>Somos diligentes y creativos.</li>
+          <li>Estamos a la vanguardia de los conocimientos científicos y tecnológicos.</li>
+          <li>Reconocemos los derechos fundamentales de las personas.</li>
+          <li>Somos exitosos por nuestra organización.</li>
+          <li>Planeamos, hacemos, verificamos y actuamos.</li>
         </ul>
       </div>
     </div>
   </div>
 </section>
 
-<section className="py-20 bg-blue-50">
-  <div className="max-w-7xl mx-auto px-6">
-    <h2 className="text-3xl font-bold text-blue-900 text-center mb-12">Nuestro Equipo Directivo</h2>
-    <div className="grid md:grid-cols-3 gap-8">
-      <div className="bg-white rounded-xl shadow-lg p-8 flex flex-col items-center">
-        <img src="https://i.ibb.co/album-director.jpg" alt="Directora" className="w-24 h-24 rounded-full mb-4 object-cover border-4 border-blue-900 shadow" />
-        <h3 className="text-xl font-bold text-blue-900 mb-2">María González</h3>
-        <p className="text-gray-700 mb-2">Directora General</p>
-        <p className="text-sm text-gray-500">Liderazgo, gestión académica y visión institucional.</p>
-      </div>
-      <div className="bg-white rounded-xl shadow-lg p-8 flex flex-col items-center">
-        <img src="https://i.ibb.co/album-coordinador.jpg" alt="Coordinador Académico" className="w-24 h-24 rounded-full mb-4 object-cover border-4 border-green-600 shadow" />
-        <h3 className="text-xl font-bold text-blue-900 mb-2">Carlos Ramírez</h3>
-        <p className="text-gray-700 mb-2">Coordinador Académico</p>
-        <p className="text-sm text-gray-500">Innovación pedagógica y acompañamiento estudiantil.</p>
-      </div>
-      <div className="bg-white rounded-xl shadow-lg p-8 flex flex-col items-center">
-        <img src="https://i.ibb.co/album-bilingue.jpg" alt="Coordinadora Bilingüe" className="w-24 h-24 rounded-full mb-4 object-cover border-4 border-yellow-400 shadow" />
-        <h3 className="text-xl font-bold text-blue-900 mb-2">Laura Torres</h3>
-        <p className="text-gray-700 mb-2">Coordinadora de Bilingüismo</p>
-        <p className="text-sm text-gray-500">Programa de inglés y certificaciones internacionales.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
+{/* Galería de Imágenes */}
 <section className="py-20 bg-white">
   <div className="max-w-7xl mx-auto px-6">
-    <h2 className="text-3xl font-bold text-blue-900 text-center mb-12">Instalaciones y Recursos</h2>
-    <div className="grid md:grid-cols-3 gap-8">
-      <div className="bg-blue-50 rounded-xl shadow-lg p-8 flex flex-col items-center">
-        <i className="ri-building-line text-5xl text-blue-900 mb-4 animate-bounce-slow"></i>
-        <h3 className="text-xl font-bold text-blue-900 mb-2">Aulas Interactivas</h3>
-        <p className="text-gray-700 text-center">Salones equipados con tecnología de punta para potenciar el aprendizaje.</p>
-      </div>
-      <div className="bg-green-50 rounded-xl shadow-lg p-8 flex flex-col items-center">
-        <i className="ri-flask-line text-5xl text-green-600 mb-4 animate-bounce-slow delay-100"></i>
-        <h3 className="text-xl font-bold text-blue-900 mb-2">Laboratorios</h3>
-        <p className="text-gray-700 text-center">Laboratorios de ciencias, matemáticas e inglés para la experimentación y el descubrimiento.</p>
-      </div>
-      <div className="bg-yellow-50 rounded-xl shadow-lg p-8 flex flex-col items-center">
-        <i className="ri-football-line text-5xl text-yellow-400 mb-4 animate-bounce-slow delay-200"></i>
-        <h3 className="text-xl font-bold text-blue-900 mb-2">Zonas Deportivas</h3>
-        <p className="text-gray-700 text-center">Campos deportivos y espacios verdes para el desarrollo físico y la recreación.</p>
-      </div>
+    <h2 className="text-3xl font-bold text-blue-900 mb-8 text-center">Galería de Imágenes</h2>
+    <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+      {/* Agrupa por título */}
+      {(() => {
+        // Agrupa por título
+        const groupedByTitle = gallery.reduce<{ [key: string]: typeof gallery }>((acc, img) => {
+          const key = img.Titulo || '';
+          if (!key || gallery.filter(g => g.Titulo === key).length === 1) {
+            acc[`__single_${img.link}`] = [img];
+          } else {
+            if (!acc[key]) acc[key] = [];
+            acc[key].push(img);
+          }
+          return acc;
+        }, {});
+        return Object.entries(groupedByTitle).map(([groupKey, imgs], idx) => (
+          groupKey.startsWith('__single_') ? (
+            imgs.map((img, i) => (
+              <div key={img.link + i} className="col-span-1 md:col-span-1 flex flex-col h-full cursor-pointer group"
+                onClick={() => openGalleryModal([img], 0)}>
+                <div className="rounded-xl shadow-lg bg-blue-50 p-2 flex flex-col h-full transition-transform duration-300 group-hover:scale-105 group-hover:shadow-xl">
+                  <div className="relative overflow-hidden rounded-xl flex flex-col h-full">
+                    <img 
+                      src={img.link}
+                      alt={img.Titulo || ''}
+                      className="w-full h-64 object-cover object-top transition-transform duration-300 group-hover:scale-110 group-hover:brightness-95"
+                      style={{ minHeight: 256, maxHeight: 256 }}
+                    />
+                    <div className="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/20 transition-colors duration-300"></div>
+                    <div className="text-center py-2 font-semibold text-blue-900 bg-white/80" style={{ minHeight: 32 }}>
+                      {img.Titulo ? img.Titulo : <span>&nbsp;</span>}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))
+          ) : (
+            <div key={groupKey} className="col-span-1 md:col-span-1 flex flex-col h-full cursor-pointer group"
+              onClick={() => openGalleryModal(imgs, 0)}>
+              <div className="rounded-xl shadow-lg bg-blue-50 p-2 flex flex-col h-full transition-transform duration-300 group-hover:scale-105 group-hover:shadow-xl">
+                <div className="relative overflow-hidden rounded-xl flex flex-col h-full">
+                  <img 
+                    src={imgs[0].link}
+                    alt={imgs[0].Titulo || ''}
+                    className="w-full h-64 object-cover object-top transition-transform duration-300 group-hover:scale-110 group-hover:brightness-95"
+                    style={{ minHeight: 256, maxHeight: 256 }}
+                  />
+                  <div className="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/20 transition-colors duration-300"></div>
+                  <div className="text-center py-2 font-semibold text-blue-900 bg-white/80" style={{ minHeight: 32 }}>
+                    {imgs[0].Titulo ? imgs[0].Titulo : <span>&nbsp;</span>}
+                  </div>
+                  {imgs.length > 1 && (
+                    <div className="absolute" style={{ bottom: '38%', left: '50%', transform: 'translateX(-50%)' }}>
+                      <button
+                        className="px-4 py-1 bg-blue-900 text-white rounded-full text-xs font-semibold shadow hover:bg-blue-800 transition"
+                        onClick={e => { e.stopPropagation(); openGalleryModal(imgs, 0); }}
+                      >
+                        Ver más ({imgs.length})
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          )
+        ));
+      })()}
     </div>
   </div>
-</section>
-
-<section className="py-20 bg-blue-900 text-white">
-  <div className="max-w-7xl mx-auto px-6 text-center">
-    <h2 className="text-3xl font-bold mb-6">¡Conoce más sobre nuestra comunidad!</h2>
-    <p className="text-lg text-blue-100 mb-8">
-      Descubre por qué somos la mejor opción para la formación integral de tus hijos.
-    </p>
-    <Link 
-      href="/admisiones"
-      className="inline-block px-8 py-4 bg-yellow-400 text-blue-900 font-bold rounded-full shadow-lg text-lg hover:bg-yellow-300 transition-colors"
-    >
-      Ver Admisiones
-    </Link>
-  </div>
-</section>
-
-{/* Modal para visualizar imagen */}
-{galleryModalOpen && (
-  <div
-    className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center"
-    onClick={closeGalleryModal}
-    tabIndex={-1}
-  >
+  {/* Modal para visualizar imagen */}
+  {galleryModalOpen && (
     <div
-      className="relative w-[80vw] max-w-[80vw] mx-4 bg-white rounded-lg shadow-lg flex flex-col items-center"
-      style={{ maxHeight: '80vh' }}
-      onClick={e => e.stopPropagation()}
+      className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center"
+      onClick={closeGalleryModal}
+      tabIndex={-1}
     >
-      <button
-        className="absolute top-2 right-2 text-2xl text-blue-900 bg-white rounded-full px-2 py-1 shadow hover:bg-blue-100"
-        onClick={closeGalleryModal}
-        aria-label="Cerrar"
+      <div
+        className="relative w-[80vw] max-w-[80vw] mx-4 bg-white rounded-lg shadow-lg flex flex-col items-center"
+        style={{ maxHeight: '80vh' }}
+        onClick={e => e.stopPropagation()}
       >
-        &times;
-      </button>
-      <div className="flex items-center justify-between w-full mt-8 mb-4 px-4">
-        {galleryModalImages.length > 1 && (
-          <button
-            className="text-2xl text-blue-900 bg-white rounded-full px-2 py-1 shadow hover:bg-blue-100"
-            onClick={prevGalleryModalImage}
-            aria-label="Anterior"
-          >
-            &#8592;
-          </button>
-        )}
-        <div className="flex-1 flex justify-center">
-          <img
-            src={galleryModalImages[galleryModalIndex].link}
-            alt={galleryModalImages[galleryModalIndex].Titulo || ''}
-            className="max-h-[65vh] w-auto rounded-lg"
-            style={{ objectFit: 'contain', maxWidth: '100%' }}
-          />
+        <button
+          className="absolute top-2 right-2 text-2xl text-blue-900 bg-white rounded-full px-2 py-1 shadow hover:bg-blue-100"
+          onClick={closeGalleryModal}
+          aria-label="Cerrar"
+        >
+          &times;
+        </button>
+        <div className="flex items-center justify-between w-full mt-8 mb-4 px-4">
+          {galleryModalImages.length > 1 && (
+            <button
+              className="text-2xl text-blue-900 bg-white rounded-full px-2 py-1 shadow hover:bg-blue-100"
+              onClick={prevGalleryModalImage}
+              aria-label="Anterior"
+            >
+              &#8592;
+            </button>
+          )}
+          <div className="flex-1 flex justify-center">
+            <img
+              src={galleryModalImages[galleryModalIndex].link}
+              alt={galleryModalImages[galleryModalIndex].Titulo || ''}
+              className="max-h-[65vh] w-auto rounded-lg"
+              style={{ objectFit: 'contain', maxWidth: '100%' }}
+            />
+          </div>
+          {galleryModalImages.length > 1 && (
+            <button
+              className="text-2xl text-blue-900 bg-white rounded-full px-2 py-1 shadow hover:bg-blue-100"
+              onClick={nextGalleryModalImage}
+              aria-label="Siguiente"
+            >
+              &#8594;
+            </button>
+          )}
         </div>
-        {galleryModalImages.length > 1 && (
-          <button
-            className="text-2xl text-blue-900 bg-white rounded-full px-2 py-1 shadow hover:bg-blue-100"
-            onClick={nextGalleryModalImage}
-            aria-label="Siguiente"
-          >
-            &#8594;
-          </button>
-        )}
-      </div>
-      <div className="text-center font-semibold text-blue-900 mb-6 px-4" style={{ minHeight: 32 }}>
-        {galleryModalImages[galleryModalIndex].Titulo ? galleryModalImages[galleryModalIndex].Titulo : <span>&nbsp;</span>}
+        <div className="text-center font-semibold text-blue-900 mb-6 px-4" style={{ minHeight: 32 }}>
+          {galleryModalImages[galleryModalIndex].Titulo ? galleryModalImages[galleryModalIndex].Titulo : <span>&nbsp;</span>}
+        </div>
       </div>
     </div>
-  </div>
-)}
-
-      {/* Floating Social Media Buttons */}
-      <div className="fixed right-6 bottom-6 z-40 space-y-3">
-        {[
-          { href: "https://wa.me/573183365700", color: "bg-green-500 hover:bg-green-600", icon: "ri-whatsapp-line" },
-          { href: "https://www.instagram.com/colegionuevosanluisgonzaga/?hl=es", color: "bg-pink-500 hover:bg-pink-600", icon: "ri-instagram-line" },
-          { href: "https://www.facebook.com/colegionuevosanluisgonzaga", color: "bg-blue-600 hover:bg-blue-700", icon: "ri-facebook-line" },
-          { href: "https://www.tiktok.com/@nuevosanluisgonzaga", color: "bg-black hover:bg-gray-800", icon: "ri-tiktok-line" },
-          { href: "https://www.youtube.com/@colegionuevosanluisgonzaga5795", color: "bg-red-600 hover:bg-red-700", icon: "ri-youtube-line" },
-        ].map((item, idx) => (
-          <a
-            key={idx}
-            href={item.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`w-12 h-12 ${item.color} text-white rounded-full flex items-center justify-center transition-all cursor-pointer shadow-lg opacity-70 hover:opacity-100`}
-          >
-            <i className={`${item.icon} text-xl`}></i>
-          </a>
-        ))}
-      </div>
+  )}
+</section>
+{/* Floating Social Media Buttons */}
+<div className="fixed right-6 bottom-6 z-40 space-y-3">
+  {[
+    { href: "https://wa.me/573183365700", color: "bg-green-500 hover:bg-green-600", icon: "ri-whatsapp-line" },
+    { href: "https://www.instagram.com/colegionuevosanluisgonzaga/?hl=es", color: "bg-pink-500 hover:bg-pink-600", icon: "ri-instagram-line" },
+    { href: "https://www.facebook.com/colegionuevosanluisgonzaga", color: "bg-blue-600 hover:bg-blue-700", icon: "ri-facebook-line" },
+    { href: "https://www.tiktok.com/@nuevosanluisgonzaga", color: "bg-black hover:bg-gray-800", icon: "ri-tiktok-line" },
+    { href: "https://www.youtube.com/@colegionuevosanluisgonzaga5795", color: "bg-red-600 hover:bg-red-700", icon: "ri-youtube-line" },
+  ].map((item, idx) => (
+    <a
+      key={idx}
+      href={item.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`w-12 h-12 ${item.color} text-white rounded-full flex items-center justify-center transition-all cursor-pointer shadow-lg opacity-70 hover:opacity-100`}
+    >
+      <i className={`${item.icon} text-xl`}></i>
+    </a>
+  ))}
+</div>
 
 
       {/* Footer */}
@@ -532,15 +609,3 @@ export default function Nosotros() {
     </div>
   );
 }
-
-/*
-@keyframes bounce-slow {
-  0%, 100% { transform: translateY(0);}
-  50% { transform: translateY(-12px);}
-}
-.animate-bounce-slow {
-  animation: bounce-slow 2s infinite;
-}
-.animate-bounce-slow.delay-100 { animation-delay: .1s; }
-.animate-bounce-slow.delay-200 { animation-delay: .2s; }
-*/
