@@ -123,19 +123,19 @@ export default function Nosotros() {
           <div className="flex items-center justify-between">
             {/* Logo siempre tamaño fijo */}
             <div className="flex-shrink-0 flex items-center">
-              <img 
-                src="https://i.ibb.co/spn4L9WW/LOGO-NSLG-2-Mini.png" 
-                alt="Logo Colegio Nuevo San Luis Gonzaga"
-                className="transition-all duration-300"
-                style={{
-                  height: '64px',
-                  width: 'auto',
-                  maxWidth: '180px',
-                  minWidth: '48px',
-                  aspectRatio: 'auto 180 / 64',
-                  objectFit: 'contain'
-                }}
-              />
+              <div style={{ aspectRatio: '180 / 64', height: '64px', width: '180px', maxWidth: '180px', minWidth: '48px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <img 
+                  src="https://i.ibb.co/spn4L9WW/LOGO-NSLG-2-Mini.png" 
+                  alt="Logo Colegio Nuevo San Luis Gonzaga"
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'contain',
+                    aspectRatio: '180 / 64',
+                    display: 'block'
+                  }}
+                />
+              </div>
             </div>
             {/* Centrado absoluto de pestañas */}
             <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full flex justify-center pointer-events-none">
