@@ -11,6 +11,15 @@ export default function Home() {
   const [isPaused, setIsPaused] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const pathname = usePathname();
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 40);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Banner y noticias desde la API
   const [bannerImages, setBannerImages] = useState<{ link: string; Titulo?: string; Descripción?: string }[]>([]);
@@ -88,15 +97,16 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-white shadow-lg z-50">
+      <nav className="fixed top-0 w-full bg-white shadow-lg z-50 transition-all duration-300">
         <div className="px-6 py-4">
           <div className="flex items-center justify-between">
-            {/* Logo siempre tamaño fijo */}
-            <div className="flex-shrink-0 flex items-center">
+            {/* Logo tamaño dinámico */}
+            <div className="flex-shrink-0 flex items-center transition-all duration-300">
               <img 
                 src="https://i.ibb.co/spn4L9WW/LOGO-NSLG-2-Mini.png" 
                 alt="Logo Colegio Nuevo San Luis Gonzaga"
-                className="h-12 w-auto min-w-[48px] max-w-[120px]"
+                className={`transition-all duration-300 ${scrolled ? 'h-12' : 'h-20'} w-auto min-w-[48px] max-w-[160px]`}
+                style={{ willChange: 'height' }}
               />
             </div>
             {/* Centrado absoluto de pestañas */}
