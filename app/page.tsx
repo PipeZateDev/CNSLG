@@ -91,10 +91,12 @@ export default function Home() {
 
   // Banner drag handlers
   const handleBannerDragStart = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.button !== 0) return; // solo botón izquierdo
+    if (e.button !== 0) return;
     setDragStartX(e.clientX);
     setDragging(true);
     setDragDelta(0);
+    // Evita el drag nativo del navegador
+    document.body.style.userSelect = 'none';
   };
   const handleBannerDragMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!dragging || dragStartX === null) return;
@@ -103,14 +105,15 @@ export default function Home() {
   };
   const handleBannerDragEnd = () => {
     if (!dragging) return;
-    if (dragDelta > 80) {
+    if (dragDelta > 30) {
       prevImage();
-    } else if (dragDelta < -80) {
+    } else if (dragDelta < -30) {
       nextImage();
     }
     setDragging(false);
     setDragStartX(null);
     setDragDelta(0);
+    document.body.style.userSelect = '';
   };
 
   // Touch events for mobile
@@ -126,9 +129,9 @@ export default function Home() {
   };
   const handleTouchEnd = () => {
     if (!dragging) return;
-    if (dragDelta > 80) {
+    if (dragDelta > 30) {
       prevImage();
-    } else if (dragDelta < -80) {
+    } else if (dragDelta < -30) {
       nextImage();
     }
     setDragging(false);
@@ -324,7 +327,7 @@ export default function Home() {
       {/* Banner Section */}
       <section className="pt-20 relative">
         <div
-          className="relative w-full mx-auto md:w-4/5"
+          className="relative w-full mx-auto md:w-4/5 select-none"
           style={{
             height: 'min(600px, 70vw)',
             maxHeight: 600,
@@ -339,6 +342,8 @@ export default function Home() {
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
+          // Evita el drag nativo de imágenes
+          onDragStart={e => e.preventDefault()}
         >
           {bannerImages.length === 0 ? (
             <div className="flex items-center justify-center h-full text-gray-400">
