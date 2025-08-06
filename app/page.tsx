@@ -91,6 +91,7 @@ export default function Home() {
 
   // Banner drag handlers
   const handleBannerDragStart = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.button !== 0) return; // solo botón izquierdo
     setDragStartX(e.clientX);
     setDragging(true);
     setDragDelta(0);
@@ -101,6 +102,7 @@ export default function Home() {
     setDragDelta(diff);
   };
   const handleBannerDragEnd = () => {
+    if (!dragging) return;
     if (dragDelta > 80) {
       prevImage();
     } else if (dragDelta < -80) {
@@ -123,6 +125,7 @@ export default function Home() {
     setDragDelta(diff);
   };
   const handleTouchEnd = () => {
+    if (!dragging) return;
     if (dragDelta > 80) {
       prevImage();
     } else if (dragDelta < -80) {
