@@ -52,12 +52,22 @@ export default function Home() {
     };
   }, [bannerImages.length, isPaused]);
 
+  // Reinicia el intervalo al cambiar manualmente la imagen
+  const resetBannerInterval = () => {
+    if (intervalRef.current) clearInterval(intervalRef.current);
+    intervalRef.current = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => prevIndex === bannerImages.length - 1 ? 0 : prevIndex + 1);
+    }, 6000);
+  };
+
   const nextImage = () => {
     setCurrentImageIndex((prevIndex) => prevIndex === bannerImages.length - 1 ? 0 : prevIndex + 1);
+    resetBannerInterval();
   };
 
   const prevImage = () => {
     setCurrentImageIndex((prevIndex) => prevIndex === 0 ? bannerImages.length - 1 : prevIndex - 1);
+    resetBannerInterval();
   };
 
   // Agrupa las noticias por título
@@ -453,7 +463,7 @@ export default function Home() {
               </button>
               <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
                 {bannerImages.map((_, index) => (
-                  <button key={index} onClick={() => setCurrentImageIndex(index)} className={`w-3 h-3 rounded-full transition-colors ${index === currentImageIndex ? 'bg-white' : 'bg-white/50'}`} />
+                  <button key={index} onClick={() => { setCurrentImageIndex(index); resetBannerInterval(); }} className={`w-3 h-3 rounded-full transition-colors ${index === currentImageIndex ? 'bg-white' : 'bg-white/50'}`} />
                 ))}
               </div>
             </>
