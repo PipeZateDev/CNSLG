@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Pacifico } from "next/font/google";
 import "./globals.css";
@@ -31,9 +32,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" suppressHydrationWarning={true}>
-      <head>
-        <link rel="icon" href="https://i.ibb.co/HmCd5Ws/Logo-Solo-Isotipo-comprimido.png" type="image/png" />
-      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${pacifico.variable} antialiased`}
         suppressHydrationWarning={true}
