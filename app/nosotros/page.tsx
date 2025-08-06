@@ -423,6 +423,17 @@ export default function Nosotros() {
                       style={{ minHeight: 256, maxHeight: 256 }}
                     />
                     <div className="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/20 transition-colors duration-300"></div>
+                    <div className="text-center py-2 font-semibold text-blue-900 bg-white/80" style={{ minHeight: 32 }}>
+                      {img.Titulo ? img.Titulo : <span>&nbsp;</span>}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))
+          ) : (
+            <div key={groupKey} className="col-span-1 md:col-span-1 flex flex-col h-full cursor-pointer group"
+              onClick={() => openGalleryModal(imgs, 0)}>
+              <div className="rounded-xl shadow-lg bg-blue-50 p-2 flex flex-col h-full transition-transform duration-300 group-hover:scale-105 group-hover:shadow-xl">
                 <div className="relative overflow-hidden rounded-xl flex flex-col h-full">
                   <img 
                     src={imgs[0].link}
@@ -548,6 +559,7 @@ export default function Nosotros() {
                 <li><Link href="/" className="hover:text-white transition-colors cursor-pointer">Inicio</Link></li>
                 <li><Link href="/admisiones" className="hover:text-white transition-colors cursor-pointer">Admisiones</Link></li>
                 <li><Link href="/nosotros" className="hover:text-white transition-colors cursor-pointer">Nosotros</Link></li>
+                <li><Link href="/redes-sociales" className="hover:text-white transition-colors cursor-pointer">Redes Sociales</Link></li>
                 <li><Link href="/contacto" className="hover:text-white transition-colors cursor-pointer">Contacto</Link></li>
               </ul>
             </div>
