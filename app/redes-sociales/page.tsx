@@ -7,6 +7,7 @@ type SocialPost = {
   url: string;
   type: "instagram" | "tiktok" | "facebook" | "youtube";
   title?: string;
+  fecha?: string;
 };
 
 const SOCIALS = [
@@ -19,6 +20,7 @@ const SOCIALS = [
 export default function RedesSociales() {
   const [posts, setPosts] = useState<SocialPost[]>([]);
   const [loading, setLoading] = useState(true);
+  const [activeIndex, setActiveIndex] = useState<{ [key: string]: number }>({});
 
   useEffect(() => {
     fetch("/api/social-posts")
@@ -35,6 +37,24 @@ export default function RedesSociales() {
       .catch(() => setLoading(false));
   }, []);
 
+  // Carrusel handlers
+  const handlePrev = (type: string, count: number) => {
+    setActiveIndex(idx => ({
+      ...idx,
+      [type]: typeof idx[type] === "number"
+        ? (idx[type] - 1 + count) % count
+        : 0
+    }));
+  };
+  const handleNext = (type: string, count: number) => {
+    setActiveIndex(idx => ({
+      ...idx,
+      [type]: typeof idx[type] === "number"
+        ? (idx[type] + 1) % count
+        : 0
+    }));
+  };
+
   return (
     <div className="min-h-screen bg-white">
       <section className="pt-24 pb-12 bg-gradient-to-r from-blue-900 to-blue-700 text-white text-center shadow-lg">
@@ -48,31 +68,57 @@ export default function RedesSociales() {
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-12">
-            {SOCIALS.map(social => (
-              <div key={social.type}>
-                <h2 className="text-2xl font-bold text-blue-900 mb-4">{social.label}</h2>
-                <div className="space-y-6">
-                  {loading ? (
-                    <div className="text-blue-900">Cargando...</div>
-                  ) : (
-                    posts.filter(p => p.type === social.type).length === 0 ? (
+            {SOCIALS.map(social => {
+              const filtered = posts.filter(p => p.type === social.type);
+              const idx = activeIndex[social.type] ?? 0;
+              return (
+                <div key={social.type}>
+                  <h2 className="text-2xl font-bold text-blue-900 mb-4">{social.label}</h2>
+                  <div className="space-y-6">
+                    {loading ? (
+                      <div className="text-blue-900">Cargando...</div>
+                    ) : filtered.length === 0 ? (
                       <div className="text-gray-500">No hay publicaciones aún.</div>
                     ) : (
-                      posts
-                        .filter(p => p.type === social.type)
-                        .map(post => (
-                          <div key={post.id} className="rounded-lg shadow bg-gray-50 p-4">
-                            {post.title && (
-                              <div className="font-semibold text-blue-900 mb-2">{post.title}</div>
-                            )}
-                            <SocialEmbed url={post.url} type={post.type} />
+                      <div className="relative">
+                        <div>
+                          <div className="flex justify-center">
+                            <div className="w-full">
+                              <SocialEmbed url={filtered[idx].url} type={filtered[idx].type} />
+                            </div>
                           </div>
-                        ))
-                    )
-                  )}
+                          {filtered[idx].title && (
+                            <div className="font-semibold text-blue-900 mt-2 text-center">{filtered[idx].title}</div>
+                          )}
+                          {filtered[idx].fecha && (
+                            <div className="text-xs text-gray-500 text-center">{filtered[idx].fecha}</div>
+                          )}
+                        </div>
+                        {filtered.length > 1 && (
+                          <div className="flex justify-center items-center gap-4 mt-4">
+                            <button
+                              className="px-3 py-1 bg-blue-900 text-white rounded-full font-bold hover:bg-blue-800 transition"
+                              onClick={() => handlePrev(social.type, filtered.length)}
+                              aria-label="Anterior"
+                            >
+                              &#8592;
+                            </button>
+                            <span className="text-blue-900 font-bold">{idx + 1} / {filtered.length}</span>
+                            <button
+                              className="px-3 py-1 bg-blue-900 text-white rounded-full font-bold hover:bg-blue-800 transition"
+                              onClick={() => handleNext(social.type, filtered.length)}
+                              aria-label="Siguiente"
+                            >
+                              &#8594;
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -80,69 +126,23 @@ export default function RedesSociales() {
   );
 }
 
+// Embeds para cada red social
 function SocialEmbed({ url, type }: { url: string; type: string }) {
-  // Basic embed for each network
-  if (type === "instagram") {
+  // Si es código de inserción (contiene <blockquote ...), usar dangerouslySetInnerHTML
+  if (url.trim().startsWith("<blockquote")) {
     return (
-      <iframe
-        src={`https://www.instagram.com/p/${extractInstagramId(url)}/embed`}
-        className="w-full min-h-[480px] rounded-lg border-0"
-        allow="autoplay; encrypted-media"
-        allowFullScreen
-        loading="lazy"
-      ></iframe>
+      <div
+        className="w-full min-h-[360px] rounded-lg border-0"
+        dangerouslySetInnerHTML={{ __html: url }}
+      />
     );
   }
-  if (type === "tiktok") {
-    return (
-      <iframe
-        src={`https://www.tiktok.com/embed/${extractTikTokId(url)}`}
-        className="w-full min-h-[480px] rounded-lg border-0"
-        allow="autoplay; encrypted-media"
-        allowFullScreen
-        loading="lazy"
-      ></iframe>
-    );
-  }
-  if (type === "facebook") {
-    return (
-      <iframe
-        src={`https://www.facebook.com/plugins/post.php?href=${encodeURIComponent(url)}&show_text=true&width=500`}
-        className="w-full min-h-[480px] rounded-lg border-0"
-        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-        allowFullScreen
-        loading="lazy"
-      ></iframe>
-    );
-  }
-  if (type === "youtube") {
-    return (
-      <iframe
-        src={`https://www.youtube.com/embed/${extractYouTubeId(url)}`}
-        className="w-full min-h-[360px] aspect-video rounded-lg border-0"
-        allow="autoplay; encrypted-media"
-        allowFullScreen
-        loading="lazy"
-      ></iframe>
-    );
-  }
+  // Fallback: mostrar link
   return (
-    <a href={url} target="_blank" rel="noopener noreferrer" className="text-blue-700 underline">
+    <a href={url} target="_blank" rel="noopener noreferrer" className="text-blue-700 underline block text-center">
       Ver publicación
     </a>
   );
 }
-
-// Helpers to extract IDs from URLs
-function extractInstagramId(url: string) {
-  const match = url.match(/instagram\.com\/p\/([^\/\?\&]+)/i);
-  return match ? match[1] : "";
-}
-function extractTikTokId(url: string) {
-  const match = url.match(/tiktok\.com\/@[^\/]+\/video\/(\d+)/i);
-  return match ? match[1] : "";
-}
-function extractYouTubeId(url: string) {
-  const match = url.match(/(?:v=|\/embed\/|\.be\/)([a-zA-Z0-9_-]{11})/);
   return match ? match[1] : "";
 }
