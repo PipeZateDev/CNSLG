@@ -4,14 +4,6 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter, usePathname } from 'next/navigation';
 
-const SOCIALS = [
-  { type: "instagram", label: "Instagram" },
-  { type: "tiktok", label: "TikTok" },
-  { type: "facebook", label: "Facebook" },
-  { type: "youtube", label: "YouTube" },
-];
-
-// Asegúrate de que la función principal esté correctamente definida y exportada:
 export default function Admin() {
   const router = useRouter();
   const pathname = usePathname();
@@ -52,16 +44,6 @@ export default function Admin() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  // Social posts state
-  const [socialType, setSocialType] = useState("instagram");
-  const [socialUrl, setSocialUrl] = useState("");
-  const [socialTitle, setSocialTitle] = useState("");
-  const [socialDate, setSocialDate] = useState("");
-  const [socialLoading, setSocialLoading] = useState(false);
-  const [socialMsg, setSocialMsg] = useState<string | null>(null);
-  const [socialPosts, setSocialPosts] = useState<any[]>([]);
-  const [socialLoadingList, setSocialLoadingList] = useState(false);
-
   // Cargar datos desde la base de datos al montar
   useEffect(() => {
     fetch('/api/banner')
@@ -74,18 +56,6 @@ export default function Admin() {
       .then(res => res.json())
       .then(data => setGallery(Array.isArray(data) ? [...data].sort((a, b) => (a.orden ?? 0) - (b.orden ?? 0)) : []));
   }, []);
-
-  // Cargar publicaciones de redes sociales
-  useEffect(() => {
-    setSocialLoadingList(true);
-    fetch("/api/social-posts")
-      .then(res => res.json())
-      .then(data => {
-        setSocialPosts(Array.isArray(data) ? data : []);
-        setSocialLoadingList(false);
-      })
-      .catch(() => setSocialLoadingList(false));
-  }, [socialMsg]);
 
   // Guardar cambios en MongoDB Atlas usando endpoints internos (solo si hay datos)
   // Al guardar, asigna el campo 'orden' según el índice actual
@@ -367,53 +337,6 @@ export default function Admin() {
     }
     return acc;
   }, {});
-
-  const handleSocialSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setSocialLoading(true);
-    setSocialMsg(null);
-    try {
-      const res = await fetch("/api/social-posts", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          url: socialUrl,
-          type: socialType,
-          title: socialTitle,
-          fecha: socialDate,
-        }),
-      });
-      if (res.ok) {
-        setSocialMsg("¡Publicación de red social agregada!");
-        setSocialUrl("");
-        setSocialTitle("");
-        setSocialDate("");
-      } else {
-        setSocialMsg("Error al agregar publicación.");
-      }
-    } catch {
-      setSocialMsg("Error de red.");
-    }
-    setSocialLoading(false);
-  };
-
-  // Eliminar publicación de red social
-  const handleDeleteSocial = async (id: string) => {
-    if (!confirm("¿Seguro que deseas eliminar esta publicación?")) return;
-    setSocialLoadingList(true);
-    try {
-      const res = await fetch(`/api/social-posts?id=${id}`, { method: "DELETE" });
-      if (res.ok) {
-        setSocialMsg("Publicación eliminada.");
-        setSocialPosts(posts => posts.filter(p => p.id !== id));
-      } else {
-        setSocialMsg("Error al eliminar publicación.");
-      }
-    } catch {
-      setSocialMsg("Error de red.");
-    }
-    setSocialLoadingList(false);
-  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -1050,100 +973,6 @@ export default function Admin() {
                     ))}
                 </div>
               </div>
-
-              {/* Sección: Publicar en Redes Sociales */}
-              <section className="py-12 bg-blue-50 border-t border-blue-200 mt-8">
-                <div className="max-w-2xl mx-auto px-6">
-                  <h2 className="text-2xl font-bold text-blue-900 mb-6">Agregar publicación de Red Social</h2>
-                  <form onSubmit={handleSocialSubmit} className="space-y-4">
-                    <div>
-                      <label className="block font-semibold text-blue-900 mb-1">Red Social</label>
-                      <select
-                        value={socialType}
-                        onChange={e => setSocialType(e.target.value)}
-                        className="w-full border rounded px-3 py-2"
-                        required
-                      >
-                        {SOCIALS.map(s => (
-                          <option key={s.type} value={s.type}>{s.label}</option>
-                        ))}
-                      </select>
-                    </div>
-                    <div>
-                      <label className="block font-semibold text-blue-900 mb-1">Título (opcional)</label>
-                      <input
-                        type="text"
-                        value={socialTitle}
-                        onChange={e => setSocialTitle(e.target.value)}
-                        className="w-full border rounded px-3 py-2"
-                        placeholder="Título de la publicación"
-                      />
-                    </div>
-                    <div>
-                      <label className="block font-semibold text-blue-900 mb-1">Fecha de la publicación</label>
-                      <input
-                        type="date"
-                        value={socialDate}
-                        onChange={e => setSocialDate(e.target.value)}
-                        className="w-full border rounded px-3 py-2"
-                        required
-                      />
-                    </div>
-                    <div>
-                      <label className="block font-semibold text-blue-900 mb-1">Link de la publicación</label>
-                      <input
-                        type="url"
-                        value={socialUrl}
-                        onChange={e => setSocialUrl(e.target.value)}
-                        className="w-full border rounded px-3 py-2"
-                        placeholder="https://..."
-                        required
-                      />
-                    </div>
-                    <button
-                      type="submit"
-                      className="px-6 py-2 bg-blue-900 text-white rounded font-bold hover:bg-blue-800 transition"
-                      disabled={socialLoading}
-                    >
-                      {socialLoading ? "Guardando..." : "Agregar publicación"}
-                    </button>
-                    {socialMsg && (
-                      <div className={`mt-2 text-sm ${socialMsg.startsWith("¡") ? "text-green-700" : "text-red-600"}`}>
-                        {socialMsg}
-                      </div>
-                    )}
-                  </form>
-                </div>
-                <div className="max-w-3xl mx-auto mt-10">
-                  <h3 className="text-xl font-bold text-blue-900 mb-4">Publicaciones registradas</h3>
-                  {socialLoadingList ? (
-                    <div className="text-blue-900">Cargando publicaciones...</div>
-                  ) : socialPosts.length === 0 ? (
-                    <div className="text-gray-500">No hay publicaciones aún.</div>
-                  ) : (
-                    <div className="space-y-4">
-                      {socialPosts.map(post => (
-                        <div key={post.id} className="bg-white rounded-lg shadow p-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                          <div>
-                            <div className="font-semibold text-blue-900">{post.title || <span className="text-gray-400">Sin título</span>}</div>
-                            <div className="text-sm text-gray-600">{post.type} {post.fecha && <>| <span className="text-gray-500">{post.fecha}</span></>}</div>
-                            <div className="text-xs text-blue-700 break-all">
-                              <a href={post.url} target="_blank" rel="noopener noreferrer" className="underline">Ver publicación</a>
-                            </div>
-                          </div>
-                          <button
-                            onClick={() => handleDeleteSocial(post.id)}
-                            className="px-4 py-1 bg-red-600 text-white rounded-full font-semibold hover:bg-red-700 transition"
-                            disabled={socialLoadingList}
-                          >
-                            Eliminar
-                          </button>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              </section>
             </div>
           </section>
           <footer className="bg-gray-900 text-white py-12">
