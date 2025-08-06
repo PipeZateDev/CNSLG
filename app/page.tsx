@@ -85,6 +85,31 @@ export default function Home() {
   const nextNewsModalImage = () => setNewsModalIndex((prev) => (prev + 1) % newsModalImages.length);
   const prevNewsModalImage = () => setNewsModalIndex((prev) => (prev - 1 + newsModalImages.length) % newsModalImages.length);
 
+  const [dragStartX, setDragStartX] = useState<number | null>(null);
+  const [dragging, setDragging] = useState(false);
+
+  // Banner drag handlers
+  const handleBannerDragStart = (e: React.MouseEvent<HTMLDivElement>) => {
+    setDragStartX(e.clientX);
+    setDragging(true);
+  };
+  const handleBannerDragMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!dragging || dragStartX === null) return;
+    const diff = e.clientX - dragStartX;
+    if (Math.abs(diff) > 40) {
+      if (diff > 0) {
+        prevImage();
+      } else {
+        nextImage();
+      }
+      setDragStartX(e.clientX);
+    }
+  };
+  const handleBannerDragEnd = () => {
+    setDragging(false);
+    setDragStartX(null);
+  };
+
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
@@ -278,10 +303,33 @@ export default function Home() {
             height: 'min(600px, 70vw)',
             maxHeight: 600,
             minHeight: 320,
+            cursor: dragging ? 'grabbing' : 'grab'
           }}
-          onMouseDown={() => setIsPaused(true)}
-          onMouseUp={() => setIsPaused(false)}
-          onMouseLeave={() => setIsPaused(false)}
+          onMouseDown={handleBannerDragStart}
+          onMouseMove={handleBannerDragMove}
+          onMouseUp={handleBannerDragEnd}
+          onMouseLeave={handleBannerDragEnd}
+          // Touch events for mobile
+          onTouchStart={e => {
+            if (e.touches.length === 1) setDragStartX(e.touches[0].clientX);
+            setDragging(true);
+          }}
+          onTouchMove={e => {
+            if (!dragging || dragStartX === null || e.touches.length !== 1) return;
+            const diff = e.touches[0].clientX - dragStartX;
+            if (Math.abs(diff) > 40) {
+              if (diff > 0) {
+                prevImage();
+              } else {
+                nextImage();
+              }
+              setDragStartX(e.touches[0].clientX);
+            }
+          }}
+          onTouchEnd={() => {
+            setDragging(false);
+            setDragStartX(null);
+          }}
         >
           {bannerImages.length === 0 ? (
             <div className="flex items-center justify-center h-full text-gray-400">
