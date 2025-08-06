@@ -450,6 +450,7 @@ export default function Admin() {
                     <Link href="/" className={`px-5 py-2 rounded-full transition-colors whitespace-nowrap cursor-pointer text-[1.25rem] font-semibold ${pathname === '/' ? 'bg-blue-900 text-white' : 'text-blue-900 hover:bg-blue-50'}`}>Inicio</Link>
                     <Link href="/nosotros" className={`px-5 py-2 rounded-full transition-colors whitespace-nowrap cursor-pointer text-[1.25rem] font-semibold ${pathname === '/nosotros' ? 'bg-blue-900 text-white' : 'text-blue-900 hover:bg-blue-50'}`}>Nosotros</Link>
                     <Link href="/admisiones" className={`px-5 py-2 rounded-full transition-colors whitespace-nowrap cursor-pointer text-[1.25rem] font-semibold ${pathname === '/admisiones' ? 'bg-blue-900 text-white' : 'text-blue-900 hover:bg-blue-50'}`}>Admisiones</Link>
+                    <Link href="/redes-sociales" className={`px-5 py-2 rounded-full transition-colors whitespace-nowrap cursor-pointer text-[1.25rem] font-semibold ${pathname === '/redes-sociales' ? 'bg-blue-900 text-white' : 'text-blue-900 hover:bg-blue-50'}`}>Redes Sociales</Link>
                     <Link href="/contacto" className={`px-5 py-2 rounded-full transition-colors whitespace-nowrap cursor-pointer text-[1.25rem] font-semibold ${pathname === '/contacto' ? 'bg-blue-900 text-white' : 'text-blue-900 hover:bg-blue-50'}`}>Contacto</Link>
                     {/* Admin tab hidden but present for accessibility */}
                     <Link href="/admin" className="hidden" tabIndex={-1} aria-hidden="true">Admin</Link>
@@ -975,7 +976,6 @@ export default function Admin() {
                   {/* Sección para grupos */}
                   {Object.entries(groupedGallery)
                     .filter(([groupKey]) => !groupKey.startsWith('__single_'))
-                    .map(([groupKey, imgs], idx) => (
                       <div key={groupKey}>
                         <div className="mb-2 text-blue-900 font-bold text-center">{groupKey}</div>
                         <div className="flex overflow-x-auto gap-4 pb-2">

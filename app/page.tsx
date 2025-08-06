@@ -104,35 +104,23 @@ export default function Home() {
               <div className="hidden lg:flex items-center space-x-10 pointer-events-auto">
                 <Link 
                   href="/" 
-                  className={`px-5 py-2 rounded-full transition-colors whitespace-nowrap cursor-pointer text-[1.25rem] font-semibold ${
-                    pathname === '/' 
-                      ? 'bg-blue-900 text-white' 
-                      : 'text-blue-900 hover:bg-blue-50'
-                  }`}
+                  className={`px-5 py-2 rounded-full transition-colors whitespace-nowrap cursor-pointer text-[1.25rem] font-semibold ${pathname === '/' ? 'bg-blue-900 text-white' : 'text-blue-900 hover:bg-blue-50'}`}
                 >Inicio</Link>
                 <Link 
                   href="/nosotros" 
-                  className={`px-5 py-2 rounded-full transition-colors whitespace-nowrap cursor-pointer text-[1.25rem] font-semibold ${
-                    pathname === '/nosotros' 
-                      ? 'bg-blue-900 text-white' 
-                      : 'text-blue-900 hover:bg-blue-50'
-                  }`}
+                  className={`px-5 py-2 rounded-full transition-colors whitespace-nowrap cursor-pointer text-[1.25rem] font-semibold ${pathname === '/nosotros' ? 'bg-blue-900 text-white' : 'text-blue-900 hover:bg-blue-50'}`}
                 >Nosotros</Link>
                 <Link 
                   href="/admisiones" 
-                  className={`px-5 py-2 rounded-full transition-colors whitespace-nowrap cursor-pointer text-[1.25rem] font-semibold ${
-                    pathname === '/admisiones' 
-                      ? 'bg-blue-900 text-white' 
-                      : 'text-blue-900 hover:bg-blue-50'
-                  }`}
+                  className={`px-5 py-2 rounded-full transition-colors whitespace-nowrap cursor-pointer text-[1.25rem] font-semibold ${pathname === '/admisiones' ? 'bg-blue-900 text-white' : 'text-blue-900 hover:bg-blue-50'}`}
                 >Admisiones</Link>
                 <Link 
+                  href="/redes-sociales"
+                  className={`px-5 py-2 rounded-full transition-colors whitespace-nowrap cursor-pointer text-[1.25rem] font-semibold ${pathname === '/redes-sociales' ? 'bg-blue-900 text-white' : 'text-blue-900 hover:bg-blue-50'}`}
+                >Redes Sociales</Link>
+                <Link 
                   href="/contacto" 
-                  className={`px-5 py-2 rounded-full transition-colors whitespace-nowrap cursor-pointer text-[1.25rem] font-semibold ${
-                    pathname === '/contacto' 
-                      ? 'bg-blue-900 text-white' 
-                      : 'text-blue-900 hover:bg-blue-50'
-                  }`}
+                  className={`px-5 py-2 rounded-full transition-colors whitespace-nowrap cursor-pointer text-[1.25rem] font-semibold ${pathname === '/contacto' ? 'bg-blue-900 text-white' : 'text-blue-900 hover:bg-blue-50'}`}
                 >Contacto</Link>
               </div>
             </div>
@@ -204,6 +192,16 @@ export default function Home() {
                   }`}
                 >
                   Admisiones
+                </Link>
+                <Link
+                  href="/redes-sociales"
+                  onClick={() => setIsMenuOpen(false)}
+                  scroll={false}
+                  className={`px-4 py-2 rounded-full transition-colors text-center cursor-pointer ${
+                    pathname === '/redes-sociales' ? 'bg-blue-900 text-white' : 'text-blue-900 hover:bg-blue-50'
+                  }`}
+                >
+                  Redes Sociales
                 </Link>
                 <Link
                   href="/contacto"
@@ -582,6 +580,7 @@ export default function Home() {
                 <li><Link href="/" className="hover:text-white transition-colors cursor-pointer">Inicio</Link></li>
                 <li><Link href="/admisiones" className="hover:text-white transition-colors cursor-pointer">Admisiones</Link></li>
                 <li><Link href="/nosotros" className="hover:text-white transition-colors cursor-pointer">Nosotros</Link></li>
+                <li><Link href="/redes-sociales" className="hover:text-white transition-colors cursor-pointer">Redes Sociales</Link></li>
                 <li><Link href="/contacto" className="hover:text-white transition-colors cursor-pointer">Contacto</Link></li>
               </ul>
             </div>
