@@ -55,6 +55,7 @@ export default function Admin() {
   const [socialType, setSocialType] = useState("instagram");
   const [socialUrl, setSocialUrl] = useState("");
   const [socialTitle, setSocialTitle] = useState("");
+  const [socialDate, setSocialDate] = useState(""); // Nueva fecha
   const [socialLoading, setSocialLoading] = useState(false);
   const [socialMsg, setSocialMsg] = useState<string | null>(null);
 
@@ -364,12 +365,14 @@ export default function Admin() {
           url: socialUrl,
           type: socialType,
           title: socialTitle,
+          fecha: socialDate,
         }),
       });
       if (res.ok) {
         setSocialMsg("¡Publicación de red social agregada!");
         setSocialUrl("");
         setSocialTitle("");
+        setSocialDate("");
       } else {
         setSocialMsg("Error al agregar publicación.");
       }
@@ -1041,6 +1044,16 @@ export default function Admin() {
                         onChange={e => setSocialTitle(e.target.value)}
                         className="w-full border rounded px-3 py-2"
                         placeholder="Título de la publicación"
+                      />
+                    </div>
+                    <div>
+                      <label className="block font-semibold text-blue-900 mb-1">Fecha de la publicación</label>
+                      <input
+                        type="date"
+                        value={socialDate}
+                        onChange={e => setSocialDate(e.target.value)}
+                        className="w-full border rounded px-3 py-2"
+                        required
                       />
                     </div>
                     <div>

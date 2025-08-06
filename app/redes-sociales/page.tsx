@@ -24,7 +24,12 @@ export default function RedesSociales() {
     fetch("/api/social-posts")
       .then(res => res.json())
       .then(data => {
-        setPosts(Array.isArray(data) ? data : []);
+        // Ordenar por fecha descendente
+        if (Array.isArray(data)) {
+          setPosts([...data].sort((a, b) => (b.fecha || '').localeCompare(a.fecha || '')));
+        } else {
+          setPosts([]);
+        }
         setLoading(false);
       })
       .catch(() => setLoading(false));
