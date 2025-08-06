@@ -87,27 +87,50 @@ export default function Home() {
 
   const [dragStartX, setDragStartX] = useState<number | null>(null);
   const [dragging, setDragging] = useState(false);
+  const [dragDelta, setDragDelta] = useState(0);
 
   // Banner drag handlers
   const handleBannerDragStart = (e: React.MouseEvent<HTMLDivElement>) => {
     setDragStartX(e.clientX);
     setDragging(true);
+    setDragDelta(0);
   };
   const handleBannerDragMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!dragging || dragStartX === null) return;
     const diff = e.clientX - dragStartX;
-    if (Math.abs(diff) > 40) {
-      if (diff > 0) {
-        prevImage();
-      } else {
-        nextImage();
-      }
-      setDragStartX(e.clientX);
-    }
+    setDragDelta(diff);
   };
   const handleBannerDragEnd = () => {
+    if (dragDelta > 80) {
+      prevImage();
+    } else if (dragDelta < -80) {
+      nextImage();
+    }
     setDragging(false);
     setDragStartX(null);
+    setDragDelta(0);
+  };
+
+  // Touch events for mobile
+  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (e.touches.length === 1) setDragStartX(e.touches[0].clientX);
+    setDragging(true);
+    setDragDelta(0);
+  };
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (!dragging || dragStartX === null || e.touches.length !== 1) return;
+    const diff = e.touches[0].clientX - dragStartX;
+    setDragDelta(diff);
+  };
+  const handleTouchEnd = () => {
+    if (dragDelta > 80) {
+      prevImage();
+    } else if (dragDelta < -80) {
+      nextImage();
+    }
+    setDragging(false);
+    setDragStartX(null);
+    setDragDelta(0);
   };
 
   return (
@@ -303,101 +326,108 @@ export default function Home() {
             height: 'min(600px, 70vw)',
             maxHeight: 600,
             minHeight: 320,
-            cursor: dragging ? 'grabbing' : 'grab'
+            cursor: dragging ? 'grabbing' : 'grab',
+            overflow: 'hidden'
           }}
           onMouseDown={handleBannerDragStart}
           onMouseMove={handleBannerDragMove}
           onMouseUp={handleBannerDragEnd}
           onMouseLeave={handleBannerDragEnd}
-          // Touch events for mobile
-          onTouchStart={e => {
-            if (e.touches.length === 1) setDragStartX(e.touches[0].clientX);
-            setDragging(true);
-          }}
-          onTouchMove={e => {
-            if (!dragging || dragStartX === null || e.touches.length !== 1) return;
-            const diff = e.touches[0].clientX - dragStartX;
-            if (Math.abs(diff) > 40) {
-              if (diff > 0) {
-                prevImage();
-              } else {
-                nextImage();
-              }
-              setDragStartX(e.touches[0].clientX);
-            }
-          }}
-          onTouchEnd={() => {
-            setDragging(false);
-            setDragStartX(null);
-          }}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
         >
           {bannerImages.length === 0 ? (
             <div className="flex items-center justify-center h-full text-gray-400">
               No hay imágenes de banner disponibles.
             </div>
           ) : (
-            bannerImages.map((image, index) => (
-              <div key={index} className={`absolute inset-0 transition-opacity duration-600 ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'}`}>
-                <img src={image.link} alt={image.Titulo} className="w-full h-full object-cover object-center" />
-                {/* Botón solo en la primera imagen */}
-                {index === 0 && (
-                  <a
-                    href="https://docs.google.com/forms/d/e/1FAIpQLSeORCc-ICVrWFFREQ_THIBY5lPYKMXKB1WLAqobKrfWScRqSg/viewform?usp=sharing&ouid=114310616812674125470"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="absolute left-1/2 transform -translate-x-1/2"
+            <div className="w-full h-full relative" style={{ height: '100%' }}>
+              {bannerImages.map((image, index) => {
+                // Calcula desplazamiento para la animación de arrastre
+                let translate = 0;
+                if (index === currentImageIndex) {
+                  translate = dragging ? dragDelta : 0;
+                } else if (index === (currentImageIndex - 1 + bannerImages.length) % bannerImages.length) {
+                  translate = dragging && dragDelta > 0 ? dragDelta - window.innerWidth : -window.innerWidth;
+                } else if (index === (currentImageIndex + 1) % bannerImages.length) {
+                  translate = dragging && dragDelta < 0 ? dragDelta + window.innerWidth : window.innerWidth;
+                } else {
+                  translate = window.innerWidth * 2; // fuera de pantalla
+                }
+                return (
+                  <div
+                    key={index}
+                    className="absolute inset-0 transition-transform duration-500"
                     style={{
-                      top: '5%',
-                      zIndex: 30,
-                      width: '100%',
-                      display: 'flex',
-                      justifyContent: 'center'
+                      zIndex: index === currentImageIndex ? 20 : 10,
+                      opacity: Math.abs(translate) < window.innerWidth ? 1 : 0,
+                      transform: `translateX(${translate}px)`,
+                      transitionProperty: dragging ? 'none' : 'transform, opacity'
                     }}
-                    onMouseEnter={() => setIsPaused(true)}
-                    onMouseLeave={() => setIsPaused(false)}
                   >
-                    <span
-                      className="px-8 py-3 rounded-full font-extrabold text-blue-900 text-lg md:text-2xl shadow-xl transition-all duration-200 border-4 border-blue-900 bg-white/70 hover:bg-blue-900 hover:text-white cursor-pointer flex items-center gap-3"
-                      style={{
-                        letterSpacing: '0.04em',
-                        textShadow: '0 2px 8px rgba(30,58,138,0.10), 0 0px 1px #fff',
-                        boxShadow: '0 4px 24px rgba(30,58,138,0.18)',
-                      }}
-                    >
-                      <span className="animate-bounce">¡Regístrate ahora!</span>
-                    </span>
-                  </a>
-                )}
-                {/* Botón solo en la tercera imagen */}
-                {index === 2 && (
-                  <a
-                    href="/admisiones"
-                    className="absolute left-1/2 transform -translate-x-1/2"
-                    style={{
-                      bottom: '5%',
-                      top: 'auto',
-                      zIndex: 30,
-                      width: '100%',
-                      display: 'flex',
-                      justifyContent: 'center'
-                    }}
-                    onMouseEnter={() => setIsPaused(true)}
-                    onMouseLeave={() => setIsPaused(false)}
-                  >
-                    <span
-                      className="px-8 py-3 rounded-full font-extrabold text-blue-900 text-lg md:text-2xl shadow-xl transition-all duration-200 border-4 border-blue-900 bg-white/70 hover:bg-blue-900 hover:text-white cursor-pointer flex items-center gap-3"
-                      style={{
-                        letterSpacing: '0.04em',
-                        textShadow: '0 2px 8px rgba(30,58,138,0.10), 0 0px 1px #fff',
-                        boxShadow: '0 4px 24px rgba(30,58,138,0.18)',
-                      }}
-                    >
-                      <span className="animate-bounce">¡Inscríbete ahora!</span>
-                    </span>
-                  </a>
-                )}
-              </div>
-            ))
+                    <img src={image.link} alt={image.Titulo} className="w-full h-full object-cover object-center" />
+                    {/* Botón solo en la primera imagen */}
+                    {index === 0 && (
+                      <a
+                        href="https://docs.google.com/forms/d/e/1FAIpQLSeORCc-ICVrWFFREQ_THIBY5lPYKMXKB1WLAqobKrfWScRqSg/viewform?usp=sharing&ouid=114310616812674125470"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="absolute left-1/2 transform -translate-x-1/2"
+                        style={{
+                          top: '5%',
+                          zIndex: 30,
+                          width: '100%',
+                          display: 'flex',
+                          justifyContent: 'center'
+                        }}
+                        onMouseEnter={() => setIsPaused(true)}
+                        onMouseLeave={() => setIsPaused(false)}
+                      >
+                        <span
+                          className="px-8 py-3 rounded-full font-extrabold text-blue-900 text-lg md:text-2xl shadow-xl transition-all duration-200 border-4 border-blue-900 bg-white/70 hover:bg-blue-900 hover:text-white cursor-pointer flex items-center gap-3"
+                          style={{
+                            letterSpacing: '0.04em',
+                            textShadow: '0 2px 8px rgba(30,58,138,0.10), 0 0px 1px #fff',
+                            boxShadow: '0 4px 24px rgba(30,58,138,0.18)',
+                          }}
+                        >
+                          <span className="animate-bounce">¡Regístrate ahora!</span>
+                        </span>
+                      </a>
+                    )}
+                    {/* Botón solo en la tercera imagen */}
+                    {index === 2 && (
+                      <a
+                        href="/admisiones"
+                        className="absolute left-1/2 transform -translate-x-1/2"
+                        style={{
+                          bottom: '5%',
+                          top: 'auto',
+                          zIndex: 30,
+                          width: '100%',
+                          display: 'flex',
+                          justifyContent: 'center'
+                        }}
+                        onMouseEnter={() => setIsPaused(true)}
+                        onMouseLeave={() => setIsPaused(false)}
+                      >
+                        <span
+                          className="px-8 py-3 rounded-full font-extrabold text-blue-900 text-lg md:text-2xl shadow-xl transition-all duration-200 border-4 border-blue-900 bg-white/70 hover:bg-blue-900 hover:text-white cursor-pointer flex items-center gap-3"
+                          style={{
+                            letterSpacing: '0.04em',
+                            textShadow: '0 2px 8px rgba(30,58,138,0.10), 0 0px 1px #fff',
+                            boxShadow: '0 4px 24px rgba(30,58,138,0.18)',
+                          }}
+                        >
+                          <span className="animate-bounce">¡Inscríbete ahora!</span>
+                        </span>
+                      </a>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
           )}
           <div className="absolute inset-0 flex items-center justify-center text-center text-white z-10">
             <div className="max-w-4xl px-6">
