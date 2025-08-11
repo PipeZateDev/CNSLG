@@ -401,7 +401,7 @@ export default function Admisiones() {
             Completa tu solicitud de inscripción y da el primer paso hacia una educación de excelencia
           </p>
           <a
-            href="https://appsprod.cibercolegios.com/ciber_enroll/?institutionId=95"
+            href="https://slgonzaga.cibercolegios.com/inscription/?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OTUsInR5cGUiOiJjaWIifQ.p0pWPNHrJsYZIH0ixkXqIPmeTI8wQedPvUBQZGcaqys"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block px-8 py-4 bg-white text-blue-900 hover:bg-gray-100 rounded-full font-semibold text-lg transition-colors"
