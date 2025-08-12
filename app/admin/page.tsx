@@ -984,25 +984,7 @@ export default function Admin() {
                               onDragOver={e => e.preventDefault()}
                               style={{ cursor: 'grab' }}
                             >
-                              <div className="absolute top-2 left-1/2 -translate-x-1/2 bg-blue-900 text-white rounded-full px-3 py-1 text-xs font-bold z-10 shadow">
-                                {gallery.indexOf(img) + 1}
-                              </div>
-                              <img src={img.link} alt={img.Titulo} className="w-full h-32 object-cover rounded" />
-                              <button
-                                onClick={() => removeGalleryImage(gallery.indexOf(img))}
-                                className="absolute top-2 right-2 bg-red-600 text-white rounded-full px-2 py-1 text-xs"
-                              >
-                                Eliminar
-                              </button>
-                              <button
-                                onClick={() => handleEditGallery(gallery.indexOf(img))}
-                                className="absolute top-2 left-2 bg-yellow-500 text-white rounded-full px-2 py-1 text-xs"
-                              >
-                                Editar
-                              </button>
-                              <div className="mt-2 text-sm text-center">
-                                <strong>{img.Titulo}</strong>
-                              </div>
+                              {/* ...existing code... */}
                             </div>
                           ))}
                       </div>
@@ -1019,7 +1001,7 @@ export default function Admin() {
                           {imgs.map((img, i) => (
                             <div
                               key={i}
-                              className={`bg-white rounded-lg shadow p-2 relative min-w-[180px] max-w-[220px] cursor-move`}
+                              className={`bg-white rounded-lg shadow p-2 relative min-w-[220px] max-w-[260px] cursor-move`}
                               draggable
                               onDragStart={() => handleGalleryDragStart(gallery.indexOf(img))}
                               onDragEnter={() => handleGalleryDragEnter(gallery.indexOf(img))}
@@ -1049,33 +1031,31 @@ export default function Admin() {
                               </div>
                             </div>
                           ))}
-                        </div>
-                        {/* Botón para agregar imagen al grupo de galería, alineado a la derecha */}
-                        <div className="flex flex-col justify-center items-center min-w-[180px] max-w-[220px] self-stretch">
-                          <button
-                            className="w-full h-32 flex flex-col items-center justify-center border-2 border-dashed border-blue-400 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-900 font-bold text-base transition"
-                            onClick={() => {
-                              // Al hacer click, agrega una nueva imagen al final del grupo
-                              const newItem = {
-                                Titulo: groupKey,
-                                Descripción: '',
-                                fecha: '',
-                                link: '',
-                                grupo: groupKey
-                              };
-                              // Encuentra el último índice del grupo en el array gallery
-                              const lastIdx = gallery.lastIndexOf(imgs[imgs.length - 1]);
-                              const updated = [...gallery];
-                              updated.splice(lastIdx + 1, 0, newItem);
-                              setGallery(updated);
-                              setEditGalleryIdx(lastIdx + 1);
-                              setGalleryForm(newItem);
-                            }}
-                            type="button"
-                          >
-                            <span className="text-3xl mb-1">+</span>
-                            <span>Agregar imagen al grupo</span>
-                          </button>
+                          {/* Botón para agregar imagen al grupo, alineado a la derecha */}
+                          <div className="flex flex-col justify-center items-center min-w-[220px] max-w-[260px] self-stretch">
+                            <button
+                              className="w-full h-32 flex flex-col items-center justify-center border-2 border-dashed border-blue-400 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-900 font-bold text-base transition"
+                              onClick={() => {
+                                const newItem = {
+                                  Titulo: groupKey,
+                                  Descripción: '',
+                                  fecha: '',
+                                  link: '',
+                                  grupo: groupKey
+                                };
+                                const lastIdx = gallery.lastIndexOf(imgs[imgs.length - 1]);
+                                const updated = [...gallery];
+                                updated.splice(lastIdx + 1, 0, newItem);
+                                setGallery(updated);
+                                setEditGalleryIdx(lastIdx + 1);
+                                setGalleryForm(newItem);
+                              }}
+                              type="button"
+                            >
+                              <span className="text-3xl mb-1">+</span>
+                              <span>Agregar imagen al grupo</span>
+                            </button>
+                          </div>
                         </div>
                       </div>
                     ))}
@@ -1136,6 +1116,26 @@ export default function Admin() {
                       <span className="font-bold text-white">Horarios de Atención:</span><br />
                       Lunes a Viernes: 7:00 AM - 5:00 PM
                     </div>
+                  </div>
+                </div>
+              </div>
+              <div className="border-t border-gray-800 mt-8 pt-8 text-center">
+                <p className="text-gray-400 text-sm">
+                  © 2025 Colegio Nuevo San Luis Gonzaga. Todos los derechos reservados.
+                </p>
+                <div className="mt-2">
+                  <Link href="/admin" className="text-blue-400 hover:text-white font-semibold underline text-sm transition-colors cursor-pointer">
+                    Ingresa como Administrador
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </footer>
+        </>
+      )}
+    </div>
+  );
+}
                   </div>
                 </div>
               </div>
