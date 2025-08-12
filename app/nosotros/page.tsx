@@ -86,25 +86,9 @@ export default function Nosotros() {
 
   const pathname = usePathname();
 
-  const [modalOpen, setModalOpen] = useState(false);
-  const [modalImages, setModalImages] = useState<{ link: string; Titulo?: string }[]>([]);
-  const [modalIndex, setModalIndex] = useState(0);
-
-  // Modal open handler
-  const openModal = (imgs: { link: string; Titulo?: string }[], idx: number = 0) => {
-    setModalImages(imgs);
-    setModalIndex(idx);
-    setModalOpen(true);
-  };
-
-  const closeModal = () => setModalOpen(false);
-
-  const nextModalImage = () => setModalIndex((prev) => (prev + 1) % modalImages.length);
-  const prevModalImage = () => setModalIndex((prev) => (prev - 1 + modalImages.length) % modalImages.length);
-
-  // Estado para el modal de galería
+  // Estado y lógica del modal de galería (idéntico a Inicio)
   const [galleryModalOpen, setGalleryModalOpen] = useState(false);
-  const [galleryImages, setGalleryImages] = useState<{ link: string; Titulo?: string }[]>([]);
+  const [galleryImages, setGalleryImages] = useState<{ link: string; Titulo?: string; Descripción?: string; fecha?: string }[]>([]);
   const [galleryIndex, setGalleryIndex] = useState(0);
 
   const stageRef = useRef<HTMLDivElement | null>(null);
@@ -247,7 +231,7 @@ export default function Nosotros() {
   }, [galleryModalOpen, galleryIndex]);
 
   // Handler para abrir el modal desde la galería agrupada
-  const handleOpenGalleryModal = (imgs: { link: string; Titulo?: string }[], idx: number = 0) => {
+  const handleOpenGalleryModal = (imgs: { link: string; Titulo?: string; Descripción?: string; fecha?: string }[], idx: number = 0) => {
     setGalleryImages(imgs);
     setGalleryIndex(idx);
     setGalleryModalOpen(true);
@@ -540,7 +524,7 @@ export default function Nosotros() {
           groupKey.startsWith('__single_') ? (
             imgs.map((img, i) => (
               <div key={img.link + i} className="col-span-1 md:col-span-1 flex flex-col h-full cursor-pointer group"
-                onClick={() => openModal([img], 0)}>
+                onClick={() => handleOpenGalleryModal([img], 0)}>
                 <div className="rounded-xl shadow-lg bg-blue-50 p-2 flex flex-col h-full transition-transform duration-300 group-hover:scale-105 group-hover:shadow-xl">
                   <div className="relative overflow-hidden rounded-xl flex flex-col h-full">
                     <img 
@@ -559,7 +543,7 @@ export default function Nosotros() {
             ))
           ) : (
             <div key={groupKey} className="col-span-1 md:col-span-1 flex flex-col h-full cursor-pointer group"
-              onClick={() => openModal(imgs, 0)}>
+              onClick={() => handleOpenGalleryModal(imgs, 0)}>
               <div className="rounded-xl shadow-lg bg-blue-50 p-2 flex flex-col h-full transition-transform duration-300 group-hover:scale-105 group-hover:shadow-xl">
                 <div className="relative overflow-hidden rounded-xl flex flex-col h-full">
                   <img 
@@ -576,7 +560,7 @@ export default function Nosotros() {
                     <div className="absolute" style={{ bottom: '38%', left: '50%', transform: 'translateX(-50%)' }}>
                       <button
                         className="px-4 py-1 bg-blue-900 text-white rounded-full text-xs font-semibold shadow hover:bg-blue-800 transition"
-                        onClick={e => { e.stopPropagation(); openModal(imgs, 0); }}
+                        onClick={e => { e.stopPropagation(); handleOpenGalleryModal(imgs, 0); }}
                       >
                         Ver más ({imgs.length})
                       </button>
@@ -612,37 +596,74 @@ export default function Nosotros() {
         >
           &times;
         </button>
-        {/* Stage + navegación */}
-        <div className="flex items-center justify-between w-full mt-8 mb-4 px-4">
-          {galleryImages.length > 1 && (
-            <button
-              className="text-2xl text-blue-900 bg-white rounded-full px-2 py-1 shadow hover:bg-blue-100"
-              onClick={() => setGalleryIndex((prev) => (prev - 1 + galleryImages.length) % galleryImages.length)}
-              aria-label="Anterior"
+        {/* Layout igual al modal de Inicio */}
+        <div className="grid grid-rows-[1fr_auto] md:grid-rows-1 md:grid-cols-3 w-full h-full">
+          {/* Visual: stage + tira de miniaturas */}
+          <div className="md:col-span-2 flex flex-col min-w-0 min-h-0">
+            {/* Stage */}
+            <div
+              ref={stageRef}
+              className="relative flex-1 bg-black flex items-center justify-center overflow-hidden touch-none select-none"
+              onPointerDown={onStagePointerDown}
+              onPointerMove={onStagePointerMove}
+              onPointerUp={onStagePointerUp}
+              onPointerCancel={onStagePointerUp}
+              onWheel={handleStageWheel}
             >
-              &#8592;
-            </button>
-          )}
-          <div className="flex-1 flex justify-center">
-            <img
-              src={galleryImages[galleryIndex].link}
-              alt={galleryImages[galleryIndex].Titulo || ''}
-              className="max-h-[65vh] w-auto rounded-lg"
-              style={{ objectFit: 'contain', maxWidth: '100%' }}
-            />
+              <img
+                src={galleryImages[galleryIndex].link}
+                alt={galleryImages[galleryIndex].Titulo || ''}
+                className="max-w-full max-h-full object-contain pointer-events-none select-none"
+                style={{ transform: `translate(${modalTx}px, ${modalTy}px) scale(${modalScale})` }}
+              />
+              {/* Nav */}
+              {galleryImages.length > 1 && (
+                <>
+                  <button
+                    className="absolute left-2 top-1/2 -translate-y-1/2 w-11 h-16 rounded bg-black/35 hover:bg-white/20 text-white text-2xl flex items-center justify-center"
+                    onClick={() => setGalleryIndex((prev) => (prev - 1 + galleryImages.length) % galleryImages.length)}
+                    aria-label="Anterior"
+                  >
+                    ‹
+                  </button>
+                  <button
+                    className="absolute right-2 top-1/2 -translate-y-1/2 w-11 h-16 rounded bg-black/35 hover:bg-white/20 text-white text-2xl flex items-center justify-center"
+                    onClick={() => setGalleryIndex((prev) => (prev + 1) % galleryImages.length)}
+                    aria-label="Siguiente"
+                  >
+                    ›
+                  </button>
+                </>
+              )}
+            </div>
+            {/* Miniaturas */}
+            {galleryImages.length > 1 && (
+              <div
+                ref={stripRef}
+                className="h-24 bg-neutral-800 border-t border-neutral-700 overflow-x-auto flex items-center gap-2 px-3 py-2"
+              >
+                {galleryImages.map((img, idx) => (
+                  <button
+                    key={img.link + idx}
+                    type="button"
+                    onClick={() => setGalleryIndex(idx)}
+                    data-current={idx === galleryIndex ? 'true' : undefined}
+                    className={`flex-none w-28 h-20 rounded overflow-hidden border-2 ${idx === galleryIndex ? 'border-blue-400' : 'border-transparent'} bg-black`}
+                    aria-label={`Ver imagen ${idx + 1}`}
+                  >
+                    <img src={img.link} alt={img.Titulo || ''} className="w-full h-full object-cover" />
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
-          {galleryImages.length > 1 && (
-            <button
-              className="text-2xl text-blue-900 bg-white rounded-full px-2 py-1 shadow hover:bg-blue-100"
-              onClick={() => setGalleryIndex((prev) => (prev + 1) % galleryImages.length)}
-              aria-label="Siguiente"
-            >
-              &#8594;
-            </button>
-          )}
-        </div>
-        <div className="text-center font-semibold text-blue-900 mb-6 px-4" style={{ minHeight: 32 }}>
-          {galleryImages[galleryIndex].Titulo ? galleryImages[galleryIndex].Titulo : <span>&nbsp;</span>}
+          {/* Info derecha */}
+          <aside className="md:col-span-1 p-4 md:p-6 overflow-auto bg-neutral-900 border-t md:border-t-0 md:border-l border-neutral-800">
+            <h3 className="text-2xl md:text-3xl font-extrabold mb-2 text-white">
+              {galleryImages[galleryIndex].Titulo}
+            </h3>
+            {/* Si tienes descripción o fecha, agrégalas aquí */}
+          </aside>
         </div>
       </div>
     </div>
