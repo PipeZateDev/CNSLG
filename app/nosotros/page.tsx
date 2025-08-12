@@ -102,9 +102,9 @@ export default function Nosotros() {
   const nextModalImage = () => setModalIndex((prev) => (prev + 1) % modalImages.length);
   const prevModalImage = () => setModalIndex((prev) => (prev - 1 + modalImages.length) % modalImages.length);
 
-  // Estado para galería (ajusta los tipos según tu estructura de imágenes)
+  // Estado para el modal de galería
   const [galleryModalOpen, setGalleryModalOpen] = useState(false);
-  const [galleryImages, setGalleryImages] = useState<{ src: string; titulo?: string; descripcion?: string }[]>([]);
+  const [galleryImages, setGalleryImages] = useState<{ link: string; Titulo?: string }[]>([]);
   const [galleryIndex, setGalleryIndex] = useState(0);
 
   const stageRef = useRef<HTMLDivElement | null>(null);
@@ -197,8 +197,11 @@ export default function Nosotros() {
           const totalDx = curr.x - dragRef.current.x;
           if (Math.abs(totalDx) > 60) {
             dragRef.current = null;
-            if (totalDx > 0) setGalleryIndex((prev) => (prev - 1 + galleryImages.length) % galleryImages.length);
-            else setGalleryIndex((prev) => (prev + 1) % galleryImages.length);
+            setGalleryIndex((prev) =>
+              totalDx > 0
+                ? (prev - 1 + galleryImages.length) % galleryImages.length
+                : (prev + 1) % galleryImages.length
+            );
           }
         }
       }
@@ -243,17 +246,12 @@ export default function Nosotros() {
     el?.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
   }, [galleryModalOpen, galleryIndex]);
 
-  // Ejemplo de imágenes (ajusta según tus datos reales)
-  const images = [
-    { src: "/img1.jpg", titulo: "Título 1", descripcion: "Descripción 1" },
-    { src: "/img2.jpg", titulo: "Título 2", descripcion: "Descripción 2" },
-    // ...más imágenes...
-  ];
-
-  // Estado y lógica del modal
-  const [galleryModalOpen, setGalleryModalOpen] = useState(false);
-  const [galleryImages, setGalleryImages] = useState(images);
-  const [galleryIndex, setGalleryIndex] = useState(0);
+  // Handler para abrir el modal desde la galería agrupada
+  const handleOpenGalleryModal = (imgs: { link: string; Titulo?: string }[], idx: number = 0) => {
+    setGalleryImages(imgs);
+    setGalleryIndex(idx);
+    setGalleryModalOpen(true);
+  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -595,27 +593,31 @@ export default function Nosotros() {
   {/* Modal para visualizar imagen */}
   {galleryModalOpen && (
     <div
-      className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center"
-      onClick={closeModal}
+      className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center"
+      onClick={() => setGalleryModalOpen(false)}
       tabIndex={-1}
     >
       <div
-        className="relative w-[80vw] max-w-[80vw] mx-4 bg-white rounded-lg shadow-lg flex flex-col items-center"
-        style={{ maxHeight: '80vh' }}
+        className="relative bg-neutral-900 text-white rounded-xl shadow-2xl overflow-hidden w-[95vw] h-[95vh] md:w-[90vw] md:h-[90vh] flex"
         onClick={e => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
       >
+        {/* Botón cerrar SIEMPRE visible */}
         <button
-          className="absolute top-2 right-2 text-2xl text-blue-900 bg-white rounded-full px-2 py-1 shadow hover:bg-blue-100"
-          onClick={closeModal}
+          className="absolute top-2 right-2 w-11 h-11 z-20 rounded-full bg-black/60 text-white text-3xl flex items-center justify-center shadow-lg focus:outline-none focus:ring-2 focus:ring-white"
+          style={{ opacity: 0.95 }}
+          onClick={() => setGalleryModalOpen(false)}
           aria-label="Cerrar"
         >
           &times;
         </button>
+        {/* Stage + navegación */}
         <div className="flex items-center justify-between w-full mt-8 mb-4 px-4">
           {galleryImages.length > 1 && (
             <button
               className="text-2xl text-blue-900 bg-white rounded-full px-2 py-1 shadow hover:bg-blue-100"
-              onClick={prevModalImage}
+              onClick={() => setGalleryIndex((prev) => (prev - 1 + galleryImages.length) % galleryImages.length)}
               aria-label="Anterior"
             >
               &#8592;
@@ -623,8 +625,8 @@ export default function Nosotros() {
           )}
           <div className="flex-1 flex justify-center">
             <img
-              src={galleryImages[galleryIndex].src}
-              alt={galleryImages[galleryIndex].titulo || ''}
+              src={galleryImages[galleryIndex].link}
+              alt={galleryImages[galleryIndex].Titulo || ''}
               className="max-h-[65vh] w-auto rounded-lg"
               style={{ objectFit: 'contain', maxWidth: '100%' }}
             />
@@ -632,7 +634,7 @@ export default function Nosotros() {
           {galleryImages.length > 1 && (
             <button
               className="text-2xl text-blue-900 bg-white rounded-full px-2 py-1 shadow hover:bg-blue-100"
-              onClick={nextModalImage}
+              onClick={() => setGalleryIndex((prev) => (prev + 1) % galleryImages.length)}
               aria-label="Siguiente"
             >
               &#8594;
@@ -640,7 +642,7 @@ export default function Nosotros() {
           )}
         </div>
         <div className="text-center font-semibold text-blue-900 mb-6 px-4" style={{ minHeight: 32 }}>
-          {galleryImages[galleryIndex].titulo ? galleryImages[galleryIndex].titulo : <span>&nbsp;</span>}
+          {galleryImages[galleryIndex].Titulo ? galleryImages[galleryIndex].Titulo : <span>&nbsp;</span>}
         </div>
       </div>
     </div>

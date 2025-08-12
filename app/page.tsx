@@ -749,23 +749,15 @@ export default function Home() {
               role="dialog"
               aria-modal="true"
             >
-              {/* Botón cerrar móvil */}
+              {/* Botón cerrar SIEMPRE visible, con fondo y sombra para móvil */}
               <button
-                className="absolute top-2 right-2 w-10 h-10 rounded-full bg-black/40 hover:bg-white/20 transition flex items-center justify-center text-2xl md:hidden"
+                className="absolute top-2 right-2 w-11 h-11 z-20 rounded-full bg-black/60 text-white text-3xl flex items-center justify-center shadow-lg focus:outline-none focus:ring-2 focus:ring-white"
+                style={{ opacity: 0.95 }}
                 onClick={closeNewsModal}
                 aria-label="Cerrar"
               >
                 &times;
               </button>
-              {/* Botón cerrar escritorio */}
-              <button
-                className="absolute top-2 right-2 w-10 h-10 rounded-full bg-black/40 hover:bg-white/20 transition flex items-center justify-center text-2xl hidden md:flex"
-                onClick={closeNewsModal}
-                aria-label="Cerrar"
-              >
-                &times;
-              </button>
-
               {/* Contenido: imagen izquierda (2) / texto derecha (1) */}
               <div className="grid grid-rows-[1fr_auto] md:grid-rows-1 md:grid-cols-3 w-full h-full">
                 {/* Visual: stage + tira de miniaturas */}
