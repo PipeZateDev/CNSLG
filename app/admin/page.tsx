@@ -810,7 +810,8 @@ export default function Admin() {
                     .map(([groupKey, items], idx) => (
                       <div key={groupKey}>
                         <div className="mb-2 text-blue-900 font-bold text-center">{groupKey}</div>
-                        <div className="flex overflow-x-auto gap-4 pb-2">
+                        <div className="flex overflow-x-auto gap-4 pb-2 items-stretch">
+                          {/* Imágenes del grupo */}
                           {items.map((item, i) => (
                             <div
                               key={i}
@@ -850,32 +851,30 @@ export default function Admin() {
                               </div>
                             </div>
                           ))}
-                        </div>
-                        {/* Botón para agregar imagen al grupo de noticias */}
-                        <div className="flex flex-col justify-center items-center min-w-[220px] max-w-[260px]">
-                          <button
-                            className="w-full h-48 flex flex-col items-center justify-center border-2 border-dashed border-blue-400 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-900 font-bold text-lg transition"
-                            onClick={() => {
-                              // Al hacer click, agrega una nueva noticia al final del grupo
-                              const newItem = {
-                                Titulo: groupKey,
-                                Descripción: '',
-                                fecha: '',
-                                link: ''
-                              };
-                              // Encuentra el último índice del grupo en el array news
-                              const lastIdx = news.lastIndexOf(items[items.length - 1]);
-                              const updated = [...news];
-                              updated.splice(lastIdx + 1, 0, newItem);
-                              setNews(updated);
-                              setEditNewsIdx(lastIdx + 1);
-                              setNewsForm(newItem);
-                            }}
-                            type="button"
-                          >
-                            <span className="text-4xl mb-2">+</span>
-                            <span>Agregar imagen al grupo</span>
-                          </button>
+                          {/* Botón para agregar imagen al grupo de noticias, alineado a la derecha */}
+                          <div className="flex flex-col justify-center items-center min-w-[220px] max-w-[260px] self-stretch">
+                            <button
+                              className="w-full h-48 flex flex-col items-center justify-center border-2 border-dashed border-blue-400 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-900 font-bold text-lg transition"
+                              onClick={() => {
+                                const newItem = {
+                                  Titulo: groupKey,
+                                  Descripción: '',
+                                  fecha: '',
+                                  link: ''
+                                };
+                                const lastIdx = news.lastIndexOf(items[items.length - 1]);
+                                const updated = [...news];
+                                updated.splice(lastIdx + 1, 0, newItem);
+                                setNews(updated);
+                                setEditNewsIdx(lastIdx + 1);
+                                setNewsForm(newItem);
+                              }}
+                              type="button"
+                            >
+                              <span className="text-4xl mb-2">+</span>
+                              <span>Agregar imagen al grupo</span>
+                            </button>
+                          </div>
                         </div>
                       </div>
                     ))}
@@ -1015,7 +1014,8 @@ export default function Admin() {
                     .map(([groupKey, imgs], idx) => (
                       <div key={groupKey}>
                         <div className="mb-2 text-blue-900 font-bold text-center">{groupKey}</div>
-                        <div className="flex overflow-x-auto gap-4 pb-2">
+                        <div className="flex overflow-x-auto gap-4 pb-2 items-stretch">
+                          {/* Imágenes del grupo */}
                           {imgs.map((img, i) => (
                             <div
                               key={i}
@@ -1051,7 +1051,7 @@ export default function Admin() {
                           ))}
                         </div>
                         {/* Botón para agregar imagen al grupo de galería */}
-                        <div className="flex flex-col justify-center items-center min-w-[180px] max-w-[220px]">
+                        <div className="flex flex-col justify-center items-center min-w-[180px] max-w-[220px] self-stretch">
                           <button
                             className="w-full h-32 flex flex-col items-center justify-center border-2 border-dashed border-blue-400 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-900 font-bold text-base transition"
                             onClick={() => {
