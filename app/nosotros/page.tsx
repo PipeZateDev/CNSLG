@@ -659,7 +659,7 @@ export default function Nosotros() {
           </div>
           {/* Info derecha */}
           <aside className="md:col-span-1 p-4 md:p-6 overflow-auto bg-neutral-900 border-t md:border-t-0 md:border-l border-neutral-800">
-            <h3 className="text-2xl md:text-3xl font-extrabold mb-2 text-white">
+            <h3 className="text-xl md:text-4xl font-extrabold mb-2 text-white">
               {galleryImages[galleryIndex].Titulo}
             </h3>
             {/* Si tienes descripción o fecha, agrégalas aquí */}
