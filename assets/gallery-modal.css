@@ -1,0 +1,131 @@
+.gm-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  z-index: 10000;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+.gm-modal.open { display: block; }
+.gm-backdrop {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,.6);
+  backdrop-filter: blur(2px);
+}
+.gm-dialog {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 90vw; height: 90vh;  /* Desktop default */
+  background: #111;
+  color: #eee;
+  border-radius: 10px;
+  box-shadow: 0 10px 40px rgba(0,0,0,.5);
+  overflow: hidden;
+}
+@media (max-width: 768px) {
+  .gm-dialog { width: 95vw; height: 95vh; }
+}
+.gm-close {
+  position: absolute; top: 8px; right: 8px;
+  width: 36px; height: 36px;
+  border: 0; border-radius: 18px;
+  background: rgba(0,0,0,.5); color: #fff;
+  font-size: 22px; line-height: 36px; cursor: pointer;
+}
+.gm-close:hover { background: rgba(255,255,255,.2); }
+
+.gm-content {
+  position: absolute; inset: 0 0 0 0;
+  display: grid;
+  grid-template-columns: 2fr 1fr;  /* imagen izquierda, texto derecha */
+  grid-template-rows: 1fr;
+}
+@media (max-width: 768px) {
+  .gm-content {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr auto; /* imagen arriba, info abajo */
+  }
+}
+
+.gm-visual {
+  display: flex; flex-direction: column;
+  min-width: 0; min-height: 0;
+}
+.gm-stage {
+  position: relative;
+  flex: 1;
+  background: #000;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  touch-action: none; /* gestos */
+  user-select: none;
+}
+.gm-image {
+  max-width: 100%;
+  max-height: 100%;
+  will-change: transform;
+  transform-origin: 50% 50%;
+  pointer-events: none; /* gestos en stage */
+  user-select: none;
+}
+
+.gm-strip {
+  height: 92px;
+  display: flex; align-items: center; gap: 8px;
+  padding: 6px 10px;
+  background: #181818;
+  border-top: 1px solid #222;
+  overflow-x: auto; overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+.gm-thumb {
+  flex: 0 0 auto;
+  width: 120px; height: 80px;
+  position: relative; border-radius: 6px;
+  overflow: hidden; cursor: pointer;
+  border: 2px solid transparent;
+  background: #000;
+}
+.gm-thumb img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+.gm-thumb[aria-current="true"] { border-color: #4da3ff; }
+
+.gm-info {
+  padding: 16px;
+  overflow: auto;
+  background: #121212;
+  border-left: 1px solid #222;
+}
+@media (max-width: 768px) {
+  .gm-info { border-left: 0; border-top: 1px solid #222; max-height: 34vh; }
+}
+.gm-title { margin: 0 0 8px 0; font-size: 18px; color: #fff; }
+.gm-desc { color: #ccc; font-size: 14px; line-height: 1.4; }
+
+.gm-nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 44px; height: 72px;
+  border: 0; border-radius: 6px;
+  background: rgba(0,0,0,.35); color: #fff;
+  font-size: 28px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+.gm-prev { left: 8px; }
+.gm-next { right: 8px; }
+.gm-nav:hover { background: rgba(255,255,255,.2); }
+
+.gm-hint {
+  position: absolute; bottom: 100px; left: 12px;
+  color: #bbb; font-size: 12px; opacity: .8;
+}
+
+.gm-hidden { display: none !important; }
+
+/* Scrollbar discreto para la tira */
+.gm-strip::-webkit-scrollbar { height: 8px; }
+.gm-strip::-webkit-scrollbar-track { background: #161616; }
+.gm-strip::-webkit-scrollbar-thumb { background: #2c2c2c; border-radius: 4px; }
+
+/* Evita selección/arrastre de imágenes */
+.gm-stage, .gm-thumb img { -webkit-user-drag: none; }
