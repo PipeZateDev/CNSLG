@@ -338,6 +338,61 @@ export default function Admin() {
     return acc;
   }, {});
 
+  // Nuevo estado para drag & drop de grupos
+  const [draggedNewsGroup, setDraggedNewsGroup] = useState<string | null>(null);
+  const [draggedGalleryGroup, setDraggedGalleryGroup] = useState<string | null>(null);
+
+  // Funciones para reordenar grupos de noticias
+  const newsGroupOrder = Object.keys(groupedNews);
+  const setNewsGroupOrder = (newOrder: string[]) => {
+    // Reordena el array news según el nuevo orden de grupos
+    const newNews: NewsItem[] = [];
+    newOrder.forEach(groupKey => {
+      newNews.push(...groupedNews[groupKey]);
+    });
+    setNews(newNews);
+  };
+
+  const handleNewsGroupDragStart = (groupKey: string) => setDraggedNewsGroup(groupKey);
+  const handleNewsGroupDragEnter = (targetGroupKey: string) => {
+    if (!draggedNewsGroup || draggedNewsGroup === targetGroupKey) return;
+    const currentOrder = newsGroupOrder;
+    const from = currentOrder.indexOf(draggedNewsGroup);
+    const to = currentOrder.indexOf(targetGroupKey);
+    if (from === -1 || to === -1) return;
+    const newOrder = [...currentOrder];
+    newOrder.splice(from, 1);
+    newOrder.splice(to, 0, draggedNewsGroup);
+    setNewsGroupOrder(newOrder);
+    setDraggedNewsGroup(targetGroupKey);
+  };
+  const handleNewsGroupDragEnd = () => setDraggedNewsGroup(null);
+
+  // Funciones para reordenar grupos de galería
+  const galleryGroupOrder = Object.keys(groupedGallery);
+  const setGalleryGroupOrder = (newOrder: string[]) => {
+    const newGallery: GalleryItem[] = [];
+    newOrder.forEach(groupKey => {
+      newGallery.push(...groupedGallery[groupKey]);
+    });
+    setGallery(newGallery);
+  };
+
+  const handleGalleryGroupDragStart = (groupKey: string) => setDraggedGalleryGroup(groupKey);
+  const handleGalleryGroupDragEnter = (targetGroupKey: string) => {
+    if (!draggedGalleryGroup || draggedGalleryGroup === targetGroupKey) return;
+    const currentOrder = galleryGroupOrder;
+    const from = currentOrder.indexOf(draggedGalleryGroup);
+    const to = currentOrder.indexOf(targetGroupKey);
+    if (from === -1 || to === -1) return;
+    const newOrder = [...currentOrder];
+    newOrder.splice(from, 1);
+    newOrder.splice(to, 0, draggedGalleryGroup);
+    setGalleryGroupOrder(newOrder);
+    setDraggedGalleryGroup(targetGroupKey);
+  };
+  const handleGalleryGroupDragEnd = () => setDraggedGalleryGroup(null);
+
   return (
     <div className="min-h-screen bg-white">
       {/* Modal de validación */}
