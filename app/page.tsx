@@ -829,10 +829,10 @@ export default function Home() {
                   <div className="text-blue-300 text-sm md:text-xl mb-3 font-semibold">
                     {newsModalImages[newsModalIndex].fecha}
                   </div>
-                  {/* Descripción eliminada */}
-                  {/* <div className="text-base md:text-2xl text-neutral-200 whitespace-pre-line">
+                  {/* Descripción visible solo en escritorio */}
+                  <div className="hidden md:block text-base md:text-2xl text-neutral-200 whitespace-pre-line">
                     {newsModalImages[newsModalIndex].Descripción}
-                  </div> */}
+                  </div>
                 </aside>
               </div>
             </div>

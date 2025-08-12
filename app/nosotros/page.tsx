@@ -662,7 +662,12 @@ export default function Nosotros() {
             <h3 className="text-xl md:text-4xl font-extrabold mb-2 text-white">
               {galleryImages[galleryIndex].Titulo}
             </h3>
-            {/* Si tienes descripción o fecha, agrégalas aquí */}
+            {/* Descripción visible solo en escritorio */}
+            {galleryImages[galleryIndex].Descripción && (
+              <div className="hidden md:block text-base md:text-2xl text-neutral-200 whitespace-pre-line">
+                {galleryImages[galleryIndex].Descripción}
+              </div>
+            )}
           </aside>
         </div>
       </div>
