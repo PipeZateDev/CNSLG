@@ -1050,7 +1050,7 @@ export default function Admin() {
                             </div>
                           ))}
                         </div>
-                        {/* Botón para agregar imagen al grupo de galería */}
+                        {/* Botón para agregar imagen al grupo de galería, alineado a la derecha */}
                         <div className="flex flex-col justify-center items-center min-w-[180px] max-w-[220px] self-stretch">
                           <button
                             className="w-full h-32 flex flex-col items-center justify-center border-2 border-dashed border-blue-400 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-900 font-bold text-base transition"
