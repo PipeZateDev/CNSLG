@@ -422,7 +422,7 @@ export default function Admin() {
                     UNOi Santillana
                   </a>
                   <a 
-                    href="https://www.cibercolegios.com/" 
+                    href="https://slgonzaga.cibercolegios.com/authentication/?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OTUsInR5cGUiOiJjaWIifQ.p0pWPNHrJsYZIH0ixkXqIPmeTI8wQedPvUBQZGcaqys" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="px-4 py-1.5 bg-yellow-400 text-black rounded-full text-sm font-semibold hover:bg-yellow-500 transition-colors whitespace-nowrap cursor-pointer"
@@ -996,7 +996,7 @@ export default function Admin() {
                       UNOi Santillana
                     </a>
                     <a 
-                      href="https://www.cibercolegios.com/" 
+                      href="https://slgonzaga.cibercolegios.com/authentication/?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OTUsInR5cGUiOiJjaWIifQ.p0pWPNHrJsYZIH0ixkXqIPmeTI8wQedPvUBQZGcaqys" 
                       target="_blank" 
                       rel="noopener noreferrer"
                       className="block text-sm text-gray-400 hover:text-white transition-colors cursor-pointer"
