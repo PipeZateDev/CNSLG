@@ -851,6 +851,32 @@ export default function Admin() {
                             </div>
                           ))}
                         </div>
+                        {/* Botón para agregar imagen al grupo de noticias */}
+                        <div className="flex flex-col justify-center items-center min-w-[220px] max-w-[260px]">
+                          <button
+                            className="w-full h-48 flex flex-col items-center justify-center border-2 border-dashed border-blue-400 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-900 font-bold text-lg transition"
+                            onClick={() => {
+                              // Al hacer click, agrega una nueva noticia al final del grupo
+                              const newItem = {
+                                Titulo: groupKey,
+                                Descripción: '',
+                                fecha: '',
+                                link: ''
+                              };
+                              // Encuentra el último índice del grupo en el array news
+                              const lastIdx = news.lastIndexOf(items[items.length - 1]);
+                              const updated = [...news];
+                              updated.splice(lastIdx + 1, 0, newItem);
+                              setNews(updated);
+                              setEditNewsIdx(lastIdx + 1);
+                              setNewsForm(newItem);
+                            }}
+                            type="button"
+                          >
+                            <span className="text-4xl mb-2">+</span>
+                            <span>Agregar imagen al grupo</span>
+                          </button>
+                        </div>
                       </div>
                     ))}
                 </div>
@@ -1023,6 +1049,33 @@ export default function Admin() {
                               </div>
                             </div>
                           ))}
+                        </div>
+                        {/* Botón para agregar imagen al grupo de galería */}
+                        <div className="flex flex-col justify-center items-center min-w-[180px] max-w-[220px]">
+                          <button
+                            className="w-full h-32 flex flex-col items-center justify-center border-2 border-dashed border-blue-400 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-900 font-bold text-base transition"
+                            onClick={() => {
+                              // Al hacer click, agrega una nueva imagen al final del grupo
+                              const newItem = {
+                                Titulo: groupKey,
+                                Descripción: '',
+                                fecha: '',
+                                link: '',
+                                grupo: groupKey
+                              };
+                              // Encuentra el último índice del grupo en el array gallery
+                              const lastIdx = gallery.lastIndexOf(imgs[imgs.length - 1]);
+                              const updated = [...gallery];
+                              updated.splice(lastIdx + 1, 0, newItem);
+                              setGallery(updated);
+                              setEditGalleryIdx(lastIdx + 1);
+                              setGalleryForm(newItem);
+                            }}
+                            type="button"
+                          >
+                            <span className="text-3xl mb-1">+</span>
+                            <span>Agregar imagen al grupo</span>
+                          </button>
                         </div>
                       </div>
                     ))}
