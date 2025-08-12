@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 
 // Mueve el componente GalleryGrid fuera del componente principal para evitar errores de declaración dentro del render.
@@ -102,18 +102,146 @@ export default function Nosotros() {
   const nextModalImage = () => setModalIndex((prev) => (prev + 1) % modalImages.length);
   const prevModalImage = () => setModalIndex((prev) => (prev - 1 + modalImages.length) % modalImages.length);
 
+  // Estado para galería (ajusta los tipos según tu estructura de imágenes)
   const [galleryModalOpen, setGalleryModalOpen] = useState(false);
-  const [galleryModalImages, setGalleryModalImages] = useState<{ link: string; Titulo?: string }[]>([]);
-  const [galleryModalIndex, setGalleryModalIndex] = useState(0);
+  const [galleryImages, setGalleryImages] = useState<{ src: string; titulo?: string; descripcion?: string }[]>([]);
+  const [galleryIndex, setGalleryIndex] = useState(0);
 
-  const openGalleryModal = (imgs: typeof gallery, idx: number = 0) => {
-    setGalleryModalImages(imgs);
-    setGalleryModalIndex(idx);
-    setGalleryModalOpen(true);
+  const stageRef = useRef<HTMLDivElement | null>(null);
+  const stripRef = useRef<HTMLDivElement | null>(null);
+  const modalTransformRef = useRef({ scale: 1, tx: 0, ty: 0 });
+  const [modalScale, setModalScale] = useState(1);
+  const [modalTx, setModalTx] = useState(0);
+  const [modalTy, setModalTy] = useState(0);
+  const pointersRef = useRef<Map<number, { x: number; y: number }>>(new Map());
+  const lastDistRef = useRef(0);
+  const dragRef = useRef<{ x: number; y: number; t: number; moved: boolean } | null>(null);
+
+  const clamp = (v: number, a: number, b: number) => Math.max(a, Math.min(b, v));
+  const setTransform = (scale: number, tx: number, ty: number) => {
+    modalTransformRef.current = { scale, tx, ty };
+    setModalScale(scale);
+    setModalTx(tx);
+    setModalTy(ty);
   };
-  const closeGalleryModal = () => setGalleryModalOpen(false);
-  const nextGalleryModalImage = () => setGalleryModalIndex((prev) => (prev + 1) % galleryModalImages.length);
-  const prevGalleryModalImage = () => setGalleryModalIndex((prev) => (prev - 1 + galleryModalImages.length) % galleryModalImages.length);
+  const resetModalTransform = (hard = true) => {
+    setTransform(1, 0, 0);
+    if (hard) dragRef.current = null;
+  };
+  const limitPan = () => {
+    const rect = stageRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    const { scale, tx, ty } = modalTransformRef.current;
+    const maxX = Math.max(0, (rect.width * scale - rect.width) / 2);
+    const maxY = Math.max(0, (rect.height * scale - rect.height) / 2);
+    const nx = clamp(tx, -maxX, maxX);
+    const ny = clamp(ty, -maxY, maxY);
+    if (nx !== tx || ny !== ty) setTransform(scale, nx, ny);
+  };
+  const zoomAround = (clientX: number, clientY: number, factor: number) => {
+    const rect = stageRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    const cx = clientX - rect.left - rect.width / 2;
+    const cy = clientY - rect.top - rect.height / 2;
+    const { scale, tx, ty } = modalTransformRef.current;
+    const newScale = clamp(scale * factor, 1, 4);
+    const applied = (newScale / scale) || 1;
+    const ntx = (tx + cx) * applied - cx;
+    const nty = (ty + cy) * applied - cy;
+    setTransform(newScale, ntx, nty);
+    limitPan();
+  };
+
+  const handleStageWheel = (e: React.WheelEvent<HTMLDivElement>) => {
+    if (!galleryModalOpen) return;
+    e.preventDefault();
+    const delta = -e.deltaY;
+    const factor = Math.exp(delta * 0.002);
+    zoomAround(e.clientX, e.clientY, factor);
+  };
+  const onStagePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    e.currentTarget.setPointerCapture(e.pointerId);
+    pointersRef.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (pointersRef.current.size === 1) {
+      dragRef.current = { x: e.clientX, y: e.clientY, t: Date.now(), moved: false };
+    } else if (pointersRef.current.size === 2) {
+      dragRef.current = null;
+      const pts = Array.from(pointersRef.current.values());
+      lastDistRef.current = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y);
+    }
+  };
+  const onStagePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!pointersRef.current.has(e.pointerId)) return;
+    const prev = pointersRef.current.get(e.pointerId)!;
+    const curr = { x: e.clientX, y: e.clientY };
+    pointersRef.current.set(e.pointerId, curr);
+
+    if (pointersRef.current.size === 2) {
+      const pts = Array.from(pointersRef.current.values());
+      const dist = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y);
+      if (lastDistRef.current) {
+        const center = { x: (pts[0].x + pts[1].x) / 2, y: (pts[0].y + pts[1].y) / 2 };
+        zoomAround(center.x, center.y, dist / lastDistRef.current);
+      }
+      lastDistRef.current = dist;
+    } else if (pointersRef.current.size === 1) {
+      const dx = curr.x - prev.x;
+      const dy = curr.y - prev.y;
+      const { scale, tx, ty } = modalTransformRef.current;
+      if (scale > 1) {
+        setTransform(scale, tx + dx, ty + dy);
+        limitPan();
+        if (dragRef.current) dragRef.current.moved = true;
+      } else {
+        if (dragRef.current) {
+          const totalDx = curr.x - dragRef.current.x;
+          if (Math.abs(totalDx) > 60) {
+            dragRef.current = null;
+            if (totalDx > 0) setGalleryIndex((prev) => (prev - 1 + galleryImages.length) % galleryImages.length);
+            else setGalleryIndex((prev) => (prev + 1) % galleryImages.length);
+          }
+        }
+      }
+    }
+  };
+  const onStagePointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (pointersRef.current.has(e.pointerId)) pointersRef.current.delete(e.pointerId);
+    if (pointersRef.current.size < 2) lastDistRef.current = 0;
+    if (pointersRef.current.size === 0 && dragRef.current) {
+      const dt = Date.now() - dragRef.current.t;
+      const moved = dragRef.current.moved;
+      dragRef.current = null;
+      if (!moved && modalTransformRef.current.scale === 1 && dt < 250)
+        setGalleryIndex((prev) => (prev + 1) % galleryImages.length);
+    }
+  };
+
+  // Bloqueo scroll del body cuando el modal está abierto
+  useEffect(() => {
+    if (galleryModalOpen) document.body.style.overflow = 'hidden';
+    else document.body.style.overflow = '';
+    return () => { document.body.style.overflow = ''; };
+  }, [galleryModalOpen]);
+
+  // Atajos de teclado y reset de zoom al cambiar imagen
+  useEffect(() => {
+    if (!galleryModalOpen) return;
+    resetModalTransform(true);
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setGalleryModalOpen(false);
+      else if (e.key === 'ArrowLeft') setGalleryIndex((prev) => (prev - 1 + galleryImages.length) % galleryImages.length);
+      else if (e.key === 'ArrowRight') setGalleryIndex((prev) => (prev + 1) % galleryImages.length);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [galleryModalOpen, galleryIndex, galleryImages.length]);
+
+  // Centra la miniatura actual en la tira
+  useEffect(() => {
+    if (!galleryModalOpen) return;
+    const el = stripRef.current?.querySelector('[data-current="true"]') as HTMLElement | null;
+    el?.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
+  }, [galleryModalOpen, galleryIndex]);
 
   return (
     <div className="min-h-screen bg-white">
@@ -402,7 +530,7 @@ export default function Nosotros() {
           groupKey.startsWith('__single_') ? (
             imgs.map((img, i) => (
               <div key={img.link + i} className="col-span-1 md:col-span-1 flex flex-col h-full cursor-pointer group"
-                onClick={() => openGalleryModal([img], 0)}>
+                onClick={() => openModal([img], 0)}>
                 <div className="rounded-xl shadow-lg bg-blue-50 p-2 flex flex-col h-full transition-transform duration-300 group-hover:scale-105 group-hover:shadow-xl">
                   <div className="relative overflow-hidden rounded-xl flex flex-col h-full">
                     <img 
@@ -421,7 +549,7 @@ export default function Nosotros() {
             ))
           ) : (
             <div key={groupKey} className="col-span-1 md:col-span-1 flex flex-col h-full cursor-pointer group"
-              onClick={() => openGalleryModal(imgs, 0)}>
+              onClick={() => openModal(imgs, 0)}>
               <div className="rounded-xl shadow-lg bg-blue-50 p-2 flex flex-col h-full transition-transform duration-300 group-hover:scale-105 group-hover:shadow-xl">
                 <div className="relative overflow-hidden rounded-xl flex flex-col h-full">
                   <img 
@@ -438,7 +566,7 @@ export default function Nosotros() {
                     <div className="absolute" style={{ bottom: '38%', left: '50%', transform: 'translateX(-50%)' }}>
                       <button
                         className="px-4 py-1 bg-blue-900 text-white rounded-full text-xs font-semibold shadow hover:bg-blue-800 transition"
-                        onClick={e => { e.stopPropagation(); openGalleryModal(imgs, 0); }}
+                        onClick={e => { e.stopPropagation(); openModal(imgs, 0); }}
                       >
                         Ver más ({imgs.length})
                       </button>
@@ -456,7 +584,7 @@ export default function Nosotros() {
   {galleryModalOpen && (
     <div
       className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center"
-      onClick={closeGalleryModal}
+      onClick={closeModal}
       tabIndex={-1}
     >
       <div
@@ -466,16 +594,16 @@ export default function Nosotros() {
       >
         <button
           className="absolute top-2 right-2 text-2xl text-blue-900 bg-white rounded-full px-2 py-1 shadow hover:bg-blue-100"
-          onClick={closeGalleryModal}
+          onClick={closeModal}
           aria-label="Cerrar"
         >
           &times;
         </button>
         <div className="flex items-center justify-between w-full mt-8 mb-4 px-4">
-          {galleryModalImages.length > 1 && (
+          {galleryImages.length > 1 && (
             <button
               className="text-2xl text-blue-900 bg-white rounded-full px-2 py-1 shadow hover:bg-blue-100"
-              onClick={prevGalleryModalImage}
+              onClick={prevModalImage}
               aria-label="Anterior"
             >
               &#8592;
@@ -483,16 +611,16 @@ export default function Nosotros() {
           )}
           <div className="flex-1 flex justify-center">
             <img
-              src={galleryModalImages[galleryModalIndex].link}
-              alt={galleryModalImages[galleryModalIndex].Titulo || ''}
+              src={galleryImages[galleryIndex].src}
+              alt={galleryImages[galleryIndex].titulo || ''}
               className="max-h-[65vh] w-auto rounded-lg"
               style={{ objectFit: 'contain', maxWidth: '100%' }}
             />
           </div>
-          {galleryModalImages.length > 1 && (
+          {galleryImages.length > 1 && (
             <button
               className="text-2xl text-blue-900 bg-white rounded-full px-2 py-1 shadow hover:bg-blue-100"
-              onClick={nextGalleryModalImage}
+              onClick={nextModalImage}
               aria-label="Siguiente"
             >
               &#8594;
@@ -500,7 +628,7 @@ export default function Nosotros() {
           )}
         </div>
         <div className="text-center font-semibold text-blue-900 mb-6 px-4" style={{ minHeight: 32 }}>
-          {galleryModalImages[galleryModalIndex].Titulo ? galleryModalImages[galleryModalIndex].Titulo : <span>&nbsp;</span>}
+          {galleryImages[galleryIndex].titulo ? galleryImages[galleryIndex].titulo : <span>&nbsp;</span>}
         </div>
       </div>
     </div>

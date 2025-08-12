@@ -749,9 +749,17 @@ export default function Home() {
               role="dialog"
               aria-modal="true"
             >
-              {/* Cerrar */}
+              {/* Botón cerrar móvil */}
               <button
-                className="absolute top-2 right-2 w-10 h-10 rounded-full bg-black/40 hover:bg-white/20 transition flex items-center justify-center text-2xl"
+                className="absolute top-2 right-2 w-10 h-10 rounded-full bg-black/40 hover:bg-white/20 transition flex items-center justify-center text-2xl md:hidden"
+                onClick={closeNewsModal}
+                aria-label="Cerrar"
+              >
+                &times;
+              </button>
+              {/* Botón cerrar escritorio */}
+              <button
+                className="absolute top-2 right-2 w-10 h-10 rounded-full bg-black/40 hover:bg-white/20 transition flex items-center justify-center text-2xl hidden md:flex"
                 onClick={closeNewsModal}
                 aria-label="Cerrar"
               >
