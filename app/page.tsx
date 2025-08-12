@@ -843,15 +843,15 @@ export default function Home() {
       {/* Botón "Ver Galería completa" debajo de Noticias */}
       <div className="flex justify-center mt-8 mb-16">
         <Link
-          href="/nosotros#galeria"
-          className="animate-bounce px-10 py-5 bg-gradient-to-r from-blue-700 to-blue-900 text-white rounded-full text-2xl font-extrabold shadow-xl border-4 border-blue-900 hover:scale-105 hover:from-blue-800 hover:to-blue-900 transition-all duration-300 flex items-center gap-3"
+          href="/nosotros#galeria-imagenes"
+          className="animate-bounce px-6 py-3 bg-gradient-to-r from-blue-700 to-blue-900 text-white rounded-full text-lg font-bold shadow-xl border-2 border-blue-900 hover:scale-105 hover:from-blue-800 hover:to-blue-900 transition-all duration-300 flex items-center gap-2"
           style={{
-            letterSpacing: '0.04em',
+            letterSpacing: '0.03em',
             textShadow: '0 2px 8px rgba(30,58,138,0.10), 0 0px 1px #fff',
             boxShadow: '0 4px 24px rgba(30,58,138,0.18)',
           }}
         >
-          <i className="ri-image-2-line text-3xl mr-2 animate-pulse"></i>
+          <i className="ri-image-2-line text-xl mr-1 animate-pulse"></i>
           Ver Galería completa
         </Link>
       </div>
