@@ -95,6 +95,142 @@ export default function Home() {
   const nextNewsModalImage = () => setNewsModalIndex((prev) => (prev + 1) % newsModalImages.length);
   const prevNewsModalImage = () => setNewsModalIndex((prev) => (prev - 1 + newsModalImages.length) % newsModalImages.length);
 
+  // ====== NUEVO: estado y lógica de gestos/zoom para el modal de noticias ======
+  const stageRef = useRef<HTMLDivElement | null>(null);
+  const stripRef = useRef<HTMLDivElement | null>(null);
+  const modalTransformRef = useRef({ scale: 1, tx: 0, ty: 0 });
+  const [modalScale, setModalScale] = useState(1);
+  const [modalTx, setModalTx] = useState(0);
+  const [modalTy, setModalTy] = useState(0);
+  const pointersRef = useRef<Map<number, { x: number; y: number }>>(new Map());
+  const lastDistRef = useRef(0);
+  const dragRef = useRef<{ x: number; y: number; t: number; moved: boolean } | null>(null);
+
+  const clamp = (v: number, a: number, b: number) => Math.max(a, Math.min(b, v));
+  const setTransform = (scale: number, tx: number, ty: number) => {
+    modalTransformRef.current = { scale, tx, ty };
+    setModalScale(scale);
+    setModalTx(tx);
+    setModalTy(ty);
+  };
+  const resetModalTransform = (hard = true) => {
+    setTransform(1, 0, 0);
+    if (hard) dragRef.current = null;
+  };
+  const limitPan = () => {
+    const rect = stageRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    const { scale, tx, ty } = modalTransformRef.current;
+    const maxX = Math.max(0, (rect.width * scale - rect.width) / 2);
+    const maxY = Math.max(0, (rect.height * scale - rect.height) / 2);
+    const nx = clamp(tx, -maxX, maxX);
+    const ny = clamp(ty, -maxY, maxY);
+    if (nx !== tx || ny !== ty) setTransform(scale, nx, ny);
+  };
+  const zoomAround = (clientX: number, clientY: number, factor: number) => {
+    const rect = stageRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    const cx = clientX - rect.left - rect.width / 2;
+    const cy = clientY - rect.top - rect.height / 2;
+    const { scale, tx, ty } = modalTransformRef.current;
+    const newScale = clamp(scale * factor, 1, 4);
+    const applied = (newScale / scale) || 1;
+    const ntx = (tx + cx) * applied - cx;
+    const nty = (ty + cy) * applied - cy;
+    setTransform(newScale, ntx, nty);
+    limitPan();
+  };
+
+  const handleStageWheel = (e: React.WheelEvent<HTMLDivElement>) => {
+    if (!newsModalOpen) return;
+    e.preventDefault();
+    const delta = -e.deltaY;
+    const factor = Math.exp(delta * 0.002);
+    zoomAround(e.clientX, e.clientY, factor);
+  };
+  const onStagePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    e.currentTarget.setPointerCapture(e.pointerId);
+    pointersRef.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (pointersRef.current.size === 1) {
+      dragRef.current = { x: e.clientX, y: e.clientY, t: Date.now(), moved: false };
+    } else if (pointersRef.current.size === 2) {
+      dragRef.current = null;
+      const pts = Array.from(pointersRef.current.values());
+      lastDistRef.current = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y);
+    }
+  };
+  const onStagePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!pointersRef.current.has(e.pointerId)) return;
+    const prev = pointersRef.current.get(e.pointerId)!;
+    const curr = { x: e.clientX, y: e.clientY };
+    pointersRef.current.set(e.pointerId, curr);
+
+    if (pointersRef.current.size === 2) {
+      const pts = Array.from(pointersRef.current.values());
+      const dist = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y);
+      if (lastDistRef.current) {
+        const center = { x: (pts[0].x + pts[1].x) / 2, y: (pts[0].y + pts[1].y) / 2 };
+        zoomAround(center.x, center.y, dist / lastDistRef.current);
+      }
+      lastDistRef.current = dist;
+    } else if (pointersRef.current.size === 1) {
+      const dx = curr.x - prev.x;
+      const dy = curr.y - prev.y;
+      const { scale, tx, ty } = modalTransformRef.current;
+      if (scale > 1) {
+        setTransform(scale, tx + dx, ty + dy);
+        limitPan();
+        if (dragRef.current) dragRef.current.moved = true;
+      } else {
+        if (dragRef.current) {
+          const totalDx = curr.x - dragRef.current.x;
+          if (Math.abs(totalDx) > 60) {
+            dragRef.current = null;
+            if (totalDx > 0) prevNewsModalImage(); else nextNewsModalImage();
+          }
+        }
+      }
+    }
+  };
+  const onStagePointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (pointersRef.current.has(e.pointerId)) pointersRef.current.delete(e.pointerId);
+    if (pointersRef.current.size < 2) lastDistRef.current = 0;
+    if (pointersRef.current.size === 0 && dragRef.current) {
+      const dt = Date.now() - dragRef.current.t;
+      const moved = dragRef.current.moved;
+      dragRef.current = null;
+      if (!moved && modalTransformRef.current.scale === 1 && dt < 250) nextNewsModalImage();
+    }
+  };
+
+  // Bloqueo scroll del body cuando el modal está abierto
+  useEffect(() => {
+    if (newsModalOpen) document.body.style.overflow = 'hidden';
+    else document.body.style.overflow = '';
+    return () => { document.body.style.overflow = ''; };
+  }, [newsModalOpen]);
+
+  // Atajos de teclado y reset de zoom al cambiar imagen
+  useEffect(() => {
+    if (!newsModalOpen) return;
+    resetModalTransform(true);
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') closeNewsModal();
+      else if (e.key === 'ArrowLeft') prevNewsModalImage();
+      else if (e.key === 'ArrowRight') nextNewsModalImage();
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [newsModalOpen, newsModalIndex]);
+
+  // Centra la miniatura actual en la tira
+  useEffect(() => {
+    if (!newsModalOpen) return;
+    const el = stripRef.current?.querySelector('[data-current="true"]') as HTMLElement | null;
+    el?.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
+  }, [newsModalOpen, newsModalIndex]);
+  // ====== FIN NUEVO ======
+
   const [dragStartX, setDragStartX] = useState<number | null>(null);
   const [dragging, setDragging] = useState(false);
   const [dragDelta, setDragDelta] = useState(0);
@@ -600,58 +736,98 @@ export default function Home() {
             ))}
           </div>
         </div>
-        {/* Modal para visualizar imágenes de noticia */}
+        {/* Modal para visualizar imágenes de noticia (REEMPLAZADO) */}
         {newsModalOpen && (
           <div
-            className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center"
+            className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center"
             onClick={closeNewsModal}
             tabIndex={-1}
           >
             <div
-              className="relative w-[80vw] max-w-[80vw] mx-4 bg-white rounded-lg shadow-lg flex flex-col items-center"
-              style={{ maxHeight: '80vh' }}
-              onClick={e => e.stopPropagation()}
+              className="relative bg-neutral-900 text-white rounded-xl shadow-2xl overflow-hidden w-[95vw] h-[95vh] md:w-[90vw] md:h-[90vh] flex"
+              onClick={(e) => e.stopPropagation()}
+              role="dialog"
+              aria-modal="true"
             >
+              {/* Cerrar */}
               <button
-                className="absolute top-2 right-2 text-2xl text-blue-900 bg-white rounded-full px-2 py-1 shadow hover:bg-blue-100"
+                className="absolute top-2 right-2 w-10 h-10 rounded-full bg-black/40 hover:bg-white/20 transition flex items-center justify-center text-2xl"
                 onClick={closeNewsModal}
                 aria-label="Cerrar"
               >
                 &times;
               </button>
-              <div className="flex items-center justify-between w-full mt-8 mb-4 px-4">
-                {newsModalImages.length > 1 && (
-                  <button
-                    className="text-2xl text-blue-900 bg-white rounded-full px-2 py-1 shadow hover:bg-blue-100"
-                    onClick={prevNewsModalImage}
-                    aria-label="Anterior"
+
+              {/* Contenido: imagen izquierda (2) / texto derecha (1) */}
+              <div className="grid grid-rows-[1fr_auto] md:grid-rows-1 md:grid-cols-3 w-full h-full">
+                {/* Visual: stage + tira de miniaturas */}
+                <div className="md:col-span-2 flex flex-col min-w-0 min-h-0">
+                  {/* Stage */}
+                  <div
+                    ref={stageRef}
+                    className="relative flex-1 bg-black flex items-center justify-center overflow-hidden touch-none select-none"
+                    onPointerDown={onStagePointerDown}
+                    onPointerMove={onStagePointerMove}
+                    onPointerUp={onStagePointerUp}
+                    onPointerCancel={onStagePointerUp}
+                    onWheel={handleStageWheel}
                   >
-                    &#8592;
-                  </button>
-                )}
-                <div className="flex-1 flex justify-center">
-                  <img
-                    src={newsModalImages[newsModalIndex].link}
-                    alt={newsModalImages[newsModalIndex].Titulo || ''}
-                    className="max-h-[65vh] w-auto rounded-lg"
-                    style={{ objectFit: 'contain', maxWidth: '100%' }}
-                  />
+                    <img
+                      src={newsModalImages[newsModalIndex].link}
+                      alt={newsModalImages[newsModalIndex].Titulo || ''}
+                      className="max-w-full max-h-full object-contain pointer-events-none select-none"
+                      style={{ transform: `translate(${modalTx}px, ${modalTy}px) scale(${modalScale})` }}
+                    />
+                    {/* Nav */}
+                    {newsModalImages.length > 1 && (
+                      <>
+                        <button
+                          className="absolute left-2 top-1/2 -translate-y-1/2 w-11 h-16 rounded bg-black/35 hover:bg-white/20 text-white text-2xl flex items-center justify-center"
+                          onClick={prevNewsModalImage}
+                          aria-label="Anterior"
+                        >
+                          ‹
+                        </button>
+                        <button
+                          className="absolute right-2 top-1/2 -translate-y-1/2 w-11 h-16 rounded bg-black/35 hover:bg-white/20 text-white text-2xl flex items-center justify-center"
+                          onClick={nextNewsModalImage}
+                          aria-label="Siguiente"
+                        >
+                          ›
+                        </button>
+                      </>
+                    )}
+                  </div>
+
+                  {/* Miniaturas */}
+                  {newsModalImages.length > 1 && (
+                    <div
+                      ref={stripRef}
+                      className="h-24 bg-neutral-800 border-t border-neutral-700 overflow-x-auto flex items-center gap-2 px-3 py-2"
+                    >
+                      {newsModalImages.map((it, idx) => (
+                        <button
+                          key={it.link + idx}
+                          type="button"
+                          onClick={() => setNewsModalIndex(idx)}
+                          data-current={idx === newsModalIndex ? 'true' : undefined}
+                          className={`flex-none w-28 h-20 rounded overflow-hidden border-2 ${idx === newsModalIndex ? 'border-blue-400' : 'border-transparent'} bg-black`}
+                          aria-label={`Ver imagen ${idx + 1}`}
+                        >
+                          <img src={it.link} alt={it.Titulo || ''} className="w-full h-full object-cover" />
+                        </button>
+                      ))}
+                    </div>
+                  )}
                 </div>
-                {newsModalImages.length > 1 && (
-                  <button
-                    className="text-2xl text-blue-900 bg-white rounded-full px-2 py-1 shadow hover:bg-blue-100"
-                    onClick={nextNewsModalImage}
-                    aria-label="Siguiente"
-                  >
-                    &#8594;
-                  </button>
-                )}
-              </div>
-              <div className="text-center font-semibold text-blue-900 mb-2 px-4">
-                {newsModalImages[newsModalIndex].Titulo}
-              </div>
-              <div className="text-center text-gray-600 mb-6 px-4">
-                {newsModalImages[newsModalIndex].Descripción}
+
+                {/* Info derecha */}
+                <aside className="md:col-span-1 p-4 md:p-6 overflow-auto bg-neutral-900 border-t md:border-t-0 md:border-l border-neutral-800">
+                  <h3 className="text-lg md:text-xl font-bold mb-2">{newsModalImages[newsModalIndex].Titulo}</h3>
+                  <div className="text-sm md:text-base text-neutral-300 whitespace-pre-line">
+                    {newsModalImages[newsModalIndex].Descripción}
+                  </div>
+                </aside>
               </div>
             </div>
           </div>
