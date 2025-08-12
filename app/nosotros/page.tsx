@@ -503,7 +503,7 @@ export default function Nosotros() {
 </section>
 
 {/* Galería de Imágenes */}
-<section className="py-20 bg-white">
+<section id="galeria-imagenes" className="py-20 bg-white">
   <div className="max-w-7xl mx-auto px-6">
     <h2 className="text-3xl font-bold text-blue-900 mb-8 text-center">Galería de Imágenes</h2>
     <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
