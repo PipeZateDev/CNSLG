@@ -1114,7 +1114,7 @@ export default function Admin() {
                     </div>
                     <div>
                       <span className="font-bold text-white">Horarios de Atención:</span><br />
-                      Lunes a Viernes: 7:00 AM - 5:00 PM
+                      Lunes a Viernes: 7:30 AM - 4:30 PM
                     </div>
                   </div>
                 </div>

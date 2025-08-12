@@ -233,7 +233,7 @@ export default function Contacto() {
                   <div>
                     <h4 className="font-semibold text-blue-900 mb-1">Horarios de Atención</h4>
                     <p className="text-gray-600">
-                      Lunes a Viernes: 7:00 AM - 5:00 PM<br />
+                      Lunes a Viernes: 7:30 AM - 4:30 PM<br />
                       Sábados: Cerrado<br />
                       Domingos: Cerrado
                     </p>
@@ -501,7 +501,7 @@ export default function Contacto() {
                 </div>
                 <div>
                   <span className="font-bold text-white">Horarios de Atención:</span><br />
-                  Lunes a Viernes: 7:00 AM - 5:00 PM
+                  Lunes a Viernes: 7:30 AM - 4:30 PM
                 </div>
               </div>
             </div>
