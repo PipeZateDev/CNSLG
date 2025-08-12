@@ -831,8 +831,13 @@ export default function Home() {
 
                 {/* Info derecha */}
                 <aside className="md:col-span-1 p-4 md:p-6 overflow-auto bg-neutral-900 border-t md:border-t-0 md:border-l border-neutral-800">
-                  <h3 className="text-lg md:text-xl font-bold mb-2">{newsModalImages[newsModalIndex].Titulo}</h3>
-                  <div className="text-sm md:text-base text-neutral-300 whitespace-pre-line">
+                  <h3 className="text-2xl md:text-3xl font-extrabold mb-2 text-white">
+                    {newsModalImages[newsModalIndex].Titulo}
+                  </h3>
+                  <div className="text-blue-300 text-base md:text-lg mb-3 font-semibold">
+                    {newsModalImages[newsModalIndex].fecha}
+                  </div>
+                  <div className="text-lg md:text-xl text-neutral-200 whitespace-pre-line">
                     {newsModalImages[newsModalIndex].Descripción}
                   </div>
                 </aside>

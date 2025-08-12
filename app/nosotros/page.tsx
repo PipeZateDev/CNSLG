@@ -243,6 +243,18 @@ export default function Nosotros() {
     el?.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
   }, [galleryModalOpen, galleryIndex]);
 
+  // Ejemplo de imágenes (ajusta según tus datos reales)
+  const images = [
+    { src: "/img1.jpg", titulo: "Título 1", descripcion: "Descripción 1" },
+    { src: "/img2.jpg", titulo: "Título 2", descripcion: "Descripción 2" },
+    // ...más imágenes...
+  ];
+
+  // Estado y lógica del modal
+  const [galleryModalOpen, setGalleryModalOpen] = useState(false);
+  const [galleryImages, setGalleryImages] = useState(images);
+  const [galleryIndex, setGalleryIndex] = useState(0);
+
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
